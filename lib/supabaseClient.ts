@@ -1,4 +1,6 @@
-type EnquiryPayload = {
+import { createClient } from "@supabase/supabase-js";
+
+export type EnquiryPayload = {
   name: string;
   email: string;
   mobile: string;
@@ -28,26 +30,18 @@ function getSupabaseConfig() {
 
   return {
     supabaseKey,
-    supabaseUrl: supabaseUrl.replace(/\/$/, ""),
+    supabaseUrl,
   };
 }
 
+const { supabaseKey, supabaseUrl } = getSupabaseConfig();
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
+
 export async function insertEnquiry(payload: EnquiryPayload) {
-  const { supabaseKey, supabaseUrl } = getSupabaseConfig();
+  const { error } = await supabase.from("enquiries").insert(payload);
 
-  const response = await fetch(`${supabaseUrl}/rest/v1/enquiries`, {
-    method: "POST",
-    headers: {
-      apikey: supabaseKey,
-      Authorization: `Bearer ${supabaseKey}`,
-      "Content-Type": "application/json",
-      Prefer: "return=minimal",
-    },
-    body: JSON.stringify(payload),
-  });
-
-  if (!response.ok) {
-    const message = await response.text();
-    throw new Error(message || `Supabase insert failed with status ${response.status}.`);
+  if (error) {
+    throw error;
   }
 }
