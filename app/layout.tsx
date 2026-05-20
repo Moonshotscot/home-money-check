@@ -18,6 +18,15 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://homemoneycheck.co.uk"),
   title: "Home Money Check",
   description: "Friendly checks for home services, bills, planning and practical money decisions.",
+  // TODO before public launch: remove noindex/nofollow and update robots once legal pages and final compliance checks are complete.
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
   openGraph: {
     title: "Home Money Check",
     description: "Friendly checks for home services, bills, planning and practical money decisions.",

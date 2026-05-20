@@ -680,14 +680,27 @@ export default async function HomeMoneyCheckHomepage() {
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-5 border-t border-white/12 pt-8 md:flex-row md:items-center">
           <BrandMark />
           {/* TODO before launch: add Privacy Policy, Terms, Cookie Policy if needed, and clear disclaimers for Utility Warehouse-related enquiries, prize draw handling, mortgages and insurance/protection. */}
-          <div className="flex flex-col gap-2 text-sm font-bold md:items-end">
+          <div className="flex flex-col gap-3 text-sm font-bold md:items-end">
             <p>© Home Money Check.</p>
-            <Link
-              href="/admin/login"
-              className="text-xs font-black uppercase tracking-[0.16em] text-[#F7F0E8]/45 transition-colors duration-300 ease-out hover:text-[#F7F0E8]/75"
+            <nav
+              aria-label="Footer links"
+              className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-black uppercase tracking-[0.14em] text-[#F7F0E8]/45 md:justify-end"
             >
-              Admin
-            </Link>
+              {[
+                { href: "/privacy-policy", label: "Privacy Policy" },
+                { href: "/terms", label: "Terms" },
+                { href: "/disclaimers", label: "Disclaimers" },
+                { href: "/admin/login", label: "Admin" },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="transition-colors duration-300 ease-out hover:text-[#F7F0E8]/75"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
           </div>
         </div>
       </footer>
