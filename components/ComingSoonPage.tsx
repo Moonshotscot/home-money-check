@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { SitePage } from "@/lib/site-pages";
+import { getRoutePath, type SitePage } from "@/lib/site-pages";
 import { LeadFormPreview } from "@/components/LeadFormPreview";
 import { PageHero } from "@/components/PageHero";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -37,7 +37,8 @@ export function ComingSoonPage({ page }: { page: SitePage }) {
             </Link>
           </section>
           <LeadFormPreview
-            selectedCheck={page.selectedCheck}
+            defaultSelectedCheck={page.selectedCheck}
+            sourcePage={getRoutePath(page)}
             title="Tell me when this is ready."
             uwRelated={page.uwRelated}
           />

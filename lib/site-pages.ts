@@ -307,7 +307,7 @@ export const sitePages: SitePage[] = [
     eyebrow: "Coming soon",
     description: "A protection check route for life and family cover is being prepared.",
     accentColour: "#F5D28A",
-    selectedCheck: "Protection",
+    selectedCheck: "Protection insurance",
     status: "comingSoon",
     category: "Life planning checks",
     metaTitle: "Protection check coming soon | Home Money Check",

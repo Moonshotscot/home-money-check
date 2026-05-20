@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Check } from "lucide-react";
-import type { SitePage } from "@/lib/site-pages";
+import { getRoutePath, type SitePage } from "@/lib/site-pages";
 import { LeadFormPreview } from "@/components/LeadFormPreview";
 import { PageHero } from "@/components/PageHero";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -61,7 +61,11 @@ export function ServicePage({ page }: { page: SitePage }) {
             {page.uwRelated ? <div className="relative mt-5"><UtilityWarehouseNote /></div> : null}
           </section>
 
-          <LeadFormPreview selectedCheck={page.selectedCheck} uwRelated={page.uwRelated} />
+          <LeadFormPreview
+            defaultSelectedCheck={page.selectedCheck}
+            sourcePage={getRoutePath(page)}
+            uwRelated={page.uwRelated}
+          />
         </div>
 
         <section className="mx-auto mt-5 grid max-w-7xl gap-5 md:grid-cols-3">
