@@ -7,14 +7,17 @@ type LegalPlaceholderPageProps = {
   title: string;
   eyebrow: string;
   description: string;
-  points: string[];
+  sections: {
+    title: string;
+    body: string | string[];
+  }[];
 };
 
 export function LegalPlaceholderPage({
   title,
   eyebrow,
   description,
-  points,
+  sections,
 }: LegalPlaceholderPageProps) {
   return (
     <div className="min-h-screen bg-[#F7F0E8] text-[#2C1F3D]">
@@ -35,33 +38,42 @@ export function LegalPlaceholderPage({
         </section>
 
         <section className="px-5 py-12 md:px-8 md:py-16">
-          <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1fr_0.75fr]">
-            <article className="relative overflow-hidden rounded-[2.75rem] bg-white p-8 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-10">
+          <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.7fr_1.3fr]">
+            <aside className="relative overflow-hidden rounded-[2.75rem] bg-white p-8 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-10">
               <div className="absolute -right-10 -top-10 h-28 w-28 rounded-[2rem] bg-[#EADFFD]" />
               <p className="relative mb-5 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
-                Being prepared
+                Working draft
               </p>
               <h2 className="relative text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-5xl">
-                This page is being prepared.
+                Prepared before public launch.
               </h2>
               <p className="relative mt-6 max-w-3xl text-lg font-bold leading-8 text-[#2C1F3D]/72">
-                This is placeholder wording for pre-launch. The final page will be reviewed and
-                updated before Home Money Check is made public.
+                This page is being prepared before public launch and may be updated.
               </p>
-            </article>
-
-            <aside className="rounded-[2.75rem] bg-[#FDCA55] p-8 shadow-[0_24px_70px_rgba(44,31,61,0.14)] md:p-10">
-              <p className="mb-5 w-fit rounded-full bg-white/55 px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#6B4611]">
-                Draft scope
-              </p>
-              <ul className="space-y-4 text-base font-black leading-7 text-[#2C1F3D]">
-                {points.map((point) => (
-                  <li key={point} className="rounded-[1.5rem] bg-white/45 p-4">
-                    {point}
-                  </li>
-                ))}
-              </ul>
             </aside>
+
+            <article className="rounded-[2.75rem] bg-white p-6 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-8">
+              <div className="grid gap-4">
+                {sections.map((section) => (
+                  <section key={section.title} className="rounded-[2rem] bg-[#F7F0E8] p-6">
+                    <h2 className="text-2xl font-black tracking-[-0.045em] text-[#5F2D8C]">
+                      {section.title}
+                    </h2>
+                    {Array.isArray(section.body) ? (
+                      <ul className="mt-4 list-disc space-y-2 pl-5 text-base font-bold leading-7 text-[#2C1F3D]/78">
+                        {section.body.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="mt-4 text-base font-bold leading-7 text-[#2C1F3D]/78">
+                        {section.body}
+                      </p>
+                    )}
+                  </section>
+                ))}
+              </div>
+            </article>
           </div>
 
           <div className="mx-auto mt-10 flex max-w-7xl">
