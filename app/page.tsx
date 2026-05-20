@@ -18,6 +18,9 @@ import {
   HeartPulse,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { getHomepageContent } from "@/lib/homepageContent";
+
+export const dynamic = "force-dynamic";
 
 type HeroTileItem = {
   title: string;
@@ -162,7 +165,7 @@ const routeGroups: RouteGroupItem[] = [
   },
 ];
 
-const updates = [
+const fallbackUpdates = [
   { label: "Featured", text: "£20K Giveaway", tone: "#EADFFD" },
   { label: "Home", text: "Household bills worth checking", tone: "#F7F0E8" },
   { label: "Business", text: "Business utilities", tone: "#D9E1E8" },
@@ -170,11 +173,12 @@ const updates = [
 
 // Back-office editable later: campaign visibility on/off, pill label, title,
 // middle/central content area, lower box text, and an optional button/link.
-const featuredCampaign = {
+const fallbackCampaign = {
   isVisible: true,
   label: "Current campaign",
-  titlePrefix: "£20K",
-  titleSuffix: "Giveaway",
+  title: "£20K Giveaway",
+  titleAccent: "£20K",
+  titleMain: "Giveaway",
   // Admin/back-office field later: central campaign content area.
   body:
     "A premium campaign panel that can be changed or hidden from the back office when the featured push changes.",
@@ -290,7 +294,52 @@ function RouteGroup({ group }: { group: RouteGroupItem }) {
   );
 }
 
-export default function HomeMoneyCheckHomepage() {
+function CampaignTitle({
+  title,
+  titleAccent,
+  titleMain,
+}: {
+  title: string;
+  titleAccent?: string | null;
+  titleMain?: string | null;
+}) {
+  const [first, ...rest] = title.split(" ");
+  const accent = titleAccent || first;
+  const main = titleMain || (rest.length > 0 ? rest.join(" ") : "");
+
+  return (
+    <>
+      <span className="text-[#F4CF7A]">{accent}</span>{" "}
+      {main}
+    </>
+  );
+}
+
+export default async function HomeMoneyCheckHomepage() {
+  const homepageContent = await getHomepageContent();
+  const featuredCampaign =
+    homepageContent.campaignError
+      ? fallbackCampaign
+      : homepageContent.campaign
+        ? {
+            body: homepageContent.campaign.body || fallbackCampaign.body,
+            isVisible: homepageContent.campaign.is_live,
+            label: homepageContent.campaign.label || fallbackCampaign.label,
+            lowerBoxText: homepageContent.campaign.lower_text || homepageContent.campaign.middle_content || fallbackCampaign.lowerBoxText,
+            title: homepageContent.campaign.title || fallbackCampaign.title,
+            titleAccent: homepageContent.campaign.title_accent,
+            titleMain: homepageContent.campaign.title_main,
+          }
+        : null;
+  const updates =
+    homepageContent.noticeboardError || homepageContent.noticeboardItems === undefined
+      ? fallbackUpdates
+      : homepageContent.noticeboardItems.map((item) => ({
+          label: item.label || item.category || "Update",
+          text: item.title || item.body || "Worth checking",
+          tone: item.accent_colour || "#EADFFD",
+        }));
+
   return (
     <div
       className="min-h-screen max-w-full overflow-x-hidden bg-[#6A35A0] text-[#F7F0E8]"
@@ -457,20 +506,43 @@ export default function HomeMoneyCheckHomepage() {
             <div className="relative overflow-hidden rounded-[2.75rem] bg-[#5F2D8C] p-8 text-[#F7F0E8] shadow-[0_30px_90px_rgba(44,31,61,0.22)] md:min-h-[430px] md:p-12">
               <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-[#EADFFD]/20 blur-3xl" />
               <div className="relative flex h-full flex-col justify-between gap-12">
-                <div>
-                  <p className="mb-5 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
-                    {featuredCampaign.label}
-                  </p>
-                  <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-7xl">
-                    <span className="text-[#F4CF7A]">{featuredCampaign.titlePrefix}</span>{" "}
-                    {featuredCampaign.titleSuffix}
-                  </h2>
-                </div>
-                <div className="max-w-2xl rounded-[2rem] bg-white/10 p-6 backdrop-blur ring-1 ring-white/12">
-                  <p className="text-lg font-bold leading-8 text-[#F7F0E8]/82">
-                    {featuredCampaign.lowerBoxText}
-                  </p>
-                </div>
+                {featuredCampaign ? (
+                  <>
+                    <div>
+                      <p className="mb-5 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
+                        {featuredCampaign.label}
+                      </p>
+                      <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-7xl">
+                        <CampaignTitle
+                          title={featuredCampaign.title}
+                          titleAccent={featuredCampaign.titleAccent}
+                          titleMain={featuredCampaign.titleMain}
+                        />
+                      </h2>
+                    </div>
+                    <div className="max-w-2xl rounded-[2rem] bg-white/10 p-6 backdrop-blur ring-1 ring-white/12">
+                      <p className="text-lg font-bold leading-8 text-[#F7F0E8]/82">
+                        {featuredCampaign.lowerBoxText}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <p className="mb-5 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
+                        Current campaign
+                      </p>
+                      <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-7xl">
+                        No current campaign
+                      </h2>
+                    </div>
+                    <div className="max-w-2xl rounded-[2rem] bg-white/10 p-6 backdrop-blur ring-1 ring-white/12">
+                      <p className="text-lg font-bold leading-8 text-[#F7F0E8]/82">
+                        Check back soon for the next featured Home Money Check route.
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
@@ -526,7 +598,7 @@ export default function HomeMoneyCheckHomepage() {
             </div>
 
             <div className="grid gap-5 md:grid-cols-3">
-              {updates.map((item) => (
+              {updates.length > 0 ? updates.map((item) => (
                 <div
                   key={item.text}
                   className="group flex min-h-[180px] transform-gpu flex-col justify-between rounded-[2.25rem] p-6 shadow-[0_22px_70px_rgba(44,31,61,0.10)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_28px_78px_rgba(44,31,61,0.16)]"
@@ -542,7 +614,11 @@ export default function HomeMoneyCheckHomepage() {
                     {item.text}
                   </p>
                 </div>
-              ))}
+              )) : (
+                <div className="rounded-[2.25rem] bg-[#F7F0E8] p-6 text-lg font-black leading-7 text-[#5F2D8C] shadow-[0_22px_70px_rgba(44,31,61,0.10)] md:col-span-3">
+                  No noticeboard items right now.
+                </div>
+              )}
             </div>
           </div>
         </section>

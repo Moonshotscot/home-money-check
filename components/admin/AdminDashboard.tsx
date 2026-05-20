@@ -13,16 +13,16 @@ const cards = [
     live: true,
   },
   {
-    href: "/admin",
+    href: "/admin/campaign",
     label: "Campaign panel",
-    note: "Coming in the next build stage.",
-    live: false,
+    note: "Edit the homepage featured campaign panel.",
+    live: true,
   },
   {
-    href: "/admin",
+    href: "/admin/noticeboard",
     label: "Noticeboard",
-    note: "Coming in the next build stage.",
-    live: false,
+    note: "Manage homepage noticeboard items.",
+    live: true,
   },
 ];
 
