@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Download, Eye, RefreshCw, Save } from "lucide-react";
+import { Download, Eye, RefreshCw, Save, Trash2 } from "lucide-react";
 import {
   Enquiry,
   enquiryStatuses,
@@ -58,15 +58,18 @@ function statusBadge(status: string | null) {
 function EnquiryDetail({
   enquiry,
   onClose,
+  onDeleted,
   onSaved,
 }: {
   enquiry: Enquiry;
   onClose: () => void;
+  onDeleted: (id: string) => void;
   onSaved: (enquiry: Enquiry) => void;
 }) {
   const [status, setStatus] = useState(statusBadge(enquiry.status));
   const [adminNotes, setAdminNotes] = useState(enquiry.admin_notes || "");
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [deleteState, setDeleteState] = useState<"idle" | "deleting" | "deleted" | "error">("idle");
 
   async function saveChanges() {
     setSaveState("saving");
@@ -99,6 +102,30 @@ function EnquiryDetail({
 
     onSaved(data as Enquiry);
     setSaveState("saved");
+  }
+
+  async function deletePermanently() {
+    const confirmed = window.confirm(
+      "Delete this enquiry permanently? This should only be used for test leads, duplicates, spam or mistakes. This cannot be undone.",
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    setDeleteState("deleting");
+
+    const { error } = await supabase.from("enquiries").delete().eq("id", enquiry.id);
+
+    if (error) {
+      console.error("Could not delete enquiry", error);
+      setDeleteState("error");
+      return;
+    }
+
+    setDeleteState("deleted");
+    onDeleted(enquiry.id);
+    onClose();
   }
 
   return (
@@ -163,6 +190,11 @@ function EnquiryDetail({
           </label>
         </div>
 
+        <p className="mt-4 rounded-[1.25rem] bg-white/70 p-4 text-sm font-bold leading-6 text-[#5F2D8C]">
+          Use Archived for genuine enquiries you no longer need to work on. Use Delete permanently
+          only for tests, duplicates, spam or mistakes.
+        </p>
+
         {saveState === "saved" ? (
           <p className="mt-4 rounded-[1.25rem] bg-white p-4 text-sm font-black text-[#5F2D8C]">
             Changes saved.
@@ -173,16 +205,32 @@ function EnquiryDetail({
             Could not save changes. Please try again.
           </p>
         ) : null}
+        {deleteState === "error" ? (
+          <p className="mt-4 rounded-[1.25rem] bg-[#FFF1C8] p-4 text-sm font-black text-[#6B4611]">
+            Could not delete this enquiry. Please try again.
+          </p>
+        ) : null}
 
-        <button
-          className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#5F2D8C] px-6 py-3 text-sm font-black text-[#F7F0E8] disabled:opacity-70"
-          disabled={saveState === "saving"}
-          onClick={saveChanges}
-          type="button"
-        >
-          <Save className="h-4 w-4" />
-          {saveState === "saving" ? "Saving..." : "Save changes"}
-        </button>
+        <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <button
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#5F2D8C] px-6 py-3 text-sm font-black text-[#F7F0E8] disabled:opacity-70"
+            disabled={saveState === "saving" || deleteState === "deleting"}
+            onClick={saveChanges}
+            type="button"
+          >
+            <Save className="h-4 w-4" />
+            {saveState === "saving" ? "Saving..." : "Save changes"}
+          </button>
+          <button
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-[#B44747]/25 bg-white px-5 py-3 text-sm font-black text-[#B44747] transition-colors duration-300 ease-out hover:bg-[#FFF1C8] disabled:opacity-70"
+            disabled={deleteState === "deleting" || saveState === "saving"}
+            onClick={deletePermanently}
+            type="button"
+          >
+            <Trash2 className="h-4 w-4" />
+            {deleteState === "deleting" ? "Deleting..." : "Delete permanently"}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -194,6 +242,7 @@ function EnquiriesContent() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [checkFilter, setCheckFilter] = useState("All");
   const [loadState, setLoadState] = useState<"loading" | "loaded" | "error">("loading");
+  const [actionMessage, setActionMessage] = useState("");
 
   async function loadEnquiries() {
     setLoadState("loading");
@@ -234,6 +283,13 @@ function EnquiriesContent() {
       current.map((enquiry) => (enquiry.id === updated.id ? updated : enquiry)),
     );
     setSelectedEnquiry(updated);
+    setActionMessage("");
+  }
+
+  function handleDeleted(id: string) {
+    setEnquiries((current) => current.filter((enquiry) => enquiry.id !== id));
+    setSelectedEnquiry(null);
+    setActionMessage("Enquiry deleted permanently.");
   }
 
   return (
@@ -313,6 +369,11 @@ function EnquiriesContent() {
         {loadState === "error" ? (
           <p className="mt-6 rounded-[1.5rem] bg-[#FFF1C8] p-5 text-sm font-black text-[#6B4611]">
             Could not load enquiries. Please try again.
+          </p>
+        ) : null}
+        {actionMessage ? (
+          <p className="mt-6 rounded-[1.5rem] bg-[#F7F0E8] p-5 text-sm font-black text-[#5F2D8C]">
+            {actionMessage}
           </p>
         ) : null}
         {loadState === "loaded" && enquiries.length === 0 ? (
@@ -400,6 +461,7 @@ function EnquiriesContent() {
         <EnquiryDetail
           enquiry={selectedEnquiry}
           onClose={() => setSelectedEnquiry(null)}
+          onDeleted={handleDeleted}
           onSaved={handleSaved}
         />
       ) : null}

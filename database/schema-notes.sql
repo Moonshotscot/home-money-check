@@ -96,6 +96,22 @@ with check (
   )
 );
 
+-- Authenticated admins may permanently delete test leads, duplicates, spam, or mistakes.
+-- Normal completed workflow should use status = 'Archived' instead.
+create policy "Admins can delete enquiries"
+on public.enquiries
+for delete
+to authenticated
+using (
+  exists (
+    select 1
+    from public.admin_users au
+    where au.user_id = auth.uid()
+       or au.id = auth.uid()
+       or au.email = auth.jwt() ->> 'email'
+  )
+);
+
 -- ---------------------------------------------------------------------------
 -- admin_users
 -- ---------------------------------------------------------------------------

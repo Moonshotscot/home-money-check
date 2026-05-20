@@ -1,5 +1,6 @@
 ﻿import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowUpRight,
   Check,
@@ -679,7 +680,15 @@ export default async function HomeMoneyCheckHomepage() {
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-5 border-t border-white/12 pt-8 md:flex-row md:items-center">
           <BrandMark />
           {/* TODO before launch: add Privacy Policy, Terms, Cookie Policy if needed, and clear disclaimers for Utility Warehouse-related enquiries, prize draw handling, mortgages and insurance/protection. */}
-          <p className="text-sm font-bold">© Home Money Check.</p>
+          <div className="flex flex-col gap-2 text-sm font-bold md:items-end">
+            <p>© Home Money Check.</p>
+            <Link
+              href="/admin/login"
+              className="text-xs font-black uppercase tracking-[0.16em] text-[#F7F0E8]/45 transition-colors duration-300 ease-out hover:text-[#F7F0E8]/75"
+            >
+              Admin
+            </Link>
+          </div>
         </div>
       </footer>
     </div>
