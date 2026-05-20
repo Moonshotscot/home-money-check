@@ -15,8 +15,14 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://homemoneycheck.co.uk"),
   title: "Home Money Check",
-  description: "Friendly household money checks for bills, benefits, and support routes.",
+  description: "Friendly checks for home services, bills, planning and practical money decisions.",
+  openGraph: {
+    title: "Home Money Check",
+    description: "Friendly checks for home services, bills, planning and practical money decisions.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

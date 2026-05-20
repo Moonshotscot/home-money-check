@@ -316,23 +316,31 @@ export default function HomeMoneyCheckHomepage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between rounded-[1.75rem] border border-white/12 bg-white/10 px-4 py-3 shadow-[0_18px_70px_rgba(44,31,61,0.22)] backdrop-blur-xl md:px-5">
           <BrandMark />
           <nav className="hidden items-center gap-1 lg:flex">
-            {["Household bills", "£20K Giveaway", "Mortgages", "Insurances", "Estate Planning", "For Businesses", "Earn extra income"].map((item) => (
+            {[
+              { label: "Household bills", href: "/bills" },
+              { label: "£20K Giveaway", href: "/20k-giveaway" },
+              { label: "Mortgages", href: "/mortgage" },
+              { label: "Insurances", href: "/protection" },
+              { label: "Estate Planning", href: "/estate-planning" },
+              { label: "For Businesses", href: "/business-utilities" },
+              { label: "Earn extra income", href: "/extra-income" },
+            ].map((item) => (
               <a
-                key={item}
+                key={item.href}
                 className="rounded-full px-2.5 py-2 text-xs font-extrabold text-[#F7F0E8]/78 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-white/12 hover:text-white xl:px-3 xl:text-[0.8rem]"
-                href="#"
+                href={item.href}
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            <button
+            <a
               className="hidden transform-gpu rounded-full bg-[#FDCA55] px-5 py-3 text-sm font-black text-[#4F247D] shadow-[0_12px_32px_rgba(44,31,61,0.22)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#FFD978] hover:shadow-[0_18px_42px_rgba(44,31,61,0.24)] md:block"
-              type="button"
+              href="/start-my-check"
             >
               Start my check
-            </button>
+            </a>
             <button
               className="flex h-11 w-11 items-center justify-center rounded-full bg-white/12 text-[#F7F0E8] lg:hidden"
               type="button"
@@ -378,19 +386,19 @@ export default function HomeMoneyCheckHomepage() {
               We check if we can get you better deals on household bills, mortgages, insurances and much more.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <button
+              <a
                 className="group inline-flex w-full transform-gpu items-center justify-center gap-2 rounded-full bg-[#F7F0E8] px-7 py-4 text-base font-black text-[#5F2D8C] shadow-[0_18px_50px_rgba(44,31,61,0.24)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_22px_54px_rgba(44,31,61,0.25)] sm:w-auto"
-                type="button"
+                href="/start-my-check"
               >
                 Start a free check
                 <ArrowUpRight className="h-5 w-5 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:-translate-y-1" strokeWidth={2.6} />
-              </button>
-              <button
+              </a>
+              <a
                 className="inline-flex w-full transform-gpu items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-4 text-base font-black text-[#F7F0E8] backdrop-blur transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-white/16 sm:w-auto"
-                type="button"
+                href="/bills"
               >
                 Explore checks
-              </button>
+              </a>
             </div>
             <div className="mt-5 flex items-center gap-2 text-sm font-extrabold text-[#F7F0E8]/70 lg:hidden">
               <span className="h-2 w-8 rounded-full bg-[#F4CF7A]" />
