@@ -1,0 +1,12 @@
+.next/
+node_modules/
+.chrome-hmc/
+out/
+.npm-cache/
+.next-dev*.log
+
+*.tsbuildinfo
+.env
+.env.local
+.env*
+!.env.example
