@@ -22,30 +22,46 @@ export function ServicePage({ page }: { page: SitePage }) {
         title={page.title}
       />
       <main className="bg-[#F7F0E8] px-5 py-12 md:px-8 md:py-16">
-        <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-          <section className="relative overflow-hidden rounded-[2.75rem] bg-white p-8 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-10">
+        <div className="mx-auto grid max-w-7xl items-start gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.9fr)]">
+          <section className="relative overflow-hidden rounded-[2.75rem] bg-[#5F2D8C] p-8 text-[#F7F0E8] shadow-[0_30px_90px_rgba(44,31,61,0.22)] md:p-12">
+            <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-[#EADFFD]/20 blur-3xl" />
             <div
-              className="absolute -right-12 -top-12 h-32 w-32 rotate-[12deg] rounded-[2rem]"
+              className="absolute -bottom-12 right-8 h-28 w-28 rotate-[12deg] rounded-[2rem] opacity-70"
               style={{ backgroundColor: page.accentColour }}
             />
-            <p className="relative mb-5 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
-              What this check is
+            <p className="relative mb-5 w-fit rounded-full bg-[#FDCA55] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
+              {page.eyebrow}
             </p>
-            <h2 className="relative text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-5xl">
-              A simple route for a clearer next step.
+            <h2 className="relative text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-6xl">
+              {page.title}
             </h2>
-            <div className="relative mt-6 grid gap-4">
+            <p className="relative mt-6 max-w-3xl text-xl font-bold leading-8 text-[#F7F0E8]/82">
+              {page.intro}
+            </p>
+            <div className="relative mt-7 grid gap-4">
               {(page.mainCopy || [page.intro]).map((paragraph) => (
                 <p
                   key={paragraph}
-                  className="max-w-3xl text-lg font-bold leading-8 text-[#2C1F3D]/72"
+                  className="max-w-3xl text-lg font-bold leading-8 text-[#F7F0E8]/76"
                 >
                   {paragraph}
                 </p>
               ))}
             </div>
+            {page.why.length > 0 ? (
+              <div className="relative mt-7 grid gap-3">
+                {page.why.map((point) => (
+                  <div
+                    key={point}
+                    className="rounded-[1.35rem] bg-white/10 p-4 text-sm font-black leading-6 text-[#F7F0E8]/80 ring-1 ring-white/12"
+                  >
+                    {point}
+                  </div>
+                ))}
+              </div>
+            ) : null}
             {!page.mainCopy?.includes(comparisonExplainer) ? (
-              <p className="relative mt-6 rounded-[1.5rem] bg-[#F7F0E8] p-5 text-base font-black leading-7 text-[#5F2D8C]">
+              <p className="relative mt-6 rounded-[1.5rem] bg-[#FDCA55] p-5 text-base font-black leading-7 text-[#4F247D]">
                 {comparisonExplainer}
               </p>
             ) : null}
