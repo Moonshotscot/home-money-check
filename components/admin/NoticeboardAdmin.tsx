@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { Edit, Plus, Save, Trash2 } from "lucide-react";
+import { Edit, ExternalLink, Plus, Save, Trash2 } from "lucide-react";
 import { AdminGuard } from "@/components/admin/AdminGuard";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { supabase } from "@/lib/supabaseClient";
@@ -131,6 +131,12 @@ function NoticeboardContent() {
       return;
     }
 
+    const confirmed = window.confirm("Delete this noticeboard item? This cannot be undone.");
+
+    if (!confirmed) {
+      return;
+    }
+
     const { error } = await supabase.from("noticeboard_items").delete().eq("id", current.id);
 
     if (error) {
@@ -155,17 +161,28 @@ function NoticeboardContent() {
               Noticeboard
             </h1>
           </div>
-          <button
-            className="inline-flex w-fit items-center gap-2 rounded-full bg-[#FDCA55] px-5 py-3 text-sm font-black text-[#4F247D]"
-            onClick={() => {
-              setCurrent(emptyItem);
-              setSaveState("idle");
-            }}
-            type="button"
-          >
-            <Plus className="h-4 w-4" />
-            Add new item
-          </button>
+          <div className="flex flex-wrap gap-3">
+            <a
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-[#F7F0E8] px-5 py-3 text-sm font-black text-[#5F2D8C]"
+              href="/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <ExternalLink className="h-4 w-4" />
+              View homepage
+            </a>
+            <button
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-[#FDCA55] px-5 py-3 text-sm font-black text-[#4F247D]"
+              onClick={() => {
+                setCurrent(emptyItem);
+                setSaveState("idle");
+              }}
+              type="button"
+            >
+              <Plus className="h-4 w-4" />
+              Add new item
+            </button>
+          </div>
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
@@ -203,12 +220,16 @@ function NoticeboardContent() {
                       </p>
                       <h2 className="mt-2 text-xl font-black tracking-[-0.045em]">{item.title}</h2>
                     </div>
-                    <span className="rounded-full px-3 py-1 text-xs font-black text-[#5F2D8C]" style={{ backgroundColor: item.accent_colour || "#EADFFD" }}>
+                    <span
+                      className={`rounded-full px-3 py-1 text-xs font-black ${
+                        item.is_live ? "bg-[#BFD9C8] text-[#173E29]" : "bg-[#F4D9DE] text-[#7C3845]"
+                      }`}
+                    >
                       {item.is_live ? "Live" : "Hidden"}
                     </span>
                   </div>
                   <p className="mt-2 text-sm font-bold text-[#2C1F3D]/65">
-                    Order {item.display_order ?? 0}
+                    Display order {item.display_order ?? 0}
                   </p>
                 </button>
               ))}

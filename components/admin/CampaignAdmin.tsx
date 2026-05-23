@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { Save } from "lucide-react";
+import { ExternalLink, Save } from "lucide-react";
 import { AdminGuard } from "@/components/admin/AdminGuard";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { supabase } from "@/lib/supabaseClient";
@@ -127,12 +127,25 @@ function CampaignContent() {
   return (
     <AdminShell>
       <section className="rounded-[2.75rem] bg-white p-6 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-8">
-        <p className="mb-5 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
-          Homepage campaign
-        </p>
-        <h1 className="text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-6xl">
-          Campaign panel
-        </h1>
+        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="mb-5 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
+              Homepage campaign
+            </p>
+            <h1 className="text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-6xl">
+              Campaign panel
+            </h1>
+          </div>
+          <a
+            className="inline-flex w-fit items-center gap-2 rounded-full bg-[#F7F0E8] px-5 py-3 text-sm font-black text-[#5F2D8C]"
+            href="/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <ExternalLink className="h-4 w-4" />
+            View homepage
+          </a>
+        </div>
         {loadState === "loading" ? (
           <p className="mt-6 rounded-[1.5rem] bg-[#F7F0E8] p-5 text-sm font-black text-[#5F2D8C]">
             Loading campaign panel...
@@ -140,7 +153,7 @@ function CampaignContent() {
         ) : null}
         {loadState === "error" ? (
           <p className="mt-6 rounded-[1.5rem] bg-[#FFF1C8] p-5 text-sm font-black text-[#6B4611]">
-            Could not load the campaign panel. You can try again in a moment.
+            Campaign content could not be loaded. Try refreshing.
           </p>
         ) : null}
         <form className="mt-8 grid gap-5" onSubmit={saveCampaign}>
@@ -167,10 +180,16 @@ function CampaignContent() {
           </p>
           <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
             Middle content
+            <span className="text-xs font-bold leading-5 text-[#2C1F3D]/65">
+              Highlighted text shown in the campaign card.
+            </span>
             <textarea className={`${fieldClass} min-h-28`} onChange={(event) => updateField("middle_content", event.target.value)} value={campaign.middle_content ?? ""} />
           </label>
           <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
             Lower text
+            <span className="text-xs font-bold leading-5 text-[#2C1F3D]/65">
+              Smaller supporting text shown below.
+            </span>
             <textarea className={`${fieldClass} min-h-28`} onChange={(event) => updateField("lower_text", event.target.value)} value={campaign.lower_text ?? ""} />
           </label>
           <div className="grid gap-5 md:grid-cols-2">
