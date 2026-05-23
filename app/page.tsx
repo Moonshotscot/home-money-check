@@ -12,13 +12,13 @@ import {
   BriefcaseBusiness,
   Sparkles,
   Wifi,
-  Menu,
   Zap,
   Smartphone,
   UsersRound,
   HeartPulse,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { DesktopNavigation, MobileNavigation } from "@/components/SiteNavigation";
 import { getHomepageContent } from "@/lib/homepageContent";
 
 export const dynamic = "force-dynamic";
@@ -74,8 +74,8 @@ const heroTiles: HeroTileItem[] = [
       "lg:absolute lg:right-[7%] lg:top-[12%] lg:mt-0 lg:h-[174px] lg:w-[226px] lg:rotate-[-1deg]",
   },
   {
-    title: "Mobile",
-    note: "SIMs and phones",
+    title: "Mobile SIMs",
+    note: "Mobile SIM deals",
     icon: Smartphone,
     bg: "#F4D9DE",
     colour: "#7C3845",
@@ -150,7 +150,7 @@ const routeGroups: RouteGroupItem[] = [
     label: "Home checks",
     bg: "#F7F0E8",
     colour: "#622C91",
-    items: ["Energy", "Broadband", "Mobile", "£20K Giveaway"],
+    items: ["Energy", "Broadband", "Mobile SIMs", "£20K Giveaway"],
   },
   {
     label: "Life planning checks",
@@ -192,7 +192,7 @@ const enquiryOptions = [
   "Household bills",
   "Energy",
   "Broadband",
-  "Mobile",
+  "Mobile SIMs",
   "£20K Giveaway",
   "Mortgage",
   "First-time buyer mortgage",
@@ -365,25 +365,7 @@ export default async function HomeMoneyCheckHomepage() {
       <header className="relative z-20 px-4 pt-5 md:px-7">
         <div className="mx-auto flex max-w-7xl items-center justify-between rounded-[1.75rem] border border-white/12 bg-white/10 px-4 py-3 shadow-[0_18px_70px_rgba(44,31,61,0.22)] backdrop-blur-xl md:px-5">
           <BrandMark />
-          <nav className="hidden items-center gap-1 lg:flex">
-            {[
-              { label: "Household bills", href: "/bills" },
-              { label: "£20K Giveaway", href: "/20k-giveaway" },
-              { label: "Mortgages", href: "/mortgage" },
-              { label: "Insurances", href: "/protection" },
-              { label: "Estate Planning", href: "/estate-planning" },
-              { label: "For Businesses", href: "/business-utilities" },
-              { label: "Earn extra income", href: "/extra-income" },
-            ].map((item) => (
-              <a
-                key={item.href}
-                className="rounded-full px-2.5 py-2 text-xs font-extrabold text-[#F7F0E8]/78 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-white/12 hover:text-white xl:px-3 xl:text-[0.8rem]"
-                href={item.href}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+          <DesktopNavigation />
           <div className="flex items-center gap-2">
             <a
               className="hidden transform-gpu rounded-full bg-[#FDCA55] px-5 py-3 text-sm font-black text-[#4F247D] shadow-[0_12px_32px_rgba(44,31,61,0.22)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#FFD978] hover:shadow-[0_18px_42px_rgba(44,31,61,0.24)] md:block"
@@ -391,13 +373,7 @@ export default async function HomeMoneyCheckHomepage() {
             >
               Start my check
             </a>
-            <button
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-white/12 text-[#F7F0E8] lg:hidden"
-              type="button"
-              aria-label="Open menu"
-            >
-              <Menu className="h-5 w-5" />
-            </button>
+            <MobileNavigation />
           </div>
         </div>
       </header>

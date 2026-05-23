@@ -16,7 +16,7 @@ export const selectedCheckFilters = [
   "Household bills",
   "Energy",
   "Broadband",
-  "Mobile",
+  "Mobile SIMs",
   "£20K Giveaway",
   "Mortgage",
   "First-time buyer mortgage",
@@ -28,6 +28,8 @@ export const selectedCheckFilters = [
   "Extra income",
   "Business utilities",
   "Finance services",
+  "Business protection",
+  "Business continuity",
 ] as const;
 
 export type EnquiryStatus = (typeof enquiryStatuses)[number];

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { LogOut } from "lucide-react";
+import { ExternalLink, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 
@@ -49,6 +49,15 @@ export function AdminShell({ children }: AdminShellProps) {
                 {link.label}
               </Link>
             ))}
+            <Link
+              className="inline-flex items-center gap-2 rounded-full bg-white/12 px-4 py-2 text-sm font-black text-[#F7F0E8] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/18"
+              href="/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ExternalLink className="h-4 w-4" />
+              View site
+            </Link>
             <button
               className="inline-flex items-center gap-2 rounded-full bg-[#FDCA55] px-4 py-2 text-sm font-black text-[#4F247D] transition-all duration-300 hover:-translate-y-0.5"
               onClick={handleLogout}

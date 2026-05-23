@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, useMemo, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
@@ -8,8 +8,8 @@ const checkOptions = [
   "Household bills",
   "Energy",
   "Broadband",
-  "Mobile",
-  "£20K Giveaway",
+  "Mobile SIMs",
+  "Â£20K Giveaway",
   "Mortgage",
   "First-time buyer mortgage",
   "Remortgage",
@@ -20,6 +20,8 @@ const checkOptions = [
   "Extra income",
   "Business utilities",
   "Finance services",
+  "Business protection",
+  "Business continuity",
 ];
 
 type LeadFormPreviewProps = {
@@ -134,16 +136,6 @@ export function LeadFormPreview({
           UW Partner opportunity. You can opt out of marketing messages at any time.
         </p>
       ) : null}
-      {status === "success" ? (
-        <div className="relative mt-7 rounded-[1.75rem] bg-white p-6 text-[#2C1F3D] shadow-[0_18px_50px_rgba(44,31,61,0.10)]">
-          <p className="text-2xl font-black leading-7 tracking-[-0.045em]">
-            Thanks. Your enquiry has been received.
-          </p>
-          <p className="mt-3 text-base font-bold leading-7 text-[#2C1F3D]/72">
-            We’ll review it and come back to you as soon as we can.
-          </p>
-        </div>
-      ) : null}
       {status === "error" ? (
         <p className="relative mt-5 rounded-[1.35rem] bg-[#FFF1C8] p-4 text-sm font-black leading-6 text-[#6B4611]">
           Sorry, something went wrong. Please try again, or contact us directly if it keeps
@@ -240,6 +232,14 @@ export function LeadFormPreview({
             money tips, relevant services and local offers. I can unsubscribe at any time.
           </span>
         </label>
+        {status === "success" ? (
+          <div className="rounded-[1.75rem] bg-white p-5 text-[#2C1F3D] shadow-[0_18px_50px_rgba(44,31,61,0.10)]">
+            <p className="text-lg font-black leading-7 tracking-[-0.025em]">
+              Thanks, we've received your details now. We’ll get back to you within 24 hours, and
+              often much sooner!
+            </p>
+          </div>
+        ) : null}
         <button
           className="flex transform-gpu items-center justify-center gap-2 rounded-full bg-[#6A35A0] px-7 py-4 text-base font-black text-[#F7F0E8] shadow-[0_18px_45px_rgba(106,53,160,0.25)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] disabled:cursor-not-allowed disabled:opacity-70"
           disabled={status === "submitting"}
@@ -252,3 +252,4 @@ export function LeadFormPreview({
     </div>
   );
 }
+

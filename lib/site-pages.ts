@@ -1,4 +1,4 @@
-export type PageStatus = "live" | "comingSoon";
+﻿export type PageStatus = "live" | "comingSoon";
 
 export type SitePage = {
   title: string;
@@ -21,32 +21,105 @@ export type SitePage = {
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://homemoneycheck.co.uk";
 
-export const mainNavigation = [
-  { label: "Household bills", href: "/bills" },
-  { label: "£20K Giveaway", href: "/20k-giveaway" },
-  { label: "Mortgages", href: "/mortgage" },
-  { label: "Insurances", href: "/protection" },
-  { label: "Estate Planning", href: "/estate-planning" },
-  { label: "For Businesses", href: "/business-utilities" },
-  { label: "Earn extra income", href: "/extra-income" },
+export type NavigationItem = {
+  label: string;
+  href: string;
+  active?: string[];
+  children?: NavigationItem[];
+};
+
+export const desktopNavigation: NavigationItem[] = [
+  {
+    label: "Household bills",
+    href: "/bills",
+    active: ["/bills", "/energy", "/broadband", "/mobile"],
+    children: [
+      { label: "Energy", href: "/energy" },
+      { label: "Broadband", href: "/broadband" },
+      { label: "Mobile SIMs", href: "/mobile" },
+    ],
+  },
+  {
+    label: "Mortgages",
+    href: "/mortgage",
+    active: ["/mortgage"],
+    children: [
+      { label: "Mortgages", href: "/mortgage" },
+      { label: "First-time buyers", href: "/mortgage/first-time-buyer" },
+      { label: "Remortgages", href: "/mortgage/remortgage" },
+      { label: "Moving home", href: "/mortgage/moving-home" },
+    ],
+  },
+  {
+    label: "Insurance",
+    href: "/protection",
+    active: ["/protection", "/private-medical-insurance"],
+    children: [
+      { label: "Protection", href: "/protection" },
+      { label: "Private medical insurance", href: "/private-medical-insurance" },
+    ],
+  },
+  { label: "Wills & POAs", href: "/estate-planning", active: ["/estate-planning"] },
+  {
+    label: "For businesses",
+    href: "/business-utilities",
+    active: [
+      "/business-utilities",
+      "/finance-services",
+      "/business-protection",
+      "/business-continuity",
+    ],
+    children: [
+      { label: "Business utilities", href: "/business-utilities" },
+      { label: "Finance/bookkeeping", href: "/finance-services" },
+      { label: "Business protection", href: "/business-protection" },
+      { label: "Business continuity", href: "/business-continuity" },
+    ],
+  },
+  { label: "Earn extra income", href: "/extra-income", active: ["/extra-income"] },
 ];
 
-export const mobileNavigation = [
+export const mobileMenuGroups: NavigationItem[] = [
   { label: "Home", href: "/" },
-  { label: "Household bills", href: "/bills" },
-  { label: "Energy", href: "/energy" },
-  { label: "Broadband", href: "/broadband" },
-  { label: "Mobile", href: "/mobile" },
-  { label: "£20K Giveaway", href: "/20k-giveaway" },
-  { label: "Mortgages", href: "/mortgage" },
-  { label: "Protection", href: "/protection" },
-  { label: "Private Medical Insurance", href: "/private-medical-insurance" },
-  { label: "Estate Planning", href: "/estate-planning" },
+  {
+    label: "Household bills",
+    href: "/bills",
+    children: [
+      { label: "Energy", href: "/energy" },
+      { label: "Broadband", href: "/broadband" },
+      { label: "Mobile SIMs", href: "/mobile" },
+    ],
+  },
+  {
+    label: "Mortgages",
+    href: "/mortgage",
+    children: [
+      { label: "Mortgages", href: "/mortgage" },
+      { label: "First-time buyers", href: "/mortgage/first-time-buyer" },
+      { label: "Remortgages", href: "/mortgage/remortgage" },
+      { label: "Moving home", href: "/mortgage/moving-home" },
+    ],
+  },
+  {
+    label: "Insurance",
+    href: "/protection",
+    children: [
+      { label: "Protection", href: "/protection" },
+      { label: "Private medical insurance", href: "/private-medical-insurance" },
+    ],
+  },
+  { label: "Wills & POAs", href: "/estate-planning" },
+  {
+    label: "For businesses",
+    href: "/business-utilities",
+    children: [
+      { label: "Business utilities", href: "/business-utilities" },
+      { label: "Finance/bookkeeping", href: "/finance-services" },
+      { label: "Business protection", href: "/business-protection" },
+      { label: "Business continuity", href: "/business-continuity" },
+    ],
+  },
   { label: "Earn extra income", href: "/extra-income" },
-  { label: "Business Utilities", href: "/business-utilities" },
-  { label: "Finance Services", href: "/finance-services" },
-  { label: "Local Home Partners", href: "/local-home-partners" },
-  { label: "Contact", href: "/contact" },
 ];
 
 const standardNextSteps = [
@@ -126,20 +199,20 @@ export const sitePages: SitePage[] = [
     uwRelated: true,
   },
   {
-    title: "Mobile check",
+    title: "Mobile SIMs check",
     slug: "mobile",
     eyebrow: "Home checks",
     description:
-      "A simple check for mobile options, SIMs and household mobile costs.",
+      "A simple check for mobile SIM options and household mobile costs.",
     accentColour: "#F4D9DE",
-    selectedCheck: "Mobile",
+    selectedCheck: "Mobile SIMs",
     status: "live",
     category: "Home checks",
-    metaTitle: "Mobile check | Home Money Check",
+    metaTitle: "Mobile SIMs check | Home Money Check",
     metaDescription:
-      "Check mobile options, SIMs and household mobile costs with Home Money Check.",
+      "Check mobile SIM options and household mobile costs with Home Money Check.",
     intro:
-      "Mobile costs can be easy to ignore, especially across a household with more than one phone.",
+      "Mobile SIM costs can be easy to ignore, especially across a household with more than one plan.",
     why: [
       "You may be paying for data or features you no longer need.",
       "Household mobile setups can often be simplified.",
@@ -149,20 +222,20 @@ export const sitePages: SitePage[] = [
     uwRelated: true,
   },
   {
-    title: "£20K Giveaway",
+    title: "Â£20K Giveaway",
     slug: "20k-giveaway",
     eyebrow: "Current route",
     description:
-      "Ask about the current £20K Giveaway route without pretending this is an official entry form.",
+      "Ask about the current Â£20K Giveaway route without pretending this is an official entry form.",
     accentColour: "#EADFFD",
-    selectedCheck: "£20K Giveaway",
+    selectedCheck: "Â£20K Giveaway",
     status: "live",
     category: "Current campaign",
-    metaTitle: "£20K Giveaway route | Home Money Check",
+    metaTitle: "Â£20K Giveaway route | Home Money Check",
     metaDescription:
-      "Ask Home Money Check about the current £20K Giveaway route and next steps.",
+      "Ask Home Money Check about the current Â£20K Giveaway route and next steps.",
     intro:
-      "This page lets you ask about the £20K Giveaway route. If you choose to continue, entry is handled through the correct Utility Warehouse process.",
+      "This page lets you ask about the Â£20K Giveaway route. If you choose to continue, entry is handled through the correct Utility Warehouse process.",
     why: [
       "You can ask what the route involves before taking another step.",
       "This is not an official-looking entry form.",
@@ -379,6 +452,36 @@ export const sitePages: SitePage[] = [
     nextSteps: standardNextSteps,
   },
   {
+    title: "Business protection",
+    slug: "business-protection",
+    eyebrow: "Coming soon",
+    description: "A business protection route is being prepared.",
+    accentColour: "#D9E1E8",
+    selectedCheck: "Business protection",
+    status: "comingSoon",
+    category: "Business checks",
+    metaTitle: "Business protection coming soon | Home Money Check",
+    metaDescription: "A business protection route is coming soon.",
+    intro: "This route will help organise business protection enquiries when it is ready.",
+    why: ["Business protection needs clear scope and suitability checks."],
+    nextSteps: standardNextSteps,
+  },
+  {
+    title: "Business continuity",
+    slug: "business-continuity",
+    eyebrow: "Coming soon",
+    description: "A business continuity route is being prepared.",
+    accentColour: "#D9E1E8",
+    selectedCheck: "Business continuity",
+    status: "comingSoon",
+    category: "Business checks",
+    metaTitle: "Business continuity coming soon | Home Money Check",
+    metaDescription: "A business continuity route is coming soon.",
+    intro: "This route will help organise business continuity enquiries when it is ready.",
+    why: ["Business continuity questions need a practical, careful route."],
+    nextSteps: standardNextSteps,
+  },
+  {
     title: "Local home partners",
     slug: "local-home-partners",
     eyebrow: "Coming soon",
@@ -403,3 +506,4 @@ export function getPageBySlug(slug: string) {
 export function getRoutePath(page: SitePage) {
   return `/${page.slug}`;
 }
+
