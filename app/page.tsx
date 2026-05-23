@@ -239,16 +239,18 @@ const enquiryOptions = [
   "Broadband",
   "Mobile SIM deals",
   "£20K Giveaway",
-  "Mortgage",
-  "First-time buyer mortgage",
-  "Remortgage",
-  "Moving home mortgage",
-  "Protection insurance",
+  "Mortgages",
+  "First-time buyers",
+  "Remortgages",
+  "Moving home",
+  "Protection",
   "Private medical insurance",
   "Wills & POAs",
   "Extra income",
   "Business utilities",
   "Finance/bookkeeping",
+  "Business protection",
+  "Business continuity",
 ];
 
 function BrandMark({ priority = false }: { priority?: boolean }) {
