@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { EnquiriesAdmin } from "@/components/admin/EnquiriesAdmin";
 
 export const metadata: Metadata = {
-  title: "Enquiries | Home Money Check admin",
+  title: "Admin | Home Money Check",
   description: "View and update Home Money Check enquiries.",
 };
 

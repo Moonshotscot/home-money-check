@@ -1,4 +1,5 @@
 ﻿import React from "react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -23,6 +24,18 @@ import { WhatHappensNext } from "@/components/WhatHappensNext";
 import { getHomepageContent } from "@/lib/homepageContent";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Home Money Check | Better deals for your home, money and future",
+  description:
+    "Choose what you want checked and get friendly help with home, money and future decisions.",
+  openGraph: {
+    title: "Home Money Check | Better deals for your home, money and future",
+    description:
+      "Choose what you want checked and get friendly help with home, money and future decisions.",
+    type: "website",
+  },
+};
 
 type HeroTileItem = {
   title: string;
@@ -192,7 +205,7 @@ const fallbackUpdates = [
   { label: "Business", text: "Business utilities", tone: "#D9E1E8" },
 ];
 
-// Back-office editable later: campaign visibility on/off, pill label, title,
+// Admin editable later: campaign visibility on/off, pill label, title,
 // middle/central content area, lower box text, and an optional button/link.
 const fallbackCampaign = {
   isVisible: true,
@@ -200,15 +213,15 @@ const fallbackCampaign = {
   title: "£20K Giveaway",
   titleAccent: "£20K",
   titleMain: "Giveaway",
-  // Admin/back-office field later: central campaign content area.
+  // Admin field later: central campaign content area.
   body:
-    "A premium campaign panel that can be changed or hidden from the back office when the featured push changes.",
-  // Admin/back-office field later: middle/central campaign content area.
+    "A premium campaign panel that can be changed or hidden when the featured push changes.",
+  // Admin field later: middle/central campaign content area.
   middleContent:
-    "A premium campaign panel that can be changed or hidden from the back office when the featured push changes.",
-  // Admin/back-office field later: lower pill/box text.
+    "A premium campaign panel that can be changed or hidden when the featured push changes.",
+  // Admin field later: lower pill/box text.
   lowerBoxText:
-    "A premium campaign panel that can be changed or hidden from the back office when the featured push changes.",
+    "A premium campaign panel that can be changed or hidden when the featured push changes.",
 };
 
 const enquiryOptions = [
@@ -676,7 +689,7 @@ export default async function HomeMoneyCheckHomepage() {
                   </h3>
                 </div>
                 <div className="flex items-end justify-end pb-2 pr-2 md:pb-8 md:pr-8">
-                  {/* TODO admin/back office: make this portrait/photo placeholder editable later. */}
+                  {/* TODO admin: make this portrait/photo placeholder editable later. */}
                   <div className="flex h-40 w-28 shrink-0 items-center justify-center rounded-[2rem] bg-white/45 shadow-[inset_0_0_0_1px_rgba(107,70,17,0.08)] md:h-48 md:w-[10.5rem]">
                     <Home className="h-16 w-16 text-[#6B4611]" strokeWidth={1.8} />
                   </div>

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { AdminLoginForm } from "@/components/admin/AdminLoginForm";
 
 export const metadata: Metadata = {
-  title: "Admin login | Home Money Check",
+  title: "Admin | Home Money Check",
   description: "Home Money Check admin login.",
 };
 

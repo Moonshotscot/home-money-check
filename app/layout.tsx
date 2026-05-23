@@ -16,7 +16,10 @@ const plusJakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://homemoneycheck.co.uk"),
-  title: "Home Money Check",
+  title: {
+    default: "Home Money Check | Better deals for your home, money and future",
+    template: "%s",
+  },
   description: "Friendly checks for home services, bills, planning and practical money decisions.",
   // TODO before public launch: remove noindex/nofollow and update robots once legal pages and final compliance checks are complete.
   robots: {
@@ -28,9 +31,19 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Home Money Check",
+    title: "Home Money Check | Better deals for your home, money and future",
     description: "Friendly checks for home services, bills, planning and practical money decisions.",
     type: "website",
+  },
+  icons: {
+    icon: [
+      {
+        url: "/brand/hmc-tick-icon-transparent.png",
+        type: "image/png",
+      },
+    ],
+    shortcut: "/brand/hmc-tick-icon-transparent.png",
+    apple: "/brand/hmc-tick-icon-transparent.png",
   },
 };
 

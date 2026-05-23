@@ -3,7 +3,7 @@ import { AdminDashboard } from "@/components/admin/AdminDashboard";
 
 export const metadata: Metadata = {
   title: "Admin | Home Money Check",
-  description: "Home Money Check back office.",
+  description: "Home Money Check admin area.",
 };
 
 export default function AdminPage() {

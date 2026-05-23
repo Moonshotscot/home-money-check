@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { NoticeboardAdmin } from "@/components/admin/NoticeboardAdmin";
 
 export const metadata: Metadata = {
-  title: "Noticeboard | Home Money Check admin",
+  title: "Admin | Home Money Check",
   description: "Manage Home Money Check noticeboard items.",
 };
 

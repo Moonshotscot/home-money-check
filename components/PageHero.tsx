@@ -39,14 +39,14 @@ export function PageHero({ eyebrow, title, description, accentColour, status = "
           </p>
           <p className="relative mt-10 text-3xl font-black leading-[1] tracking-[-0.055em]">
             {status === "comingSoon"
-              ? "Leave your details and we can keep this route warm for later."
+              ? "Leave your details and we’ll let you know when this service is ready."
               : "Start with a few details and a clear check route."}
           </p>
           <Link
             className="relative mt-8 inline-flex transform-gpu items-center gap-2 rounded-full bg-[#6A35A0] px-6 py-3 text-sm font-black text-[#F7F0E8] shadow-[0_18px_45px_rgba(106,53,160,0.25)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5"
-            href="/start-my-check"
+            href={status === "comingSoon" ? "#lead-form" : "/start-my-check"}
           >
-            Start my check
+            {status === "comingSoon" ? "Tell me when this is ready" : "Start my check"}
             <ArrowUpRight className="h-4 w-4" strokeWidth={2.7} />
           </Link>
         </div>

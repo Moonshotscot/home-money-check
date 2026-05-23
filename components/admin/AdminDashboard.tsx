@@ -33,7 +33,7 @@ export function AdminDashboard() {
         <AdminShell>
           <section className="rounded-[2.75rem] bg-white p-8 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-10">
             <p className="mb-5 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
-              Back office
+              Admin
             </p>
             <h1 className="text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-6xl">
               Home Money Check admin
