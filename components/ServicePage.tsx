@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { getRoutePath, type SitePage } from "@/lib/site-pages";
 import { LeadFormPreview } from "@/components/LeadFormPreview";
 import { PageHero } from "@/components/PageHero";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { WhatHappensNext } from "@/components/WhatHappensNext";
 
 function UtilityWarehouseNote() {
   return (
@@ -15,6 +16,9 @@ function UtilityWarehouseNote() {
     </div>
   );
 }
+
+const comparisonExplainer =
+  "Home Money Check is not an instant comparison site. It is a friendly check and advice service. You send a few basic details, we get in touch, then we help you understand the best route for what you need.";
 
 export function ServicePage({ page }: { page: SitePage }) {
   return (
@@ -40,19 +44,21 @@ export function ServicePage({ page }: { page: SitePage }) {
             <h2 className="relative text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-5xl">
               A simple route for a clearer next step.
             </h2>
-            <p className="relative mt-6 max-w-2xl text-lg font-bold leading-8 text-[#2C1F3D]/72">
-              {page.intro}
-            </p>
-            <div className="relative mt-8 grid gap-4 md:grid-cols-3">
-              {page.why.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-[1.75rem] bg-[#F7F0E8] p-5 text-sm font-extrabold leading-6 shadow-[0_14px_40px_rgba(44,31,61,0.08)]"
+            <div className="relative mt-6 grid gap-4">
+              {(page.mainCopy || [page.intro]).map((paragraph) => (
+                <p
+                  key={paragraph}
+                  className="max-w-3xl text-lg font-bold leading-8 text-[#2C1F3D]/72"
                 >
-                  {item}
-                </div>
+                  {paragraph}
+                </p>
               ))}
             </div>
+            {!page.mainCopy?.includes(comparisonExplainer) ? (
+              <p className="relative mt-6 rounded-[1.5rem] bg-[#F7F0E8] p-5 text-base font-black leading-7 text-[#5F2D8C]">
+                {comparisonExplainer}
+              </p>
+            ) : null}
             {page.extraNote ? (
               <p className="relative mt-5 rounded-[1.5rem] bg-[#FFF1C8] p-5 text-sm font-black leading-6 text-[#6B4611]">
                 {page.extraNote}
@@ -68,19 +74,7 @@ export function ServicePage({ page }: { page: SitePage }) {
           />
         </div>
 
-        <section className="mx-auto mt-5 grid max-w-7xl gap-5 md:grid-cols-3">
-          {page.nextSteps.map((step) => (
-            <div
-              key={step}
-              className="flex min-h-32 items-start gap-4 rounded-[2rem] bg-[#EADFFD] p-6 shadow-[0_18px_55px_rgba(44,31,61,0.10)]"
-            >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/70 text-[#5F2D8C]">
-                <Check className="h-5 w-5" strokeWidth={2.7} />
-              </span>
-              <p className="text-base font-black leading-6">{step}</p>
-            </div>
-          ))}
-        </section>
+        <WhatHappensNext />
 
         <div className="mx-auto mt-10 flex max-w-7xl flex-wrap gap-3">
           <Link

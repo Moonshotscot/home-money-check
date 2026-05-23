@@ -130,6 +130,10 @@ export function LeadFormPreview({
       <h2 className="relative text-4xl font-black leading-[0.98] tracking-[-0.065em] text-[#2C1F3D] md:text-5xl">
         {title}
       </h2>
+      <p className="relative mt-5 rounded-[1.35rem] bg-white/70 p-4 text-sm font-bold leading-6 text-[#4F247D]">
+        Send your details and we’ll get back to you personally. You are not committing to anything
+        by submitting this form.
+      </p>
       {uwRelated ? (
         <p className="relative mt-5 rounded-[1.35rem] bg-white/70 p-4 text-sm font-bold leading-6 text-[#4F247D]">
           If your enquiry relates to Utility Warehouse, you may be contacted about UW services or the

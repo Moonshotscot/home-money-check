@@ -4,6 +4,7 @@ import { LeadFormPreview } from "@/components/LeadFormPreview";
 import { PageHero } from "@/components/PageHero";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import { WhatHappensNext } from "@/components/WhatHappensNext";
 
 export function ComingSoonPage({ page }: { page: SitePage }) {
   return (
@@ -27,8 +28,16 @@ export function ComingSoonPage({ page }: { page: SitePage }) {
               Coming soon
             </h2>
             <p className="relative mt-7 max-w-2xl text-xl font-bold leading-8 text-[#F7F0E8]/80">
-              {page.intro}
+              {(page.mainCopy || [page.intro])[0]}
             </p>
+            {page.mainCopy?.slice(1).map((paragraph) => (
+              <p
+                key={paragraph}
+                className="relative mt-5 max-w-2xl text-lg font-bold leading-8 text-[#F7F0E8]/78"
+              >
+                {paragraph}
+              </p>
+            ))}
             <Link
               className="relative mt-8 inline-flex rounded-full bg-[#F7F0E8] px-6 py-3 text-sm font-black text-[#5F2D8C]"
               href="/"
@@ -43,6 +52,7 @@ export function ComingSoonPage({ page }: { page: SitePage }) {
             uwRelated={page.uwRelated}
           />
         </div>
+        <WhatHappensNext />
       </main>
       <SiteFooter />
     </div>

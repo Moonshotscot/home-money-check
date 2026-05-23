@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { DesktopNavigation, MobileNavigation } from "@/components/SiteNavigation";
+import { WhatHappensNext } from "@/components/WhatHappensNext";
 import { getHomepageContent } from "@/lib/homepageContent";
 
 export const dynamic = "force-dynamic";
@@ -550,6 +551,15 @@ export default async function HomeMoneyCheckHomepage() {
               <h2 className="relative text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-5xl">
                 Tell us what you want to check.
               </h2>
+              <p className="relative mt-5 rounded-[1.35rem] bg-white/70 p-4 text-sm font-bold leading-6 text-[#4F247D]">
+                Home Money Check is not an instant comparison site. It is a friendly check and
+                advice service. You send a few basic details, we get in touch, then we help you
+                understand the best route for what you need.
+              </p>
+              <p className="relative mt-4 rounded-[1.35rem] bg-white/70 p-4 text-sm font-bold leading-6 text-[#4F247D]">
+                Send your details and we’ll get back to you personally. You are not committing to
+                anything by submitting this form.
+              </p>
               <div className="relative mt-7 grid gap-4">
                 <input
                   className="rounded-[1.35rem] border-0 bg-white px-5 py-4 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
@@ -579,6 +589,7 @@ export default async function HomeMoneyCheckHomepage() {
               </div>
             </div>
           </div>
+          <WhatHappensNext />
         </section>
 
         <section className="bg-[#F7F0E8] px-5 pb-14 text-[#2C1F3D] md:px-8 md:pb-20">
