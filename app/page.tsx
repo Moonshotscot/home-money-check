@@ -419,13 +419,13 @@ export default async function HomeMoneyCheckHomepage() {
             </div>
 
             <h1 className="max-w-4xl">
-              <span className="display-font block text-[4.7rem] leading-[0.82] tracking-[-0.045em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.79] lg:text-[7.35rem]">
+              <span className="display-font block text-[4.7rem] leading-[0.86] tracking-[-0.045em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.83] lg:text-[7.35rem]">
                 Home
               </span>
-              <span className="display-font block text-[4.7rem] leading-[0.78] tracking-[-0.045em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.75] lg:text-[7.35rem]">
+              <span className="display-font block text-[4.7rem] leading-[0.84] tracking-[-0.045em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.81] lg:text-[7.35rem]">
                 Money
               </span>
-              <span className="mt-3 flex w-fit max-w-full items-center md:mt-5">
+              <span className="mt-1 flex w-fit max-w-full items-center md:mt-2">
                 <span className="block text-[3.45rem] font-black leading-[0.88] tracking-[-0.075em] text-[#F7F0E8] md:text-[5.25rem] lg:text-[5.65rem]">
                   Checked
                 </span>
