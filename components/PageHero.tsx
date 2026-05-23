@@ -22,7 +22,7 @@ export function PageHero({ eyebrow, title, description, accentColour, status = "
           >
             {eyebrow}
           </p>
-          <h1 className="max-w-4xl text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-7xl">
+          <h1 className="display-font max-w-4xl text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-7xl">
             {title}
           </h1>
           <p className="mt-7 max-w-2xl text-xl font-bold leading-8 text-[#F7F0E8]/78 md:text-2xl md:leading-9">
@@ -35,7 +35,7 @@ export function PageHero({ eyebrow, title, description, accentColour, status = "
             style={{ backgroundColor: accentColour }}
           />
           <p className="relative text-sm font-black uppercase tracking-[0.14em] text-[#5F2D8C]/70">
-            {status === "comingSoon" ? "Almost ready" : "Next step"}
+            {status === "comingSoon" ? "Coming soon" : "Next step"}
           </p>
           <p className="relative mt-10 text-3xl font-black leading-[1] tracking-[-0.055em]">
             {status === "comingSoon"

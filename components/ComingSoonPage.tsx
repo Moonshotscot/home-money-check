@@ -48,6 +48,7 @@ export function ComingSoonPage({ page }: { page: SitePage }) {
             <LeadFormPreview
               defaultSelectedCheck={page.selectedCheck}
               sourcePage={getRoutePath(page)}
+              submitLabel="Tell me when this is ready"
               title="Tell me when this is ready"
             />
           </div>

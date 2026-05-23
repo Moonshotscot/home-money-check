@@ -30,6 +30,7 @@ type LeadFormPreviewProps = {
   sourcePage: string;
   uwRelated?: boolean;
   title?: string;
+  submitLabel?: string;
 };
 
 type FormState = {
@@ -51,6 +52,7 @@ export function LeadFormPreview({
   defaultSelectedCheck,
   selectedCheck,
   sourcePage,
+  submitLabel = "Start my check",
   title = "Tell us what you want to check.",
 }: LeadFormPreviewProps) {
   const initialSelectedCheck =
@@ -270,7 +272,7 @@ export function LeadFormPreview({
           disabled={status === "submitting"}
           type="submit"
         >
-          {status === "submitting" ? "Sending..." : "Start my check"}
+          {status === "submitting" ? "Sending..." : submitLabel}
           <ArrowUpRight className="h-5 w-5" strokeWidth={2.6} />
         </button>
       </form>

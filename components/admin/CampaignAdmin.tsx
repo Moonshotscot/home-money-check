@@ -163,7 +163,7 @@ function CampaignContent() {
               <input className={fieldClass} onChange={(event) => updateField("label", event.target.value)} value={campaign.label ?? ""} />
             </label>
             <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
-              Title backup
+              Fallback title
               <input className={fieldClass} onChange={(event) => updateField("title", event.target.value)} value={campaign.title ?? ""} />
             </label>
             <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">

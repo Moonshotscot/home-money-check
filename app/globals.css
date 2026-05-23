@@ -36,6 +36,12 @@ body {
   font-weight: 900;
 }
 
+.brand-wordmark-text {
+  font-family: "Fraunces", ui-serif, Georgia, serif;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  font-weight: 900;
+}
+
 img,
 svg {
   max-width: 100%;

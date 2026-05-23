@@ -32,7 +32,7 @@ export function ServicePage({ page }: { page: SitePage }) {
             <p className="relative mb-5 w-fit rounded-full bg-[#FDCA55] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
               {page.eyebrow}
             </p>
-            <h2 className="relative text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-6xl">
+            <h2 className="display-font relative text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-6xl">
               {page.title}
             </h2>
             <p className="relative mt-6 max-w-3xl text-xl font-bold leading-8 text-[#F7F0E8]/82">
@@ -62,7 +62,11 @@ export function ServicePage({ page }: { page: SitePage }) {
             ) : null}
             {!page.mainCopy?.includes(comparisonExplainer) ? (
               <p className="relative mt-6 rounded-[1.5rem] bg-[#FDCA55] p-5 text-base font-black leading-7 text-[#4F247D]">
-                {comparisonExplainer}
+                <span className="brand-wordmark-text text-lg tracking-[-0.035em]">
+                  Home Money Check
+                </span>{" "}
+                is a friendly check and advice service. You send a few basic details, we get in
+                touch, then we help you understand the best route for what you need.
               </p>
             ) : null}
             {page.extraNote ? (

@@ -38,12 +38,12 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/brand/hmc-tick-icon-transparent.png",
+        url: "/brand/hmc-tick-icon-purple.png",
         type: "image/png",
       },
     ],
-    shortcut: "/brand/hmc-tick-icon-transparent.png",
-    apple: "/brand/hmc-tick-icon-transparent.png",
+    shortcut: "/brand/hmc-tick-icon-purple.png",
+    apple: "/brand/hmc-tick-icon-purple.png",
   },
 };
 

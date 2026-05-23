@@ -37,6 +37,7 @@ export const metadata: Metadata = {
 type HeroTileItem = {
   title: string;
   note: string;
+  href: string;
   icon: LucideIcon;
   bg: string;
   colour: string;
@@ -59,6 +60,7 @@ const heroTiles: HeroTileItem[] = [
   {
     title: "Household Bills",
     note: "Your main home services check",
+    href: "/bills",
     icon: Home,
     bg: "#F7F0E8",
     colour: "#622C91",
@@ -70,6 +72,7 @@ const heroTiles: HeroTileItem[] = [
   {
     title: "Energy",
     note: "Gas and electricity",
+    href: "/energy",
     icon: Zap,
     bg: "#F4CF7A",
     colour: "#6B4611",
@@ -80,6 +83,7 @@ const heroTiles: HeroTileItem[] = [
   {
     title: "Broadband",
     note: "Home internet",
+    href: "/broadband",
     icon: Wifi,
     bg: "#BFE3FF",
     colour: "#245984",
@@ -90,6 +94,7 @@ const heroTiles: HeroTileItem[] = [
   {
     title: "Mobile SIMs",
     note: "Mobile SIM deals",
+    href: "/mobile",
     icon: Smartphone,
     bg: "#F4D9DE",
     colour: "#7C3845",
@@ -100,6 +105,7 @@ const heroTiles: HeroTileItem[] = [
   {
     title: "Prize draw",
     note: "£20K Giveaway",
+    href: "/20k-giveaway",
     icon: Gift,
     bg: "#EADFFD",
     colour: "#5F2D8C",
@@ -110,6 +116,7 @@ const heroTiles: HeroTileItem[] = [
   {
     title: "Mortgage",
     note: "Buying or remortgage",
+    href: "/mortgage",
     icon: Landmark,
     bg: "#D8EEFF",
     colour: "#245984",
@@ -120,6 +127,7 @@ const heroTiles: HeroTileItem[] = [
   {
     title: "Protection",
     note: "Life and family cover",
+    href: "/protection",
     icon: ShieldCheck,
     bg: "#F5D28A",
     colour: "#6B4611",
@@ -130,6 +138,7 @@ const heroTiles: HeroTileItem[] = [
   {
     title: "Medical",
     note: "Private medical cover",
+    href: "/private-medical-insurance",
     icon: HeartPulse,
     bg: "#BFD9C8",
     colour: "#173E29",
@@ -140,6 +149,7 @@ const heroTiles: HeroTileItem[] = [
   {
     title: "Wills & POAs",
     note: "Wills and POAs",
+    href: "/estate-planning",
     icon: FileText,
     bg: "#CFE6D5",
     colour: "#173E29",
@@ -150,6 +160,7 @@ const heroTiles: HeroTileItem[] = [
   {
     title: "Extra Income",
     note: "Become a Partner",
+    href: "/extra-income",
     icon: UsersRound,
     bg: "#D9C2F4",
     colour: "#4F247D",
@@ -225,7 +236,7 @@ const enquiryOptions = [
   "Household bills",
   "Energy",
   "Broadband",
-  "Mobile SIMs",
+  "Mobile SIM deals",
   "£20K Giveaway",
   "Mortgage",
   "First-time buyer mortgage",
@@ -264,8 +275,10 @@ function HeroTile({ item }: { item: HeroTileItem }) {
       : "text-2xl";
 
   return (
-    <div
-      className={`group relative h-[185px] min-w-[230px] snap-start transform-gpu overflow-hidden rounded-[2rem] p-5 shadow-[0_22px_60px_rgba(44,31,61,0.24)] ring-1 ring-white/40 transition-all duration-300 ease-out hover:z-20 hover:-translate-y-3 hover:rotate-0 hover:scale-[1.025] hover:shadow-[0_34px_86px_rgba(44,31,61,0.31)] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)] ${item.big ? "h-[220px] min-w-[285px]" : ""} ${item.mobileClass} lg:min-w-0 ${item.className}`}
+    <Link
+      aria-label={`Open ${item.title} check`}
+      className={`group relative block h-[185px] min-w-[230px] snap-start transform-gpu cursor-pointer overflow-hidden rounded-[2rem] p-5 no-underline shadow-[0_22px_60px_rgba(44,31,61,0.24)] ring-1 ring-white/40 transition-all duration-300 ease-out hover:z-20 hover:-translate-y-3 hover:rotate-0 hover:scale-[1.025] hover:shadow-[0_34px_86px_rgba(44,31,61,0.31)] focus-visible:z-20 focus-visible:ring-4 focus-visible:ring-[#FDCA55] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)] ${item.big ? "h-[220px] min-w-[285px]" : ""} ${item.mobileClass} lg:min-w-0 ${item.className}`}
+      href={item.href}
       style={{ backgroundColor: item.bg, color: item.colour }}
     >
       <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/38 transition-all duration-300 ease-out group-hover:scale-110 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]" />
@@ -281,7 +294,7 @@ function HeroTile({ item }: { item: HeroTileItem }) {
           />
         </div>
         <div>
-          <h3 className={`${titleSize} font-black leading-[0.96] tracking-[-0.055em]`}>
+          <h3 className={`display-font ${titleSize} font-black leading-[0.96] tracking-[-0.055em]`}>
             {item.title}
           </h3>
           <p className={`${item.big ? "mt-3 text-base" : "mt-2 text-sm"} max-w-[16rem] font-extrabold leading-5 opacity-72`}>
@@ -289,7 +302,7 @@ function HeroTile({ item }: { item: HeroTileItem }) {
           </p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -301,7 +314,7 @@ function RouteGroup({ group }: { group: RouteGroupItem }) {
     >
       <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/35" />
       <div className="relative">
-        <p className="mb-4 text-xs font-black uppercase tracking-[0.14em] leading-5 opacity-70">
+        <p className="display-font mb-4 text-lg font-black leading-5 tracking-[-0.035em] opacity-85">
           {group.label}
         </p>
         <div className="grid gap-2">
@@ -406,10 +419,10 @@ export default async function HomeMoneyCheckHomepage() {
             </div>
 
             <h1 className="max-w-4xl">
-              <span className="display-font block text-[4.7rem] leading-[0.76] tracking-[-0.045em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.74] lg:text-[7.35rem]">
+              <span className="display-font block text-[4.7rem] leading-[0.82] tracking-[-0.045em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.79] lg:text-[7.35rem]">
                 Home
               </span>
-              <span className="display-font block text-[4.7rem] leading-[0.72] tracking-[-0.045em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.70] lg:text-[7.35rem]">
+              <span className="display-font block text-[4.7rem] leading-[0.78] tracking-[-0.045em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.75] lg:text-[7.35rem]">
                 Money
               </span>
               <span className="mt-3 flex w-fit max-w-full items-center md:mt-5">
@@ -558,8 +571,11 @@ export default async function HomeMoneyCheckHomepage() {
                 Tell us what you want to check.
               </h2>
               <p className="relative mt-5 rounded-[1.35rem] bg-white/70 p-4 text-sm font-bold leading-6 text-[#4F247D]">
-                Home Money Check is a friendly check and advice service. Pop in some details here
-                and we'll get back to you to discuss how we can help. No obligation at all.
+                <span className="brand-wordmark-text text-lg tracking-[-0.035em]">
+                  Home Money Check
+                </span>{" "}
+                is a friendly check and advice service. Pop in some details here and we'll get
+                back to you to discuss how we can help. No obligation at all.
               </p>
               <div className="relative mt-6 grid gap-3">
                 <input
@@ -667,9 +683,10 @@ export default async function HomeMoneyCheckHomepage() {
                     About home money check
                   </p>
                   <h3 className="text-xl font-black leading-[1.12] tracking-[-0.04em] md:text-2xl">
-                    Home Money Check is run by Neill Connolly and is dedicated to helping you get
-                    better deals tailored to your own specific needs and circumstances. We always
-                    put our customers first. We&apos;d love to help you!
+                    <span className="brand-wordmark-text">Home Money Check</span> is run by Neill
+                    Connolly and is dedicated to helping you get better deals tailored to your own
+                    specific needs and circumstances. We always put our customers first. We&apos;d
+                    love to help you!
                   </h3>
                 </div>
                 <div className="flex items-end justify-end pb-2 pr-2 md:pb-8 md:pr-8">

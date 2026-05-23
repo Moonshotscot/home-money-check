@@ -16,7 +16,7 @@ export const selectedCheckFilters = [
   "Household bills",
   "Energy",
   "Broadband",
-  "Mobile SIMs",
+  "Mobile SIM deals",
   "£20K Giveaway",
   "Mortgage",
   "First-time buyer mortgage",
