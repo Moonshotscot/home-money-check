@@ -24,10 +24,10 @@ export const selectedCheckFilters = [
   "Moving home mortgage",
   "Protection insurance",
   "Private medical insurance",
-  "Estate planning",
+  "Wills & POAs",
   "Extra income",
   "Business utilities",
-  "Finance services",
+  "Finance/bookkeeping",
   "Business protection",
   "Business continuity",
 ] as const;

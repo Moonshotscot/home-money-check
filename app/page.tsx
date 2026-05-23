@@ -38,7 +38,10 @@ type RouteGroupItem = {
   label: string;
   bg: string;
   colour: string;
-  items: string[];
+  items: {
+    label: string;
+    href: string;
+  }[];
 };
 
 const heroTiles: HeroTileItem[] = [
@@ -124,7 +127,7 @@ const heroTiles: HeroTileItem[] = [
       "lg:absolute lg:right-[19%] lg:bottom-[20%] lg:mt-0 lg:h-[176px] lg:w-[216px] lg:rotate-[2deg]",
   },
   {
-    title: "Estate Planning",
+    title: "Wills & POAs",
     note: "Wills and POAs",
     icon: FileText,
     bg: "#CFE6D5",
@@ -147,22 +150,38 @@ const heroTiles: HeroTileItem[] = [
 
 const routeGroups: RouteGroupItem[] = [
   {
-    label: "Home checks",
+    label: "Household bill checks",
     bg: "#F7F0E8",
     colour: "#622C91",
-    items: ["Energy", "Broadband", "Mobile SIMs", "£20K Giveaway"],
+    items: [
+      { label: "Energy", href: "/energy" },
+      { label: "Broadband", href: "/broadband" },
+      { label: "Mobile SIM deals", href: "/mobile" },
+      { label: "£20K Giveaway", href: "/20k-giveaway" },
+    ],
   },
   {
-    label: "Life planning checks",
+    label: "Mortgage, insurance & planning",
     bg: "#EADFFD",
     colour: "#5F2D8C",
-    items: ["Mortgage", "Protection", "Private Medical", "Estate Planning"],
+    items: [
+      { label: "Mortgages", href: "/mortgage" },
+      { label: "Protection", href: "/protection" },
+      { label: "Private medical insurance", href: "/private-medical-insurance" },
+      { label: "Wills & POAs", href: "/estate-planning" },
+    ],
   },
   {
-    label: "Business checks",
+    label: "Business & income checks",
     bg: "#D9E1E8",
     colour: "#263646",
-    items: ["Extra Income", "Business Utilities", "Finance Services", "Local Home Partners"],
+    items: [
+      { label: "Extra income", href: "/extra-income" },
+      { label: "Business utilities", href: "/business-utilities" },
+      { label: "Finance/bookkeeping", href: "/finance-services" },
+      { label: "Business protection", href: "/business-protection" },
+      { label: "Business continuity", href: "/business-continuity" },
+    ],
   },
 ];
 
@@ -200,10 +219,10 @@ const enquiryOptions = [
   "Moving home mortgage",
   "Protection insurance",
   "Private medical insurance",
-  "Estate planning",
+  "Wills & POAs",
   "Extra income",
   "Business utilities",
-  "Finance services",
+  "Finance/bookkeeping",
 ];
 
 function CheckBoxMark({ className = "" }: { className?: string }) {
@@ -239,18 +258,18 @@ function HeroTile({ item }: { item: HeroTileItem }) {
 
   return (
     <div
-      className={`group relative h-[185px] min-w-[230px] snap-start transform-gpu overflow-hidden rounded-[2rem] p-5 shadow-[0_22px_60px_rgba(44,31,61,0.24)] ring-1 ring-white/40 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:z-20 hover:-translate-y-3 hover:rotate-0 hover:scale-[1.025] hover:shadow-[0_34px_86px_rgba(44,31,61,0.31)] ${item.big ? "h-[220px] min-w-[285px]" : ""} ${item.mobileClass} lg:min-w-0 ${item.className}`}
+      className={`group relative h-[185px] min-w-[230px] snap-start transform-gpu overflow-hidden rounded-[2rem] p-5 shadow-[0_22px_60px_rgba(44,31,61,0.24)] ring-1 ring-white/40 transition-all duration-300 ease-out hover:z-20 hover:-translate-y-3 hover:rotate-0 hover:scale-[1.025] hover:shadow-[0_34px_86px_rgba(44,31,61,0.31)] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)] ${item.big ? "h-[220px] min-w-[285px]" : ""} ${item.mobileClass} lg:min-w-0 ${item.className}`}
       style={{ backgroundColor: item.bg, color: item.colour }}
     >
-      <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/38 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110" />
-      <div className="absolute -bottom-14 left-8 h-24 w-24 rounded-full bg-white/22 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110" />
+      <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/38 transition-all duration-300 ease-out group-hover:scale-110 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]" />
+      <div className="absolute -bottom-14 left-8 h-24 w-24 rounded-full bg-white/22 transition-all duration-300 ease-out group-hover:scale-110 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]" />
       <div className="relative flex h-full flex-col justify-between gap-5">
         <div className="flex items-start justify-between gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/60 shadow-sm transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1 group-hover:bg-white/80">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/60 shadow-sm transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:bg-white/80 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]">
             <Icon className="h-6 w-6" strokeWidth={2.45} />
           </div>
           <ArrowUpRight
-            className="h-5 w-5 opacity-45 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-85"
+            className="h-5 w-5 opacity-45 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-85 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
             strokeWidth={2.6}
           />
         </div>
@@ -270,24 +289,24 @@ function HeroTile({ item }: { item: HeroTileItem }) {
 function RouteGroup({ group }: { group: RouteGroupItem }) {
   return (
     <div
-      className="group relative transform-gpu overflow-hidden rounded-[2rem] p-5 shadow-[0_18px_55px_rgba(44,31,61,0.12)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:scale-[1.01] hover:shadow-[0_26px_72px_rgba(44,31,61,0.16)]"
+      className="group relative transform-gpu overflow-hidden rounded-[2rem] p-5 shadow-[0_18px_55px_rgba(44,31,61,0.12)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_26px_72px_rgba(44,31,61,0.16)]"
       style={{ backgroundColor: group.bg, color: group.colour }}
     >
       <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/35" />
       <div className="relative">
-        <p className="mb-4 text-xs font-black uppercase tracking-[0.14em] opacity-70">
+        <p className="mb-4 text-xs font-black uppercase tracking-[0.14em] leading-5 opacity-70">
           {group.label}
         </p>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid gap-2">
           {group.items.map((item) => (
-            <button
-              key={item}
-              className="inline-flex transform-gpu items-center gap-2 rounded-full bg-white/62 px-4 py-2.5 text-sm font-black shadow-sm transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.01] hover:bg-white/85 hover:shadow-[0_10px_24px_rgba(44,31,61,0.10)]"
-              type="button"
+            <Link
+              key={item.href}
+              className="inline-flex min-h-12 w-full transform-gpu items-center justify-between gap-3 rounded-[1.15rem] bg-white/62 px-4 py-3 text-sm font-black leading-5 shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/85 hover:shadow-[0_10px_24px_rgba(44,31,61,0.10)] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
+              href={item.href}
             >
-              {item}
-              <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.7} />
-            </button>
+              <span className="min-w-0">{item.label}</span>
+              <ArrowUpRight className="h-4 w-4 shrink-0" strokeWidth={2.7} />
+            </Link>
           ))}
         </div>
       </div>
@@ -470,7 +489,7 @@ export default async function HomeMoneyCheckHomepage() {
                 className="pointer-events-none absolute bottom-1 right-12 h-24 w-32 object-contain drop-shadow-[0_10px_16px_rgba(79,36,125,0.2)] md:bottom-2 md:right-14 md:h-32 md:w-40"
               />
             </div>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {routeGroups.map((group) => (
                 <RouteGroup key={group.label} group={group} />
               ))}
