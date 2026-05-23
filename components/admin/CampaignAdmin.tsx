@@ -166,10 +166,6 @@ function CampaignContent() {
             Yellow title text appears in gold. White title text appears beside it in white.
           </p>
           <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
-            Body
-            <textarea className={`${fieldClass} min-h-28`} onChange={(event) => updateField("body", event.target.value)} value={campaign.body ?? ""} />
-          </label>
-          <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
             Middle content
             <textarea className={`${fieldClass} min-h-28`} onChange={(event) => updateField("middle_content", event.target.value)} value={campaign.middle_content ?? ""} />
           </label>

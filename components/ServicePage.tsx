@@ -7,18 +7,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WhatHappensNext } from "@/components/WhatHappensNext";
 
-function UtilityWarehouseNote() {
-  return (
-    <div className="rounded-[1.75rem] bg-white/70 p-5 text-sm font-bold leading-6 text-[#4F247D] shadow-[0_16px_45px_rgba(44,31,61,0.08)]">
-      Home Money Check is independent and is not operated by Utility Warehouse. If your enquiry
-      relates to Utility Warehouse services or the Partner opportunity, the correct UW process will
-      be explained before anything proceeds.
-    </div>
-  );
-}
-
 const comparisonExplainer =
-  "Home Money Check is not an instant comparison site. It is a friendly check and advice service. You send a few basic details, we get in touch, then we help you understand the best route for what you need.";
+  "Home Money Check is a friendly check and advice service. You send a few basic details, we get in touch, then we help you understand the best route for what you need.";
 
 export function ServicePage({ page }: { page: SitePage }) {
   return (
@@ -64,13 +54,11 @@ export function ServicePage({ page }: { page: SitePage }) {
                 {page.extraNote}
               </p>
             ) : null}
-            {page.uwRelated ? <div className="relative mt-5"><UtilityWarehouseNote /></div> : null}
           </section>
 
           <LeadFormPreview
             defaultSelectedCheck={page.selectedCheck}
             sourcePage={getRoutePath(page)}
-            uwRelated={page.uwRelated}
           />
         </div>
 

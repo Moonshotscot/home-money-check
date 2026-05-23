@@ -8,7 +8,7 @@ const checkOptions = [
   "Household bills",
   "Energy",
   "Broadband",
-  "Mobile SIMs",
+  "Mobile SIM deals",
   "£20K Giveaway",
   "Mortgage",
   "First-time buyer mortgage",
@@ -50,7 +50,6 @@ export function LeadFormPreview({
   defaultSelectedCheck,
   selectedCheck,
   sourcePage,
-  uwRelated = false,
   title = "Tell us what you want to check.",
 }: LeadFormPreviewProps) {
   const initialSelectedCheck =
@@ -134,12 +133,6 @@ export function LeadFormPreview({
         Send your details and we’ll get back to you personally. You are not committing to anything
         by submitting this form.
       </p>
-      {uwRelated ? (
-        <p className="relative mt-5 rounded-[1.35rem] bg-white/70 p-4 text-sm font-bold leading-6 text-[#4F247D]">
-          If your enquiry relates to Utility Warehouse, you may be contacted about UW services or the
-          UW Partner opportunity. You can opt out of marketing messages at any time.
-        </p>
-      ) : null}
       {status === "error" ? (
         <p className="relative mt-5 rounded-[1.35rem] bg-[#FFF1C8] p-4 text-sm font-black leading-6 text-[#6B4611]">
           Sorry, something went wrong. Please try again, or contact us directly if it keeps

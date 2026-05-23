@@ -14,7 +14,7 @@ export function SiteFooter() {
             className="h-14 w-auto object-contain md:h-16"
           />
         </Link>
-        {/* TODO before launch: add Privacy Policy, Terms, Cookie Policy if needed, and clear disclaimers for Utility Warehouse-related enquiries, prize draw handling, mortgages and insurance/protection. */}
+        {/* TODO before launch: add Privacy Policy, Terms, Cookie Policy if needed, and clear service disclaimers. */}
         <div className="flex flex-col gap-3 text-sm font-bold md:items-end">
           <p>© Home Money Check.</p>
           <nav

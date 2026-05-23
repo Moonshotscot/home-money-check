@@ -4,7 +4,6 @@ import { LeadFormPreview } from "@/components/LeadFormPreview";
 import { PageHero } from "@/components/PageHero";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { WhatHappensNext } from "@/components/WhatHappensNext";
 
 export function ComingSoonPage({ page }: { page: SitePage }) {
   return (
@@ -48,11 +47,9 @@ export function ComingSoonPage({ page }: { page: SitePage }) {
           <LeadFormPreview
             defaultSelectedCheck={page.selectedCheck}
             sourcePage={getRoutePath(page)}
-            title="Tell me when this is ready."
-            uwRelated={page.uwRelated}
+            title="Tell me when this is ready"
           />
         </div>
-        <WhatHappensNext />
       </main>
       <SiteFooter />
     </div>

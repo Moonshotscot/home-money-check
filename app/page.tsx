@@ -203,6 +203,9 @@ const fallbackCampaign = {
   // Admin/back-office field later: central campaign content area.
   body:
     "A premium campaign panel that can be changed or hidden from the back office when the featured push changes.",
+  // Admin/back-office field later: middle/central campaign content area.
+  middleContent:
+    "A premium campaign panel that can be changed or hidden from the back office when the featured push changes.",
   // Admin/back-office field later: lower pill/box text.
   lowerBoxText:
     "A premium campaign panel that can be changed or hidden from the back office when the featured push changes.",
@@ -343,10 +346,12 @@ export default async function HomeMoneyCheckHomepage() {
       ? fallbackCampaign
       : homepageContent.campaign
         ? {
-            body: homepageContent.campaign.body || fallbackCampaign.body,
             isVisible: homepageContent.campaign.is_live,
             label: homepageContent.campaign.label || fallbackCampaign.label,
-            lowerBoxText: homepageContent.campaign.lower_text || homepageContent.campaign.middle_content || fallbackCampaign.lowerBoxText,
+            middleContent:
+              homepageContent.campaign.middle_content ||
+              fallbackCampaign.middleContent,
+            lowerBoxText: homepageContent.campaign.lower_text || fallbackCampaign.lowerBoxText,
             title: homepageContent.campaign.title || fallbackCampaign.title,
             titleAccent: homepageContent.campaign.title_accent,
             titleMain: homepageContent.campaign.title_main,
@@ -429,7 +434,7 @@ export default async function HomeMoneyCheckHomepage() {
             </h1>
 
             <p className="mt-7 max-w-full text-xl font-semibold leading-8 text-[#F7F0E8]/78 md:max-w-2xl md:text-2xl md:leading-9">
-              We check if we can get you better deals on household bills, mortgages, insurances and much more.
+              Better deals for your home, money and future.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
@@ -499,10 +504,10 @@ export default async function HomeMoneyCheckHomepage() {
         </section>
 
         <section className="bg-[#F7F0E8] px-5 pb-12 text-[#2C1F3D] md:px-8 md:pb-16">
-          <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="relative overflow-hidden rounded-[2.75rem] bg-[#5F2D8C] p-8 text-[#F7F0E8] shadow-[0_30px_90px_rgba(44,31,61,0.22)] md:min-h-[430px] md:p-12">
+          <div className="mx-auto grid max-w-7xl items-start gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.9fr)]">
+            <div className="relative self-start overflow-hidden rounded-[2.75rem] bg-[#5F2D8C] p-8 text-[#F7F0E8] shadow-[0_30px_90px_rgba(44,31,61,0.22)] md:p-10 lg:min-h-[520px]">
               <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-[#EADFFD]/20 blur-3xl" />
-              <div className="relative flex h-full flex-col justify-between gap-12">
+              <div className="relative flex min-h-full flex-col gap-7">
                 {featuredCampaign ? (
                   <>
                     <div>
@@ -517,8 +522,13 @@ export default async function HomeMoneyCheckHomepage() {
                         />
                       </h2>
                     </div>
-                    <div className="max-w-2xl rounded-[2rem] bg-white/10 p-6 backdrop-blur ring-1 ring-white/12">
-                      <p className="text-lg font-bold leading-8 text-[#F7F0E8]/82">
+                    <div className="max-w-2xl rounded-[2rem] bg-[#F4CF7A]/95 p-5 text-[#4F247D] shadow-[0_18px_48px_rgba(44,31,61,0.18)]">
+                      <p className="text-xl font-black leading-8 tracking-[-0.03em]">
+                        {featuredCampaign.middleContent}
+                      </p>
+                    </div>
+                    <div className="max-w-2xl rounded-[1.5rem] bg-white/10 p-5 backdrop-blur ring-1 ring-white/12">
+                      <p className="text-base font-bold leading-7 text-[#F7F0E8]/76">
                         {featuredCampaign.lowerBoxText}
                       </p>
                     </div>
@@ -533,8 +543,8 @@ export default async function HomeMoneyCheckHomepage() {
                         No current campaign
                       </h2>
                     </div>
-                    <div className="max-w-2xl rounded-[2rem] bg-white/10 p-6 backdrop-blur ring-1 ring-white/12">
-                      <p className="text-lg font-bold leading-8 text-[#F7F0E8]/82">
+                    <div className="max-w-2xl rounded-[1.5rem] bg-white/10 p-5 backdrop-blur ring-1 ring-white/12">
+                      <p className="text-base font-bold leading-7 text-[#F7F0E8]/76">
                         Check back soon for the next featured Home Money Check route.
                       </p>
                     </div>
@@ -543,7 +553,7 @@ export default async function HomeMoneyCheckHomepage() {
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-[2.75rem] bg-[#F7F0E8] p-7 shadow-[0_24px_70px_rgba(44,31,61,0.13)] ring-1 ring-[#EADFFD] md:p-9">
+            <div className="relative self-start overflow-hidden rounded-[2.75rem] bg-[#F7F0E8] p-7 shadow-[0_24px_70px_rgba(44,31,61,0.13)] ring-1 ring-[#EADFFD] md:p-8 lg:min-h-[520px]">
               <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[#EADFFD]/55" />
               <p className="relative mb-5 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
                 Leave your details
@@ -552,28 +562,23 @@ export default async function HomeMoneyCheckHomepage() {
                 Tell us what you want to check.
               </h2>
               <p className="relative mt-5 rounded-[1.35rem] bg-white/70 p-4 text-sm font-bold leading-6 text-[#4F247D]">
-                Home Money Check is not an instant comparison site. It is a friendly check and
-                advice service. You send a few basic details, we get in touch, then we help you
-                understand the best route for what you need.
+                Home Money Check is a friendly check and advice service. Pop in some details here
+                and we'll get back to you to discuss how we can help. No obligation at all.
               </p>
-              <p className="relative mt-4 rounded-[1.35rem] bg-white/70 p-4 text-sm font-bold leading-6 text-[#4F247D]">
-                Send your details and we’ll get back to you personally. You are not committing to
-                anything by submitting this form.
-              </p>
-              <div className="relative mt-7 grid gap-4">
+              <div className="relative mt-6 grid gap-3">
                 <input
-                  className="rounded-[1.35rem] border-0 bg-white px-5 py-4 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
+                  className="rounded-[1.35rem] border-0 bg-white px-5 py-3.5 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
                   placeholder="Name"
                 />
                 <input
-                  className="rounded-[1.35rem] border-0 bg-white px-5 py-4 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
+                  className="rounded-[1.35rem] border-0 bg-white px-5 py-3.5 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
                   placeholder="Mobile"
                 />
                 <input
-                  className="rounded-[1.35rem] border-0 bg-white px-5 py-4 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
+                  className="rounded-[1.35rem] border-0 bg-white px-5 py-3.5 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
                   placeholder="Email"
                 />
-                <select className="rounded-[1.35rem] border-0 bg-white px-5 py-4 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent focus:ring-[#6A35A0]">
+                <select className="rounded-[1.35rem] border-0 bg-white px-5 py-3.5 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent focus:ring-[#6A35A0]">
                   <option>Choose your check</option>
                   {enquiryOptions.map((option) => (
                     <option key={option}>{option}</option>
@@ -685,7 +690,7 @@ export default async function HomeMoneyCheckHomepage() {
       <footer className="relative z-10 bg-[#5F2D8C] px-5 pb-8 text-[#F7F0E8]/70 md:px-8">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-5 border-t border-white/12 pt-8 md:flex-row md:items-center">
           <BrandMark />
-          {/* TODO before launch: add Privacy Policy, Terms, Cookie Policy if needed, and clear disclaimers for Utility Warehouse-related enquiries, prize draw handling, mortgages and insurance/protection. */}
+          {/* TODO before launch: add Privacy Policy, Terms, Cookie Policy if needed, and clear service disclaimers. */}
           <div className="flex flex-col gap-3 text-sm font-bold md:items-end">
             <p>© Home Money Check.</p>
             <nav
