@@ -39,16 +39,18 @@ export function ComingSoonPage({ page }: { page: SitePage }) {
             ))}
             <Link
               className="relative mt-8 inline-flex rounded-full bg-[#F7F0E8] px-6 py-3 text-sm font-black text-[#5F2D8C]"
-              href="/"
+              href="#lead-form"
             >
-              Back to homepage
+              Tell me when this is ready
             </Link>
           </section>
-          <LeadFormPreview
-            defaultSelectedCheck={page.selectedCheck}
-            sourcePage={getRoutePath(page)}
-            title="Tell me when this is ready"
-          />
+          <div id="lead-form">
+            <LeadFormPreview
+              defaultSelectedCheck={page.selectedCheck}
+              sourcePage={getRoutePath(page)}
+              title="Tell me when this is ready"
+            />
+          </div>
         </div>
       </main>
       <SiteFooter />

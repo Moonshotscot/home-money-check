@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Download, Eye, RefreshCw, Save, Trash2 } from "lucide-react";
+import { Download, Eye, ExternalLink, RefreshCw, Save, Trash2 } from "lucide-react";
 import {
   Enquiry,
   enquiryStatuses,
@@ -53,6 +53,24 @@ function exportCsv(enquiries: Enquiry[]) {
 
 function statusBadge(status: string | null) {
   return status || "New";
+}
+
+function statusPillClass(status: string | null) {
+  const value = statusBadge(status);
+
+  if (value === "New") {
+    return "bg-[#FDCA55] text-[#4F247D]";
+  }
+
+  if (value === "Converted") {
+    return "bg-[#BFD9C8] text-[#173E29]";
+  }
+
+  if (value === "Archived" || value === "Not suitable" || value === "No response") {
+    return "bg-[#F4D9DE] text-[#7C3845]";
+  }
+
+  return "bg-[#EADFFD] text-[#5F2D8C]";
 }
 
 function EnquiryDetail({
@@ -165,6 +183,19 @@ function EnquiryDetail({
           <p className="md:col-span-2">
             <span className="text-[#5F2D8C]">Message:</span> {enquiry.message || "No message"}
           </p>
+          {enquiry.source_page ? (
+            <p className="md:col-span-2">
+              <a
+                className="inline-flex items-center gap-2 rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black text-[#5F2D8C]"
+                href={enquiry.source_page}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <ExternalLink className="h-4 w-4" />
+                View source page
+              </a>
+            </p>
+          ) : null}
         </div>
 
         <div className="mt-5 grid gap-4 md:grid-cols-[18rem_1fr]">
@@ -403,11 +434,23 @@ function EnquiriesContent() {
                     <tr className="border-t border-[#EADFFD] bg-white" key={enquiry.id}>
                       <td className="p-4 font-bold">{formatDate(enquiry.created_at)}</td>
                       <td className="p-4 font-black">{enquiry.name}</td>
-                      <td className="p-4 font-bold">{enquiry.selected_check}</td>
-                      <td className="p-4 font-bold">{statusBadge(enquiry.status)}</td>
+                      <td className="p-4">
+                        <span className="inline-flex rounded-full bg-[#F7F0E8] px-3 py-1 text-xs font-black text-[#5F2D8C]">
+                          {enquiry.selected_check}
+                        </span>
+                      </td>
+                      <td className="p-4">
+                        <span className={`inline-flex rounded-full px-3 py-1 text-xs font-black ${statusPillClass(enquiry.status)}`}>
+                          {statusBadge(enquiry.status)}
+                        </span>
+                      </td>
                       <td className="p-4 font-bold">{enquiry.email}</td>
                       <td className="p-4 font-bold">{enquiry.mobile}</td>
-                      <td className="p-4 font-bold">{enquiry.source_page}</td>
+                      <td className="p-4">
+                        <span className="inline-flex rounded-full bg-[#F7F0E8] px-3 py-1 text-xs font-black text-[#5F2D8C]">
+                          {enquiry.source_page}
+                        </span>
+                      </td>
                       <td className="p-4">
                         <button
                           className="inline-flex items-center gap-2 rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black text-[#5F2D8C]"
@@ -434,7 +477,7 @@ function EnquiriesContent() {
                       </p>
                       <h2 className="mt-2 text-2xl font-black tracking-[-0.05em]">{enquiry.name}</h2>
                     </div>
-                    <span className="rounded-full bg-white px-3 py-1 text-xs font-black text-[#5F2D8C]">
+                    <span className={`rounded-full px-3 py-1 text-xs font-black ${statusPillClass(enquiry.status)}`}>
                       {statusBadge(enquiry.status)}
                     </span>
                   </div>

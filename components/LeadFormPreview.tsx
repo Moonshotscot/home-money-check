@@ -39,6 +39,7 @@ type FormState = {
   postcode: string;
   selected_check: string;
   message: string;
+  website: string;
   consent_contact: boolean;
   consent_updates: boolean;
 };
@@ -65,6 +66,7 @@ export function LeadFormPreview({
       postcode: "",
       selected_check: initialSelectedCheck,
       message: "",
+      website: "",
       consent_contact: false,
       consent_updates: false,
     }),
@@ -81,8 +83,22 @@ export function LeadFormPreview({
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (status === "submitting") {
+      return;
+    }
+
     setValidationMessage("");
     setStatus("idle");
+
+    if (form.website.trim()) {
+      setStatus("success");
+      setForm({
+        ...initialState,
+        selected_check: form.selected_check,
+      });
+      return;
+    }
 
     if (!form.name.trim() || !form.email.trim() || !form.mobile.trim() || !form.selected_check) {
       setValidationMessage("Please complete your name, email, mobile and chosen check.");
@@ -145,6 +161,18 @@ export function LeadFormPreview({
         </p>
       ) : null}
       <form className="relative mt-7 grid gap-4" onSubmit={handleSubmit}>
+        <div className="hidden" aria-hidden="true">
+          <label>
+            Company website
+            <input
+              autoComplete="off"
+              name="website"
+              onChange={(event) => updateField("website", event.target.value)}
+              tabIndex={-1}
+              value={form.website}
+            />
+          </label>
+        </div>
         <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
           Name
           <input
