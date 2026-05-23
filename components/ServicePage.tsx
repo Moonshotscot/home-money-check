@@ -5,12 +5,32 @@ import { LeadFormPreview } from "@/components/LeadFormPreview";
 import { PageHero } from "@/components/PageHero";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { WhatHappensNext } from "@/components/WhatHappensNext";
+import { WhatHappensNext, type WhatHappensNextStep } from "@/components/WhatHappensNext";
 
 const comparisonExplainer =
-  "Home Money Check is a friendly check and advice service. You send a few basic details, we get in touch, then we help you understand the best route for what you need.";
+  "Home Money Check is a friendly check and advice service. You send a few basic details, we get in touch, then we help you understand the best option for what you need.";
 
 export function ServicePage({ page }: { page: SitePage }) {
+  const isHouseholdBillPage = Boolean(page.householdSections?.length);
+  const householdNextSteps: WhatHappensNextStep[] = [
+    {
+      title: "Send your details",
+      body: "Tell us what you want to look at and the best way to contact you.",
+    },
+    {
+      title: "We’ll call you",
+      body: "Neill will call you and go through a detailed online Utility Warehouse quote with you.",
+    },
+    {
+      title: "We’ll look at the full package",
+      body: "We can look at energy, broadband, Mobile SIM deals, EV tariffs, the UW Cashback Card and help towards existing cancellation fees.",
+    },
+    {
+      title: "You decide",
+      body: "You are not committing to anything by sending your details. We’ll talk through the quote, answer your questions and you decide what happens next.",
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-[#F7F0E8] text-[#2C1F3D]">
       <SiteHeader />
@@ -48,6 +68,35 @@ export function ServicePage({ page }: { page: SitePage }) {
                 </p>
               ))}
             </div>
+            {page.householdSections ? (
+              <div className="relative mt-8 grid gap-4">
+                {page.householdSections.map((section) => (
+                  <section
+                    key={section.title}
+                    className="rounded-[1.75rem] bg-[#EADFFD]/14 p-5 ring-1 ring-white/12"
+                  >
+                    <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#FDCA55] md:text-4xl">
+                      {section.title}
+                    </h3>
+                    <div className="mt-4 grid gap-3">
+                      {section.body.map((paragraph) => (
+                        <p
+                          key={paragraph}
+                          className="text-base font-bold leading-7 text-[#F7F0E8]/78"
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                    {section.support ? (
+                      <p className="mt-4 rounded-[1.25rem] bg-[#FDCA55] p-4 text-sm font-black leading-6 text-[#4F247D]">
+                        {section.support}
+                      </p>
+                    ) : null}
+                  </section>
+                ))}
+              </div>
+            ) : null}
             {page.why.length > 0 ? (
               <div className="relative mt-7 grid gap-3">
                 {page.why.map((point) => (
@@ -60,13 +109,13 @@ export function ServicePage({ page }: { page: SitePage }) {
                 ))}
               </div>
             ) : null}
-            {!page.mainCopy?.includes(comparisonExplainer) ? (
+            {!isHouseholdBillPage && !page.mainCopy?.includes(comparisonExplainer) ? (
               <p className="relative mt-6 rounded-[1.5rem] bg-[#FDCA55] p-5 text-base font-black leading-7 text-[#4F247D]">
                 <span className="brand-wordmark-text text-lg tracking-[-0.035em]">
                   Home Money Check
                 </span>{" "}
                 is a friendly check and advice service. You send a few basic details, we get in
-                touch, then we help you understand the best route for what you need.
+                touch, then we help you understand the best option for what you need.
               </p>
             ) : null}
             {page.extraNote ? (
@@ -78,11 +127,16 @@ export function ServicePage({ page }: { page: SitePage }) {
 
           <LeadFormPreview
             defaultSelectedCheck={page.selectedCheck}
+            helperText={
+              isHouseholdBillPage
+                ? "Pop in your details and we’ll get back to you personally. No obligation at all."
+                : undefined
+            }
             sourcePage={getRoutePath(page)}
           />
         </div>
 
-        <WhatHappensNext />
+        <WhatHappensNext customSteps={isHouseholdBillPage ? householdNextSteps : undefined} />
 
         <div className="mx-auto mt-10 flex max-w-7xl flex-wrap gap-3">
           <Link

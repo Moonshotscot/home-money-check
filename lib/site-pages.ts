@@ -14,6 +14,11 @@ export type SitePage = {
   intro: string;
   why: string[];
   mainCopy?: string[];
+  householdSections?: {
+    title: string;
+    body: string[];
+    support?: string;
+  }[];
   nextSteps: string[];
   uwRelated?: boolean;
   extraNote?: string;
@@ -139,25 +144,69 @@ const comingSoonCopy = [
   "Leave your details and we’ll let you know when this service is ready.",
 ];
 
-const billsCopy = [
-  "Household bill checks are the simple place to start if you want energy, broadband or Mobile SIM deals reviewed together.",
-  "Tell us what you want checked and we’ll ask the right questions. Then we’ll explain what is available in plain English before you decide.",
+const householdBillsIntro = [
+  "Household bills can be difficult to work through on your own.",
+  "Through Home Money Check, Neill Connolly, an Authorised Utility Warehouse (UW) Partner, will call you and go through a detailed online quote so you can see exactly what the services are, what benefits you get and what savings you can make.",
+  "We can look at energy, broadband, Mobile SIM deals, EV tariffs, the UW Cashback Card and help towards existing cancellation fees.",
+  "The best value is often found when more than one service is added to your account.",
+  "We’ll talk through the quote and answer your questions so you can see exactly what is available before you decide.",
 ];
 
-const energyCopy = [
-  "We’ll take a few details about your home, your current supplier or deal and what you need from your energy service.",
-  "Energy can feel confusing because tariffs, standing charges, usage and contract details can all affect the answer. We’ll check what is available and explain the options clearly before you decide.",
-];
-
-const broadbandCopy = [
-  "We’ll ask about your postcode, current provider, speed, household usage and what you need broadband for day to day.",
-  "Cheapest is not always best if the speed or reliability is wrong. We’ll help you understand the option clearly before you decide.",
-];
-
-const mobileCopy = [
-  "Mobile SIM deals are about SIM-only options, not phone handsets.",
-  "We’ll ask about your current network, data usage and what you want from the deal. Then we’ll explain the available options clearly before you decide.",
-];
+const householdBillSections = {
+  energy: {
+    title: "Energy",
+    body: [
+      "Energy bills are a big part of most household budgets, so it makes sense to check them carefully.",
+      "Utility Warehouse offers gas and electricity with fixed, variable and EV tariff options. If you have an electric vehicle, or you are thinking about getting one, we can go through the EV tariff options as part of your quote.",
+      "The best energy value is often unlocked when energy is combined with other services on your UW account.",
+      "We’ll show you how the quote works, what your options are and how the services fit together.",
+    ],
+  },
+  broadband: {
+    title: "Broadband",
+    body: [
+      "Fast, reliable broadband is now part of everyday life and it needs to fit around you and your family.",
+      "Whether you’re working from home, playing online games, making video calls, streaming TV and films, or keeping the whole family connected, it’s important to get the right deal for your own household.",
+      "We’ll look at what options are available for your address and discuss what you actually need. (Spoiler: you do not always need the fastest package!)",
+      "UW’s fibre and full-fibre options can reach speeds up to 944Mbps, so there is definitely a package to suit you.",
+      "If you are still in contract, UW may also be able to help towards existing cancellation fees, making it easier to move when you are ready, not when your current provider lets you.",
+    ],
+  },
+  mobile: {
+    title: "Mobile SIM deals",
+    body: [
+      "Mobile SIM deals are for people who already have a phone they are happy with and want a better plan.",
+      "We’ll look at how much data you use, what you pay now, how many SIMs your household needs and whether unlimited data makes sense.",
+      "UW mobile runs on the EE network, with SIM-only plans that can include generous or unlimited data allowances, 4G and 5G, Wi-Fi Calling and monthly rolling contracts.",
+      "If your current phone still does the job, a SIM-only deal can be a simple way to cut waste and get better value from the phone you already have.",
+      "SIM-only deals can give great savings and are also super useful for the rest of your family.",
+    ],
+  },
+  cashback: {
+    title: "UW Cashback Card",
+    body: [
+      "The UW Cashback Card can help bring your bill down when you spend with participating retailers.",
+      "That means your everyday spending can help reduce what you pay for your household services.",
+      "We’ll show you how it works during the quote.",
+    ],
+  },
+  contract: {
+    title: "Still in contract?",
+    body: [
+      "Still in contract? You may not need to wait it out.",
+      "UW may also be able to help towards your existing cancellation fees, making it easier to move when you are ready, not when your current provider lets you.",
+      "We’ll go through this during the quote so you can see exactly how it works.",
+    ],
+  },
+  note: {
+    title: "Note",
+    body: [
+      "For electricity, gas, broadband and mobile services, your quote will be for Utility Warehouse services.",
+      "We do not search the whole market.",
+      "We will always be transparent about our services, explain your quote clearly and help you make a fully informed decision.",
+    ],
+  },
+};
 
 const willsCopy = [
   "Estate planning is about making things easier for the people you care about and making sure your wishes are properly recorded.",
@@ -193,26 +242,28 @@ const extraIncomeCopy = [
 
 export const sitePages: SitePage[] = [
   {
-    title: "Household bills check",
+    title: "Household bill checks",
     slug: "bills",
     eyebrow: "Home checks",
-    description:
-      "Check whether your regular home services and household costs are still working well for you.",
+    description: "Check energy, broadband and Mobile SIM deals in one simple place.",
     accentColour: "#F7F0E8",
     selectedCheck: "Household bills",
     status: "live",
     category: "Home checks",
     metaTitle: "Household bills check | Home Money Check",
     metaDescription:
-      "A simple Home Money Check route for reviewing regular household services and costs.",
-    intro:
-      "A calm first step for looking at everyday household services without pressure or jargon.",
-    why: [
-      "Your regular bills can drift over time.",
-      "Home services should still fit the way your household actually lives.",
-      "A short check can help you see what may be worth reviewing.",
+      "Check energy, broadband and Mobile SIM deals in one simple place with Home Money Check.",
+    intro: "Check energy, broadband and Mobile SIM deals in one simple place.",
+    why: [],
+    mainCopy: householdBillsIntro,
+    householdSections: [
+      householdBillSections.energy,
+      householdBillSections.broadband,
+      householdBillSections.mobile,
+      householdBillSections.cashback,
+      householdBillSections.contract,
+      householdBillSections.note,
     ],
-    mainCopy: billsCopy,
     nextSteps: standardNextSteps,
   },
   {
@@ -220,22 +271,26 @@ export const sitePages: SitePage[] = [
     slug: "energy",
     eyebrow: "Home checks",
     description:
-      "A practical look at gas and electricity options, without pressure or jargon.",
+      "Check your energy, broadband and Mobile SIM deals with clear help from Home Money Check.",
     accentColour: "#F4CF7A",
     selectedCheck: "Energy",
     status: "live",
     category: "Home checks",
     metaTitle: "Energy check | Home Money Check",
     metaDescription:
-      "Ask Home Money Check for a practical look at gas and electricity options.",
+      "Check your energy, broadband and Mobile SIM deals with clear help from Home Money Check.",
     intro:
-      "Energy is one of the easiest household areas to leave unchecked for too long.",
-    why: [
-      "Your usage and tariff needs can change.",
-      "A review can help you understand what options may be relevant.",
-      "The aim is clarity before any decision.",
+      "Check your energy, broadband and Mobile SIM deals with clear help from Home Money Check.",
+    why: [],
+    mainCopy: householdBillsIntro,
+    householdSections: [
+      householdBillSections.energy,
+      householdBillSections.broadband,
+      householdBillSections.mobile,
+      householdBillSections.cashback,
+      householdBillSections.contract,
+      householdBillSections.note,
     ],
-    mainCopy: energyCopy,
     nextSteps: standardNextSteps,
   },
   {
@@ -243,22 +298,26 @@ export const sitePages: SitePage[] = [
     slug: "broadband",
     eyebrow: "Home checks",
     description:
-      "Check whether your broadband still fits your home, speed needs and budget.",
+      "Check your broadband, energy and Mobile SIM deals with clear help from Home Money Check.",
     accentColour: "#BFE3FF",
     selectedCheck: "Broadband",
     status: "live",
     category: "Home checks",
     metaTitle: "Broadband check | Home Money Check",
     metaDescription:
-      "A simple route for checking whether your broadband still fits your household.",
+      "Check your broadband, energy and Mobile SIM deals with clear help from Home Money Check.",
     intro:
-      "Broadband should suit the way your home works now, not just when you first signed up.",
-    why: [
-      "Homes change, usage changes and speed needs change.",
-      "A check can help you think through fit, reliability and budget.",
-      "You stay in control of whether to continue.",
+      "Check your broadband, energy and Mobile SIM deals with clear help from Home Money Check.",
+    why: [],
+    mainCopy: householdBillsIntro,
+    householdSections: [
+      householdBillSections.broadband,
+      householdBillSections.energy,
+      householdBillSections.mobile,
+      householdBillSections.cashback,
+      householdBillSections.contract,
+      householdBillSections.note,
     ],
-    mainCopy: broadbandCopy,
     nextSteps: standardNextSteps,
   },
   {
@@ -266,7 +325,7 @@ export const sitePages: SitePage[] = [
     slug: "mobile",
     eyebrow: "Home checks",
     description:
-      "A simple check for mobile SIM options and household mobile costs.",
+      "Check Mobile SIM deals, broadband and energy with clear help from Home Money Check.",
     accentColour: "#F4D9DE",
     selectedCheck: "Mobile SIM deals",
     status: "live",
@@ -275,13 +334,17 @@ export const sitePages: SitePage[] = [
     metaDescription:
       "Check mobile SIM options and household mobile costs with Home Money Check.",
     intro:
-      "Mobile SIM costs can be easy to ignore, especially across a household with more than one plan.",
-    why: [
-      "You may be paying for data or features you no longer need.",
-      "Household mobile setups can often be simplified.",
-      "The check starts with what you actually use.",
+      "Check Mobile SIM deals, broadband and energy with clear help from Home Money Check.",
+    why: [],
+    mainCopy: householdBillsIntro,
+    householdSections: [
+      householdBillSections.mobile,
+      householdBillSections.broadband,
+      householdBillSections.energy,
+      householdBillSections.cashback,
+      householdBillSections.contract,
+      householdBillSections.note,
     ],
-    mainCopy: mobileCopy,
     nextSteps: standardNextSteps,
   },
   {

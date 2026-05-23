@@ -1,4 +1,9 @@
-const steps = [
+export type WhatHappensNextStep = {
+  title: string;
+  body: string;
+};
+
+const steps: WhatHappensNextStep[] = [
   {
     title: "Choose what service you want checked",
     body: "Send a few basic details so we know what you need help with.",
@@ -17,14 +22,14 @@ const steps = [
   },
 ];
 
-export function WhatHappensNext() {
+export function WhatHappensNext({ customSteps = steps }: { customSteps?: WhatHappensNextStep[] }) {
   return (
     <section className="mx-auto mt-5 max-w-7xl rounded-[2.75rem] bg-white p-6 shadow-[0_24px_70px_rgba(44,31,61,0.10)] md:p-8">
       <p className="mb-5 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
         What happens next
       </p>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {steps.map((step, index) => (
+        {customSteps.map((step, index) => (
           <article key={step.title} className="rounded-[1.75rem] bg-[#F7F0E8] p-5">
             <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#FDCA55] text-sm font-black text-[#4F247D]">
               {index + 1}

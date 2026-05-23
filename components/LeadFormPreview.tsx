@@ -31,6 +31,7 @@ type LeadFormPreviewProps = {
   uwRelated?: boolean;
   title?: string;
   submitLabel?: string;
+  helperText?: string;
 };
 
 type FormState = {
@@ -52,6 +53,7 @@ export function LeadFormPreview({
   defaultSelectedCheck,
   selectedCheck,
   sourcePage,
+  helperText = "Send your details and we’ll get back to you personally. You are not committing to anything by submitting this form.",
   submitLabel = "Start my check",
   title = "Tell us what you want to check.",
 }: LeadFormPreviewProps) {
@@ -148,8 +150,7 @@ export function LeadFormPreview({
         {title}
       </h2>
       <p className="relative mt-5 rounded-[1.35rem] bg-white/70 p-4 text-sm font-bold leading-6 text-[#4F247D]">
-        Send your details and we’ll get back to you personally. You are not committing to anything
-        by submitting this form.
+        {helperText}
       </p>
       {status === "error" ? (
         <p className="relative mt-5 rounded-[1.35rem] bg-[#FFF1C8] p-4 text-sm font-black leading-6 text-[#6B4611]">
