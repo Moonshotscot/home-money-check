@@ -1,16 +1,13 @@
-﻿import React from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowUpRight,
-  Check,
   Gift,
   Home,
   Landmark,
   ShieldCheck,
   FileText,
-  BriefcaseBusiness,
   Sparkles,
   Wifi,
   Zap,
@@ -242,24 +239,17 @@ const enquiryOptions = [
   "Finance/bookkeeping",
 ];
 
-function CheckBoxMark({ className = "" }: { className?: string }) {
-  return (
-    <img
-      src="/brand/hmc-tick-icon-transparent.png"
-      alt=""
-      aria-hidden="true"
-      className={className}
-    />
-  );
-}
-
-function BrandMark() {
+function BrandMark({ priority = false }: { priority?: boolean }) {
   return (
     <div className="flex items-center">
-      <img
-        src="/brand/hmc-logo-full-transparent.png"
+      <Image
         alt="Home Money Check"
         className="h-14 w-auto object-contain md:h-16"
+        height={88}
+        priority={priority}
+        sizes="(min-width: 768px) 248px, 216px"
+        src="/brand/hmc-logo-full-transparent.png"
+        width={248}
       />
     </div>
   );
@@ -306,7 +296,7 @@ function HeroTile({ item }: { item: HeroTileItem }) {
 function RouteGroup({ group }: { group: RouteGroupItem }) {
   return (
     <div
-      className="group relative transform-gpu overflow-hidden rounded-[2rem] p-5 shadow-[0_18px_55px_rgba(44,31,61,0.12)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_26px_72px_rgba(44,31,61,0.16)]"
+      className="group relative transform-gpu overflow-hidden rounded-[2rem] p-5 shadow-[0_18px_55px_rgba(44,31,61,0.12)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_26px_72px_rgba(44,31,61,0.16)] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
       style={{ backgroundColor: group.bg, color: group.colour }}
     >
       <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/35" />
@@ -384,16 +374,7 @@ export default async function HomeMoneyCheckHomepage() {
       className="min-h-screen max-w-full overflow-x-hidden bg-[#6A35A0] text-[#F7F0E8]"
       style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
     >
-      <style>{`
-        @import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,900,100,1&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap");
-        .display-font {
-          font-family: "Fraunces", ui-serif, Georgia, serif;
-          font-variation-settings: "SOFT" 100, "WONK" 1;
-          font-weight: 900;
-        }
-      `}</style>
-
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+      <div className="pointer-events-none fixed inset-0 hidden overflow-hidden md:block">
         <div className="absolute -left-28 top-12 h-96 w-96 rounded-full bg-[#8E52C4]/35 blur-3xl" />
         <div className="absolute right-0 top-64 h-[30rem] w-[30rem] rounded-full bg-[#4F247D]/45 blur-3xl" />
         <div className="absolute bottom-20 left-1/3 h-80 w-80 rounded-full bg-[#F4CF7A]/18 blur-3xl" />
@@ -402,7 +383,7 @@ export default async function HomeMoneyCheckHomepage() {
 
       <header className="relative z-20 px-4 pt-5 md:px-7">
         <div className="mx-auto flex max-w-7xl items-center justify-between rounded-[1.75rem] border border-white/12 bg-white/10 px-4 py-3 shadow-[0_18px_70px_rgba(44,31,61,0.22)] backdrop-blur-xl md:px-5">
-          <BrandMark />
+          <BrandMark priority />
           <DesktopNavigation />
           <div className="flex items-center gap-2">
             <a
@@ -441,6 +422,7 @@ export default async function HomeMoneyCheckHomepage() {
                   width={220}
                   height={180}
                   priority
+                  sizes="(min-width: 1024px) 182px, (min-width: 768px) 182px, 118px"
                   className="-ml-3 -mt-4 h-[5.9rem] w-[7.4rem] shrink-0 object-contain drop-shadow-[0_10px_16px_rgba(79,36,125,0.22)] md:-ml-5 md:-mt-7 md:h-[9.2rem] md:w-[11.4rem] lg:-ml-6 lg:-mt-5"
                 />
               </span>
@@ -451,14 +433,14 @@ export default async function HomeMoneyCheckHomepage() {
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
-                className="group inline-flex w-full transform-gpu items-center justify-center gap-2 rounded-full bg-[#F7F0E8] px-7 py-4 text-base font-black text-[#5F2D8C] shadow-[0_18px_50px_rgba(44,31,61,0.24)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_22px_54px_rgba(44,31,61,0.25)] sm:w-auto"
+                className="group inline-flex w-full transform-gpu items-center justify-center gap-2 rounded-full bg-[#F7F0E8] px-7 py-4 text-base font-black text-[#5F2D8C] shadow-[0_18px_50px_rgba(44,31,61,0.24)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_22px_54px_rgba(44,31,61,0.25)] sm:w-auto md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
                 href="/start-my-check"
               >
                 Start a free check
-                <ArrowUpRight className="h-5 w-5 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:-translate-y-1" strokeWidth={2.6} />
+                <ArrowUpRight className="h-5 w-5 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]" strokeWidth={2.6} />
               </a>
               <a
-                className="inline-flex w-full transform-gpu items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-4 text-base font-black text-[#F7F0E8] backdrop-blur transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-white/16 sm:w-auto"
+                className="inline-flex w-full transform-gpu items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-4 text-base font-black text-[#F7F0E8] backdrop-blur transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/16 sm:w-auto md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
                 href="/bills"
               >
                 Explore checks
@@ -489,8 +471,8 @@ export default async function HomeMoneyCheckHomepage() {
         </section>
 
         <section className="relative overflow-hidden rounded-t-[3rem] bg-[#F7F0E8] px-5 py-12 text-[#2C1F3D] md:px-8 md:py-16">
-          <div className="absolute -right-20 top-8 h-56 w-56 rounded-full bg-[#EADFFD] blur-3xl" />
-          <div className="absolute -left-20 bottom-8 h-56 w-56 rounded-[3rem] bg-[#F4CF7A]/35 blur-3xl" />
+          <div className="absolute -right-20 top-8 hidden h-56 w-56 rounded-full bg-[#EADFFD] blur-3xl md:block" />
+          <div className="absolute -left-20 bottom-8 hidden h-56 w-56 rounded-[3rem] bg-[#F4CF7A]/35 blur-3xl md:block" />
           <div className="relative mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.72fr_1.28fr] lg:items-stretch">
             <div className="relative overflow-hidden rounded-[2.3rem] bg-[#6A35A0] p-7 text-[#F7F0E8] shadow-[0_24px_70px_rgba(44,31,61,0.18)] md:p-9">
               <div className="absolute -bottom-12 -right-10 h-28 w-28 rotate-[14deg] rounded-[2rem] bg-[#F4CF7A]/35" />
@@ -505,6 +487,7 @@ export default async function HomeMoneyCheckHomepage() {
                 alt=""
                 width={220}
                 height={180}
+                sizes="(min-width: 768px) 160px, 128px"
                 className="pointer-events-none absolute bottom-1 right-12 h-24 w-32 object-contain drop-shadow-[0_10px_16px_rgba(79,36,125,0.2)] md:bottom-2 md:right-14 md:h-32 md:w-40"
               />
             </div>
@@ -519,7 +502,7 @@ export default async function HomeMoneyCheckHomepage() {
         <section className="bg-[#F7F0E8] px-5 pb-12 text-[#2C1F3D] md:px-8 md:pb-16">
           <div className="mx-auto grid max-w-7xl items-start gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.9fr)]">
             <div className="relative self-start overflow-hidden rounded-[2.75rem] bg-[#5F2D8C] p-8 text-[#F7F0E8] shadow-[0_30px_90px_rgba(44,31,61,0.22)] md:p-10 lg:min-h-[520px]">
-              <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-[#EADFFD]/20 blur-3xl" />
+              <div className="absolute -right-20 -top-28 hidden h-80 w-80 rounded-full bg-[#EADFFD]/20 blur-3xl md:block" />
               <div className="relative flex min-h-full flex-col gap-7">
                 {featuredCampaign ? (
                   <>
@@ -598,11 +581,11 @@ export default async function HomeMoneyCheckHomepage() {
                   ))}
                 </select>
                 <button
-                  className="group flex transform-gpu items-center justify-center gap-2 rounded-full bg-[#6A35A0] px-7 py-4 text-base font-black text-[#F7F0E8] shadow-[0_18px_45px_rgba(106,53,160,0.25)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_22px_54px_rgba(106,53,160,0.27)]"
+                  className="group flex transform-gpu items-center justify-center gap-2 rounded-full bg-[#6A35A0] px-7 py-4 text-base font-black text-[#F7F0E8] shadow-[0_18px_45px_rgba(106,53,160,0.25)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_22px_54px_rgba(106,53,160,0.27)] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
                   type="button"
                 >
                   Start my check
-                  <ArrowUpRight className="h-5 w-5 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:-translate-y-1" strokeWidth={2.6} />
+                  <ArrowUpRight className="h-5 w-5 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]" strokeWidth={2.6} />
                 </button>
               </div>
             </div>
@@ -626,14 +609,14 @@ export default async function HomeMoneyCheckHomepage() {
               {updates.length > 0 ? updates.map((item) => (
                 <div
                   key={item.text}
-                  className="group flex min-h-[180px] transform-gpu flex-col justify-between rounded-[2.25rem] p-6 shadow-[0_22px_70px_rgba(44,31,61,0.10)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_28px_78px_rgba(44,31,61,0.16)]"
+                  className="group flex min-h-[180px] transform-gpu flex-col justify-between rounded-[2.25rem] p-6 shadow-[0_22px_70px_rgba(44,31,61,0.10)] transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_28px_78px_rgba(44,31,61,0.16)] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
                   style={{ backgroundColor: item.tone }}
                 >
                   <div className="flex items-center justify-between">
                     <span className="rounded-full bg-white/55 px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-[#5F2D8C]">
                       {item.label}
                     </span>
-                    <ArrowUpRight className="h-5 w-5 text-[#5F2D8C] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <ArrowUpRight className="h-5 w-5 text-[#5F2D8C] transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]" />
                   </div>
                   <p className="text-2xl font-black leading-[1.05] tracking-[-0.05em] text-[#2C1F3D]">
                     {item.text}
@@ -650,7 +633,7 @@ export default async function HomeMoneyCheckHomepage() {
 
         <section className="bg-[#5F2D8C] px-5 py-14 md:px-8 md:py-20">
           <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="relative min-h-[360px] transform-gpu overflow-hidden rounded-[2.75rem] bg-[#F7F0E8] p-8 text-[#2C1F3D] shadow-[0_30px_90px_rgba(44,31,61,0.25)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_34px_90px_rgba(44,31,61,0.26)] md:p-12">
+            <div className="relative min-h-[360px] transform-gpu overflow-hidden rounded-[2.75rem] bg-[#F7F0E8] p-8 text-[#2C1F3D] shadow-[0_30px_90px_rgba(44,31,61,0.25)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_34px_90px_rgba(44,31,61,0.26)] md:p-12 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]">
               <div className="absolute -right-5 top-6 h-20 w-28 rotate-[10deg] rounded-[1.5rem] bg-[#EADFFD]/55" />
               <div className="relative z-10 grid h-full min-h-[296px] gap-8 md:grid-cols-[minmax(0,1fr)_14rem]">
                 <div>
@@ -669,13 +652,14 @@ export default async function HomeMoneyCheckHomepage() {
                     alt=""
                     width={220}
                     height={180}
+                    sizes="(min-width: 768px) 208px, 128px"
                     className="h-auto w-32 object-contain drop-shadow-[0_12px_18px_rgba(79,36,125,0.18)] md:w-52"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="relative transform-gpu overflow-hidden rounded-[2.75rem] bg-[#F4CF7A] p-8 text-[#2C1F3D] shadow-[0_30px_90px_rgba(44,31,61,0.22)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_34px_90px_rgba(44,31,61,0.24)] md:p-10">
+            <div className="relative transform-gpu overflow-hidden rounded-[2.75rem] bg-[#F4CF7A] p-8 text-[#2C1F3D] shadow-[0_30px_90px_rgba(44,31,61,0.22)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_34px_90px_rgba(44,31,61,0.24)] md:p-10 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]">
               <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/35" />
               <div className="relative z-10 grid h-full min-h-[320px] gap-10 md:grid-cols-[minmax(0,28rem)_12rem]">
                 <div>
