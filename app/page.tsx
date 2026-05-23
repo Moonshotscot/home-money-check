@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { DesktopNavigation, MobileNavigation } from "@/components/SiteNavigation";
+import { SiteFooter } from "@/components/SiteFooter";
 import { WhatHappensNext } from "@/components/WhatHappensNext";
 import { getHomepageContent } from "@/lib/homepageContent";
 
@@ -701,34 +702,7 @@ export default async function HomeMoneyCheckHomepage() {
         </section>
       </main>
 
-      <footer className="relative z-10 bg-[#5F2D8C] px-5 pb-8 text-[#F7F0E8]/70 md:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-5 border-t border-white/12 pt-8 md:flex-row md:items-center">
-          <BrandMark />
-          {/* TODO before launch: add Privacy Policy, Terms, Cookie Policy if needed, and clear service disclaimers. */}
-          <div className="flex flex-col gap-3 text-sm font-bold md:items-end">
-            <p>© Home Money Check.</p>
-            <nav
-              aria-label="Footer links"
-              className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-black uppercase tracking-[0.14em] text-[#F7F0E8]/45 md:justify-end"
-            >
-              {[
-                { href: "/privacy-policy", label: "Privacy Policy" },
-                { href: "/terms", label: "Terms" },
-                { href: "/disclaimers", label: "Disclaimers" },
-                { href: "/admin/login", label: "Admin" },
-              ].map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="transition-colors duration-300 ease-out hover:text-[#F7F0E8]/75"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

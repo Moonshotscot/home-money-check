@@ -4,8 +4,16 @@ import { LeadFormPreview } from "@/components/LeadFormPreview";
 import { PageHero } from "@/components/PageHero";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
+import {
+  mortgageComingSoonSlugs,
+  regulatedComingSoonNote,
+  regulatedComingSoonSlugs,
+} from "@/lib/compliance";
 
 export function ComingSoonPage({ page }: { page: SitePage }) {
+  const showRegulatedNote = regulatedComingSoonSlugs.has(page.slug);
+  const isMortgagePage = mortgageComingSoonSlugs.has(page.slug);
+
   return (
     <div className="min-h-screen bg-[#F7F0E8] text-[#2C1F3D]">
       <SiteHeader />
@@ -44,13 +52,32 @@ export function ComingSoonPage({ page }: { page: SitePage }) {
               Tell me when this is ready
             </Link>
           </section>
-          <div id="lead-form">
+          <div id="lead-form" className="space-y-5">
             <LeadFormPreview
               defaultSelectedCheck={page.selectedCheck}
               sourcePage={getRoutePath(page)}
               submitLabel="Tell me when this is ready"
               title="Tell me when this is ready"
             />
+            {showRegulatedNote ? (
+              <aside className="rounded-[2rem] border border-[#5F2D8C]/12 bg-white p-6 text-sm font-bold leading-7 text-[#2C1F3D]/72 shadow-[0_18px_50px_rgba(44,31,61,0.10)]">
+                <p className="mb-3 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
+                  Regulated service note
+                </p>
+                <p>{regulatedComingSoonNote.notLive}</p>
+                <p className="mt-3">{regulatedComingSoonNote.route}</p>
+                <p
+                  className={
+                    isMortgagePage
+                      ? "mt-3 font-black text-[#2C1F3D]"
+                      : "mt-3 text-[#2C1F3D]/68"
+                  }
+                >
+                  {regulatedComingSoonNote.mortgageRisk}
+                </p>
+                <p className="mt-3">{regulatedComingSoonNote.register}</p>
+              </aside>
+            ) : null}
           </div>
         </div>
       </main>
