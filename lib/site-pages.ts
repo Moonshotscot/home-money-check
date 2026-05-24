@@ -37,8 +37,8 @@ export type NavigationItem = {
 export const desktopNavigation: NavigationItem[] = [
   {
     label: "Household bills",
-    href: "/bills",
-    active: ["/bills", "/energy", "/broadband", "/mobile"],
+    href: "",
+    active: ["/energy", "/broadband", "/mobile"],
     children: [
       { label: "Energy", href: "/energy" },
       { label: "Broadband", href: "/broadband" },
@@ -48,7 +48,7 @@ export const desktopNavigation: NavigationItem[] = [
   { label: "£20K Giveaway", href: "/20k-giveaway", active: ["/20k-giveaway"] },
   {
     label: "Mortgages",
-    href: "/mortgage",
+    href: "",
     active: ["/mortgage"],
     children: [
       { label: "Mortgages", href: "/mortgage" },
@@ -59,7 +59,7 @@ export const desktopNavigation: NavigationItem[] = [
   },
   {
     label: "Insurance",
-    href: "/protection",
+    href: "",
     active: ["/protection", "/private-medical-insurance"],
     children: [
       { label: "Protection", href: "/protection" },
@@ -69,7 +69,7 @@ export const desktopNavigation: NavigationItem[] = [
   { label: "Wills & POAs", href: "/estate-planning", active: ["/estate-planning"] },
   {
     label: "For businesses",
-    href: "/business-utilities",
+    href: "",
     active: [
       "/business-utilities",
       "/finance-services",
@@ -90,7 +90,7 @@ export const mobileMenuGroups: NavigationItem[] = [
   { label: "Home", href: "/" },
   {
     label: "Household bills",
-    href: "/bills",
+    href: "",
     children: [
       { label: "Energy", href: "/energy" },
       { label: "Broadband", href: "/broadband" },
@@ -100,7 +100,7 @@ export const mobileMenuGroups: NavigationItem[] = [
   { label: "£20K Giveaway", href: "/20k-giveaway" },
   {
     label: "Mortgages",
-    href: "/mortgage",
+    href: "",
     children: [
       { label: "Mortgages", href: "/mortgage" },
       { label: "First-time buyers", href: "/mortgage/first-time-buyer" },
@@ -110,7 +110,7 @@ export const mobileMenuGroups: NavigationItem[] = [
   },
   {
     label: "Insurance",
-    href: "/protection",
+    href: "",
     children: [
       { label: "Protection", href: "/protection" },
       { label: "Private medical insurance", href: "/private-medical-insurance" },
@@ -119,7 +119,7 @@ export const mobileMenuGroups: NavigationItem[] = [
   { label: "Wills & POAs", href: "/estate-planning" },
   {
     label: "For businesses",
-    href: "/business-utilities",
+    href: "",
     children: [
       { label: "Business utilities", href: "/business-utilities" },
       { label: "Finance/bookkeeping", href: "/finance-services" },
@@ -132,7 +132,7 @@ export const mobileMenuGroups: NavigationItem[] = [
 
 const standardNextSteps = [
   "Tell us what you want to check.",
-  "We will look at the route that seems most relevant.",
+  "We will look at the option that seems most relevant.",
   "You can decide what, if anything, you want to do next.",
 ];
 
@@ -145,11 +145,10 @@ const comingSoonCopy = [
 ];
 
 const householdBillsIntro = [
-  "Household bills can be difficult to work through on your own.",
-  "Through Home Money Check, Neill Connolly, an Authorised Utility Warehouse (UW) Partner, will call you and go through a detailed online quote so you can see exactly what the services are, what benefits you get and what savings you can make.",
-  "We can look at energy, broadband, Mobile SIM deals, EV tariffs, the UW Cashback Card and help towards existing cancellation fees.",
-  "The best value is often found when more than one service is added to your account.",
-  "We’ll talk through the quote and answer your questions so you can see exactly what is available before you decide.",
+  "Through Home Money Check, our Authorised Utility Warehouse Partner, Neill Connolly, will contact you and go through a detailed online quote.",
+  "You’ll see how things work, what they cost, what benefits are on offer and what savings you can make.",
+  "We can look at electricity, gas, broadband, Mobile SIM deals, EV tariffs, the UW Cashback Card and help towards existing cancellation fees.",
+  "The very best value is often found when more than one service is added to your account.",
 ];
 
 const householdBillSections = {
@@ -201,8 +200,7 @@ const householdBillSections = {
   note: {
     title: "Note",
     body: [
-      "For electricity, gas, broadband and mobile services, your quote will be for Utility Warehouse services.",
-      "We do not search the whole market.",
+      "For electricity, gas, broadband and mobile services, your quote will be for Utility Warehouse services. We do not search the whole market.",
       "We will always be transparent about our services, explain your quote clearly and help you make a fully informed decision.",
     ],
   },
@@ -222,7 +220,7 @@ const businessUtilitiesCopy = [
 
 const financeCopy = [
   "Finance/bookkeeping starts with a short discovery call so we can understand what the business needs.",
-  "We’ll recommend the right service route and provide a clear quote. This is about bookkeeping and finance admin support, not investment, pension or credit advice.",
+  "We’ll recommend the right service option and provide a clear quote. This is about bookkeeping and finance admin support, not investment, pension or credit advice.",
 ];
 
 const businessProtectionCopy = [
@@ -242,45 +240,19 @@ const extraIncomeCopy = [
 
 export const sitePages: SitePage[] = [
   {
-    title: "Household bill checks",
-    slug: "bills",
-    eyebrow: "Home checks",
-    description: "Check energy, broadband and Mobile SIM deals in one simple place.",
-    accentColour: "#F7F0E8",
-    selectedCheck: "Household bills",
-    status: "live",
-    category: "Home checks",
-    metaTitle: "Household bills check | Home Money Check",
-    metaDescription:
-      "Check energy, broadband and Mobile SIM deals in one simple place with Home Money Check.",
-    intro: "Check energy, broadband and Mobile SIM deals in one simple place.",
-    why: [],
-    mainCopy: householdBillsIntro,
-    householdSections: [
-      householdBillSections.energy,
-      householdBillSections.broadband,
-      householdBillSections.mobile,
-      householdBillSections.cashback,
-      householdBillSections.contract,
-      householdBillSections.note,
-    ],
-    nextSteps: standardNextSteps,
-  },
-  {
-    title: "Energy check",
+    title: "Energy checks",
     slug: "energy",
-    eyebrow: "Home checks",
+    eyebrow: "Household bill checks",
     description:
-      "Check your energy, broadband and Mobile SIM deals with clear help from Home Money Check.",
+      "See how our quote could bring your energy, broadband and Mobile SIM deals together to maximise your savings.",
     accentColour: "#F4CF7A",
     selectedCheck: "Energy",
     status: "live",
     category: "Home checks",
     metaTitle: "Energy check | Home Money Check",
     metaDescription:
-      "Check your energy, broadband and Mobile SIM deals with clear help from Home Money Check.",
-    intro:
-      "Check your energy, broadband and Mobile SIM deals with clear help from Home Money Check.",
+      "Ask Home Money Check about energy, broadband and Mobile SIM deals.",
+    intro: "",
     why: [],
     mainCopy: householdBillsIntro,
     householdSections: [
@@ -294,20 +266,19 @@ export const sitePages: SitePage[] = [
     nextSteps: standardNextSteps,
   },
   {
-    title: "Broadband check",
+    title: "Broadband checks",
     slug: "broadband",
-    eyebrow: "Home checks",
+    eyebrow: "Household bill checks",
     description:
-      "Check your broadband, energy and Mobile SIM deals with clear help from Home Money Check.",
+      "See how our quote could bring your energy, broadband and Mobile SIM deals together to maximise your savings.",
     accentColour: "#BFE3FF",
     selectedCheck: "Broadband",
     status: "live",
     category: "Home checks",
     metaTitle: "Broadband check | Home Money Check",
     metaDescription:
-      "Check your broadband, energy and Mobile SIM deals with clear help from Home Money Check.",
-    intro:
-      "Check your broadband, energy and Mobile SIM deals with clear help from Home Money Check.",
+      "Ask Home Money Check about broadband, energy and Mobile SIM deals.",
+    intro: "",
     why: [],
     mainCopy: householdBillsIntro,
     householdSections: [
@@ -323,9 +294,9 @@ export const sitePages: SitePage[] = [
   {
     title: "Mobile SIM deals",
     slug: "mobile",
-    eyebrow: "Home checks",
+    eyebrow: "Household bill checks",
     description:
-      "Check Mobile SIM deals, broadband and energy with clear help from Home Money Check.",
+      "See how our quote could bring your energy, broadband and Mobile SIM deals together to maximise your savings.",
     accentColour: "#F4D9DE",
     selectedCheck: "Mobile SIM deals",
     status: "live",
@@ -333,8 +304,7 @@ export const sitePages: SitePage[] = [
     metaTitle: "Mobile SIM deals | Home Money Check",
     metaDescription:
       "Check mobile SIM options and household mobile costs with Home Money Check.",
-    intro:
-      "Check Mobile SIM deals, broadband and energy with clear help from Home Money Check.",
+    intro: "",
     why: [],
     mainCopy: householdBillsIntro,
     householdSections: [
@@ -350,20 +320,20 @@ export const sitePages: SitePage[] = [
   {
     title: "£20K Giveaway",
     slug: "20k-giveaway",
-    eyebrow: "Current route",
+    eyebrow: "Current campaign",
     description:
-      "Ask about the current £20K Giveaway route and what happens next.",
+      "Ask about the current £20K Giveaway and what happens next.",
     accentColour: "#EADFFD",
     selectedCheck: "£20K Giveaway",
     status: "live",
     category: "Current campaign",
-    metaTitle: "£20K Giveaway route | Home Money Check",
+    metaTitle: "£20K Giveaway | Home Money Check",
     metaDescription:
-      "Ask Home Money Check about the current £20K Giveaway route and next steps.",
+      "Ask Home Money Check about the current £20K Giveaway and next steps.",
     intro:
-      "This page lets you ask about the current £20K Giveaway route. Send a few details and we’ll get back to you personally.",
+      "This page lets you ask about the current £20K Giveaway. Send a few details and we’ll get back to you quickly.",
     why: [
-      "You can ask what the route involves before taking another step.",
+      "You can ask what the enquiry involves before taking another step.",
       "You are not committing to anything by submitting the form.",
       "We will explain the next step clearly before anything proceeds.",
     ],
@@ -372,7 +342,7 @@ export const sitePages: SitePage[] = [
   {
     title: "Earn extra income",
     slug: "extra-income",
-    eyebrow: "Income route",
+    eyebrow: "Business & income checks",
     description:
       "A calm, serious partner opportunity page. No hype, no income guarantees.",
     accentColour: "#D9C2F4",
@@ -381,11 +351,11 @@ export const sitePages: SitePage[] = [
     category: "Income",
     metaTitle: "Earn extra income | Home Money Check",
     metaDescription:
-      "Ask about the Partner opportunity route through Home Money Check. No income is guaranteed.",
+      "Ask about the Partner opportunity through Home Money Check. No income is guaranteed.",
     intro:
-      "A practical route for people who want to understand the Partner opportunity without hype.",
+      "A practical option for people who want to understand the Partner opportunity without hype.",
     why: [
-      "You can ask questions before deciding if the route is suitable.",
+      "You can ask questions before deciding if the opportunity is suitable.",
       "No income is guaranteed. Results depend on effort, suitability, activity and the way the opportunity is approached.",
       "The focus is a clear explanation, not pressure.",
     ],
@@ -405,16 +375,16 @@ export const sitePages: SitePage[] = [
     category: "Contact",
     metaTitle: "Start my check | Home Money Check",
     metaDescription:
-      "Start a Home Money Check enquiry for bills, home services, planning or income routes.",
+      "Start a Home Money Check enquiry for bills, home services, planning or income options.",
     intro:
       "Choose the check you want to start with and send a few details.",
     why: [
       "You can keep the enquiry broad if you are not sure.",
-      "We will get back to you personally.",
+      "We will get back to you quickly.",
       "You are not committing to anything by submitting the form.",
     ],
     mainCopy: [
-      "Home Money Check is a friendly check and advice service. You send a few basic details, we get in touch, then we help you understand the best route for what you need.",
+      "Home Money Check is a friendly check and advice service. You send a few basic details, we get in touch, then we help you understand the best option for what you need.",
     ],
     nextSteps: standardNextSteps,
   },
@@ -429,25 +399,25 @@ export const sitePages: SitePage[] = [
     category: "Contact",
     metaTitle: "Contact | Home Money Check",
     metaDescription:
-      "Contact Home Money Check about household bills, planning routes, business checks or income options.",
+      "Contact Home Money Check about household bills, planning, business checks or income options.",
     intro:
-      "A simple contact route for questions that do not fit neatly into one check yet.",
+      "A simple contact page for questions that do not fit neatly into one check yet.",
     why: [
       "You can ask a general question.",
-      "We can point you toward a more specific route.",
+      "We can point you toward a more specific option.",
       "You are not committing to anything by submitting the form.",
     ],
     nextSteps: standardNextSteps,
   },
   {
-    title: "Coming soon",
+    title: "Mortgages",
     slug: "mortgage",
-    eyebrow: "Coming soon",
+    eyebrow: "Mortgage, insurance & planning",
     description: comingSoonIntro,
     accentColour: "#D8EEFF",
     selectedCheck: "Mortgages",
     status: "comingSoon",
-    category: "Life planning checks",
+    category: "Mortgage, insurance & planning",
     metaTitle: "Mortgage checks coming soon | Home Money Check",
     metaDescription:
       "Mortgage check pages are coming soon to Home Money Check.",
@@ -457,82 +427,82 @@ export const sitePages: SitePage[] = [
     nextSteps: standardNextSteps,
   },
   {
-    title: "Coming soon",
+    title: "First-time buyers",
     slug: "mortgage/first-time-buyer",
-    eyebrow: "Coming soon",
+    eyebrow: "Mortgage, insurance & planning",
     description: comingSoonIntro,
     accentColour: "#D8EEFF",
     selectedCheck: "First-time buyers",
     status: "comingSoon",
-    category: "Life planning checks",
+    category: "Mortgage, insurance & planning",
     metaTitle: "First-time buyer mortgage coming soon | Home Money Check",
     metaDescription:
-      "A first-time buyer mortgage check route is coming soon.",
+      "A first-time buyer mortgage check is coming soon.",
     intro: comingSoonIntro,
     why: ["Leave your details and we’ll let you know when this service is ready."],
     mainCopy: comingSoonCopy,
     nextSteps: standardNextSteps,
   },
   {
-    title: "Coming soon",
+    title: "Remortgages",
     slug: "mortgage/remortgage",
-    eyebrow: "Coming soon",
+    eyebrow: "Mortgage, insurance & planning",
     description: comingSoonIntro,
     accentColour: "#D8EEFF",
     selectedCheck: "Remortgages",
     status: "comingSoon",
-    category: "Life planning checks",
+    category: "Mortgage, insurance & planning",
     metaTitle: "Remortgage check coming soon | Home Money Check",
-    metaDescription: "A remortgage check route is coming soon.",
+    metaDescription: "A remortgage check is coming soon.",
     intro: comingSoonIntro,
     why: ["Leave your details and we’ll let you know when this service is ready."],
     mainCopy: comingSoonCopy,
     nextSteps: standardNextSteps,
   },
   {
-    title: "Coming soon",
+    title: "Moving home",
     slug: "mortgage/moving-home",
-    eyebrow: "Coming soon",
+    eyebrow: "Mortgage, insurance & planning",
     description: comingSoonIntro,
     accentColour: "#D8EEFF",
     selectedCheck: "Moving home",
     status: "comingSoon",
-    category: "Life planning checks",
+    category: "Mortgage, insurance & planning",
     metaTitle: "Moving home mortgage coming soon | Home Money Check",
-    metaDescription: "A moving home mortgage check route is coming soon.",
+    metaDescription: "A moving home mortgage check is coming soon.",
     intro: comingSoonIntro,
     why: ["Leave your details and we’ll let you know when this service is ready."],
     mainCopy: comingSoonCopy,
     nextSteps: standardNextSteps,
   },
   {
-    title: "Coming soon",
+    title: "Protection",
     slug: "protection",
-    eyebrow: "Coming soon",
+    eyebrow: "Mortgage, insurance & planning",
     description: comingSoonIntro,
     accentColour: "#F5D28A",
     selectedCheck: "Protection",
     status: "comingSoon",
-    category: "Life planning checks",
+    category: "Mortgage, insurance & planning",
     metaTitle: "Protection check coming soon | Home Money Check",
-    metaDescription: "A protection check route is coming soon.",
+    metaDescription: "A protection check is coming soon.",
     intro: comingSoonIntro,
     why: ["Leave your details and we’ll let you know when this service is ready."],
     mainCopy: comingSoonCopy,
     nextSteps: standardNextSteps,
   },
   {
-    title: "Coming soon",
+    title: "Private medical insurance",
     slug: "private-medical-insurance",
-    eyebrow: "Coming soon",
+    eyebrow: "Mortgage, insurance & planning",
     description: comingSoonIntro,
     accentColour: "#BFD9C8",
     selectedCheck: "Private medical insurance",
     status: "comingSoon",
-    category: "Life planning checks",
+    category: "Mortgage, insurance & planning",
     metaTitle: "Private medical insurance coming soon | Home Money Check",
     metaDescription:
-      "A private medical insurance check route is coming soon.",
+      "A private medical insurance check is coming soon.",
     intro: comingSoonIntro,
     why: ["Leave your details and we’ll let you know when this service is ready."],
     mainCopy: comingSoonCopy,
@@ -541,15 +511,15 @@ export const sitePages: SitePage[] = [
   {
     title: "Wills & POAs",
     slug: "estate-planning",
-    eyebrow: "Planning checks",
-    description: "A practical route for wills, POAs and planning conversations.",
+    eyebrow: "Mortgage, insurance & planning",
+    description: "A practical option for wills, POAs and planning conversations.",
     accentColour: "#CFE6D5",
     selectedCheck: "Wills & POAs",
     status: "live",
     category: "Life planning checks",
     metaTitle: "Wills & POAs | Home Money Check",
     metaDescription: "Ask Home Money Check about wills, POAs and practical planning.",
-    intro: "This route helps people ask about wills, POAs and practical planning.",
+    intro: "This page helps people ask about wills, POAs and practical planning.",
     why: ["Planning conversations are easier when they start clearly."],
     mainCopy: willsCopy,
     nextSteps: standardNextSteps,
@@ -557,46 +527,46 @@ export const sitePages: SitePage[] = [
   {
     title: "Business utilities",
     slug: "business-utilities",
-    eyebrow: "Business checks",
-    description: "A practical route for business utility checks.",
+    eyebrow: "Business & income checks",
+    description: "A practical option for business utility checks.",
     accentColour: "#D9E1E8",
     selectedCheck: "Business utilities",
     status: "live",
     category: "Business checks",
     metaTitle: "Business utilities | Home Money Check",
     metaDescription: "Ask Home Money Check about business utility checks.",
-    intro: "This route supports business utility questions.",
+    intro: "This page supports business utility questions.",
     why: ["Business services need a different check from household services."],
     mainCopy: businessUtilitiesCopy,
     nextSteps: standardNextSteps,
   },
   {
-    title: "Coming soon",
+    title: "Finance/bookkeeping",
     slug: "finance-services",
-    eyebrow: "Coming soon",
+    eyebrow: "Business & income checks",
     description: comingSoonIntro,
     accentColour: "#D9E1E8",
     selectedCheck: "Finance/bookkeeping",
     status: "comingSoon",
-    category: "Business checks",
+    category: "Business & income checks",
     metaTitle: "Finance/bookkeeping | Home Money Check",
-    metaDescription: "A finance/bookkeeping route is coming soon.",
+    metaDescription: "A finance/bookkeeping service is coming soon.",
     intro: comingSoonIntro,
     why: ["Leave your details and we’ll let you know when this service is ready."],
     mainCopy: comingSoonCopy,
     nextSteps: standardNextSteps,
   },
   {
-    title: "Coming soon",
+    title: "Business protection",
     slug: "business-protection",
-    eyebrow: "Coming soon",
+    eyebrow: "Business & income checks",
     description: comingSoonIntro,
     accentColour: "#D9E1E8",
     selectedCheck: "Business protection",
     status: "comingSoon",
-    category: "Business checks",
+    category: "Business & income checks",
     metaTitle: "Business protection coming soon | Home Money Check",
-    metaDescription: "A business protection route is coming soon.",
+    metaDescription: "A business protection service is coming soon.",
     intro: comingSoonIntro,
     why: ["Leave your details and we’ll let you know when this service is ready."],
     mainCopy: comingSoonCopy,
@@ -605,16 +575,16 @@ export const sitePages: SitePage[] = [
   {
     title: "Business continuity",
     slug: "business-continuity",
-    eyebrow: "Business checks",
-    description: "A practical route for business continuity conversations.",
+    eyebrow: "Business & income checks",
+    description: "A practical option for business continuity conversations.",
     accentColour: "#D9E1E8",
     selectedCheck: "Business continuity",
     status: "live",
     category: "Business checks",
     metaTitle: "Business continuity | Home Money Check",
     metaDescription: "Ask Home Money Check about business continuity conversations.",
-    intro: "This route helps organise business continuity enquiries.",
-    why: ["Business continuity questions need a practical, careful route."],
+    intro: "This page helps organise business continuity enquiries.",
+    why: ["Business continuity questions need a practical, careful conversation."],
     mainCopy: businessContinuityCopy,
     nextSteps: standardNextSteps,
   },
@@ -622,16 +592,16 @@ export const sitePages: SitePage[] = [
     title: "Local home partners",
     slug: "local-home-partners",
     eyebrow: "Coming soon",
-    description: "A local home partners route is being prepared.",
+    description: "A local home partners page is being prepared.",
     accentColour: "#D9E1E8",
     selectedCheck: "Local home partners",
     status: "comingSoon",
     category: "Business checks",
     metaTitle: "Local home partners coming soon | Home Money Check",
-    metaDescription: "A local home partners route is coming soon.",
+    metaDescription: "A local home partners page is coming soon.",
     intro:
-      "This route will help organise local partner enquiries when it is ready.",
-    why: ["Local home support routes need simple, trustworthy presentation."],
+      "This page will help organise local partner enquiries when it is ready.",
+    why: ["Local home support needs simple, trustworthy presentation."],
     nextSteps: standardNextSteps,
   },
 ];

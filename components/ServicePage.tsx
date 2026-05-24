@@ -31,6 +31,22 @@ export function ServicePage({ page }: { page: SitePage }) {
     },
   ];
 
+  const renderParagraph = (paragraph: string) => {
+    if (isHouseholdBillPage && paragraph.startsWith("Through Home Money Check,")) {
+      return (
+        <>
+          Through{" "}
+          <span className="brand-wordmark-text text-xl tracking-[-0.035em]">
+            Home Money Check
+          </span>
+          {paragraph.replace("Through Home Money Check", "")}
+        </>
+      );
+    }
+
+    return paragraph;
+  };
+
   return (
     <div className="min-h-screen bg-[#F7F0E8] text-[#2C1F3D]">
       <SiteHeader />
@@ -38,6 +54,11 @@ export function ServicePage({ page }: { page: SitePage }) {
         accentColour={page.accentColour}
         description={page.description}
         eyebrow={page.eyebrow}
+        howItWorksBody={
+          isHouseholdBillPage
+            ? "Send your details and we'll talk you through your options and costs to help you save money."
+            : undefined
+        }
         status={page.status}
         title={page.title}
       />
@@ -49,22 +70,21 @@ export function ServicePage({ page }: { page: SitePage }) {
               className="absolute -bottom-12 right-8 h-28 w-28 rotate-[12deg] rounded-[2rem] opacity-70"
               style={{ backgroundColor: page.accentColour }}
             />
-            <p className="relative mb-5 w-fit rounded-full bg-[#FDCA55] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
-              {page.eyebrow}
-            </p>
-            <h2 className="display-font relative text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-6xl">
-              {page.title}
+            <h2 className="display-font relative text-4xl font-black leading-[0.98] tracking-[-0.065em] text-[#FDCA55] md:text-6xl">
+              {isHouseholdBillPage ? "What we’ll check" : page.title}
             </h2>
-            <p className="relative mt-6 max-w-3xl text-xl font-bold leading-8 text-[#F7F0E8]/82">
-              {page.intro}
-            </p>
+            {!isHouseholdBillPage && page.intro ? (
+              <p className="relative mt-6 max-w-3xl text-xl font-bold leading-8 text-[#F7F0E8]/82">
+                {page.intro}
+              </p>
+            ) : null}
             <div className="relative mt-7 grid gap-4">
-              {(page.mainCopy || [page.intro]).map((paragraph) => (
+              {(page.mainCopy || [page.intro]).filter(Boolean).map((paragraph) => (
                 <p
                   key={paragraph}
                   className="max-w-3xl text-lg font-bold leading-8 text-[#F7F0E8]/76"
                 >
-                  {paragraph}
+                  {renderParagraph(paragraph)}
                 </p>
               ))}
             </div>
@@ -73,7 +93,7 @@ export function ServicePage({ page }: { page: SitePage }) {
                 {page.householdSections.map((section) => (
                   <section
                     key={section.title}
-                    className="rounded-[1.75rem] bg-[#EADFFD]/14 p-5 ring-1 ring-white/12"
+                    className="rounded-[1.75rem] bg-[#7A45A8]/55 p-5 ring-1 ring-white/12"
                   >
                     <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#FDCA55] md:text-4xl">
                       {section.title}
@@ -125,15 +145,17 @@ export function ServicePage({ page }: { page: SitePage }) {
             ) : null}
           </section>
 
-          <LeadFormPreview
-            defaultSelectedCheck={page.selectedCheck}
-            helperText={
-              isHouseholdBillPage
-                ? "Pop in your details and we’ll get back to you personally. No obligation at all."
-                : undefined
-            }
-            sourcePage={getRoutePath(page)}
-          />
+          <div id="lead-form">
+            <LeadFormPreview
+              defaultSelectedCheck={page.selectedCheck}
+              helperText={
+                isHouseholdBillPage
+                  ? "Pop in your details and we’ll get back to you quickly. No obligation at all."
+                  : undefined
+              }
+              sourcePage={getRoutePath(page)}
+            />
+          </div>
         </div>
 
         <WhatHappensNext customSteps={isHouseholdBillPage ? householdNextSteps : undefined} />
@@ -147,7 +169,7 @@ export function ServicePage({ page }: { page: SitePage }) {
           </Link>
           <Link
             className="inline-flex items-center gap-2 rounded-full bg-[#FDCA55] px-6 py-3 text-sm font-black text-[#4F247D]"
-            href="/start-my-check"
+            href="#lead-form"
           >
             Start my check
             <ArrowUpRight className="h-4 w-4" strokeWidth={2.7} />

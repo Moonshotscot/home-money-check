@@ -50,7 +50,7 @@ export default function NotFound() {
             </p>
             <div className="relative grid gap-3">
               {[
-                { href: "/bills", label: "Household bills" },
+                { href: "/energy", label: "Household bills" },
                 { href: "/20k-giveaway", label: "£20K Giveaway" },
                 { href: "/estate-planning", label: "Wills & POAs" },
                 { href: "/business-utilities", label: "Business utilities" },

@@ -53,7 +53,7 @@ export function LeadFormPreview({
   defaultSelectedCheck,
   selectedCheck,
   sourcePage,
-  helperText = "Send your details and we’ll get back to you personally. You are not committing to anything by submitting this form.",
+  helperText = "Pop in your details and we’ll get back to you quickly. No obligation at all.",
   submitLabel = "Start my check",
   title = "Tell us what you want to check.",
 }: LeadFormPreviewProps) {

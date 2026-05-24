@@ -61,7 +61,7 @@ const heroTiles: HeroTileItem[] = [
   {
     title: "Household Bills",
     note: "Your main home services check",
-    href: "/bills",
+    href: "/energy",
     icon: Home,
     bg: "#F7F0E8",
     colour: "#622C91",
@@ -404,7 +404,7 @@ export default async function HomeMoneyCheckHomepage() {
           <div className="flex items-center gap-2">
             <a
               className="hidden transform-gpu rounded-full bg-[#FDCA55] px-5 py-3 text-sm font-black text-[#4F247D] shadow-[0_12px_32px_rgba(44,31,61,0.22)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#FFD978] hover:shadow-[0_18px_42px_rgba(44,31,61,0.24)] md:block"
-              href="/start-my-check"
+              href="#lead-form"
             >
               Start my check
             </a>
@@ -450,21 +450,21 @@ export default async function HomeMoneyCheckHomepage() {
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 className="group inline-flex w-full transform-gpu items-center justify-center gap-2 rounded-full bg-[#F7F0E8] px-7 py-4 text-base font-black text-[#5F2D8C] shadow-[0_18px_50px_rgba(44,31,61,0.24)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_22px_54px_rgba(44,31,61,0.25)] sm:w-auto md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
-                href="/start-my-check"
+                href="#lead-form"
               >
                 Start a free check
                 <ArrowUpRight className="h-5 w-5 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]" strokeWidth={2.6} />
               </a>
               <a
                 className="inline-flex w-full transform-gpu items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-4 text-base font-black text-[#F7F0E8] backdrop-blur transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/16 sm:w-auto md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
-                href="/bills"
+                href="#checks"
               >
                 Explore checks
               </a>
             </div>
             <div className="mt-5 flex items-center gap-2 text-sm font-extrabold text-[#F7F0E8]/70 lg:hidden">
               <span className="h-2 w-8 rounded-full bg-[#F4CF7A]" />
-              Swipe the cards to choose a route
+              Swipe the cards to choose a check
             </div>
           </div>
 
@@ -489,7 +489,7 @@ export default async function HomeMoneyCheckHomepage() {
         <section className="relative overflow-hidden rounded-t-[3rem] bg-[#F7F0E8] px-5 py-12 text-[#2C1F3D] md:px-8 md:py-16">
           <div className="absolute -right-20 top-8 hidden h-56 w-56 rounded-full bg-[#EADFFD] blur-3xl md:block" />
           <div className="absolute -left-20 bottom-8 hidden h-56 w-56 rounded-[3rem] bg-[#F4CF7A]/35 blur-3xl md:block" />
-          <div className="relative mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.72fr_1.28fr] lg:items-stretch">
+          <div id="checks" className="relative mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.72fr_1.28fr] lg:items-stretch">
             <div className="relative overflow-hidden rounded-[2.3rem] bg-[#6A35A0] p-7 text-[#F7F0E8] shadow-[0_24px_70px_rgba(44,31,61,0.18)] md:p-9">
               <div className="absolute -bottom-12 -right-10 h-28 w-28 rotate-[14deg] rounded-[2rem] bg-[#F4CF7A]/35" />
               <p className="mb-4 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
@@ -557,7 +557,7 @@ export default async function HomeMoneyCheckHomepage() {
                     </div>
                     <div className="max-w-2xl rounded-[1.5rem] bg-white/10 p-5 backdrop-blur ring-1 ring-white/12">
                       <p className="text-base font-bold leading-7 text-[#F7F0E8]/76">
-                        Check back soon for the next featured Home Money Check route.
+                        Check back soon for the next featured Home Money Check update.
                       </p>
                     </div>
                   </>
@@ -565,7 +565,7 @@ export default async function HomeMoneyCheckHomepage() {
               </div>
             </div>
 
-            <div className="relative self-start overflow-hidden rounded-[2.75rem] bg-[#F7F0E8] p-7 shadow-[0_24px_70px_rgba(44,31,61,0.13)] ring-1 ring-[#EADFFD] md:p-8 lg:min-h-[520px]">
+            <div id="lead-form" className="relative self-start overflow-hidden rounded-[2.75rem] bg-[#F7F0E8] p-7 shadow-[0_24px_70px_rgba(44,31,61,0.13)] ring-1 ring-[#EADFFD] md:p-8 lg:min-h-[520px]">
               <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[#EADFFD]/55" />
               <p className="relative mb-5 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
                 Leave your details

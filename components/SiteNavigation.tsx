@@ -25,16 +25,29 @@ export function DesktopNavigation() {
 
         return (
           <div className="group relative" key={item.label}>
-            <Link
-              className={`block rounded-full px-2.5 py-2 text-xs font-extrabold transition-all duration-300 ease-out xl:px-3 xl:text-[0.8rem] ${
+            {hasChildren ? (
+              <button
+                className={`block rounded-full px-2.5 py-2 text-left text-xs font-extrabold transition-all duration-300 ease-out xl:px-3 xl:text-[0.8rem] ${
+                  active
+                    ? "bg-[#F7F0E8]/18 text-white"
+                    : "text-[#F7F0E8]/78 hover:bg-white/12 hover:text-white focus-visible:bg-white/12 focus-visible:text-white"
+                }`}
+                type="button"
+              >
+                {item.label}
+              </button>
+            ) : (
+              <Link
+                className={`block rounded-full px-2.5 py-2 text-xs font-extrabold transition-all duration-300 ease-out xl:px-3 xl:text-[0.8rem] ${
                 active
                   ? "bg-[#F7F0E8]/18 text-white"
                   : "text-[#F7F0E8]/78 hover:bg-white/12 hover:text-white focus-visible:bg-white/12 focus-visible:text-white"
-              }`}
-              href={item.href}
-            >
-              {item.label}
-            </Link>
+                }`}
+                href={item.href}
+              >
+                {item.label}
+              </Link>
+            )}
             {hasChildren ? (
               <div className="invisible absolute left-0 top-full z-40 min-w-64 translate-y-2 pt-3 opacity-0 transition-all duration-300 ease-out group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
                 <div className="rounded-[1.5rem] bg-[#F7F0E8] p-3 text-[#2C1F3D] shadow-[0_24px_70px_rgba(44,31,61,0.25)] ring-1 ring-white/60">
@@ -75,13 +88,19 @@ export function MobileNavigation() {
         <div className="absolute right-0 top-14 z-50 max-h-[min(34rem,calc(100vh-7rem))] w-[min(21rem,calc(100vw-2rem))] overflow-y-auto rounded-[1.5rem] bg-[#F7F0E8] p-3 text-[#2C1F3D] shadow-[0_24px_70px_rgba(44,31,61,0.25)] ring-1 ring-white/60">
           {mobileMenuGroups.map((group) => (
             <div className="border-b border-[#EADFFD] py-3 last:border-b-0" key={group.label}>
-              <Link
-                className="block rounded-full px-4 py-2 text-sm font-black text-[#5F2D8C] transition-colors duration-300 ease-out hover:bg-[#EADFFD]"
-                href={group.href}
-                onClick={() => setOpen(false)}
-              >
-                {group.label}
-              </Link>
+              {group.children?.length ? (
+                <p className="block rounded-full px-4 py-2 text-sm font-black text-[#5F2D8C]">
+                  {group.label}
+                </p>
+              ) : (
+                <Link
+                  className="block rounded-full px-4 py-2 text-sm font-black text-[#5F2D8C] transition-colors duration-300 ease-out hover:bg-[#EADFFD]"
+                  href={group.href}
+                  onClick={() => setOpen(false)}
+                >
+                  {group.label}
+                </Link>
+              )}
               {group.children?.length ? (
                 <div className="mt-1 grid gap-1 pl-3">
                   {group.children.map((child) => (

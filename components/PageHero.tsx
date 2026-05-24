@@ -1,15 +1,19 @@
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
-
 type PageHeroProps = {
   eyebrow: string;
   title: string;
   description: string;
   accentColour: string;
+  howItWorksBody?: string;
   status?: "live" | "comingSoon";
 };
 
-export function PageHero({ eyebrow, title, description, accentColour, status = "live" }: PageHeroProps) {
+export function PageHero({
+  eyebrow,
+  title,
+  description,
+  accentColour,
+  howItWorksBody = "Send in your details, we’ll get back to you and talk you through your options and costs, answer any questions and help you save money.",
+}: PageHeroProps) {
   return (
     <section className="relative overflow-hidden bg-[#5F2D8C] px-5 pb-16 pt-12 text-[#F7F0E8] md:px-8 md:pb-20 md:pt-16">
       <div className="absolute -right-20 top-10 h-64 w-64 rounded-full bg-[#8E52C4]/40 blur-3xl" />
@@ -22,7 +26,7 @@ export function PageHero({ eyebrow, title, description, accentColour, status = "
           >
             {eyebrow}
           </p>
-          <h1 className="display-font max-w-4xl text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-7xl">
+          <h1 className="display-font max-w-4xl text-5xl font-black leading-[0.95] tracking-[-0.075em] text-[#FDCA55] md:text-7xl">
             {title}
           </h1>
           <p className="mt-7 max-w-2xl text-xl font-bold leading-8 text-[#F7F0E8]/78 md:text-2xl md:leading-9">
@@ -35,20 +39,14 @@ export function PageHero({ eyebrow, title, description, accentColour, status = "
             style={{ backgroundColor: accentColour }}
           />
           <p className="relative text-sm font-black uppercase tracking-[0.14em] text-[#5F2D8C]/70">
-            {status === "comingSoon" ? "Coming soon" : "Next step"}
+            HOW IT WORKS
           </p>
-          <p className="relative mt-10 text-3xl font-black leading-[1] tracking-[-0.055em]">
-            {status === "comingSoon"
-              ? "Leave your details and we’ll let you know when this service is ready."
-              : "Start with a few details and a clear check route."}
+          <p className="display-font relative mt-10 text-3xl font-black leading-[1] tracking-[-0.055em]">
+            We’ll talk it through with you.
           </p>
-          <Link
-            className="relative mt-8 inline-flex transform-gpu items-center gap-2 rounded-full bg-[#6A35A0] px-6 py-3 text-sm font-black text-[#F7F0E8] shadow-[0_18px_45px_rgba(106,53,160,0.25)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5"
-            href={status === "comingSoon" ? "#lead-form" : "/start-my-check"}
-          >
-            {status === "comingSoon" ? "Tell me when this is ready" : "Start my check"}
-            <ArrowUpRight className="h-4 w-4" strokeWidth={2.7} />
-          </Link>
+          <p className="relative mt-5 text-base font-bold leading-7 text-[#2C1F3D]/76">
+            {howItWorksBody}
+          </p>
         </div>
       </div>
     </section>
