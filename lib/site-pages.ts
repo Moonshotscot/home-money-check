@@ -228,10 +228,7 @@ const householdBillSections = {
 };
 
 const willsCopy = [
-  "Estate planning is about making things easier for the people you care about and making sure your wishes are properly recorded.",
-  "Wills: a will records who should receive your estate and who should deal with things when the time comes.",
-  "Powers of Attorney: a Power of Attorney can help if you are alive but unable to deal with decisions yourself.",
-  "Trusts: trusts can be useful in some situations, but they are not right for everyone. We’ll keep the conversation practical and avoid heavy jargon.",
+  "Home Money Check works with advisers who cover all your estate planning needs.",
 ];
 
 const businessUtilitiesCopy = [
@@ -580,17 +577,77 @@ export const sitePages: SitePage[] = [
   {
     title: "Wills & POAs",
     slug: "estate-planning",
-    eyebrow: "Mortgage, insurance & planning",
-    description: "A practical option for wills, POAs and planning conversations.",
+    eyebrow: "MORTGAGE, INSURANCE & PLANNING",
+    description: "Protect your family's inheritance and prepare for the future.",
     accentColour: "#CFE6D5",
     selectedCheck: "Wills & POAs",
     status: "live",
     category: "Life planning checks",
     metaTitle: "Wills & POAs | Home Money Check",
     metaDescription: "Ask Home Money Check about wills, POAs and practical planning.",
-    intro: "This page helps people ask about wills, POAs and practical planning.",
-    why: ["Planning conversations are easier when they start clearly."],
+    intro: "",
+    why: [],
+    contentTitle: "What we’ll help with",
     mainCopy: willsCopy,
+    contentSections: [
+      {
+        title: "Wills",
+        body: [
+          "A will lets you decide who should receive your estate, who should deal with things and what you want to happen after you die.",
+          "Without a clear will, the people you care about can be left with more stress, delay and uncertainty at the worst possible time.",
+          "We’ll talk through your family, property, wishes and concerns, then help you plan and implement the best strategy for your future.",
+        ],
+      },
+      {
+        title: "Powers of Attorney",
+        body: [
+          "Unlike a will, a Power of Attorney is designed to help you when you are alive.",
+          "It lets people you trust deal with decisions when you lose capacity or cannot manage things yourself. This can include money, property, welfare and practical decisions.",
+          "This is one of the most important documents you can have. Without it, your family may have delays, additional costs and stress at an already difficult time.",
+        ],
+      },
+      {
+        title: "Trusts",
+        body: [
+          "Trusts can be useful in many situations, especially where there are children, blended families, property concerns, vulnerable beneficiaries or more complex wishes.",
+          "They can provide strong frameworks to make sure the right people get the right benefits at the right time.",
+          "They are not right for everyone, so we’ll explain when they make sense and when a simpler approach is better.",
+        ],
+      },
+      {
+        title: "Why it matters",
+        body: [
+          "Good estate planning is about making your wishes clear, reducing stress for your family and helping the right people deal with things when needed.",
+          "It can make life easier for the people you care about and give you confidence that the important decisions have been thought through.",
+        ],
+      },
+    ],
+    processSteps: [
+      {
+        title: "Send your details",
+        body: "Tell us the best way to contact you.",
+      },
+      {
+        title: "We’ll arrange a call",
+        body: "We’ll get back to you and arrange a good time for a phone or video call.",
+      },
+      {
+        title: "We’ll talk through your wishes",
+        body: "We’ll discuss your family, property, wishes, concerns and what you want to achieve.",
+      },
+      {
+        title: "You decide the next step",
+        body: "We’ll explain the options and help you understand what documents or planning may be right for you.",
+      },
+    ],
+    heroCard: {
+      pill: "HOW IT WORKS",
+      heading: "We’ll talk it through with you.",
+      body: "Enter your details and we’ll get back to you to arrange a good time to talk through what you want to achieve and discuss your requirements.",
+    },
+    formHelperText: "Pop in your details and we’ll get back to you quickly. No obligation at all.",
+    submitLabel: "Start my check",
+    primaryCta: "Start my check",
     nextSteps: standardNextSteps,
   },
   {

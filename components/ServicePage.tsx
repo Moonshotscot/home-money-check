@@ -45,6 +45,17 @@ export function ServicePage({ page }: { page: SitePage }) {
       );
     }
 
+    if (page.slug === "estate-planning" && paragraph.startsWith("Home Money Check works")) {
+      return (
+        <>
+          <span className="brand-wordmark-text text-xl tracking-[-0.035em]">
+            Home Money Check
+          </span>
+          {paragraph.replace("Home Money Check", "")}
+        </>
+      );
+    }
+
     return paragraph;
   };
 
@@ -158,6 +169,7 @@ export function ServicePage({ page }: { page: SitePage }) {
             ) : null}
             {!isHouseholdBillPage &&
             page.slug !== "20k-giveaway" &&
+            page.slug !== "estate-planning" &&
             !page.mainCopy?.includes(comparisonExplainer) ? (
               <p className="relative mt-6 rounded-[1.5rem] bg-[#FDCA55] p-5 text-base font-black leading-7 text-[#4F247D]">
                 <span className="brand-wordmark-text text-lg tracking-[-0.035em]">
