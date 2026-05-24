@@ -104,7 +104,7 @@ export const desktopNavigation: NavigationItem[] = [
       { label: "Business continuity", href: "/business-continuity" },
     ],
   },
-  { label: "Earn extra income", href: "/extra-income", active: ["/extra-income"] },
+  { label: "Partner with us", href: "/partner-with-us", active: ["/partner-with-us"] },
 ];
 
 export const mobileMenuGroups: NavigationItem[] = [
@@ -148,7 +148,7 @@ export const mobileMenuGroups: NavigationItem[] = [
       { label: "Business continuity", href: "/business-continuity" },
     ],
   },
-  { label: "Earn extra income", href: "/extra-income" },
+  { label: "Partner with us", href: "/partner-with-us" },
 ];
 
 const standardNextSteps = [
@@ -255,8 +255,10 @@ const businessContinuityCopy = [
 ];
 
 const extraIncomeCopy = [
-  "If you’re looking for an extra income opportunity, we’ll explain how it works and what is involved.",
-  "There is no guaranteed income. We’ll be honest about that, answer your questions and help you decide whether it suits you. No pressure.",
+  "Home Money Check is built to help people check services, understand their options and get to the right person quickly.",
+  "As the site grows, we want to work with people and businesses who can help us serve customers well.",
+  "That might mean building your own income stream, receiving leads for your business, or using a Home Money Check partner page to point people towards services you can help with.",
+  "No big claims. No false promises. Just a practical way to create more conversations, more enquiries and more opportunities.",
 ];
 
 export const sitePages: SitePage[] = [
@@ -409,29 +411,94 @@ export const sitePages: SitePage[] = [
     nextSteps: standardNextSteps,
   },
   {
-    title: "Earn extra income",
-    slug: "extra-income",
-    eyebrow: "Business & income checks",
+    title: "Partner with us",
+    slug: "partner-with-us",
+    eyebrow: "PARTNER WITH HOME MONEY CHECK",
     description:
-      "A calm, serious partner opportunity page. No hype, no income guarantees.",
+      "Make extra money, grow your business, or bring Home Money Check to your own audience.",
     accentColour: "#D9C2F4",
-    selectedCheck: "Extra income",
+    selectedCheck: "Partner with us",
     status: "live",
     category: "Income",
-    metaTitle: "Earn extra income | Home Money Check",
+    metaTitle: "Partner with us | Home Money Check",
     metaDescription:
-      "Ask about the Partner opportunity through Home Money Check. No income is guaranteed.",
-    intro:
-      "A practical option for people who want to understand the Partner opportunity without hype.",
-    why: [
-      "You can ask questions before deciding if the opportunity is suitable.",
-      "No income is guaranteed. Results depend on effort, suitability, activity and the way the opportunity is approached.",
-      "The focus is a clear explanation, not pressure.",
-    ],
+      "Partner with Home Money Check to make extra money, grow your business or bring Home Money Check to your own audience.",
+    intro: "",
+    why: [],
+    contentTitle: "How you can partner with Home Money Check",
     mainCopy: extraIncomeCopy,
+    contentSections: [
+      {
+        title: "Make extra money",
+        body: [
+          "If you like the idea of earning extra income, Home Money Check could give you a practical place to start.",
+          "You do not need to be pushy. You do need to be willing to learn, talk to people, follow the process and build steadily.",
+          "We’ll explain the options, what is involved, how the support works and whether it feels like a good fit for you.",
+          "For the right person, this could become a useful side income. For someone more ambitious, it could become something bigger over time.",
+        ],
+      },
+      {
+        title: "Your own Home Money Check partner page",
+        body: [
+          "Selected partners may be offered their own Home Money Check page.",
+          "This gives you a simple place to send people from social media, messages, conversations, emails or your existing client base.",
+          "The page can be set up around your name, your audience and the services that make sense for you.",
+          "The aim is simple: make it easier for people to ask for help, and make sure the right enquiries go to the right person.",
+        ],
+      },
+      {
+        title: "Get more leads for your business",
+        body: [
+          "If your business provides a service that helps households, families, homeowners or small businesses, Home Money Check may be able to send suitable leads your way.",
+          "We want to work with businesses that respond quickly, treat customers well and provide a good service.",
+          "This could suit local service providers, professional firms, business service providers and selected specialists who want more enquiries without building everything from scratch.",
+          "If there is a good fit, we’ll agree how it works before any leads are sent.",
+        ],
+      },
+      {
+        title: "Already work with clients?",
+        body: [
+          "If you are a mortgage adviser, estate planner, accountant, IFA, letting agent, estate agent or another professional, you may already speak to people who need help in more than one area.",
+          "Home Money Check can give you a simple way to add more value, keep conversations open and point clients towards services that make sense for them.",
+          "You keep doing what you are good at. Home Money Check helps with the wider opportunities around the client.",
+        ],
+      },
+      {
+        title: "A real opportunity, not a promise",
+        body: [
+          "There is no guaranteed income and not every person or business will be the right fit.",
+          "The opportunity depends on what you want to do, how active you are, how well you follow the process and whether there is a good match between you, Home Money Check and the customers we serve.",
+          "We’ll talk it through with you before anything is agreed.",
+        ],
+      },
+    ],
+    processSteps: [
+      {
+        title: "Send your details",
+        body: "Tell us who you are and what kind of partnership you are interested in.",
+      },
+      {
+        title: "We’ll get in touch",
+        body: "We’ll arrange a time to talk through your situation, your goals and what might fit.",
+      },
+      {
+        title: "We’ll explain the options",
+        body: "We’ll cover the different ways to work with Home Money Check and what would be involved.",
+      },
+      {
+        title: "You decide",
+        body: "You can ask questions, think it over and decide whether it is right for you.",
+      },
+    ],
+    heroCard: {
+      pill: "WAYS TO WORK TOGETHER",
+      heading: "One brand. Different opportunities.",
+      body: "You might want to make extra money, get more leads for your business, or offer Home Money Check to your own clients and contacts.",
+    },
+    formHelperText: "Pop in your details and we’ll get back to you quickly. No obligation at all.",
+    submitLabel: "Talk to us about partnering",
+    primaryCta: "Talk to us about partnering",
     nextSteps: standardNextSteps,
-    extraNote:
-      "No income is guaranteed. Results depend on effort, suitability, activity and the way the opportunity is approached.",
   },
   {
     title: "Start my check",

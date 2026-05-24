@@ -17,7 +17,7 @@ const checkOptions = [
   "Protection",
   "Private medical insurance",
   "Wills & POAs",
-  "Extra income",
+  "Partner with us",
   "Business utilities",
   "Finance/bookkeeping",
   "Business protection",

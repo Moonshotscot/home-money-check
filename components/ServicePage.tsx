@@ -78,6 +78,21 @@ export function ServicePage({ page }: { page: SitePage }) {
       );
     }
 
+    if (
+      page.slug === "partner-with-us" &&
+      (paragraph.startsWith("Home Money Check is built") ||
+        paragraph.startsWith("Home Money Check can give"))
+    ) {
+      return (
+        <>
+          <span className="brand-wordmark-text text-xl tracking-[-0.035em]">
+            Home Money Check
+          </span>
+          {paragraph.replace("Home Money Check", "")}
+        </>
+      );
+    }
+
     return paragraph;
   };
 
@@ -194,6 +209,7 @@ export function ServicePage({ page }: { page: SitePage }) {
             page.slug !== "estate-planning" &&
             page.slug !== "business-utilities" &&
             page.slug !== "business-continuity" &&
+            page.slug !== "partner-with-us" &&
             !page.mainCopy?.includes(comparisonExplainer) ? (
               <p className="relative mt-6 rounded-[1.5rem] bg-[#FDCA55] p-5 text-base font-black leading-7 text-[#4F247D]">
                 <span className="brand-wordmark-text text-lg tracking-[-0.035em]">
@@ -224,6 +240,8 @@ export function ServicePage({ page }: { page: SitePage }) {
               title={
                 page.slug === "20k-giveaway"
                   ? "Let’s get you in the draw..."
+                  : page.slug === "partner-with-us"
+                    ? "Let’s talk about partnering..."
                   : "Let’s get your check started..."
               }
             />
