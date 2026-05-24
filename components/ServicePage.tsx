@@ -30,6 +30,7 @@ export function ServicePage({ page }: { page: SitePage }) {
       body: "You are not committing to anything by sending your details. We’ll talk through the quote, answer your questions and you decide what happens next.",
     },
   ];
+  const processSteps = isHouseholdBillPage ? householdNextSteps : page.processSteps;
 
   const renderParagraph = (paragraph: string) => {
     if (isHouseholdBillPage && paragraph.startsWith("Through Home Money Check,")) {
@@ -54,10 +55,12 @@ export function ServicePage({ page }: { page: SitePage }) {
         accentColour={page.accentColour}
         description={page.description}
         eyebrow={page.eyebrow}
+        howItWorksHeading={page.heroCard?.heading}
+        howItWorksPill={page.heroCard?.pill}
         howItWorksBody={
           isHouseholdBillPage
             ? "Send your details and we'll talk you through your options and costs to help you save money."
-            : undefined
+            : page.heroCard?.body
         }
         status={page.status}
         title={page.title}
@@ -71,7 +74,7 @@ export function ServicePage({ page }: { page: SitePage }) {
               style={{ backgroundColor: page.accentColour }}
             />
             <h2 className="display-font relative text-4xl font-black leading-[0.98] tracking-[-0.065em] text-[#FDCA55] md:text-6xl">
-              {isHouseholdBillPage ? "What we’ll check" : page.title}
+              {isHouseholdBillPage ? "What we’ll check" : page.contentTitle || page.title}
             </h2>
             {!isHouseholdBillPage && page.intro ? (
               <p className="relative mt-6 max-w-3xl text-xl font-bold leading-8 text-[#F7F0E8]/82">
@@ -117,6 +120,30 @@ export function ServicePage({ page }: { page: SitePage }) {
                 ))}
               </div>
             ) : null}
+            {page.contentSections ? (
+              <div className="relative mt-8 grid gap-4">
+                {page.contentSections.map((section) => (
+                  <section
+                    key={section.title}
+                    className="rounded-[1.75rem] bg-[#7A45A8]/55 p-5 ring-1 ring-white/12"
+                  >
+                    <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#FDCA55] md:text-4xl">
+                      {section.title}
+                    </h3>
+                    <div className="mt-4 grid gap-3">
+                      {section.body.map((paragraph) => (
+                        <p
+                          key={paragraph}
+                          className="text-base font-bold leading-7 text-[#F7F0E8]/78"
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+            ) : null}
             {page.why.length > 0 ? (
               <div className="relative mt-7 grid gap-3">
                 {page.why.map((point) => (
@@ -129,7 +156,9 @@ export function ServicePage({ page }: { page: SitePage }) {
                 ))}
               </div>
             ) : null}
-            {!isHouseholdBillPage && !page.mainCopy?.includes(comparisonExplainer) ? (
+            {!isHouseholdBillPage &&
+            page.slug !== "20k-giveaway" &&
+            !page.mainCopy?.includes(comparisonExplainer) ? (
               <p className="relative mt-6 rounded-[1.5rem] bg-[#FDCA55] p-5 text-base font-black leading-7 text-[#4F247D]">
                 <span className="brand-wordmark-text text-lg tracking-[-0.035em]">
                   Home Money Check
@@ -149,16 +178,31 @@ export function ServicePage({ page }: { page: SitePage }) {
             <LeadFormPreview
               defaultSelectedCheck={page.selectedCheck}
               helperText={
-                isHouseholdBillPage
+                page.formHelperText ||
+                (isHouseholdBillPage
                   ? "Pop in your details and we’ll get back to you quickly. No obligation at all."
-                  : undefined
+                  : undefined)
               }
+              submitLabel={page.submitLabel}
               sourcePage={getRoutePath(page)}
             />
           </div>
         </div>
 
-        <WhatHappensNext customSteps={isHouseholdBillPage ? householdNextSteps : undefined} />
+        <WhatHappensNext customSteps={processSteps} />
+
+        {page.noteSection ? (
+          <aside className="mx-auto mt-5 max-w-7xl rounded-[2rem] bg-white p-6 text-[#2C1F3D] shadow-[0_18px_50px_rgba(44,31,61,0.08)] ring-1 ring-[#EADFFD] md:p-7">
+            <p className="mb-4 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
+              {page.noteSection.title}
+            </p>
+            <div className="grid gap-3 text-sm font-bold leading-6 text-[#2C1F3D]/72">
+              {page.noteSection.body.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </aside>
+        ) : null}
 
         <div className="mx-auto mt-10 flex max-w-7xl flex-wrap gap-3">
           <Link
@@ -171,7 +215,7 @@ export function ServicePage({ page }: { page: SitePage }) {
             className="inline-flex items-center gap-2 rounded-full bg-[#FDCA55] px-6 py-3 text-sm font-black text-[#4F247D]"
             href="#lead-form"
           >
-            Start my check
+            {page.primaryCta || "Start my check"}
             <ArrowUpRight className="h-4 w-4" strokeWidth={2.7} />
           </Link>
         </div>

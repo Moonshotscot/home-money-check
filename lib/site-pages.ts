@@ -14,11 +14,32 @@ export type SitePage = {
   intro: string;
   why: string[];
   mainCopy?: string[];
+  contentTitle?: string;
+  contentSections?: {
+    title: string;
+    body: string[];
+  }[];
   householdSections?: {
     title: string;
     body: string[];
     support?: string;
   }[];
+  processSteps?: {
+    title: string;
+    body: string;
+  }[];
+  heroCard?: {
+    pill: string;
+    heading: string;
+    body: string;
+  };
+  formHelperText?: string;
+  submitLabel?: string;
+  primaryCta?: string;
+  noteSection?: {
+    title: string;
+    body: string[];
+  };
   nextSteps: string[];
   uwRelated?: boolean;
   extraNote?: string;
@@ -320,23 +341,71 @@ export const sitePages: SitePage[] = [
   {
     title: "£20K Giveaway",
     slug: "20k-giveaway",
-    eyebrow: "Current campaign",
+    eyebrow: "CURRENT CAMPAIGN",
     description:
-      "Ask about the current £20K Giveaway and what happens next.",
+      "Enter for free for your chance to win £20,000. No purchase necessary.",
     accentColour: "#EADFFD",
     selectedCheck: "£20K Giveaway",
     status: "live",
     category: "Current campaign",
     metaTitle: "£20K Giveaway | Home Money Check",
     metaDescription:
-      "Ask Home Money Check about the current £20K Giveaway and next steps.",
-    intro:
-      "This page lets you ask about the current £20K Giveaway. Send a few details and we’ll get back to you quickly.",
-    why: [
-      "You can ask what the enquiry involves before taking another step.",
-      "You are not committing to anything by submitting the form.",
-      "We will explain the next step clearly before anything proceeds.",
+      "Enter for free for your chance to win £20,000 through Home Money Check.",
+    intro: "",
+    why: [],
+    contentTitle: "Your chance to win £20,000",
+    mainCopy: [
+      "Utility Warehouse is giving away £20,000 and you can enter for free.",
+      "No purchase is needed. You do not need to be a Utility Warehouse customer.",
+      "Through Home Money Check, our Authorised Utility Warehouse Partner, Neill Connolly, will contact you and help you enter the current UW £20K Giveaway.",
+      "It is simple: send your details, we’ll get back to you, help with the entry and explain anything you need to know.",
     ],
+    contentSections: [
+      {
+        title: "Why enter?",
+        body: [
+          "£20,000 could make a serious difference.",
+          "It could help with bills, savings, home improvements, clearing debt, treating your family or simply giving yourself more breathing room.",
+          "It is free to enter, quick to do and there is no purchase needed.",
+        ],
+      },
+    ],
+    processSteps: [
+      {
+        title: "Send your details",
+        body: "Enter your name and contact details.",
+      },
+      {
+        title: "We’ll get back to you",
+        body: "Our Authorised Utility Warehouse Partner, Neill Connolly, will contact you and help with the giveaway entry.",
+      },
+      {
+        title: "You’re entered",
+        body: "Once your entry is completed and submitted, you’re in the draw.",
+      },
+      {
+        title: "You decide what else to check",
+        body: "You can also ask about household bills if you want to, but entering the giveaway does not require a purchase.",
+      },
+    ],
+    heroCard: {
+      pill: "FREE TO ENTER",
+      heading: "A chance to win £20,000",
+      body: "Send your details and our Authorised Utility Warehouse Partner, Neill Connolly, will help you enter the current UW £20K Giveaway.",
+    },
+    formHelperText: "Pop in your details and we’ll get back to you quickly. No obligation at all.",
+    submitLabel: "Enter the giveaway",
+    primaryCta: "Enter the giveaway",
+    noteSection: {
+      title: "Important note",
+      body: [
+        "The £20K Giveaway is run by Utility Warehouse and is subject to its prize draw terms and eligibility rules.",
+        "No purchase is necessary.",
+        "Open to UK residents aged 18+ only. Existing UW customers are excluded under the current terms.",
+        "One entry per person.",
+        "Entries must be completed by 31 August 2026. The draw is due to take place by 31 October 2026.",
+      ],
+    },
     nextSteps: standardNextSteps,
   },
   {

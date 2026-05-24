@@ -3,6 +3,8 @@ type PageHeroProps = {
   title: string;
   description: string;
   accentColour: string;
+  howItWorksPill?: string;
+  howItWorksHeading?: string;
   howItWorksBody?: string;
   status?: "live" | "comingSoon";
 };
@@ -12,6 +14,8 @@ export function PageHero({
   title,
   description,
   accentColour,
+  howItWorksPill = "HOW IT WORKS",
+  howItWorksHeading = "We’ll talk it through with you.",
   howItWorksBody = "Send in your details, we’ll get back to you and talk you through your options and costs, answer any questions and help you save money.",
 }: PageHeroProps) {
   return (
@@ -39,10 +43,10 @@ export function PageHero({
             style={{ backgroundColor: accentColour }}
           />
           <p className="relative text-sm font-black uppercase tracking-[0.14em] text-[#5F2D8C]/70">
-            HOW IT WORKS
+            {howItWorksPill}
           </p>
           <p className="display-font relative mt-10 text-3xl font-black leading-[1] tracking-[-0.055em]">
-            We’ll talk it through with you.
+            {howItWorksHeading}
           </p>
           <p className="relative mt-5 text-base font-bold leading-7 text-[#2C1F3D]/76">
             {howItWorksBody}
