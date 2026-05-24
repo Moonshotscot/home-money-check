@@ -54,7 +54,7 @@ export function ComingSoonPage({ page }: { page: SitePage }) {
               defaultSelectedCheck={page.selectedCheck}
               sourcePage={getRoutePath(page)}
               submitLabel="Tell me when this is ready"
-              title="Let’s get your check started."
+              title="Tell me when this is ready"
             />
             {showRegulatedNote ? (
               <aside className="rounded-[2rem] border border-[#5F2D8C]/12 bg-white p-6 text-sm font-bold leading-7 text-[#2C1F3D]/72 shadow-[0_18px_50px_rgba(44,31,61,0.10)]">

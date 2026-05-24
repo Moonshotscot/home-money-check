@@ -209,7 +209,11 @@ export function ServicePage({ page }: { page: SitePage }) {
               }
               submitLabel={page.submitLabel}
               sourcePage={getRoutePath(page)}
-              title="Let’s get your check started."
+              title={
+                page.slug === "20k-giveaway"
+                  ? "Let’s get you in the draw..."
+                  : "Let’s get your check started..."
+              }
             />
           </div>
         </div>
