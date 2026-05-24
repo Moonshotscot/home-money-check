@@ -581,6 +581,12 @@ export default async function HomeMoneyCheckHomepage() {
                 back to you to discuss how we can help. No obligation at all.
               </p>
               <div className="relative mt-6 grid gap-3">
+                <div className="hidden" aria-hidden="true">
+                  <label>
+                    Company website
+                    <input autoComplete="off" name="website" tabIndex={-1} />
+                  </label>
+                </div>
                 <input
                   className="rounded-[1.35rem] border-0 bg-white px-5 py-3.5 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
                   placeholder="Name"
