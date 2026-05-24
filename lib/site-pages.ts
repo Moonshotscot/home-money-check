@@ -249,8 +249,9 @@ const businessProtectionCopy = [
 ];
 
 const businessContinuityCopy = [
-  "Business continuity is about what happens if an owner, director or key person cannot continue.",
-  "We’ll help you think through practical planning around control, succession, decision-making, documents and keeping the business moving.",
+  "Business continuity is about making sure the business can keep moving if something happens to an owner, director or key person.",
+  "Home Money Check can help you start the conversation, identify the practical risks and understand what planning may be needed.",
+  "This could include control of the business, decision-making, succession, key documents, access to information and making sure the right people can step in when needed.",
 ];
 
 const extraIncomeCopy = [
@@ -756,17 +757,69 @@ export const sitePages: SitePage[] = [
   {
     title: "Business continuity",
     slug: "business-continuity",
-    eyebrow: "Business & income checks",
-    description: "A practical option for business continuity conversations.",
+    eyebrow: "BUSINESS & INCOME CHECKS",
+    description:
+      "Make sure your business has a plan if an owner, director or key person can no longer carry on.",
     accentColour: "#D9E1E8",
     selectedCheck: "Business continuity",
     status: "live",
     category: "Business checks",
     metaTitle: "Business continuity | Home Money Check",
     metaDescription: "Ask Home Money Check about business continuity conversations.",
-    intro: "This page helps organise business continuity enquiries.",
-    why: ["Business continuity questions need a practical, careful conversation."],
+    intro: "",
+    why: [],
+    contentTitle: "What we’ll help you think through",
     mainCopy: businessContinuityCopy,
+    contentSections: [
+      {
+        title: "Why it matters",
+        body: [
+          "Many businesses rely heavily on one or two people.",
+          "If one of those people can no longer work, make decisions or deal with the business, everything can become harder very quickly.",
+          "A continuity plan helps reduce confusion, protect the people involved and give the business a clearer way forward.",
+        ],
+      },
+      {
+        title: "What can be reviewed",
+        body: [
+          "We can talk through who owns the business, who makes decisions, who has access to key information and what would happen if someone important could no longer act.",
+          "We can also discuss whether wills, powers of attorney, shareholder arrangements, business documents or professional advice may be needed.",
+        ],
+      },
+      {
+        title: "Who this helps",
+        body: [
+          "This can help company directors, business owners, family businesses, partnerships, sole traders and firms that rely heavily on key people.",
+          "If the business would struggle without one person, it is worth having the conversation.",
+        ],
+      },
+    ],
+    processSteps: [
+      {
+        title: "Send your details",
+        body: "Tell us about the business and the best way to contact you.",
+      },
+      {
+        title: "We’ll arrange a call",
+        body: "We’ll get back to you and arrange a good time to talk.",
+      },
+      {
+        title: "We’ll discuss the risks",
+        body: "We’ll talk through ownership, key people, decision-making and what would happen if someone could no longer act.",
+      },
+      {
+        title: "You decide the next step",
+        body: "We’ll explain what planning may help and what the next step could look like.",
+      },
+    ],
+    heroCard: {
+      pill: "HOW IT WORKS",
+      heading: "We’ll talk it through with you.",
+      body: "Enter your details and we’ll get back to you to discuss the business, the people involved and what needs to be protected.",
+    },
+    formHelperText: "Pop in your details and we’ll get back to you quickly. No obligation at all.",
+    submitLabel: "Start my check",
+    primaryCta: "Start my check",
     nextSteps: standardNextSteps,
   },
   {

@@ -67,6 +67,17 @@ export function ServicePage({ page }: { page: SitePage }) {
       );
     }
 
+    if (page.slug === "business-continuity" && paragraph.startsWith("Home Money Check can help")) {
+      return (
+        <>
+          <span className="brand-wordmark-text text-xl tracking-[-0.035em]">
+            Home Money Check
+          </span>
+          {paragraph.replace("Home Money Check", "")}
+        </>
+      );
+    }
+
     return paragraph;
   };
 
@@ -182,6 +193,7 @@ export function ServicePage({ page }: { page: SitePage }) {
             page.slug !== "20k-giveaway" &&
             page.slug !== "estate-planning" &&
             page.slug !== "business-utilities" &&
+            page.slug !== "business-continuity" &&
             !page.mainCopy?.includes(comparisonExplainer) ? (
               <p className="relative mt-6 rounded-[1.5rem] bg-[#FDCA55] p-5 text-base font-black leading-7 text-[#4F247D]">
                 <span className="brand-wordmark-text text-lg tracking-[-0.035em]">
