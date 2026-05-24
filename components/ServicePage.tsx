@@ -118,7 +118,7 @@ export function ServicePage({ page }: { page: SitePage }) {
                 {page.householdSections.map((section) => (
                   <section
                     key={section.title}
-                    className="rounded-[1.75rem] bg-[#7A45A8]/55 p-5 ring-1 ring-white/12"
+                    className="rounded-[1.75rem] bg-[#8E52C4]/45 p-5 ring-1 ring-white/14"
                   >
                     <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#FDCA55] md:text-4xl">
                       {section.title}
@@ -147,7 +147,7 @@ export function ServicePage({ page }: { page: SitePage }) {
                 {page.contentSections.map((section) => (
                   <section
                     key={section.title}
-                    className="rounded-[1.75rem] bg-[#7A45A8]/55 p-5 ring-1 ring-white/12"
+                    className="rounded-[1.75rem] bg-[#8E52C4]/45 p-5 ring-1 ring-white/14"
                   >
                     <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#FDCA55] md:text-4xl">
                       {section.title}
@@ -209,6 +209,7 @@ export function ServicePage({ page }: { page: SitePage }) {
               }
               submitLabel={page.submitLabel}
               sourcePage={getRoutePath(page)}
+              title="Let’s get your check started."
             />
           </div>
         </div>

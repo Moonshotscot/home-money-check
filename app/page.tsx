@@ -571,7 +571,7 @@ export default async function HomeMoneyCheckHomepage() {
                 Leave your details
               </p>
               <h2 className="relative text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-5xl">
-                Tell us what you want to check.
+                What would you like to check?
               </h2>
               <p className="relative mt-5 rounded-[1.35rem] bg-white/70 p-4 text-sm font-bold leading-6 text-[#4F247D]">
                 <span className="brand-wordmark-text text-lg tracking-[-0.035em]">
@@ -599,6 +599,11 @@ export default async function HomeMoneyCheckHomepage() {
                     <option key={option}>{option}</option>
                   ))}
                 </select>
+                <textarea
+                  className="min-h-28 rounded-[1.35rem] border-0 bg-white px-5 py-3.5 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
+                  placeholder="Tell us what you’d like help with."
+                  aria-label="Message"
+                />
                 <button
                   className="group flex transform-gpu items-center justify-center gap-2 rounded-full bg-[#6A35A0] px-7 py-4 text-base font-black text-[#F7F0E8] shadow-[0_18px_45px_rgba(106,53,160,0.25)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_22px_54px_rgba(106,53,160,0.27)] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
                   type="button"
