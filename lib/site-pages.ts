@@ -232,8 +232,10 @@ const willsCopy = [
 ];
 
 const businessUtilitiesCopy = [
-  "Business utilities can be harder to compare because contract terms, usage, standing charges and renewal dates all matter.",
-  "We’ll take the details, understand the business and check what is available. You’ll get a clear explanation of the quote and the next steps.",
+  "Business utilities can be a serious cost, and it is easy to let renewals, contract dates and supplier paperwork drift.",
+  "Home Money Check can help you review your business electricity, gas, water, telecoms, phone, broadband and mobile services where available.",
+  "We can also discuss energy efficiency support, solar options and EV charger options where they are relevant to your business.",
+  "We’ll take the key details, understand your business and talk through the quote so you know what the costs are, what the contract means and what happens next.",
 ];
 
 const financeCopy = [
@@ -653,17 +655,70 @@ export const sitePages: SitePage[] = [
   {
     title: "Business utilities",
     slug: "business-utilities",
-    eyebrow: "Business & income checks",
-    description: "A practical option for business utility checks.",
+    eyebrow: "BUSINESS & INCOME CHECKS",
+    description:
+      "If your current energy, water or telecoms contract is ending in the next 12 months, we can check to get you the best deals.",
     accentColour: "#D9E1E8",
     selectedCheck: "Business utilities",
     status: "live",
     category: "Business checks",
     metaTitle: "Business utilities | Home Money Check",
     metaDescription: "Ask Home Money Check about business utility checks.",
-    intro: "This page supports business utility questions.",
-    why: ["Business services need a different check from household services."],
+    intro: "",
+    why: [],
+    contentTitle: "What we’ll check",
     mainCopy: businessUtilitiesCopy,
+    contentSections: [
+      {
+        title: "Energy, water and telecoms",
+        body: [
+          "Business electricity, gas, water and telecoms contracts can be awkward to compare because usage, contract end dates, standing charges, call packages, broadband needs and supplier terms all matter.",
+          "We’ll look at your current position, your renewal dates and what your business needs day to day.",
+          "The aim is simple: help you understand the quote, reduce hassle and arrange business utility options that make sense for your business.",
+        ],
+      },
+      {
+        title: "Why check now?",
+        body: [
+          "Business owners are busy, and utilities are easy to leave until the last minute.",
+          "Checking early gives you more control. It can help you avoid rushed decisions, understand your renewal options and see whether a better deal can be arranged before you are under pressure.",
+        ],
+      },
+      {
+        title: "What we’ll need",
+        body: [
+          "To start the check, we will usually need a few details about your business, your current suppliers, your usage and your contract position.",
+          "Recent bills for energy, water or telecoms can make the process easier.",
+          "We’ll keep it straightforward and explain what information is needed before anything moves forward.",
+        ],
+      },
+    ],
+    processSteps: [
+      {
+        title: "Send your details",
+        body: "Tell us about your business and the best way to contact you.",
+      },
+      {
+        title: "We’ll get in touch",
+        body: "We’ll arrange a time to talk through your current utility position.",
+      },
+      {
+        title: "We’ll review the details",
+        body: "We’ll look at your supplier, usage, contract dates and what your business needs.",
+      },
+      {
+        title: "You decide the next step",
+        body: "We’ll talk through the quote, answer your questions and help you decide what works for your business.",
+      },
+    ],
+    heroCard: {
+      pill: "HOW IT WORKS",
+      heading: "We’ll talk it through with you.",
+      body: "Send your details and we’ll get back to you to understand your business, discuss your options and help you make the right decision.",
+    },
+    formHelperText: "Pop in your details and we’ll get back to you quickly. No obligation at all.",
+    submitLabel: "Start my check",
+    primaryCta: "Start my check",
     nextSteps: standardNextSteps,
   },
   {
