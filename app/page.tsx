@@ -135,7 +135,7 @@ const heroTiles: HeroTileItem[] = [
     colour: "#6B4611",
     mobileClass: "mt-1 rotate-[-1.25deg]",
     className:
-      "lg:absolute lg:left-[30%] lg:bottom-[31%] lg:mt-0 lg:h-[160px] lg:w-[228px] lg:rotate-[-2deg]",
+      "lg:absolute lg:left-[26%] lg:bottom-[31%] lg:mt-0 lg:h-[160px] lg:w-[228px] lg:rotate-[3deg]",
   },
   {
     title: "Medical",
@@ -149,7 +149,7 @@ const heroTiles: HeroTileItem[] = [
       "lg:absolute lg:right-[19%] lg:bottom-[20%] lg:mt-0 lg:h-[176px] lg:w-[216px] lg:rotate-[2deg]",
   },
   {
-    title: "Wills & POAs",
+    title: "Wills and POAs",
     note: "Wills and POAs",
     href: "/estate-planning",
     icon: FileText,
@@ -192,7 +192,7 @@ const routeGroups: RouteGroupItem[] = [
       { label: "Mortgages", href: "/mortgage" },
       { label: "Protection", href: "/protection" },
       { label: "Private medical insurance", href: "/private-medical-insurance" },
-      { label: "Wills & POAs", href: "/estate-planning" },
+      { label: "Wills and POAs", href: "/estate-planning" },
     ],
   },
   {
@@ -246,7 +246,7 @@ const enquiryOptions = [
   "Moving home",
   "Protection",
   "Private medical insurance",
-  "Wills & POAs",
+  "Wills and POAs",
   "Partner with us",
   "Business utilities",
   "Finance/bookkeeping",
@@ -392,10 +392,10 @@ export default async function HomeMoneyCheckHomepage() {
       style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
     >
       <div className="pointer-events-none fixed inset-0 hidden overflow-hidden md:block">
-        <div className="absolute -left-28 top-12 h-96 w-96 rounded-full bg-[#8E52C4]/35 blur-3xl" />
-        <div className="absolute right-0 top-64 h-[30rem] w-[30rem] rounded-full bg-[#4F247D]/45 blur-3xl" />
-        <div className="absolute bottom-20 left-1/3 h-80 w-80 rounded-full bg-[#F4CF7A]/18 blur-3xl" />
-        <div className="absolute -bottom-24 right-1/4 h-64 w-64 rotate-[18deg] rounded-[4rem] bg-[#EADFFD]/12 blur-2xl" />
+        <div className="absolute -left-28 top-12 h-96 w-96 rounded-full bg-[#8E52C4]/20" />
+        <div className="absolute right-0 top-64 h-[30rem] w-[30rem] rounded-full bg-[#4F247D]/24" />
+        <div className="absolute bottom-20 left-1/3 h-80 w-80 rounded-full bg-[#F4CF7A]/14" />
+        <div className="absolute -bottom-24 right-1/4 h-64 w-64 rotate-[18deg] rounded-[4rem] bg-[#EADFFD]/12" />
       </div>
 
       <header className="relative z-20 px-4 pt-5 md:px-7">
@@ -404,7 +404,7 @@ export default async function HomeMoneyCheckHomepage() {
           <DesktopNavigation />
           <div className="flex items-center gap-2">
             <a
-              className="hidden transform-gpu rounded-full bg-[#FDCA55] px-5 py-3 text-sm font-black text-[#4F247D] shadow-[0_12px_32px_rgba(44,31,61,0.22)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#FFD978] hover:shadow-[0_18px_42px_rgba(44,31,61,0.24)] md:block"
+              className="hidden transform-gpu rounded-full bg-[#22C55E] px-5 py-3 text-sm font-black text-[#2C1F3D] shadow-[0_12px_32px_rgba(34,197,94,0.24)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#32D86A] hover:shadow-[0_18px_42px_rgba(34,197,94,0.28)] md:block"
               href="#lead-form"
             >
               Start my check
@@ -415,7 +415,12 @@ export default async function HomeMoneyCheckHomepage() {
       </header>
 
       <main className="relative z-10 max-w-full overflow-x-hidden">
-        <section className="mx-auto grid max-w-7xl gap-6 overflow-hidden px-5 pb-12 pt-12 md:px-8 md:pb-16 md:pt-16 lg:min-h-[820px] lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:overflow-visible">
+        <section className="relative mx-auto grid max-w-7xl gap-6 overflow-hidden px-5 pb-12 pt-12 md:px-8 md:pb-16 md:pt-16 lg:min-h-[820px] lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:overflow-visible">
+          <div className="pointer-events-none absolute left-[2%] top-[18%] hidden h-24 w-24 rounded-full bg-[#BFE3FF]/42 md:block" />
+          <div className="pointer-events-none absolute right-[9%] top-[8%] hidden h-32 w-32 rounded-bl-[6rem] bg-[#F4CF7A]/38 lg:block" />
+          <div className="pointer-events-none absolute bottom-[12%] left-[32%] hidden h-20 w-20 rotate-[12deg] rounded-[1.5rem] bg-[#CFE6D5]/34 lg:block" />
+          <div className="pointer-events-none absolute bottom-[24%] right-[1%] hidden h-28 w-28 rounded-full bg-[#F7F0E8]/16 lg:block" />
+          <div className="pointer-events-none absolute left-[45%] top-[8%] hidden h-14 w-14 rotate-[-10deg] rounded-[1.1rem] bg-[#F4D9DE]/35 lg:block" />
           <div className="relative z-10 min-w-0 max-w-full">
             <div className="mb-7 inline-flex max-w-full items-start gap-3 rounded-full bg-[#F7F0E8] px-5 py-3 text-sm font-black text-[#5F2D8C] shadow-[0_14px_45px_rgba(44,31,61,0.22)] sm:items-center">
               <Sparkles className="h-4 w-4 shrink-0 text-[#D89B2B]" strokeWidth={2.7} />
@@ -450,7 +455,7 @@ export default async function HomeMoneyCheckHomepage() {
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
-                className="group inline-flex w-full transform-gpu items-center justify-center gap-2 rounded-full bg-[#F7F0E8] px-7 py-4 text-base font-black text-[#5F2D8C] shadow-[0_18px_50px_rgba(44,31,61,0.24)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_22px_54px_rgba(44,31,61,0.25)] sm:w-auto md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
+                className="group inline-flex w-full transform-gpu items-center justify-center gap-2 rounded-full bg-[#22C55E] px-7 py-4 text-base font-black text-[#2C1F3D] shadow-[0_18px_50px_rgba(34,197,94,0.25)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.01] hover:bg-[#32D86A] hover:shadow-[0_22px_54px_rgba(34,197,94,0.28)] sm:w-auto md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
                 href="#lead-form"
               >
                 Start a free check
@@ -469,7 +474,7 @@ export default async function HomeMoneyCheckHomepage() {
             </div>
           </div>
 
-          <div className="relative min-h-[300px] max-w-full overflow-hidden md:min-h-[320px] lg:mx-0 lg:min-h-[770px] lg:overflow-visible">
+          <div className="relative z-10 min-h-[300px] max-w-full overflow-hidden md:min-h-[320px] lg:mx-0 lg:min-h-[770px] lg:overflow-visible">
             <div className="absolute left-[2%] top-[4%] hidden h-24 w-24 rounded-full bg-[#BFE3FF] opacity-80 shadow-[0_24px_60px_rgba(44,31,61,0.18)] lg:block" />
             <div className="absolute right-[16%] top-[2%] hidden h-20 w-20 rotate-[12deg] rounded-[1.5rem] bg-[#F4CF7A] opacity-95 shadow-[0_24px_60px_rgba(44,31,61,0.2)] lg:block" />
             <div className="absolute bottom-[7%] right-[28%] hidden h-24 w-24 rounded-full bg-[#BFD9C8] opacity-90 shadow-[0_24px_60px_rgba(44,31,61,0.18)] lg:block" />

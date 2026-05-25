@@ -26,7 +26,7 @@ export function SiteHeader() {
         <DesktopNavigation />
         <div className="flex items-center gap-2">
           <Link
-            className="hidden transform-gpu rounded-full bg-[#FDCA55] px-5 py-3 text-sm font-black text-[#4F247D] shadow-[0_12px_32px_rgba(44,31,61,0.22)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#FFD978] hover:shadow-[0_18px_42px_rgba(44,31,61,0.24)] md:block"
+            className="hidden transform-gpu rounded-full bg-[#22C55E] px-5 py-3 text-sm font-black text-[#2C1F3D] shadow-[0_12px_32px_rgba(34,197,94,0.24)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#32D86A] hover:shadow-[0_18px_42px_rgba(34,197,94,0.28)] md:block"
             href={startHref}
           >
             Start my check

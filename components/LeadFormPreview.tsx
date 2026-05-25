@@ -17,7 +17,7 @@ const checkOptions = [
   "Moving home",
   "Protection",
   "Private medical insurance",
-  "Wills & POAs",
+  "Wills and POAs",
   "Partner with us",
   "Business utilities",
   "Finance/bookkeeping",

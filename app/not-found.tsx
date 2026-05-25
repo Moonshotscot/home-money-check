@@ -52,7 +52,7 @@ export default function NotFound() {
               {[
                 { href: "/energy", label: "Household bills" },
                 { href: "/20k-giveaway", label: "£20K Giveaway" },
-                { href: "/estate-planning", label: "Wills & POAs" },
+                { href: "/estate-planning", label: "Wills and POAs" },
                 { href: "/business-utilities", label: "Business utilities" },
               ].map((item) => (
                 <Link
