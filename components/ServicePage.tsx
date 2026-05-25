@@ -144,16 +144,16 @@ export function ServicePage({ page }: { page: SitePage }) {
                 {page.householdSections.map((section) => (
                   <section
                     key={section.title}
-                    className="rounded-[1.75rem] bg-[#8E52C4]/45 p-5 ring-1 ring-white/14"
+                    className="rounded-[1.75rem] bg-[#F4CF7A] p-5 text-[#4F247D] shadow-[0_14px_34px_rgba(30,9,55,0.12)] ring-1 ring-white/25"
                   >
-                    <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#FDCA55] md:text-4xl">
+                    <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#4F247D] md:text-4xl">
                       {section.title}
                     </h3>
                     <div className="mt-4 grid gap-3">
                       {section.body.map((paragraph) => (
                         <p
                           key={paragraph}
-                          className="text-base font-bold leading-7 text-[#F7F0E8]/78"
+                          className="text-base font-bold leading-7 text-[#4F247D]/82"
                         >
                           {paragraph}
                         </p>
@@ -173,16 +173,16 @@ export function ServicePage({ page }: { page: SitePage }) {
                 {page.contentSections.map((section) => (
                   <section
                     key={section.title}
-                    className="rounded-[1.75rem] bg-[#8E52C4]/45 p-5 ring-1 ring-white/14"
+                    className="rounded-[1.75rem] bg-[#F4CF7A] p-5 text-[#4F247D] shadow-[0_14px_34px_rgba(30,9,55,0.12)] ring-1 ring-white/25"
                   >
-                    <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#FDCA55] md:text-4xl">
+                    <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#4F247D] md:text-4xl">
                       {section.title}
                     </h3>
                     <div className="mt-4 grid gap-3">
                       {section.body.map((paragraph) => (
                         <p
                           key={paragraph}
-                          className="text-base font-bold leading-7 text-[#F7F0E8]/78"
+                          className="text-base font-bold leading-7 text-[#4F247D]/82"
                         >
                           {paragraph}
                         </p>
@@ -197,7 +197,7 @@ export function ServicePage({ page }: { page: SitePage }) {
                 {page.why.map((point) => (
                   <div
                     key={point}
-                    className="rounded-[1.35rem] bg-white/10 p-4 text-sm font-black leading-6 text-[#F7F0E8]/80 ring-1 ring-white/12"
+                    className="rounded-[1.35rem] bg-[#F4CF7A] p-4 text-sm font-black leading-6 text-[#4F247D]/82 shadow-[0_10px_24px_rgba(30,9,55,0.10)] ring-1 ring-white/25"
                   >
                     {point}
                   </div>

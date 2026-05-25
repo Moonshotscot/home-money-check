@@ -153,8 +153,8 @@ const heroTiles: HeroTileItem[] = [
     note: "Wills and POAs",
     href: "/estate-planning",
     icon: FileText,
-    bg: "#CFE6D5",
-    colour: "#173E29",
+    bg: "#F7D5C8",
+    colour: "#5F2D8C",
     mobileClass: "mt-2 rotate-[-0.75deg]",
     className:
       "lg:absolute lg:left-[21%] lg:bottom-[0%] lg:mt-0 lg:h-[182px] lg:w-[260px] lg:rotate-[3deg]",
@@ -578,25 +578,19 @@ export default async function HomeMoneyCheckHomepage() {
                 </div>
               </div>
 
-              <div className="relative hidden min-h-10 flex-1 overflow-hidden rounded-[2.25rem] lg:block">
-                <div className="absolute left-10 top-8 h-20 w-20 rounded-full bg-[#EADFFD]/50" />
-                <div className="absolute bottom-10 right-14 h-28 w-28 rounded-full bg-[#F4CF7A]/28" />
-                <div className="absolute left-[48%] top-[38%] h-12 w-12 rotate-[15deg] rounded-[1.15rem] bg-[#CFE6D5]/38" />
-                <div className="absolute bottom-16 left-[24%] h-8 w-8 rounded-full bg-[#BFE3FF]/45" />
-                <div className="absolute right-[32%] top-10 h-10 w-10 rotate-[-10deg] rounded-[0.9rem] bg-[#F4D9DE]/42" />
-                <div className="absolute -bottom-12 left-[55%] h-24 w-24 rounded-tl-[5rem] bg-[#EADFFD]/36" />
+              <div className="relative hidden min-h-[220px] flex-1 overflow-visible rounded-[2.25rem] lg:block">
+                <div className="absolute left-[11%] top-[4%] z-0 h-56 w-56 rotate-[13deg] rounded-[3.25rem] bg-[#EADFFD]/75" />
+                <div className="absolute bottom-[8%] right-[14%] z-0 h-40 w-40 rounded-full bg-[#CFE6D5]/70" />
               </div>
 
-              <div className="relative hidden overflow-hidden rounded-[2.5rem] bg-[#F7F0E8] p-8 shadow-[0_18px_54px_rgba(44,31,61,0.09)] ring-1 ring-[#EADFFD] lg:block">
-                <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#EADFFD]/48" />
-                <div className="absolute -bottom-12 left-8 h-28 w-28 rotate-[12deg] rounded-[2rem] bg-[#F4CF7A]/32" />
-                <div className="absolute bottom-8 right-10 h-10 w-10 rotate-[-8deg] rounded-[0.85rem] bg-[#CFE6D5]/55" />
-                <div className="absolute right-28 top-24 h-7 w-7 rounded-full bg-[#BFE3FF]/50" />
-                <div className="relative grid gap-5">
+              <div className="relative hidden overflow-hidden rounded-[2.5rem] bg-[#5F2D8C] p-8 text-[#F7F0E8] shadow-[0_18px_54px_rgba(44,31,61,0.14)] ring-1 ring-[#EADFFD]/35 lg:block">
+                <div className="absolute right-8 top-10 z-0 h-32 w-32 rounded-full bg-[#BFE3FF]/75" />
+                <div className="absolute bottom-8 right-28 z-0 h-44 w-44 rotate-[12deg] rounded-[2.75rem] bg-[#F4CF7A]/70" />
+                <div className="relative z-10 grid gap-5">
                   <p className="w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
                     Why use Home Money Check
                   </p>
-                  <div className="w-fit overflow-hidden rounded-[1.75rem] bg-[#5F2D8C] p-5">
+                  <div className="w-fit overflow-hidden rounded-[1.75rem] bg-[#4F247D] p-5">
                     <Image
                       src="/brand/hmc-logo-full-transparent.png"
                       alt="Home Money Check"
@@ -607,10 +601,10 @@ export default async function HomeMoneyCheckHomepage() {
                     />
                   </div>
                   <div>
-                    <h3 className="text-3xl font-black leading-[1.02] tracking-[-0.055em] text-[#2C1F3D]">
+                    <h3 className="text-3xl font-black leading-[1.02] tracking-[-0.055em] text-[#F7F0E8]">
                       Friendly help. Quick contact. No obligation.
                     </h3>
-                    <p className="mt-4 max-w-2xl text-base font-bold leading-7 text-[#2C1F3D]/70">
+                    <p className="mt-4 max-w-2xl text-base font-bold leading-7 text-[#F7F0E8]/78">
                       Tell us what you want checked and we’ll get back to you quickly to help you
                       understand your options.
                     </p>
@@ -618,7 +612,7 @@ export default async function HomeMoneyCheckHomepage() {
                   <div className="flex flex-wrap gap-2">
                     {["Friendly help", "Quick contact", "No obligation"].map((point) => (
                       <span
-                        className="rounded-full bg-[#5F2D8C] px-4 py-2 text-xs font-black text-[#F7F0E8]"
+                        className="rounded-full bg-[#F7F0E8] px-4 py-2 text-xs font-black text-[#5F2D8C]"
                         key={point}
                       >
                         {point}
