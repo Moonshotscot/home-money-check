@@ -19,7 +19,7 @@ export function ServicePage({ page }: { page: SitePage }) {
     },
     {
       title: "We’ll call you",
-      body: "Neill will call you and go through a detailed online Utility Warehouse quote with you.",
+      body: "We will call you and go through a detailed online quote which will give you exact rates and a clear plan.",
     },
     {
       title: "We’ll look at the full package",

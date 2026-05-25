@@ -579,13 +579,13 @@ export default async function HomeMoneyCheckHomepage() {
               </div>
 
               <div className="relative hidden min-h-[220px] flex-1 overflow-visible rounded-[2.25rem] lg:block">
-                <div className="absolute left-[11%] top-[4%] z-0 h-56 w-56 rotate-[13deg] rounded-[3.25rem] bg-[#EADFFD]/75" />
-                <div className="absolute bottom-[8%] right-[14%] z-0 h-40 w-40 rounded-full bg-[#CFE6D5]/70" />
+                <div className="absolute left-[11%] top-[4%] z-0 h-48 w-48 rotate-[13deg] rounded-[2.8rem] bg-[#EADFFD]/75" />
+                <div className="absolute bottom-[14%] right-[16%] z-0 h-36 w-36 rounded-full bg-[#CFE6D5]/70" />
               </div>
 
               <div className="relative hidden overflow-hidden rounded-[2.5rem] bg-[#5F2D8C] p-8 text-[#F7F0E8] shadow-[0_18px_54px_rgba(44,31,61,0.14)] ring-1 ring-[#EADFFD]/35 lg:block">
-                <div className="absolute right-8 top-10 z-0 h-32 w-32 rounded-full bg-[#BFE3FF]/75" />
-                <div className="absolute bottom-8 right-28 z-0 h-44 w-44 rotate-[12deg] rounded-[2.75rem] bg-[#F4CF7A]/70" />
+                <div className="absolute right-8 top-10 z-0 h-28 w-28 rounded-full bg-[#BFE3FF]/75" />
+                <div className="absolute bottom-24 right-36 z-0 h-36 w-36 rotate-[12deg] rounded-[2.35rem] bg-[#F4CF7A]/70" />
                 <div className="relative z-10 grid gap-5">
                   <p className="w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
                     Why use Home Money Check
