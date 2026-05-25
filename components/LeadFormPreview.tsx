@@ -3,33 +3,52 @@
 import { FormEvent, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { insertEnquiry } from "@/lib/supabaseClient";
+import { insertEnquiry, type RequestedCheck } from "@/lib/supabaseClient";
 
-const checkOptions = [
-  "Household bills",
-  "Energy",
-  "Broadband",
-  "Mobile SIM deals",
-  "£20K Giveaway",
-  "Mortgages",
-  "First-time buyers",
-  "Remortgages",
-  "Moving home",
-  "Protection",
-  "Private medical insurance",
-  "Wills and POAs",
-  "Partner with us",
-  "Business utilities",
-  "Finance/bookkeeping",
-  "Business protection",
-  "Business continuity",
+const checkGroups = [
+  {
+    label: "Household bills",
+    options: [
+      { key: "energy", label: "Energy" },
+      { key: "broadband", label: "Broadband" },
+      { key: "mobile", label: "Mobile SIMs" },
+      { key: "giveaway-20k", label: "£20K Giveaway" },
+    ],
+  },
+  {
+    label: "Planning",
+    options: [
+      { key: "mortgages", label: "Mortgages" },
+      { key: "estate-planning", label: "Wills and POAs" },
+    ],
+  },
+  {
+    label: "Insurance",
+    options: [
+      { key: "protection", label: "Protection" },
+      { key: "private-medical-insurance", label: "Private Medical Insurance" },
+      { key: "business-protection", label: "Business protection" },
+    ],
+  },
+  {
+    label: "Business",
+    options: [
+      { key: "business-utilities", label: "Business utilities" },
+      { key: "business-continuity", label: "Business continuity" },
+      { key: "finance-bookkeeping", label: "Finance / bookkeeping" },
+      { key: "partner-with-us", label: "Partner with us" },
+    ],
+  },
 ];
+
+const defaultOpenGroups = ["Household bills"];
 
 type LeadFormPreviewProps = {
   defaultSelectedCheck?: string;
   selectedCheck?: string;
   sourcePage: string;
   uwRelated?: boolean;
+  compactCheckSelector?: boolean;
   title?: string;
   submitLabel?: string;
   helperText?: ReactNode;
@@ -42,7 +61,7 @@ type FormState = {
   email: string;
   mobile: string;
   postcode: string;
-  selected_check: string;
+  requested_checks: RequestedCheck[];
   message: string;
   website: string;
   consent_contact: boolean;
@@ -52,20 +71,75 @@ type FormState = {
 const fieldClass =
   "w-full appearance-none rounded-[1.35rem] border-0 bg-white px-5 py-4 text-base font-bold text-[#2C1F3D] shadow-[inset_0_0_0_1px_rgba(95,45,140,0.08)] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#FDCA55]";
 
+const flatCheckOptions = checkGroups.flatMap((group) => group.options);
+
+const checkAliases = new Map(
+  flatCheckOptions.flatMap((option) => [
+    [normaliseCheckLabel(option.label), option],
+    [normaliseCheckLabel(option.key), option],
+  ]),
+);
+
+checkAliases.set("mobile sim deals", { key: "mobile", label: "Mobile SIMs" });
+checkAliases.set("mobile sims", { key: "mobile", label: "Mobile SIMs" });
+checkAliases.set("private medical insurance", {
+  key: "private-medical-insurance",
+  label: "Private Medical Insurance",
+});
+checkAliases.set("first-time buyers", { key: "mortgages", label: "Mortgages" });
+checkAliases.set("remortgages", { key: "mortgages", label: "Mortgages" });
+checkAliases.set("moving home", { key: "mortgages", label: "Mortgages" });
+checkAliases.set("finance/bookkeeping", {
+  key: "finance-bookkeeping",
+  label: "Finance / bookkeeping",
+});
+
+function normaliseCheckLabel(value: string) {
+  return value.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function fallbackCheckFromLabel(label: string): RequestedCheck {
+  return {
+    key: label
+      .trim()
+      .toLowerCase()
+      .replace(/£/g, "")
+      .replace(/&/g, "and")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 80),
+    label: label.trim(),
+  };
+}
+
+function getCheckFromLabel(label?: string) {
+  const trimmed = label?.trim();
+
+  if (!trimmed || trimmed === "Choose your check") {
+    return null;
+  }
+
+  return checkAliases.get(normaliseCheckLabel(trimmed)) || fallbackCheckFromLabel(trimmed);
+}
+
 export function LeadFormPreview({
   defaultSelectedCheck,
   selectedCheck,
   sourcePage,
+  compactCheckSelector = false,
   helperText = "Pop in your details and we’ll get back to you quickly. No obligation at all.",
   submitLabel = "Start my check",
   title = "Tell us what you want to check.",
   showPostcode = true,
   messagePlaceholder,
 }: LeadFormPreviewProps) {
-  const initialSelectedCheck =
-    defaultSelectedCheck === "Choose your check"
-      ? ""
-      : defaultSelectedCheck || (selectedCheck === "Choose your check" ? "" : selectedCheck) || "";
+  const initialRequestedChecks = useMemo(() => {
+    const defaultCheck = getCheckFromLabel(defaultSelectedCheck);
+    const selected = getCheckFromLabel(selectedCheck);
+    const initial = defaultCheck || selected;
+
+    return initial ? [initial] : [];
+  }, [defaultSelectedCheck, selectedCheck]);
 
   const initialState = useMemo<FormState>(
     () => ({
@@ -73,18 +147,21 @@ export function LeadFormPreview({
       email: "",
       mobile: "",
       postcode: "",
-      selected_check: initialSelectedCheck,
+      requested_checks: initialRequestedChecks,
       message: "",
       website: "",
       consent_contact: false,
       consent_updates: false,
     }),
-    [initialSelectedCheck],
+    [initialRequestedChecks],
   );
 
   const [form, setForm] = useState<FormState>(initialState);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [validationMessage, setValidationMessage] = useState("");
+  const isGeneralSelector = !compactCheckSelector && initialRequestedChecks.length === 0;
+  const [showCheckSelector, setShowCheckSelector] = useState(isGeneralSelector);
+  const [openGroups, setOpenGroups] = useState<string[]>(defaultOpenGroups);
 
   function updateField<K extends keyof FormState>(field: K, value: FormState[K]) {
     setForm((current) => ({ ...current, [field]: value }));
@@ -104,13 +181,13 @@ export function LeadFormPreview({
       setStatus("success");
       setForm({
         ...initialState,
-        selected_check: form.selected_check,
+        requested_checks: form.requested_checks,
       });
       return;
     }
 
-    if (!form.name.trim() || !form.email.trim() || !form.mobile.trim() || !form.selected_check) {
-      setValidationMessage("Please complete your name, email, mobile and chosen check.");
+    if (!form.name.trim() || !form.email.trim() || !form.mobile.trim() || form.requested_checks.length === 0) {
+      setValidationMessage("Please complete your name, email, mobile and at least one check.");
       return;
     }
 
@@ -127,7 +204,8 @@ export function LeadFormPreview({
         email: form.email.trim(),
         mobile: form.mobile.trim(),
         postcode: form.postcode.trim() || undefined,
-        selected_check: form.selected_check,
+        selected_check: form.requested_checks[0].label,
+        requested_checks: form.requested_checks,
         source_page: sourcePage,
         message: form.message.trim() || undefined,
         consent_contact: form.consent_contact,
@@ -137,12 +215,31 @@ export function LeadFormPreview({
       setStatus("success");
       setForm({
         ...initialState,
-        selected_check: form.selected_check,
+        requested_checks: form.requested_checks,
       });
     } catch (error) {
       console.error("Supabase enquiry insert failed", error);
       setStatus("error");
     }
+  }
+
+  function toggleRequestedCheck(option: RequestedCheck) {
+    setForm((current) => {
+      const isSelected = current.requested_checks.some((check) => check.key === option.key);
+
+      return {
+        ...current,
+        requested_checks: isSelected
+          ? current.requested_checks.filter((check) => check.key !== option.key)
+          : [...current.requested_checks, option],
+      };
+    });
+  }
+
+  function toggleGroup(label: string) {
+    setOpenGroups((current) =>
+      current.includes(label) ? current.filter((group) => group !== label) : [...current, label],
+    );
   }
 
   return (
@@ -219,22 +316,89 @@ export function LeadFormPreview({
             />
           </label>
         ) : null}
-        <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
-          Choose your check
-          <select
-            className={fieldClass}
-            onChange={(event) => updateField("selected_check", event.target.value)}
-            required
-            value={form.selected_check}
-          >
-            <option value="">Choose your check</option>
-            {checkOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </label>
+        <fieldset className="grid gap-3">
+          <legend className="text-sm font-black text-[#5F2D8C]">
+            {compactCheckSelector ? "Your check" : "What would you like to check?"}
+          </legend>
+          {compactCheckSelector ? (
+            <div className="rounded-[1.35rem] bg-white/75 p-4 text-sm font-black leading-6 text-[#5F2D8C]">
+              {form.requested_checks[0]?.label || "This service"}
+            </div>
+          ) : (
+            <div className="grid gap-3 rounded-[1.35rem] bg-white/55 p-4">
+              {form.requested_checks.length > 0 ? (
+                <div className="flex flex-wrap gap-2">
+                  {form.requested_checks.map((check) => (
+                    <span
+                      className="rounded-full bg-[#FDCA55] px-3 py-2 text-xs font-black text-[#4F247D] shadow-[0_8px_18px_rgba(253,202,85,0.22)]"
+                      key={check.key}
+                    >
+                      {check.label}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
+              {!isGeneralSelector ? (
+                <button
+                  className="w-fit rounded-full bg-white px-4 py-2 text-sm font-black text-[#5F2D8C] shadow-[inset_0_0_0_1px_rgba(95,45,140,0.12)] transition-colors duration-300 hover:bg-[#EADFFD]"
+                  onClick={() => setShowCheckSelector((current) => !current)}
+                  type="button"
+                >
+                  {showCheckSelector ? "Hide extra checks" : "Add another check"}
+                </button>
+              ) : null}
+              {showCheckSelector ? (
+                <div className="grid gap-2">
+                  {checkGroups.map((group) => {
+                    const isOpen = openGroups.includes(group.label);
+
+                    return (
+                      <div
+                        className="overflow-hidden rounded-[1.1rem] bg-white shadow-[inset_0_0_0_1px_rgba(95,45,140,0.08)]"
+                        key={group.label}
+                      >
+                        <button
+                          aria-expanded={isOpen}
+                          className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm font-black text-[#5F2D8C]"
+                          onClick={() => toggleGroup(group.label)}
+                          type="button"
+                        >
+                          <span>{group.label}</span>
+                          <span className="text-lg leading-none">{isOpen ? "-" : "+"}</span>
+                        </button>
+                        {isOpen ? (
+                          <div className="flex flex-wrap gap-2 border-t border-[#EADFFD] p-3">
+                            {group.options.map((option) => {
+                              const selected = form.requested_checks.some(
+                                (check) => check.key === option.key,
+                              );
+
+                              return (
+                                <button
+                                  aria-pressed={selected}
+                                  className={`rounded-full px-3 py-2 text-xs font-black transition-all duration-300 sm:text-sm ${
+                                    selected
+                                      ? "bg-[#FDCA55] text-[#4F247D] shadow-[0_10px_24px_rgba(253,202,85,0.25)] ring-2 ring-[#4F247D]/15"
+                                      : "bg-[#F7F0E8] text-[#5F2D8C] shadow-[inset_0_0_0_1px_rgba(95,45,140,0.10)] hover:bg-[#EADFFD]"
+                                  }`}
+                                  key={option.key}
+                                  onClick={() => toggleRequestedCheck(option)}
+                                  type="button"
+                                >
+                                  {option.label}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        ) : null}
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </div>
+          )}
+        </fieldset>
         <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
           Message
           <textarea

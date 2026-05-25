@@ -51,6 +51,7 @@ export function ComingSoonPage({ page }: { page: SitePage }) {
           </section>
           <div id="lead-form" className="space-y-5">
             <LeadFormPreview
+              compactCheckSelector
               defaultSelectedCheck={page.selectedCheck}
               sourcePage={getRoutePath(page)}
               submitLabel="Tell me when this is ready"

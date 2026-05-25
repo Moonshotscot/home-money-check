@@ -6,10 +6,16 @@ export type EnquiryPayload = {
   mobile: string;
   postcode?: string;
   selected_check: string;
+  requested_checks: RequestedCheck[];
   source_page: string;
   message?: string;
   consent_contact: boolean;
   consent_updates: boolean;
+};
+
+export type RequestedCheck = {
+  key: string;
+  label: string;
 };
 
 function getSupabaseConfig() {
@@ -39,7 +45,17 @@ const { supabaseKey, supabaseUrl } = getSupabaseConfig();
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function insertEnquiry(payload: EnquiryPayload) {
-  const { error } = await supabase.from("enquiries").insert(payload);
+  const { error } = await supabase.rpc("create_enquiry_with_checks", {
+    p_consent_contact: payload.consent_contact,
+    p_consent_updates: payload.consent_updates,
+    p_email: payload.email,
+    p_message: payload.message || null,
+    p_mobile: payload.mobile,
+    p_name: payload.name,
+    p_postcode: payload.postcode || null,
+    p_requested_checks: payload.requested_checks,
+    p_source_page: payload.source_page,
+  });
 
   if (error) {
     throw error;
