@@ -574,32 +574,35 @@ export default async function HomeMoneyCheckHomepage() {
               </div>
 
               <div className="relative hidden min-h-10 flex-1 overflow-hidden rounded-[2.25rem] lg:block">
-                <div className="absolute left-10 top-6 h-20 w-20 rounded-full bg-[#EADFFD]/55 blur-sm" />
-                <div className="absolute bottom-8 right-14 h-28 w-28 rounded-full bg-[#F4CF7A]/30 blur-sm" />
+                <div className="absolute left-10 top-8 h-20 w-20 rounded-full bg-[#EADFFD]/50" />
+                <div className="absolute bottom-10 right-14 h-28 w-28 rounded-full bg-[#F4CF7A]/28" />
                 <div className="absolute left-[48%] top-[38%] h-12 w-12 rotate-[15deg] rounded-[1.15rem] bg-[#CFE6D5]/38" />
-                <div className="absolute bottom-14 left-[24%] h-8 w-8 rounded-full bg-[#BFE3FF]/45" />
-                <div className="absolute right-[32%] top-8 h-10 w-10 rotate-[-10deg] rounded-[0.9rem] bg-[#F4D9DE]/42" />
+                <div className="absolute bottom-16 left-[24%] h-8 w-8 rounded-full bg-[#BFE3FF]/45" />
+                <div className="absolute right-[32%] top-10 h-10 w-10 rotate-[-10deg] rounded-[0.9rem] bg-[#F4D9DE]/42" />
+                <div className="absolute -bottom-12 left-[55%] h-24 w-24 rounded-tl-[5rem] bg-[#EADFFD]/36" />
               </div>
 
               <div className="relative hidden overflow-hidden rounded-[2.5rem] bg-[#F7F0E8] p-8 shadow-[0_18px_54px_rgba(44,31,61,0.09)] ring-1 ring-[#EADFFD] lg:block">
-                <div className="absolute -right-14 -top-16 h-40 w-40 rounded-full bg-[#EADFFD]/60" />
-                <div className="absolute -bottom-12 left-8 h-28 w-28 rotate-[12deg] rounded-[2rem] bg-[#F4CF7A]/38" />
+                <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#EADFFD]/48" />
+                <div className="absolute -bottom-12 left-8 h-28 w-28 rotate-[12deg] rounded-[2rem] bg-[#F4CF7A]/32" />
+                <div className="absolute bottom-8 right-10 h-10 w-10 rotate-[-8deg] rounded-[0.85rem] bg-[#CFE6D5]/55" />
+                <div className="absolute right-28 top-24 h-7 w-7 rounded-full bg-[#BFE3FF]/50" />
                 <div className="relative grid gap-5">
                   <p className="w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
                     Why use Home Money Check
                   </p>
-                  <div className="w-fit overflow-hidden rounded-[1.4rem] bg-[#5F2D8C] p-3 shadow-[0_14px_34px_rgba(44,31,61,0.16)]">
+                  <div className="w-fit overflow-hidden rounded-[1.75rem] bg-[#5F2D8C] p-5">
                     <Image
-                      src="/brand/hmc-logo-full-purple-crop.png"
+                      src="/brand/hmc-logo-full-transparent.png"
                       alt="Home Money Check"
-                      width={268}
-                      height={96}
-                      sizes="240px"
-                      className="h-20 w-auto object-contain"
+                      width={328}
+                      height={118}
+                      sizes="292px"
+                      className="h-24 w-auto object-contain"
                     />
                   </div>
                   <div>
-                    <h3 className="text-3xl font-black leading-[0.98] tracking-[-0.055em] text-[#2C1F3D]">
+                    <h3 className="text-3xl font-black leading-[1.02] tracking-[-0.055em] text-[#2C1F3D]">
                       Friendly help. Quick contact. No obligation.
                     </h3>
                     <p className="mt-4 max-w-2xl text-base font-bold leading-7 text-[#2C1F3D]/70">
@@ -692,7 +695,7 @@ export default async function HomeMoneyCheckHomepage() {
                   <h2 className="display-font flex max-w-3xl flex-col gap-4 text-4xl font-black leading-[0.98] tracking-[-0.065em] md:gap-5 md:text-6xl">
                     <span>Check your deals.</span>
                     <span>Straight answers.</span>
-                    <span>No pressure.</span>
+                    <span>Super easy.</span>
                   </h2>
                 </div>
                 <div className="flex items-end justify-end pb-2 pr-2 md:pb-8 md:pr-8">
