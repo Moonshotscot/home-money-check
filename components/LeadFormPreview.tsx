@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import type { ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { insertEnquiry } from "@/lib/supabaseClient";
 
@@ -31,7 +32,9 @@ type LeadFormPreviewProps = {
   uwRelated?: boolean;
   title?: string;
   submitLabel?: string;
-  helperText?: string;
+  helperText?: ReactNode;
+  showPostcode?: boolean;
+  messagePlaceholder?: string;
 };
 
 type FormState = {
@@ -56,6 +59,8 @@ export function LeadFormPreview({
   helperText = "Pop in your details and we’ll get back to you quickly. No obligation at all.",
   submitLabel = "Start my check",
   title = "Tell us what you want to check.",
+  showPostcode = true,
+  messagePlaceholder,
 }: LeadFormPreviewProps) {
   const initialSelectedCheck =
     defaultSelectedCheck === "Choose your check"
@@ -204,14 +209,16 @@ export function LeadFormPreview({
             value={form.mobile}
           />
         </label>
-        <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
-          Postcode
-          <input
-            className={fieldClass}
-            onChange={(event) => updateField("postcode", event.target.value)}
-            value={form.postcode}
-          />
-        </label>
+        {showPostcode ? (
+          <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
+            Postcode
+            <input
+              className={fieldClass}
+              onChange={(event) => updateField("postcode", event.target.value)}
+              value={form.postcode}
+            />
+          </label>
+        ) : null}
         <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
           Choose your check
           <select
@@ -233,6 +240,7 @@ export function LeadFormPreview({
           <textarea
             className={`${fieldClass} min-h-28`}
             onChange={(event) => updateField("message", event.target.value)}
+            placeholder={messagePlaceholder}
             value={form.message}
           />
         </label>

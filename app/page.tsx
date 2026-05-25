@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { DesktopNavigation, MobileNavigation } from "@/components/SiteNavigation";
+import { LeadFormPreview } from "@/components/LeadFormPreview";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatHappensNext } from "@/components/WhatHappensNext";
 import { getHomepageContent } from "@/lib/homepageContent";
@@ -516,108 +517,126 @@ export default async function HomeMoneyCheckHomepage() {
         </section>
 
         <section className="bg-[#F7F0E8] px-5 pb-12 text-[#2C1F3D] md:px-8 md:pb-16">
-          <div className="mx-auto grid max-w-7xl items-start gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.9fr)]">
-            <div className="relative self-start overflow-hidden rounded-[2.75rem] bg-[#5F2D8C] p-8 text-[#F7F0E8] shadow-[0_30px_90px_rgba(44,31,61,0.22)] md:p-10 lg:min-h-[520px]">
-              <div className="absolute -right-20 -top-28 hidden h-80 w-80 rounded-full bg-[#EADFFD]/20 blur-3xl md:block" />
-              <div className="relative flex min-h-full flex-col gap-7">
-                {featuredCampaign ? (
-                  <>
-                    <div>
-                      <p className="mb-5 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
-                        {featuredCampaign.label}
-                      </p>
-                      <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-7xl">
-                        <CampaignTitle
-                          title={featuredCampaign.title}
-                          titleAccent={featuredCampaign.titleAccent}
-                          titleMain={featuredCampaign.titleMain}
-                        />
-                      </h2>
-                    </div>
-                    <div className="max-w-2xl rounded-[2rem] bg-[#F4CF7A]/95 p-5 text-[#4F247D] shadow-[0_18px_48px_rgba(44,31,61,0.18)]">
-                      <p className="text-xl font-black leading-8 tracking-[-0.03em]">
-                        {featuredCampaign.middleContent}
-                      </p>
-                    </div>
-                    <div className="max-w-2xl rounded-[1.5rem] bg-white/10 p-5 backdrop-blur ring-1 ring-white/12">
-                      <p className="text-base font-bold leading-7 text-[#F7F0E8]/76">
-                        {featuredCampaign.lowerBoxText}
-                      </p>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div>
-                      <p className="mb-5 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
-                        Current campaign
-                      </p>
-                      <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-7xl">
-                        No current campaign
-                      </h2>
-                    </div>
-                    <div className="max-w-2xl rounded-[1.5rem] bg-white/10 p-5 backdrop-blur ring-1 ring-white/12">
-                      <p className="text-base font-bold leading-7 text-[#F7F0E8]/76">
-                        Check back soon for the next featured Home Money Check update.
-                      </p>
-                    </div>
-                  </>
-                )}
+          <div className="mx-auto grid max-w-7xl items-stretch gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.9fr)]">
+            <div className="flex flex-col gap-5 self-stretch">
+              <div className="relative overflow-hidden rounded-[2.75rem] bg-[#5F2D8C] p-9 text-[#F7F0E8] shadow-[0_30px_90px_rgba(44,31,61,0.22)] md:p-12">
+                <div className="absolute -right-20 -top-28 hidden h-80 w-80 rounded-full bg-[#EADFFD]/20 blur-3xl md:block" />
+                <div className="absolute bottom-8 right-10 hidden h-24 w-24 rounded-full bg-[#BFE3FF]/18 md:block" />
+                <div className="absolute right-24 top-20 hidden h-14 w-14 rotate-[14deg] rounded-[1.1rem] bg-[#F4D9DE]/22 md:block" />
+                <div className="absolute bottom-28 left-8 hidden h-16 w-16 rotate-[-9deg] rounded-[1.35rem] bg-[#F7F0E8]/10 md:block" />
+                <div className="absolute left-[58%] top-[48%] hidden h-8 w-8 rounded-full bg-[#CFE6D5]/24 lg:block" />
+                <div className="relative flex min-h-full flex-col gap-8 md:gap-9">
+                  {featuredCampaign ? (
+                    <>
+                      <div>
+                        <p className="mb-5 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
+                          {featuredCampaign.label}
+                        </p>
+                        <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-7xl">
+                          <CampaignTitle
+                            title={featuredCampaign.title}
+                            titleAccent={featuredCampaign.titleAccent}
+                            titleMain={featuredCampaign.titleMain}
+                          />
+                        </h2>
+                      </div>
+                      <div className="relative max-w-2xl overflow-hidden rounded-[2.25rem] bg-[#F4CF7A] p-8 text-[#4F247D] shadow-[0_24px_64px_rgba(44,31,61,0.23)] ring-1 ring-white/20 md:p-9">
+                        <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/22" />
+                        <div className="absolute -bottom-5 left-8 h-12 w-12 rotate-[12deg] rounded-[1rem] bg-[#EADFFD]/40" />
+                        <p className="relative text-2xl font-black leading-9 tracking-[-0.035em] md:text-[1.75rem] md:leading-10">
+                          {featuredCampaign.middleContent}
+                        </p>
+                      </div>
+                      <div className="max-w-2xl rounded-[1.6rem] bg-white/10 p-6 backdrop-blur ring-1 ring-white/14">
+                        <p className="text-base font-bold leading-7 text-[#F7F0E8]/76">
+                          {featuredCampaign.lowerBoxText}
+                        </p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div>
+                        <p className="mb-5 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
+                          Current campaign
+                        </p>
+                        <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-7xl">
+                          No current campaign
+                        </h2>
+                      </div>
+                      <div className="max-w-2xl rounded-[1.5rem] bg-white/10 p-5 backdrop-blur ring-1 ring-white/12">
+                        <p className="text-base font-bold leading-7 text-[#F7F0E8]/76">
+                          Check back soon for the next featured Home Money Check update.
+                        </p>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              <div className="relative hidden min-h-10 flex-1 overflow-hidden rounded-[2.25rem] lg:block">
+                <div className="absolute left-10 top-6 h-20 w-20 rounded-full bg-[#EADFFD]/55 blur-sm" />
+                <div className="absolute bottom-8 right-14 h-28 w-28 rounded-full bg-[#F4CF7A]/30 blur-sm" />
+                <div className="absolute left-[48%] top-[38%] h-12 w-12 rotate-[15deg] rounded-[1.15rem] bg-[#CFE6D5]/38" />
+                <div className="absolute bottom-14 left-[24%] h-8 w-8 rounded-full bg-[#BFE3FF]/45" />
+                <div className="absolute right-[32%] top-8 h-10 w-10 rotate-[-10deg] rounded-[0.9rem] bg-[#F4D9DE]/42" />
+              </div>
+
+              <div className="relative hidden overflow-hidden rounded-[2.5rem] bg-[#F7F0E8] p-8 shadow-[0_18px_54px_rgba(44,31,61,0.09)] ring-1 ring-[#EADFFD] lg:block">
+                <div className="absolute -right-14 -top-16 h-40 w-40 rounded-full bg-[#EADFFD]/60" />
+                <div className="absolute -bottom-12 left-8 h-28 w-28 rotate-[12deg] rounded-[2rem] bg-[#F4CF7A]/38" />
+                <div className="relative grid gap-5">
+                  <p className="w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
+                    Why use Home Money Check
+                  </p>
+                  <div className="w-fit overflow-hidden rounded-[1.4rem] bg-[#5F2D8C] p-3 shadow-[0_14px_34px_rgba(44,31,61,0.16)]">
+                    <Image
+                      src="/brand/hmc-logo-full-purple-crop.png"
+                      alt="Home Money Check"
+                      width={268}
+                      height={96}
+                      sizes="240px"
+                      className="h-20 w-auto object-contain"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-black leading-[0.98] tracking-[-0.055em] text-[#2C1F3D]">
+                      Friendly help. Quick contact. No obligation.
+                    </h3>
+                    <p className="mt-4 max-w-2xl text-base font-bold leading-7 text-[#2C1F3D]/70">
+                      Tell us what you want checked and we’ll get back to you quickly to help you
+                      understand your options.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {["Friendly help", "Quick contact", "No obligation"].map((point) => (
+                      <span
+                        className="rounded-full bg-[#5F2D8C] px-4 py-2 text-xs font-black text-[#F7F0E8]"
+                        key={point}
+                      >
+                        {point}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div id="lead-form" className="relative self-start overflow-hidden rounded-[2.75rem] bg-[#F7F0E8] p-7 shadow-[0_24px_70px_rgba(44,31,61,0.13)] ring-1 ring-[#EADFFD] md:p-8 lg:min-h-[520px]">
-              <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[#EADFFD]/55" />
-              <p className="relative mb-5 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
-                Leave your details
-              </p>
-              <h2 className="relative text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-5xl">
-                What would you like to check?
-              </h2>
-              <p className="relative mt-5 rounded-[1.35rem] bg-white/70 p-4 text-sm font-bold leading-6 text-[#4F247D]">
-                <span className="brand-wordmark-text text-lg tracking-[-0.035em]">
-                  Home Money Check
-                </span>{" "}
-                is a friendly check and advice service. Pop in some details here and we'll get
-                back to you to discuss how we can help. No obligation at all.
-              </p>
-              <div className="relative mt-6 grid gap-3">
-                <div className="hidden" aria-hidden="true">
-                  <label>
-                    Company website
-                    <input autoComplete="off" name="website" tabIndex={-1} />
-                  </label>
-                </div>
-                <input
-                  className="rounded-[1.35rem] border-0 bg-white px-5 py-3.5 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
-                  placeholder="Name"
-                />
-                <input
-                  className="rounded-[1.35rem] border-0 bg-white px-5 py-3.5 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
-                  placeholder="Mobile"
-                />
-                <input
-                  className="rounded-[1.35rem] border-0 bg-white px-5 py-3.5 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
-                  placeholder="Email"
-                />
-                <select className="rounded-[1.35rem] border-0 bg-white px-5 py-3.5 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent focus:ring-[#6A35A0]">
-                  <option>Choose your check</option>
-                  {enquiryOptions.map((option) => (
-                    <option key={option}>{option}</option>
-                  ))}
-                </select>
-                <textarea
-                  className="min-h-28 rounded-[1.35rem] border-0 bg-white px-5 py-3.5 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent placeholder:text-[#8A7D96] focus:ring-[#6A35A0]"
-                  placeholder="Tell us what you’d like help with."
-                  aria-label="Message"
-                />
-                <button
-                  className="group flex transform-gpu items-center justify-center gap-2 rounded-full bg-[#6A35A0] px-7 py-4 text-base font-black text-[#F7F0E8] shadow-[0_18px_45px_rgba(106,53,160,0.25)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.01] hover:shadow-[0_22px_54px_rgba(106,53,160,0.27)] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
-                  type="button"
-                >
-                  Start my check
-                  <ArrowUpRight className="h-5 w-5 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]" strokeWidth={2.6} />
-                </button>
-              </div>
+            <div id="lead-form" className="self-start">
+              <LeadFormPreview
+                helperText={
+                  <>
+                    <span className="brand-wordmark-text text-lg tracking-[-0.035em]">
+                      Home Money Check
+                    </span>{" "}
+                    is a friendly check and advice service. Pop in some details here and we'll get
+                    back to you to discuss how we can help. No obligation at all.
+                  </>
+                }
+                messagePlaceholder="Tell us what you’d like help with."
+                showPostcode={false}
+                sourcePage="/"
+                title="What would you like to check?"
+              />
             </div>
           </div>
           <WhatHappensNext />
