@@ -215,6 +215,18 @@ const fallbackUpdates = [
   { label: "Business", text: "Business utilities", tone: "#D9E1E8" },
 ];
 
+const homepageProfile = {
+  name: "Neill",
+  image: "/images/neill-connolly-profile.webp",
+  heading: "A note from Neill",
+  paragraphs: [
+    "I set up Home Money Check to help people check the services they already use, spot better options where possible, and help them save money, not just now, but for the long term.",
+    "Most households have bills, policies, plans or paperwork that could be reviewed. My aim is to make that easier, explain it simply and help you get the best deals.",
+    "If we can help you make a great saving, improve something, or get a product or service more suited to what you actually need, then we'll have done our job.",
+  ],
+  closing: "We’d love to help you too.",
+};
+
 // Admin editable later: campaign visibility on/off, pill label, title,
 // middle/central content area, lower box text, and an optional button/link.
 const fallbackCampaign = {
@@ -583,14 +595,14 @@ export default async function HomeMoneyCheckHomepage() {
                 <div className="absolute bottom-[14%] right-[16%] z-0 h-36 w-36 rounded-full bg-[#CFE6D5]/70" />
               </div>
 
-              <div className="relative hidden min-h-[360px] overflow-hidden rounded-[2.5rem] bg-[#5F2D8C] p-10 text-[#F7F0E8] shadow-[0_18px_54px_rgba(44,31,61,0.14)] ring-1 ring-[#EADFFD]/35 lg:block xl:min-h-[400px]">
+              <div className="relative hidden min-h-[520px] overflow-hidden rounded-[2.5rem] bg-[#5F2D8C] p-10 text-[#F7F0E8] shadow-[0_18px_54px_rgba(44,31,61,0.14)] ring-1 ring-[#EADFFD]/35 lg:block xl:min-h-[560px] xl:p-11">
                 <div className="absolute right-8 top-10 z-0 h-28 w-28 rounded-full bg-[#BFE3FF]/75" />
                 <div className="absolute bottom-24 right-36 z-0 h-36 w-36 rotate-[12deg] rounded-[2.35rem] bg-[#F4CF7A]/70" />
-                <div className="relative z-10 flex min-h-[280px] flex-col justify-between gap-8 xl:min-h-[320px]">
+                <div className="relative z-10 flex min-h-[440px] flex-col justify-between gap-12 xl:min-h-[478px]">
                   <p className="w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
                     Why use Home Money Check
                   </p>
-                  <div className="grid gap-7">
+                  <div className="grid gap-9">
                     <div className="w-fit overflow-hidden rounded-[1.75rem] bg-[#4F247D] p-5">
                       <Image
                         src="/brand/hmc-logo-full-transparent.png"
@@ -693,10 +705,12 @@ export default async function HomeMoneyCheckHomepage() {
                   <p className="mb-5 w-fit rounded-full bg-[#BFD9C8] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#173E29]">
                     Trusted advice
                   </p>
-                  <h2 className="display-font flex max-w-3xl flex-col gap-4 text-4xl font-black leading-[0.98] tracking-[-0.065em] md:gap-5 md:text-6xl">
-                    <span>Check your deals.</span>
-                    <span>Straight answers.</span>
-                    <span>Super easy.</span>
+                  <h2 className="display-font flex max-w-3xl flex-col gap-4 text-4xl font-black leading-[0.98] tracking-[-0.065em] md:gap-5 md:text-[4.35rem]">
+                    <span className="whitespace-nowrap">Check your</span>
+                    <span className="whitespace-nowrap">deals.</span>
+                    <span className="whitespace-nowrap">Straight</span>
+                    <span className="whitespace-nowrap">answers.</span>
+                    <span className="whitespace-nowrap">Super easy.</span>
                   </h2>
                 </div>
                 <div className="flex items-end justify-end pb-2 pr-2 md:pb-8 md:pr-8">
@@ -714,22 +728,36 @@ export default async function HomeMoneyCheckHomepage() {
 
             <div className="relative transform-gpu overflow-hidden rounded-[2.75rem] bg-[#F4CF7A] p-8 text-[#2C1F3D] shadow-[0_30px_90px_rgba(44,31,61,0.22)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_34px_90px_rgba(44,31,61,0.24)] md:p-10 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]">
               <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/35" />
-              <div className="relative z-10 grid h-full min-h-[320px] gap-10 md:grid-cols-[minmax(0,28rem)_12rem]">
+              <div className="relative z-10 flex h-full min-h-[320px] flex-col gap-8">
                 <div>
-                  <p className="mb-7 w-fit rounded-full bg-white/55 px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#6B4611]">
-                    About home money check
+                  <p className="mb-6 w-fit rounded-full bg-white/55 px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#6B4611]">
+                    {homepageProfile.heading}
                   </p>
-                  <h3 className="text-xl font-black leading-[1.12] tracking-[-0.04em] md:text-2xl">
-                    <span className="brand-wordmark-text">Home Money Check</span> is run by Neill
-                    Connolly and is dedicated to helping you get better deals tailored to your own
-                    specific needs and circumstances. We always put our customers first. We&apos;d
-                    love to help you!
-                  </h3>
+                  <div className="grid gap-4 text-base font-black leading-7 text-[#2C1F3D]/84 md:text-lg md:leading-8">
+                    {homepageProfile.paragraphs.slice(0, 2).map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex items-end justify-end pb-2 pr-2 md:pb-8 md:pr-8">
-                  {/* TODO admin: make this portrait/photo placeholder editable later. */}
-                  <div className="flex h-40 w-28 shrink-0 items-center justify-center rounded-[2rem] bg-white/45 shadow-[inset_0_0_0_1px_rgba(107,70,17,0.08)] md:h-48 md:w-[10.5rem]">
-                    <Home className="h-16 w-16 text-[#6B4611]" strokeWidth={1.8} />
+
+                <div className="mt-auto grid gap-6 md:grid-cols-[minmax(0,1fr)_11rem] md:items-end">
+                  <div className="grid gap-4 text-base font-black leading-7 text-[#2C1F3D]/84 md:text-lg md:leading-8">
+                    <p>{homepageProfile.paragraphs[2]}</p>
+                    <p className="display-font pt-1 text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#5F2D8C] md:text-4xl">
+                      {homepageProfile.closing}
+                    </p>
+                  </div>
+                  <div className="flex justify-start md:justify-end">
+                    <div className="relative aspect-[4/5] w-36 shrink-0 overflow-hidden rounded-[2rem] bg-[#F7F0E8]/52 p-2 shadow-[inset_0_0_0_1px_rgba(107,70,17,0.08),0_18px_42px_rgba(44,31,61,0.14)] md:w-44">
+                      <Image
+                        src={homepageProfile.image}
+                        alt={`${homepageProfile.name} Connolly`}
+                        width={360}
+                        height={450}
+                        sizes="(min-width: 768px) 176px, 144px"
+                        className="h-full w-full rounded-[1.45rem] object-contain object-bottom"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

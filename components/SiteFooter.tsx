@@ -27,27 +27,34 @@ export function SiteFooter() {
         </div>
 
         {/* TODO before launch: add Cookie Policy if needed and final compliance-approved service disclaimers. */}
-        <div className="mt-7 flex flex-col gap-3 text-sm font-bold md:flex-row md:items-center md:justify-between">
+        <div className="mt-7 flex flex-col gap-3 text-sm font-bold md:flex-row md:items-end md:justify-between">
           <p>© Home Money Check.</p>
-          <nav
-            aria-label="Footer links"
-            className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-black uppercase tracking-[0.14em] text-[#F7F0E8]/45 md:justify-end"
-          >
-            {[
-              { href: "/privacy-policy", label: "Privacy Policy" },
-              { href: "/terms", label: "Terms" },
-              { href: "/disclaimers", label: "Disclaimers" },
-              { href: "/admin/login", label: "Admin" },
-            ].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="transition-colors duration-300 ease-out hover:text-[#F7F0E8]/75"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          <div className="flex flex-col gap-2 md:items-end">
+            <nav
+              aria-label="Footer links"
+              className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-black uppercase tracking-[0.14em] text-[#F7F0E8]/48 md:justify-end"
+            >
+              {[
+                { href: "/privacy-policy", label: "Privacy Policy" },
+                { href: "/terms", label: "Terms" },
+                { href: "/disclaimers", label: "Disclaimers" },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="transition-colors duration-300 ease-out hover:text-[#F7F0E8]/75"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            <Link
+              href="/admin/login"
+              className="w-fit text-[0.65rem] font-black uppercase tracking-[0.14em] text-[#F7F0E8]/28 transition-colors duration-300 ease-out hover:text-[#F7F0E8]/55"
+            >
+              Admin
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

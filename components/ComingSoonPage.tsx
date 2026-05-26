@@ -64,15 +64,11 @@ export function ComingSoonPage({ page }: { page: SitePage }) {
                 </p>
                 <p>{regulatedComingSoonNote.notLive}</p>
                 <p className="mt-3">{regulatedComingSoonNote.process}</p>
-                <p
-                  className={
-                    isMortgagePage
-                      ? "mt-3 font-black text-[#2C1F3D]"
-                      : "mt-3 text-[#2C1F3D]/68"
-                  }
-                >
-                  {regulatedComingSoonNote.mortgageRisk}
-                </p>
+                {isMortgagePage ? (
+                  <p className="mt-3 font-black text-[#2C1F3D]">
+                    {regulatedComingSoonNote.mortgageRisk}
+                  </p>
+                ) : null}
                 <p className="mt-3">{regulatedComingSoonNote.register}</p>
               </aside>
             ) : null}

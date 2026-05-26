@@ -405,7 +405,6 @@ export const sitePages: SitePage[] = [
         "No purchase is necessary.",
         "Open to UK residents aged 18+ only. Existing UW customers are excluded under the current terms.",
         "One entry per person.",
-        "Entries must be completed by 31 August 2026. The draw is due to take place by 31 October 2026.",
       ],
     },
     nextSteps: standardNextSteps,
