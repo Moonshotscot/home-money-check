@@ -28,6 +28,9 @@ export const metadata: Metadata = {
       "Check household bills, planning, protection and selected business services in one place. Tell us what you want checked and we’ll help you take the next step.",
     type: "website",
   },
+  verification: {
+    google: "t2pGsW1Iokm3vb9m6HIxCd_2TuFxHSinXfyc7UpLy4U",
+  },
   icons: {
     icon: [
       {
@@ -47,12 +50,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <meta
-          name="google-site-verification"
-          content="t2pGsW1Iokm3vb9m6HIxCd_2TuFxHSinXfyc7UpLy4U"
-        />
-      </head>
       <body className={`${fraunces.variable} ${plusJakarta.variable}`}>
         {children}
       </body>
