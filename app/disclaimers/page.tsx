@@ -62,7 +62,7 @@ const sections: DisclaimerSection[] = [
     title: "Partners and providers",
     paragraphs: [
       "Some enquiries may be handled by, or introduced to, a suitable provider, professional or partner.",
-      "Where this is needed, we will explain the route clearly and only share the information needed to deal with your enquiry.",
+      "Where this is needed, we will explain the process clearly and only share the information needed to deal with your enquiry.",
     ],
   },
   {
@@ -74,9 +74,9 @@ const sections: DisclaimerSection[] = [
     ],
   },
   {
-    title: "Extra income opportunities",
+    title: "Partner opportunities",
     paragraphs: [
-      "Any extra income opportunity should be considered carefully.",
+      "Any partner opportunity should be considered carefully.",
       "Income is not guaranteed. Results depend on the opportunity, your own activity, suitability, compliance with the relevant rules and other factors.",
       "We will explain what is involved so you can decide whether it is right for you.",
     ],

@@ -889,22 +889,6 @@ export const sitePages: SitePage[] = [
     primaryCta: "Start my check",
     nextSteps: standardNextSteps,
   },
-  {
-    title: "Local home partners",
-    slug: "local-home-partners",
-    eyebrow: "Coming soon",
-    description: "A local home partners page is being prepared.",
-    accentColour: "#D9E1E8",
-    selectedCheck: "Local home partners",
-    status: "comingSoon",
-    category: "Business checks",
-    metaTitle: "Local home partners coming soon | Home Money Check",
-    metaDescription: "A local home partners page is coming soon.",
-    intro:
-      "This page will help organise local partner enquiries when it is ready.",
-    why: ["Local home support needs simple, trustworthy presentation."],
-    nextSteps: standardNextSteps,
-  },
 ];
 
 export function getPageBySlug(slug: string) {

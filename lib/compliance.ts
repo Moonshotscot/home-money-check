@@ -2,7 +2,7 @@
 export const footerCompliance = {
   intro: "Home Money Check is run by Neill Connolly.",
   services:
-    "Some services are provided directly, and some may be introduced to suitable providers, professional partners or regulated advice routes where required.",
+    "Some services are provided directly, and some may be introduced to suitable providers, professional partners or regulated advice services where required.",
   regulated:
     "Mortgage and protection advice, where available, is provided through Where Can I Find a Mortgage Ltd, an Appointed Representative of Cornerstone Finance Group Ltd, which is authorised and regulated by the Financial Conduct Authority.",
   company:
@@ -13,7 +13,7 @@ export const footerCompliance = {
 
 export const regulatedComingSoonNote = {
   notLive: "This service is not live on Home Money Check yet.",
-  route:
+  process:
     "When available, mortgage and protection advice will be provided through Where Can I Find a Mortgage Ltd, an Appointed Representative of Cornerstone Finance Group Ltd, which is authorised and regulated by the Financial Conduct Authority.",
   mortgageRisk:
     "Your home may be repossessed if you do not keep up repayments on your mortgage.",

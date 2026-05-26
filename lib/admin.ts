@@ -67,7 +67,6 @@ export type Enquiry = {
 export async function isAdminUser(user: User) {
   const checks = [
     { column: "id", value: user.id },
-    { column: "user_id", value: user.id },
     { column: "email", value: user.email },
   ].filter((check) => check.value);
 

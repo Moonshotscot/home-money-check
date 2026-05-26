@@ -63,7 +63,7 @@ export function ComingSoonPage({ page }: { page: SitePage }) {
                   Regulated service note
                 </p>
                 <p>{regulatedComingSoonNote.notLive}</p>
-                <p className="mt-3">{regulatedComingSoonNote.route}</p>
+                <p className="mt-3">{regulatedComingSoonNote.process}</p>
                 <p
                   className={
                     isMortgagePage
