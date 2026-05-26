@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabaseClient";
 export const enquiryStatuses = [
   "New",
   "Contacted",
+  "Booked",
   "Quoted",
   "In progress",
   "Converted",
@@ -11,7 +12,6 @@ export const enquiryStatuses = [
   "Closed",
   "Archived",
   "No response",
-  "Booked",
 ] as const;
 
 export const selectedCheckFilters = [

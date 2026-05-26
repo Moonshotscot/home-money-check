@@ -53,6 +53,7 @@ type LeadFormPreviewProps = {
   submitLabel?: string;
   helperText?: ReactNode;
   showPostcode?: boolean;
+  requirePostcode?: boolean;
   messagePlaceholder?: string;
 };
 
@@ -131,6 +132,7 @@ export function LeadFormPreview({
   submitLabel = "Start my check",
   title = "Tell us what you want to check.",
   showPostcode = true,
+  requirePostcode = false,
   messagePlaceholder,
 }: LeadFormPreviewProps) {
   const initialRequestedChecks = useMemo(() => {
@@ -186,8 +188,18 @@ export function LeadFormPreview({
       return;
     }
 
-    if (!form.name.trim() || !form.email.trim() || !form.mobile.trim() || form.requested_checks.length === 0) {
-      setValidationMessage("Please complete your name, email, mobile and at least one check.");
+    if (
+      !form.name.trim() ||
+      !form.email.trim() ||
+      !form.mobile.trim() ||
+      (requirePostcode && !form.postcode.trim()) ||
+      form.requested_checks.length === 0
+    ) {
+      setValidationMessage(
+        requirePostcode
+          ? "Please complete your name, email, mobile, postcode and at least one check."
+          : "Please complete your name, email, mobile and at least one check.",
+      );
       return;
     }
 
@@ -312,6 +324,7 @@ export function LeadFormPreview({
             <input
               className={fieldClass}
               onChange={(event) => updateField("postcode", event.target.value)}
+              required={requirePostcode}
               value={form.postcode}
             />
           </label>

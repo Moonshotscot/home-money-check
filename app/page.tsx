@@ -583,31 +583,33 @@ export default async function HomeMoneyCheckHomepage() {
                 <div className="absolute bottom-[14%] right-[16%] z-0 h-36 w-36 rounded-full bg-[#CFE6D5]/70" />
               </div>
 
-              <div className="relative hidden overflow-hidden rounded-[2.5rem] bg-[#5F2D8C] p-8 text-[#F7F0E8] shadow-[0_18px_54px_rgba(44,31,61,0.14)] ring-1 ring-[#EADFFD]/35 lg:block">
+              <div className="relative hidden min-h-[360px] overflow-hidden rounded-[2.5rem] bg-[#5F2D8C] p-10 text-[#F7F0E8] shadow-[0_18px_54px_rgba(44,31,61,0.14)] ring-1 ring-[#EADFFD]/35 lg:block xl:min-h-[400px]">
                 <div className="absolute right-8 top-10 z-0 h-28 w-28 rounded-full bg-[#BFE3FF]/75" />
                 <div className="absolute bottom-24 right-36 z-0 h-36 w-36 rotate-[12deg] rounded-[2.35rem] bg-[#F4CF7A]/70" />
-                <div className="relative z-10 grid gap-5">
+                <div className="relative z-10 flex min-h-[280px] flex-col justify-between gap-8 xl:min-h-[320px]">
                   <p className="w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
                     Why use Home Money Check
                   </p>
-                  <div className="w-fit overflow-hidden rounded-[1.75rem] bg-[#4F247D] p-5">
-                    <Image
-                      src="/brand/hmc-logo-full-transparent.png"
-                      alt="Home Money Check"
-                      width={328}
-                      height={118}
-                      sizes="292px"
-                      className="h-24 w-auto object-contain"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-3xl font-black leading-[1.02] tracking-[-0.055em] text-[#F7F0E8]">
-                      Friendly help. Quick contact. No obligation.
-                    </h3>
-                    <p className="mt-4 max-w-2xl text-base font-bold leading-7 text-[#F7F0E8]/78">
-                      Tell us what you want checked and we’ll get back to you quickly to help you
-                      understand your options.
-                    </p>
+                  <div className="grid gap-7">
+                    <div className="w-fit overflow-hidden rounded-[1.75rem] bg-[#4F247D] p-5">
+                      <Image
+                        src="/brand/hmc-logo-full-transparent.png"
+                        alt="Home Money Check"
+                        width={328}
+                        height={118}
+                        sizes="292px"
+                        className="h-24 w-auto object-contain"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-3xl font-black leading-[1.02] tracking-[-0.055em] text-[#F7F0E8]">
+                        Friendly help. Quick contact. No obligation.
+                      </h3>
+                      <p className="mt-4 max-w-2xl text-base font-bold leading-7 text-[#F7F0E8]/78">
+                        Tell us what you want checked and we’ll get back to you quickly to help you
+                        understand your options.
+                      </p>
+                    </div>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {["Friendly help", "Quick contact", "No obligation"].map((point) => (
@@ -635,7 +637,7 @@ export default async function HomeMoneyCheckHomepage() {
                   </>
                 }
                 messagePlaceholder="Tell us what you’d like help with."
-                showPostcode={false}
+                requirePostcode
                 sourcePage="/"
                 title="What would you like to check?"
               />

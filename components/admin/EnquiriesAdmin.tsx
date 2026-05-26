@@ -19,16 +19,6 @@ const enquiryColumns =
 const enquiryCheckColumns =
   "id,enquiry_id,check_key,check_label,status,assigned_to,source_page,notes,created_at";
 
-const enquiryCheckStatuses = [
-  "New",
-  "Contacted",
-  "Quoted",
-  "In progress",
-  "Converted",
-  "Not suitable",
-  "Closed",
-] as const;
-
 function csvEscape(value: unknown) {
   const text = value === null || value === undefined ? "" : String(value);
   return `"${text.replace(/"/g, '""')}"`;
@@ -329,7 +319,7 @@ function EnquiryCheckEditor({
             onChange={(event) => setStatus(event.target.value)}
             value={status}
           >
-            {enquiryCheckStatuses.map((option) => (
+            {enquiryStatuses.map((option) => (
               <option key={option}>{option}</option>
             ))}
           </select>
