@@ -80,6 +80,9 @@ with check (
   )
 );
 
+grant select on table public.enquiry_checks to authenticated;
+grant insert, update, delete on table public.enquiry_checks to authenticated;
+
 -- ---------------------------------------------------------------------------
 -- Atomic parent + child insert RPC
 -- ---------------------------------------------------------------------------

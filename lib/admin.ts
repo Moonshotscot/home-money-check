@@ -4,35 +4,45 @@ import { supabase } from "@/lib/supabaseClient";
 export const enquiryStatuses = [
   "New",
   "Contacted",
-  "Booked",
   "Quoted",
+  "In progress",
   "Converted",
   "Not suitable",
-  "No response",
+  "Closed",
   "Archived",
+  "No response",
+  "Booked",
 ] as const;
 
 export const selectedCheckFilters = [
-  "Household bills",
   "Energy",
   "Broadband",
-  "Mobile SIM deals",
+  "Mobile SIMs",
   "£20K Giveaway",
-  "Mortgage",
-  "First-time buyer mortgage",
-  "Remortgage",
-  "Moving home mortgage",
-  "Protection insurance",
-  "Private medical insurance",
-  "Wills & POAs",
-  "Extra income",
-  "Business utilities",
-  "Finance/bookkeeping",
+  "Mortgages",
+  "Wills and POAs",
+  "Protection",
+  "Private Medical Insurance",
   "Business protection",
+  "Business utilities",
   "Business continuity",
+  "Finance / bookkeeping",
+  "Partner with us",
 ] as const;
 
 export type EnquiryStatus = (typeof enquiryStatuses)[number];
+
+export type EnquiryCheck = {
+  id: string;
+  enquiry_id: string;
+  check_key: string;
+  check_label: string;
+  status: string | null;
+  assigned_to: string | null;
+  source_page: string | null;
+  notes: string | null;
+  created_at: string | null;
+};
 
 export type Enquiry = {
   id: string;
@@ -51,6 +61,7 @@ export type Enquiry = {
   last_contacted_at: string | null;
   converted_at: string | null;
   updated_at: string | null;
+  enquiry_checks?: EnquiryCheck[];
 };
 
 export async function isAdminUser(user: User) {
