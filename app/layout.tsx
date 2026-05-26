@@ -47,6 +47,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="google-site-verification"
+          content="t2pGsW1Iokm3vb9m6HIxCd_2TuFxHSinXfyc7UpLy4U"
+        />
+      </head>
       <body className={`${fraunces.variable} ${plusJakarta.variable}`}>
         {children}
       </body>
