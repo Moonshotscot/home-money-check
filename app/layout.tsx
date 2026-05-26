@@ -17,22 +17,15 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://homemoneycheck.co.uk"),
   title: {
-    default: "Home Money Check | Better deals for your home, money and future",
+    default: "Home Money Check | Check deals for your home, money and future",
     template: "%s",
   },
-  description: "Friendly checks for home services, bills, planning and practical money decisions.",
-  // TODO before public launch: remove noindex/nofollow and update robots once legal pages and final compliance checks are complete.
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-    },
-  },
+  description:
+    "Check household bills, planning, protection and selected business services in one place. Tell us what you want checked and we’ll help you take the next step.",
   openGraph: {
-    title: "Home Money Check | Better deals for your home, money and future",
-    description: "Friendly checks for home services, bills, planning and practical money decisions.",
+    title: "Home Money Check | Check deals for your home, money and future",
+    description:
+      "Check household bills, planning, protection and selected business services in one place. Tell us what you want checked and we’ll help you take the next step.",
     type: "website",
   },
   icons: {

@@ -1,21 +1,33 @@
 import type { MetadataRoute } from "next";
-import { getRoutePath, sitePages, siteUrl } from "@/lib/site-pages";
+import { siteUrl } from "@/lib/site-pages";
+
+const sitemapPaths = [
+  "",
+  "/energy",
+  "/broadband",
+  "/mobile",
+  "/20k-giveaway",
+  "/estate-planning",
+  "/business-utilities",
+  "/business-continuity",
+  "/partner-with-us",
+  "/mortgage",
+  "/protection",
+  "/private-medical-insurance",
+  "/business-protection",
+  "/finance-services",
+  "/privacy-policy",
+  "/terms",
+  "/disclaimers",
+];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  return [
-    {
-      url: siteUrl,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    ...sitePages.map((page) => ({
-      url: `${siteUrl}${getRoutePath(page)}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: page.status === "live" ? 0.8 : 0.5,
-    })),
-  ];
+  return sitemapPaths.map((path) => ({
+    url: `${siteUrl}${path}`,
+    lastModified: now,
+    changeFrequency: path === "" ? "weekly" : "monthly",
+    priority: path === "" ? 1 : 0.8,
+  }));
 }

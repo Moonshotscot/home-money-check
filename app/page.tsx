@@ -25,13 +25,13 @@ import { getHomepageContent } from "@/lib/homepageContent";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Home Money Check | Better deals for your home, money and future",
+  title: "Home Money Check | Check deals for your home, money and future",
   description:
-    "Choose what you want checked and get friendly help with home, money and future decisions.",
+    "Check household bills, planning, protection and selected business services in one place. Tell us what you want checked and we’ll help you take the next step.",
   openGraph: {
-    title: "Home Money Check | Better deals for your home, money and future",
+    title: "Home Money Check | Check deals for your home, money and future",
     description:
-      "Choose what you want checked and get friendly help with home, money and future decisions.",
+      "Check household bills, planning, protection and selected business services in one place. Tell us what you want checked and we’ll help you take the next step.",
     type: "website",
   },
 };
