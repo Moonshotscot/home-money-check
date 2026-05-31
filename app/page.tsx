@@ -21,6 +21,7 @@ import { LeadFormPreview } from "@/components/LeadFormPreview";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatHappensNext } from "@/components/WhatHappensNext";
 import { getHomepageContent } from "@/lib/homepageContent";
+import { socialLinks } from "@/lib/social-links";
 
 export const dynamic = "force-dynamic";
 
@@ -504,7 +505,7 @@ export default async function HomeMoneyCheckHomepage() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden rounded-t-[3rem] bg-[#F7F0E8] px-5 py-12 text-[#2C1F3D] md:px-8 md:py-16">
+        <section className="relative overflow-hidden bg-[#F7F0E8] px-5 py-12 text-[#2C1F3D] md:px-8 md:py-16">
           <div className="absolute -right-20 top-8 hidden h-56 w-56 rounded-full bg-[#EADFFD] blur-3xl md:block" />
           <div className="absolute -left-20 bottom-8 hidden h-56 w-56 rounded-[3rem] bg-[#F4CF7A]/35 blur-3xl md:block" />
           <div id="checks" className="relative mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.72fr_1.28fr] lg:items-stretch">
@@ -590,9 +591,27 @@ export default async function HomeMoneyCheckHomepage() {
                 </div>
               </div>
 
-              <div className="relative hidden min-h-[220px] flex-1 overflow-visible rounded-[2.25rem] lg:block">
-                <div className="absolute left-[11%] top-[4%] z-0 h-48 w-48 rotate-[13deg] rounded-[2.8rem] bg-[#EADFFD]/75" />
-                <div className="absolute bottom-[14%] right-[16%] z-0 h-36 w-36 rounded-full bg-[#CFE6D5]/70" />
+              <div className="relative hidden min-h-[230px] overflow-hidden rounded-[2.25rem] border-2 border-[#22C55E]/55 bg-[#F7F0E8] p-6 shadow-[0_18px_50px_rgba(34,197,94,0.12)] lg:block">
+                <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-[#CFE6D5]/80" />
+                <div className="absolute -bottom-10 left-10 h-20 w-20 rotate-[12deg] rounded-[1.4rem] bg-[#FDCA55]/45" />
+                <div className="relative z-10 max-w-md">
+                  <p className="mb-4 w-fit rounded-full bg-[#CFE6D5] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#173E29]">
+                    Updates
+                  </p>
+                  <h2 className="display-font text-[2.15rem] font-black leading-[0.96] tracking-[-0.065em] text-[#2C1F3D]">
+                    Get regular updates from Home Money Check
+                  </h2>
+                  <p className="mt-4 text-sm font-bold leading-6 text-[#2C1F3D]/70">
+                    Stay in the know with money saving ideas and the latest offers.
+                  </p>
+                  <Link
+                    className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#22C55E] px-5 py-3 text-sm font-black text-[#2C1F3D] shadow-[0_12px_32px_rgba(34,197,94,0.2)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#32D86A]"
+                    href="/updates"
+                  >
+                    Sign up for updates
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                </div>
               </div>
 
               <div className="relative hidden min-h-[520px] overflow-hidden rounded-[2.5rem] bg-[#5F2D8C] p-10 text-[#F7F0E8] shadow-[0_18px_54px_rgba(44,31,61,0.14)] ring-1 ring-[#EADFFD]/35 lg:block xl:min-h-[560px] xl:p-11">
@@ -692,6 +711,33 @@ export default async function HomeMoneyCheckHomepage() {
                   No noticeboard items right now.
                 </div>
               )}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#F7F0E8] px-5 pb-14 text-[#2C1F3D] md:px-8 md:pb-20">
+          <div className="mx-auto grid max-w-7xl gap-4 rounded-[2.25rem] bg-white p-6 shadow-[0_18px_55px_rgba(44,31,61,0.10)] md:grid-cols-[1fr_auto] md:items-center md:p-7">
+            <div>
+              <p className="w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
+                Follow Home Money Check
+              </p>
+              <p className="mt-4 max-w-2xl text-base font-bold leading-7 text-[#2C1F3D]/72">
+                Get useful updates, reminders and simple money-saving checks on social.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2 md:justify-end">
+              {socialLinks.map((item) => (
+                <a
+                  aria-label={`Follow Home Money Check on ${item.label}`}
+                  className="rounded-full bg-[#5F2D8C] px-4 py-2 text-sm font-black text-[#F7F0E8] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#6A35A0]"
+                  href={item.href}
+                  key={item.href}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {item.label}
+                </a>
+              ))}
             </div>
           </div>
         </section>

@@ -7,6 +7,7 @@ const sitemapPaths = [
   "/broadband",
   "/mobile",
   "/20k-giveaway",
+  "/updates",
   "/estate-planning",
   "/business-utilities",
   "/business-continuity",

@@ -31,6 +31,7 @@ const sections: PrivacySection[] = [
       "Your message or enquiry details.",
       "Your consent choices.",
       "The page you used to send the enquiry.",
+      "Update signup details, such as your first name, email address, postcode if provided and interests.",
     ],
   },
   {
@@ -74,7 +75,7 @@ const sections: PrivacySection[] = [
   {
     title: "Marketing and updates",
     paragraphs: [
-      "If you choose to receive updates, we may send occasional emails about Home Money Check services, offers or useful information.",
+      "If you choose to receive updates, we may use your update signup details to send occasional emails about Home Money Check services, offers, reminders or useful information.",
       "You can ask us to stop sending updates at any time.",
     ],
   },

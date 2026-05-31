@@ -30,6 +30,12 @@ const cards = [
     live: true,
   },
   {
+    href: "/admin/updates",
+    label: "Updates",
+    note: "View Home Money Check update signups.",
+    live: true,
+  },
+  {
     href: "/admin/campaign",
     label: "Campaign panel",
     note: "Edit the homepage featured campaign panel.",

@@ -64,6 +64,20 @@ export type Enquiry = {
   enquiry_checks?: EnquiryCheck[];
 };
 
+export type UpdateSubscriber = {
+  id: string;
+  created_at: string | null;
+  updated_at: string | null;
+  first_name: string | null;
+  email: string | null;
+  postcode: string | null;
+  interests: string[] | null;
+  consent_updates: boolean | null;
+  source_page: string | null;
+  status: string | null;
+  unsubscribed_at: string | null;
+};
+
 export async function isAdminUser(user: User) {
   const checks = [
     { column: "id", value: user.id },

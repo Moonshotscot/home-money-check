@@ -18,6 +18,15 @@ export type RequestedCheck = {
   label: string;
 };
 
+export type UpdateSignupPayload = {
+  first_name: string;
+  email: string;
+  postcode?: string;
+  interests: string[];
+  consent_updates: boolean;
+  source_page: string;
+};
+
 function getSupabaseConfig() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey =
@@ -54,6 +63,21 @@ export async function insertEnquiry(payload: EnquiryPayload) {
     p_name: payload.name,
     p_postcode: payload.postcode || null,
     p_requested_checks: payload.requested_checks,
+    p_source_page: payload.source_page,
+  });
+
+  if (error) {
+    throw error;
+  }
+}
+
+export async function insertUpdateSubscriber(payload: UpdateSignupPayload) {
+  const { error } = await supabase.rpc("upsert_update_subscriber", {
+    p_consent_updates: payload.consent_updates,
+    p_email: payload.email,
+    p_first_name: payload.first_name,
+    p_interests: payload.interests,
+    p_postcode: payload.postcode || null,
     p_source_page: payload.source_page,
   });
 
