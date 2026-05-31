@@ -21,7 +21,6 @@ import { LeadFormPreview } from "@/components/LeadFormPreview";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatHappensNext } from "@/components/WhatHappensNext";
 import { getHomepageContent } from "@/lib/homepageContent";
-import { socialLinks } from "@/lib/social-links";
 
 export const dynamic = "force-dynamic";
 
@@ -711,33 +710,6 @@ export default async function HomeMoneyCheckHomepage() {
                   No noticeboard items right now.
                 </div>
               )}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-[#F7F0E8] px-5 pb-14 text-[#2C1F3D] md:px-8 md:pb-20">
-          <div className="mx-auto grid max-w-7xl gap-4 rounded-[2.25rem] bg-white p-6 shadow-[0_18px_55px_rgba(44,31,61,0.10)] md:grid-cols-[1fr_auto] md:items-center md:p-7">
-            <div>
-              <p className="w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
-                Follow Home Money Check
-              </p>
-              <p className="mt-4 max-w-2xl text-base font-bold leading-7 text-[#2C1F3D]/72">
-                Get useful updates, reminders and simple money-saving checks on social.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-2 md:justify-end">
-              {socialLinks.map((item) => (
-                <a
-                  aria-label={`Follow Home Money Check on ${item.label}`}
-                  className="rounded-full bg-[#5F2D8C] px-4 py-2 text-sm font-black text-[#F7F0E8] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#6A35A0]"
-                  href={item.href}
-                  key={item.href}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {item.label}
-                </a>
-              ))}
             </div>
           </div>
         </section>

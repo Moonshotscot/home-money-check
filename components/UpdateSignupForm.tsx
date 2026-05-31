@@ -96,8 +96,7 @@ export function UpdateSignupForm({ sourcePage = "/updates" }: { sourcePage?: str
 
       setStatus("success");
       setForm(initialState);
-    } catch (error) {
-      console.error("Supabase updates signup failed", error);
+    } catch {
       setStatus("error");
     }
   }

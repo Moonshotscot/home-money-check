@@ -38,6 +38,8 @@ function exportSubscribersCsv(subscribers: UpdateSubscriber[]) {
 function UpdatesContent() {
   const [subscribers, setSubscribers] = useState<UpdateSubscriber[]>([]);
   const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
+  const [deleteMessage, setDeleteMessage] = useState("");
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -86,6 +88,40 @@ function UpdatesContent() {
     });
   }, [searchTerm, subscribers]);
 
+  async function handleDeleteSubscriber(subscriber: UpdateSubscriber) {
+    if (!subscriber.id) {
+      return;
+    }
+
+    const confirmed = window.confirm(
+      "This will permanently delete this update signup. This cannot be undone. Delete it now?",
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    setDeleteMessage("");
+    setDeletingId(subscriber.id);
+
+    const { error } = await supabase.from("update_subscribers").delete().eq("id", subscriber.id);
+
+    setDeletingId(null);
+
+    if (error) {
+      console.error("Update subscriber delete failed", error);
+      setDeleteMessage(
+        `Could not delete the update signup. ${error.message}${
+          error.code ? ` (${error.code})` : ""
+        }`,
+      );
+      return;
+    }
+
+    setSubscribers((current) => current.filter((item) => item.id !== subscriber.id));
+    setDeleteMessage("Update signup deleted.");
+  }
+
   return (
     <AdminShell>
       <section className="rounded-[2.75rem] bg-white p-8 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-10">
@@ -128,14 +164,20 @@ function UpdatesContent() {
             Update signups could not be loaded. Check the update_subscribers table and policies.
           </p>
         ) : null}
+        {deleteMessage ? (
+          <p className="mt-6 rounded-[1.5rem] bg-[#F7F0E8] p-5 text-sm font-black leading-6 text-[#5F2D8C]">
+            {deleteMessage}
+          </p>
+        ) : null}
 
         <div className="mt-8 overflow-hidden rounded-[1.75rem] ring-1 ring-[#EADFFD]">
-          <div className="grid grid-cols-[1fr_1.25fr_1fr_1.25fr_0.8fr] gap-3 bg-[#5F2D8C] px-5 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#F7F0E8] max-lg:hidden">
+          <div className="grid grid-cols-[1fr_1.25fr_1fr_1.25fr_0.8fr_0.55fr] gap-3 bg-[#5F2D8C] px-5 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#F7F0E8] max-lg:hidden">
             <span>Name</span>
             <span>Email</span>
             <span>Postcode</span>
             <span>Interests</span>
             <span>Status</span>
+            <span>Action</span>
           </div>
           <div className="divide-y divide-[#EADFFD] bg-[#F7F0E8]">
             {status === "loading" ? (
@@ -146,7 +188,7 @@ function UpdatesContent() {
             ) : null}
             {filteredSubscribers.map((subscriber) => (
               <div
-                className="grid gap-3 p-5 text-sm font-bold text-[#2C1F3D] lg:grid-cols-[1fr_1.25fr_1fr_1.25fr_0.8fr]"
+                className="grid gap-3 p-5 text-sm font-bold text-[#2C1F3D] lg:grid-cols-[1fr_1.25fr_1fr_1.25fr_0.8fr_0.55fr]"
                 key={subscriber.id}
               >
                 <div>
@@ -172,6 +214,14 @@ function UpdatesContent() {
                 <span className="h-fit w-fit rounded-full bg-[#CFE6D5] px-3 py-1 text-xs font-black text-[#173E29]">
                   {subscriber.status || "Active"}
                 </span>
+                <button
+                  className="h-fit w-fit rounded-full bg-white px-3 py-1 text-xs font-black text-[#7A2130] shadow-[inset_0_0_0_1px_rgba(122,33,48,0.16)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#F4D9DE] disabled:cursor-not-allowed disabled:opacity-60"
+                  disabled={deletingId === subscriber.id}
+                  onClick={() => handleDeleteSubscriber(subscriber)}
+                  type="button"
+                >
+                  {deletingId === subscriber.id ? "Deleting..." : "Delete"}
+                </button>
               </div>
             ))}
           </div>

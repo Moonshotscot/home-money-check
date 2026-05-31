@@ -30,21 +30,21 @@ export function SiteFooter() {
         {/* TODO before launch: add Cookie Policy if needed and final compliance-approved service disclaimers. */}
         <div className="mt-8 grid gap-6 border-t border-white/10 pt-6 text-sm font-bold md:grid-cols-[1fr_auto_1fr] md:items-end">
           <p>© Home Money Check.</p>
-          <div className="text-center">
-            <p className="mx-auto max-w-sm text-sm font-black leading-6 text-[#F7F0E8]/75">
+          <div className="text-center md:min-w-[31rem]">
+            <p className="mx-auto max-w-[34rem] text-sm font-black leading-6 text-[#FDCA55] md:whitespace-nowrap">
               We’d really appreciate it if you could follow us on our socials.
             </p>
-            <div className="mt-3 flex flex-wrap justify-center gap-2">
+            <div className="mt-4 flex flex-wrap justify-center gap-3">
               {socialLinks.map((item) => (
                 <a
                   aria-label={`Follow Home Money Check on ${item.label}`}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#22C55E] text-xs font-black uppercase tracking-[0.12em] text-[#2C1F3D] shadow-[0_12px_30px_rgba(34,197,94,0.18)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#32D86A]"
+                  className="inline-flex h-12 w-12 items-center justify-center rounded-[1rem] bg-[#F7F0E8] text-[#4F247D] shadow-[0_10px_28px_rgba(44,31,61,0.14)] ring-1 ring-white/20 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#FDCA55] hover:text-[#173E29] hover:shadow-[0_14px_34px_rgba(44,31,61,0.18)]"
                   href={item.href}
                   key={item.href}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  {item.shortLabel}
+                  <SocialIcon label={item.label} />
                 </a>
               ))}
             </div>
@@ -79,5 +79,45 @@ export function SiteFooter() {
         </div>
       </div>
     </footer>
+  );
+}
+
+function SocialIcon({ label }: { label: string }) {
+  if (label === "Facebook") {
+    return (
+      <svg aria-hidden="true" className="block h-7 w-7" fill="none" viewBox="0 0 24 24">
+        <path
+          d="M14.45 8.42V6.67c0-.74.49-.91.85-.91h2.19V2.1h-3.03c-3.35 0-4.11 2.51-4.11 4.12v2.2H7.7v3.74h2.65V22h4.1v-9.84h2.91l.47-3.74h-3.38Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  }
+
+  if (label === "Instagram") {
+    return (
+      <svg aria-hidden="true" className="block h-7 w-7" fill="none" viewBox="0 0 24 24">
+        <rect
+          height="16.4"
+          rx="4.9"
+          stroke="currentColor"
+          strokeWidth="2.2"
+          width="16.4"
+          x="3.8"
+          y="3.8"
+        />
+        <circle cx="12" cy="12" r="3.7" stroke="currentColor" strokeWidth="2.2" />
+        <circle cx="17" cy="7" fill="currentColor" r="1.2" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg aria-hidden="true" className="block h-7 w-7" fill="none" viewBox="0 0 24 24">
+      <path
+        d="M15.75 2.35c.22 1.82 1.24 3.42 2.77 4.39.62.39 1.31.68 2.08.86v3.82a9.38 9.38 0 0 1-4.63-1.23v5.33c0 3.65-2.92 6.55-6.57 6.55a6.29 6.29 0 0 1-3.67-1.17 6.44 6.44 0 0 1-2.48-5.07c0-3.61 2.9-6.51 6.51-6.51.37 0 .72.03 1.08.1v3.95a2.69 2.69 0 0 0-1.08-.22 2.66 2.66 0 0 0-2.68 2.68 2.7 2.7 0 0 0 2.74 2.7 2.69 2.69 0 0 0 2.68-2.69V2.35h3.25Z"
+        fill="currentColor"
+      />
+    </svg>
   );
 }

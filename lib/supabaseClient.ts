@@ -82,6 +82,15 @@ export async function insertUpdateSubscriber(payload: UpdateSignupPayload) {
   });
 
   if (error) {
+    if (process.env.NODE_ENV !== "production") {
+      console.error("Supabase updates signup failed", {
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+        message: error.message,
+      });
+    }
+
     throw error;
   }
 }

@@ -209,7 +209,7 @@ export function AdminDashboard() {
               ))}
             </div>
 
-            <div className="mt-8 grid gap-5 md:grid-cols-3">
+            <div className="mt-8 grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-4">
               {cards.map((card) => {
                 const inner = (
                   <div className="flex h-full flex-col justify-between rounded-[2rem] bg-[#F7F0E8] p-6 shadow-[0_16px_45px_rgba(44,31,61,0.08)] transition-all duration-300 hover:-translate-y-1">
@@ -262,6 +262,7 @@ export function AdminDashboard() {
 
                 return card.live ? (
                   <Link
+                    className="h-full"
                     href={card.href}
                     key={card.label}
                   >
