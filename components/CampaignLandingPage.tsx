@@ -236,9 +236,14 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
               <h2 className="display-font mt-6 text-4xl font-black leading-[1.04] tracking-normal text-[#4F247D] md:text-5xl">
                 Ready to check?
               </h2>
-              <p className="mt-6 rounded-[1.5rem] bg-[#22C55E] p-5 text-2xl font-black leading-8 text-[#2C1F3D] shadow-[0_16px_34px_rgba(34,197,94,0.22)] md:text-3xl md:leading-10">
-                We’ll do all we can to help save you money.
-              </p>
+              <div className="mt-6 flex items-start gap-4 rounded-[1.5rem] border border-[#22C55E]/45 bg-[#F7F0E8]/86 p-5 shadow-[0_14px_30px_rgba(44,31,61,0.08)]">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#22C55E] text-[#2C1F3D]">
+                  <Check className="h-5 w-5" strokeWidth={3.2} />
+                </span>
+                <p className="text-xl font-black leading-7 text-[#4F247D] md:text-2xl md:leading-8">
+                  We’ll do all we can to help save you money.
+                </p>
+              </div>
             </div>
             <div id="campaign-lead-form">
               <CampaignLeadForm
