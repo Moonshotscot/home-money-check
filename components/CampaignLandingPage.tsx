@@ -47,7 +47,7 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
     <div className="min-h-screen bg-[#F7F0E8] text-[#2C1F3D]">
       <header className="absolute inset-x-0 top-0 z-20 px-5 py-5 md:px-8">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
-          <Link className="flex items-center" href="/" aria-label="Home Money Check home">
+          <div className="flex items-center" aria-label="Home Money Check">
             <Image
               alt="Home Money Check"
               className="h-14 w-auto object-contain md:h-16"
@@ -56,7 +56,7 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
               src="/brand/hmc-logo-full-transparent.png"
               width={248}
             />
-          </Link>
+          </div>
           <CampaignScrollButton
             className="hidden items-center gap-2 rounded-full bg-[#22C55E] px-4 py-3 text-sm font-black text-[#2C1F3D] shadow-[0_12px_30px_rgba(34,197,94,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#32D86A] sm:inline-flex"
             targetId="campaign-lead-form"
@@ -276,7 +276,7 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
         <div className="mx-auto max-w-6xl border-t border-white/12 pt-8">
           <div className="grid gap-8 text-sm font-bold lg:grid-cols-[1fr_auto_1fr] lg:items-start">
             <div className="grid gap-4">
-              <Link className="w-fit" href="/" aria-label="Home Money Check home">
+              <div className="w-fit" aria-label="Home Money Check">
                 <Image
                   alt="Home Money Check"
                   className="h-14 w-auto object-contain md:h-16"
@@ -284,7 +284,7 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
                   src="/brand/hmc-logo-full-transparent.png"
                   width={248}
                 />
-              </Link>
+              </div>
               <p className="max-w-md text-sm font-bold leading-6 text-[#F7F0E8]/70">
                 Home Money Check is run by Neill Connolly. Some services are provided directly, and some may be introduced to suitable providers, professional partners or regulated advice services where required.
               </p>
@@ -342,7 +342,7 @@ export function CampaignLandingPage({ page }: { page: CampaignPageConfig }) {
     <div className="min-h-screen bg-[#F7F0E8] text-[#2C1F3D]">
       <header className="absolute inset-x-0 top-0 z-20 px-5 py-5 md:px-8">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
-          <Link className="flex items-center" href="/" aria-label="Home Money Check home">
+          <div className="flex items-center" aria-label="Home Money Check">
             <Image
               alt="Home Money Check"
               className="h-12 w-auto object-contain md:h-14"
@@ -351,7 +351,7 @@ export function CampaignLandingPage({ page }: { page: CampaignPageConfig }) {
               src="/brand/hmc-logo-full-transparent.png"
               width={248}
             />
-          </Link>
+          </div>
           <a
             className="hidden items-center gap-2 rounded-full bg-[#22C55E] px-4 py-3 text-sm font-black text-[#2C1F3D] shadow-[0_12px_30px_rgba(34,197,94,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#32D86A] sm:inline-flex"
             href="#campaign-lead-form"
