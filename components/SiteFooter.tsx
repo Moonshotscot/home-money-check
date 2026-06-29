@@ -29,10 +29,10 @@ export function SiteFooter() {
 
         {/* TODO before launch: add Cookie Policy if needed and final compliance-approved service disclaimers. */}
         <div className="mt-8 grid gap-6 border-t border-white/10 pt-6 text-sm font-bold md:grid-cols-[1fr_auto_1fr] md:items-end">
-          <p>© Home Money Check.</p>
+          <p>&copy; Home Money Check.</p>
           <div className="text-center md:min-w-[31rem]">
             <p className="mx-auto max-w-[34rem] text-sm font-black leading-6 text-[#FDCA55] md:whitespace-nowrap">
-              We’d really appreciate it if you could follow us on our socials.
+              We&rsquo;d love for you to follow us on our socials.
             </p>
             <div className="mt-4 flex flex-wrap justify-center gap-3">
               {socialLinks.map((item) => (

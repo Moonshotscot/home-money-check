@@ -49,6 +49,15 @@ const cards = [
   },
 ];
 
+const hiddenPageLinks = [
+  { href: "/household-bills-check", label: "Household Bills Check" },
+  { href: "/perthshire-bills-check", label: "Perthshire Bills Check" },
+  { href: "/dundee-bills-check", label: "Dundee Bills Check" },
+  { href: "/staff-bills-check", label: "Your Staff’s Bills Check" },
+  { href: "/for-your-clients", label: "Home Money Check for Your Clients" },
+  { href: "/updates", label: "Updates" },
+];
+
 export function AdminDashboard() {
   const [summary, setSummary] = useState({
     campaignLive: null as boolean | null,
@@ -345,6 +354,34 @@ export function AdminDashboard() {
                 )}
               </section>
             </div>
+
+            <section className="mt-8 rounded-[2rem] bg-[#F7F0E8] p-6 shadow-[0_16px_45px_rgba(44,31,61,0.08)]">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <p className="w-fit rounded-full bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.12em] text-[#5F2D8C]/70">
+                    Utility links
+                  </p>
+                  <h2 className="mt-3 text-2xl font-black tracking-[-0.05em]">
+                    Campaign and hidden page links
+                  </h2>
+                </div>
+                <p className="max-w-xl text-sm font-bold leading-6 text-[#2C1F3D]/65">
+                  Quick access to direct-link pages that are not shown in the public navigation.
+                </p>
+              </div>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {hiddenPageLinks.map((item) => (
+                  <Link
+                    className="group flex items-center justify-between gap-3 rounded-[1.25rem] bg-white px-4 py-3 text-sm font-black text-[#5F2D8C] shadow-[0_10px_28px_rgba(44,31,61,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#FDCA55]"
+                    href={item.href}
+                    key={item.href}
+                  >
+                    <span>{item.label}</span>
+                    <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                ))}
+              </div>
+            </section>
           </section>
         </AdminShell>
       )}

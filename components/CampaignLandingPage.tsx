@@ -50,7 +50,7 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
           <Link className="flex items-center" href="/" aria-label="Home Money Check home">
             <Image
               alt="Home Money Check"
-              className="h-12 w-auto object-contain md:h-14"
+              className="h-14 w-auto object-contain md:h-16"
               height={88}
               priority
               src="/brand/hmc-logo-full-transparent.png"
@@ -80,6 +80,9 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
               <p className="mt-7 max-w-2xl text-xl font-bold leading-8 text-[#F7F0E8]/88 md:text-2xl md:leading-9">
                 {page.subtitle}
               </p>
+              <p className="mt-4 w-fit rounded-[1.2rem] bg-white/10 px-4 py-3 text-sm font-black leading-6 text-[#F7F0E8] ring-1 ring-white/14 md:text-base">
+                Speak with an expert. No AI. No Call Centres.
+              </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <CampaignScrollButton
                   className="inline-flex w-fit items-center gap-2 rounded-full bg-[#22C55E] px-6 py-4 text-base font-black text-[#2C1F3D] shadow-[0_18px_45px_rgba(34,197,94,0.24)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#32D86A]"
@@ -90,12 +93,6 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
                 </CampaignScrollButton>
                 <p className="w-fit rounded-full bg-[#FDCA55] px-4 py-3 text-sm font-black text-[#4F247D] shadow-[0_14px_32px_rgba(253,202,85,0.2)]">
                   {page.reassurance}
-                </p>
-              </div>
-              <div className="mt-6 max-w-xl rounded-[1.7rem] bg-[#F7F0E8] p-5 text-[#2C1F3D] shadow-[0_20px_50px_rgba(44,31,61,0.2)]">
-                <p className="text-lg font-black leading-6 text-[#4F247D]">Tied into a contract?</p>
-                <p className="mt-2 text-base font-black leading-7">
-                  UW can cover up to £400 of early termination fees when you switch services so even if you're tied into a contract, you could still save.
                 </p>
               </div>
             </div>
@@ -109,7 +106,7 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
                         Household bills
                       </p>
                       <h2 className="display-font mt-2 text-3xl font-black leading-[1.05] tracking-normal text-[#4F247D] md:text-4xl">
-                        Your bills check includes:
+                        Your personal bills check includes:
                       </h2>
                     </div>
                     <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#22C55E] text-[#2C1F3D]">
@@ -117,7 +114,7 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
                     </span>
                   </div>
                   <div className="grid gap-3">
-                    {["Gas and electricity", "Broadband", "Mobile SIMs"].map((item) => (
+                    {["Gas", "Electricity", "Broadband", "Mobile SIMs"].map((item) => (
                       <div
                         className="flex items-center justify-between gap-4 rounded-[1.35rem] bg-white px-5 py-4 shadow-[0_14px_32px_rgba(44,31,61,0.08)]"
                         key={item}
@@ -130,6 +127,12 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
                     ))}
                   </div>
                 </div>
+              </div>
+              <div className="mt-5 rounded-[1.7rem] border border-[#FDCA55]/55 bg-[#FDCA55] p-5 text-[#2C1F3D] shadow-[0_20px_50px_rgba(44,31,61,0.18)]">
+                <p className="text-lg font-black leading-6 text-[#4F247D]">Tied into a contract?</p>
+                <p className="mt-2 text-base font-black leading-7">
+                  UW can cover up to £400 of early termination fees when you switch services so even if you're tied into a contract, you could still save.
+                </p>
               </div>
             </div>
           </div>
@@ -161,9 +164,6 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 rounded-[1.2rem] bg-white/45 p-4 text-sm font-black leading-6 text-[#4F247D]">
-                UW can cover up to £400 of early termination fees when you switch services so even if you're tied into a contract, you could still save.
-              </p>
             </article>
           </div>
           <div className="mx-auto mt-6 max-w-6xl">
@@ -293,7 +293,7 @@ function HouseholdBillsCampaignPage({ page }: { page: CampaignPageConfig }) {
 
             <div className="text-left lg:min-w-[31rem] lg:text-center">
               <p className="mx-auto max-w-[34rem] text-sm font-black leading-6 text-[#FDCA55] md:whitespace-nowrap">
-                We’d really appreciate it if you could follow us on our socials.
+                We’d love for you to follow us on our socials.
               </p>
               <div className="mt-4 flex flex-wrap gap-3 lg:justify-center">
                 {socialLinks.map((item) => (

@@ -28,7 +28,7 @@ export function ComingSoonPage({ page }: { page: SitePage }) {
         <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1fr_0.9fr]">
           <section className="relative overflow-hidden rounded-[2.75rem] bg-[#5F2D8C] p-8 text-[#F7F0E8] shadow-[0_30px_90px_rgba(44,31,61,0.22)] md:p-12">
             <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-[#EADFFD]/20 blur-3xl" />
-            <h2 className="display-font relative text-6xl font-black leading-[0.9] tracking-[-0.075em] text-[#FDCA55] md:text-8xl">
+            <h2 className="display-font relative text-6xl font-black leading-[0.9] tracking-[-0.015em] text-[#FDCA55] md:text-8xl">
               Coming soon
             </h2>
             <p className="relative mt-7 max-w-2xl text-xl font-bold leading-8 text-[#F7F0E8]/80">

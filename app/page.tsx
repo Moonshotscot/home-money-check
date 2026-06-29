@@ -310,7 +310,7 @@ function HeroTile({ item }: { item: HeroTileItem }) {
           />
         </div>
         <div>
-          <h3 className={`display-font ${titleSize} font-black leading-[0.96] tracking-[-0.055em]`}>
+          <h3 className={`display-font ${titleSize} font-black leading-[0.96] tracking-[-0.015em]`}>
             {item.title}
           </h3>
           <p className={`${item.big ? "mt-3 text-base" : "mt-2 text-sm"} max-w-[16rem] font-extrabold leading-5 opacity-72`}>
@@ -330,7 +330,7 @@ function RouteGroup({ group }: { group: RouteGroupItem }) {
     >
       <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/35" />
       <div className="relative">
-        <p className="display-font mb-4 text-lg font-black leading-5 tracking-[-0.035em] opacity-85">
+        <p className="display-font mb-4 text-lg font-black leading-5 tracking-[-0.015em] opacity-85">
           {group.label}
         </p>
         <div className="grid gap-2">
@@ -440,10 +440,10 @@ export default async function HomeMoneyCheckHomepage() {
             </div>
 
             <h1 className="max-w-4xl">
-              <span className="display-font block text-[4.7rem] leading-[0.86] tracking-[-0.045em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.83] lg:text-[7.35rem]">
+              <span className="display-font block text-[4.7rem] leading-[0.86] tracking-[-0.015em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.83] lg:text-[7.35rem]">
                 Home
               </span>
-              <span className="display-font block text-[4.7rem] leading-[0.84] tracking-[-0.045em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.81] lg:text-[7.35rem]">
+              <span className="display-font block text-[4.7rem] leading-[0.84] tracking-[-0.015em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.81] lg:text-[7.35rem]">
                 Money
               </span>
               <span className="mt-1 flex w-fit max-w-full items-center md:mt-2">
@@ -513,7 +513,7 @@ export default async function HomeMoneyCheckHomepage() {
               <p className="mb-4 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
                 Check services
               </p>
-              <h2 className="display-font relative z-10 max-w-[12ch] text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-6xl">
+              <h2 className="display-font relative z-10 max-w-[12ch] text-5xl font-black leading-[0.95] tracking-[-0.015em] md:text-6xl">
                 Choose your check
               </h2>
               <Image
@@ -549,7 +549,7 @@ export default async function HomeMoneyCheckHomepage() {
                         <p className="mb-5 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
                           {featuredCampaign.label}
                         </p>
-                        <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-7xl">
+                        <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.015em] md:text-7xl">
                           <CampaignTitle
                             title={featuredCampaign.title}
                             titleAccent={featuredCampaign.titleAccent}
@@ -576,7 +576,7 @@ export default async function HomeMoneyCheckHomepage() {
                         <p className="mb-5 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
                           Current campaign
                         </p>
-                        <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.075em] md:text-7xl">
+                        <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.015em] md:text-7xl">
                           No current campaign
                         </h2>
                       </div>
@@ -597,7 +597,7 @@ export default async function HomeMoneyCheckHomepage() {
                   <p className="mb-4 w-fit rounded-full bg-[#CFE6D5] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#173E29]">
                     Updates
                   </p>
-                  <h2 className="display-font text-[2.15rem] font-black leading-[0.96] tracking-[-0.065em] text-[#2C1F3D]">
+                  <h2 className="display-font text-[2.15rem] font-black leading-[0.96] tracking-[-0.015em] text-[#2C1F3D]">
                     Get regular updates from Home Money Check
                   </h2>
                   <p className="mt-4 text-sm font-bold leading-6 text-[#2C1F3D]/70">
@@ -723,7 +723,7 @@ export default async function HomeMoneyCheckHomepage() {
                   <p className="mb-5 w-fit rounded-full bg-[#BFD9C8] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#173E29]">
                     Trusted advice
                   </p>
-                  <h2 className="display-font flex max-w-3xl flex-col gap-4 text-4xl font-black leading-[0.98] tracking-[-0.065em] md:gap-5 md:text-[4.35rem]">
+                  <h2 className="display-font flex max-w-3xl flex-col gap-4 text-4xl font-black leading-[0.98] tracking-[-0.015em] md:gap-5 md:text-[4.35rem]">
                     <span className="whitespace-nowrap">Check your</span>
                     <span className="whitespace-nowrap">deals.</span>
                     <span className="whitespace-nowrap">Straight</span>
@@ -761,7 +761,7 @@ export default async function HomeMoneyCheckHomepage() {
                 <div className="mt-auto grid gap-6 md:grid-cols-[minmax(0,1fr)_11rem] md:items-end">
                   <div className="grid gap-4 text-base font-black leading-7 text-[#2C1F3D]/84 md:text-lg md:leading-8">
                     <p>{homepageProfile.paragraphs[2]}</p>
-                    <p className="display-font pt-1 text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#5F2D8C] md:text-4xl">
+                    <p className="display-font pt-1 text-3xl font-black leading-[0.95] tracking-[-0.015em] text-[#5F2D8C] md:text-4xl">
                       {homepageProfile.closing}
                     </p>
                   </div>

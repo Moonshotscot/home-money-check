@@ -20,7 +20,7 @@ export default function NotFound() {
             <p className="relative mb-5 w-fit rounded-full bg-[#FDCA55] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
               Page not found
             </p>
-            <h1 className="display-font relative text-6xl font-black leading-[0.9] tracking-[-0.075em] text-[#FDCA55] md:text-8xl">
+            <h1 className="display-font relative text-6xl font-black leading-[0.9] tracking-[-0.015em] text-[#FDCA55] md:text-8xl">
               Page not found
             </h1>
             <p className="relative mt-7 max-w-2xl text-xl font-bold leading-8 text-[#F7F0E8]/82">

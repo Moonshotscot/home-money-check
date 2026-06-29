@@ -56,7 +56,7 @@ export const campaignPages = {
     eyebrow: "HOUSEHOLD BILLS CHECK",
     title: "Let’s see if we can save you money!",
     subtitle:
-      "Pop in your details below and we’ll check your gas, electricity, broadband and Mobile SIM options. If there’s a better deal for you and your home, we’ll show you.",
+      "Pop in your details below and we’ll check if we can save you money on your household bills.",
     ctaLabel: "Start my bills check",
     reassurance: "Free! No cost to you",
     intro: [

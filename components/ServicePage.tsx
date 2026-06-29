@@ -121,7 +121,7 @@ export function ServicePage({ page }: { page: SitePage }) {
               className="absolute -bottom-12 right-8 h-28 w-28 rotate-[12deg] rounded-[2rem] opacity-70"
               style={{ backgroundColor: page.accentColour }}
             />
-            <h2 className="display-font relative text-4xl font-black leading-[0.98] tracking-[-0.065em] text-[#FDCA55] md:text-6xl">
+            <h2 className="display-font relative text-4xl font-black leading-[0.98] tracking-[-0.015em] text-[#FDCA55] md:text-6xl">
               {isHouseholdBillPage ? "What we’ll check" : page.contentTitle || page.title}
             </h2>
             {!isHouseholdBillPage && page.intro ? (
@@ -146,7 +146,7 @@ export function ServicePage({ page }: { page: SitePage }) {
                     key={section.title}
                     className="rounded-[1.75rem] bg-[#F4CF7A] p-5 text-[#4F247D] shadow-[0_14px_34px_rgba(30,9,55,0.12)] ring-1 ring-white/25"
                   >
-                    <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#4F247D] md:text-4xl">
+                    <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.015em] text-[#4F247D] md:text-4xl">
                       {section.title}
                     </h3>
                     <div className="mt-4 grid gap-3">
@@ -175,7 +175,7 @@ export function ServicePage({ page }: { page: SitePage }) {
                     key={section.title}
                     className="rounded-[1.75rem] bg-[#F4CF7A] p-5 text-[#4F247D] shadow-[0_14px_34px_rgba(30,9,55,0.12)] ring-1 ring-white/25"
                   >
-                    <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.055em] text-[#4F247D] md:text-4xl">
+                    <h3 className="display-font text-3xl font-black leading-[0.95] tracking-[-0.015em] text-[#4F247D] md:text-4xl">
                       {section.title}
                     </h3>
                     <div className="mt-4 grid gap-3">
