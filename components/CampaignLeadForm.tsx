@@ -18,6 +18,7 @@ type CampaignLeadFormProps = {
     label: string;
     options: CampaignChoice[];
   };
+  workplaceMode?: boolean;
 };
 
 type FormState = {
@@ -25,6 +26,9 @@ type FormState = {
   email: string;
   mobile: string;
   postcode: string;
+  organisation: string;
+  role: string;
+  staffCount: string;
   bestTime: string;
   selectedChoice: string;
   contextChoice: string;
@@ -47,12 +51,16 @@ export function CampaignLeadForm({
   choiceLabel,
   choices,
   contextField,
+  workplaceMode = false,
 }: CampaignLeadFormProps) {
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
     mobile: "",
     postcode: "",
+    organisation: "",
+    role: "",
+    staffCount: "",
     bestTime: "",
     selectedChoice: choices?.[0]?.key || "",
     contextChoice: "",
@@ -83,8 +91,17 @@ export function CampaignLeadForm({
       return;
     }
 
-    if (!form.name.trim() || !form.email.trim() || !form.mobile.trim() || !form.postcode.trim()) {
-      setValidationMessage("Please complete your name, email, mobile and postcode.");
+    if (
+      !form.name.trim() ||
+      !form.email.trim() ||
+      !form.mobile.trim() ||
+      (!workplaceMode && !form.postcode.trim())
+    ) {
+      setValidationMessage(
+        workplaceMode
+          ? "Please complete your name, email and mobile."
+          : "Please complete your name, email, mobile and postcode.",
+      );
       return;
     }
 
@@ -114,6 +131,13 @@ export function CampaignLeadForm({
     );
     const message = [
       `Best time to contact: ${form.bestTime}.`,
+      workplaceMode && form.organisation.trim()
+        ? `Organisation / workplace: ${form.organisation.trim()}.`
+        : "",
+      workplaceMode && form.role.trim() ? `Role: ${form.role.trim()}.` : "",
+      workplaceMode && form.staffCount.trim()
+        ? `Approximate number of staff: ${form.staffCount.trim()}.`
+        : "",
       contextField && contextChoice ? `${contextField.label} ${contextChoice.label}.` : "",
       form.notes.trim() ? `Notes: ${form.notes.trim()}` : "",
     ]
@@ -127,7 +151,7 @@ export function CampaignLeadForm({
         name: form.name.trim(),
         email: form.email.trim(),
         mobile: form.mobile.trim(),
-        postcode: form.postcode.trim(),
+        postcode: workplaceMode ? form.postcode.trim() || "Not supplied" : form.postcode.trim(),
         selected_check: selectedCheck.label,
         requested_checks: [selectedCheck],
         source_page: sourcePage,
@@ -179,7 +203,7 @@ export function CampaignLeadForm({
 
             <div className="grid gap-4 sm:grid-cols-2">
               <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
-                Name
+                {workplaceMode ? "Your name" : "Name"}
                 <input
                   className={fieldClass}
                   onChange={(event) => updateField("name", event.target.value)}
@@ -187,6 +211,26 @@ export function CampaignLeadForm({
                   value={form.name}
                 />
               </label>
+              {workplaceMode ? (
+                <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
+                  Organisation / workplace
+                  <input
+                    className={fieldClass}
+                    onChange={(event) => updateField("organisation", event.target.value)}
+                    value={form.organisation}
+                  />
+                </label>
+              ) : null}
+              {workplaceMode ? (
+                <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
+                  Your role
+                  <input
+                    className={fieldClass}
+                    onChange={(event) => updateField("role", event.target.value)}
+                    value={form.role}
+                  />
+                </label>
+              ) : null}
               <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
                 Email
                 <input
@@ -208,15 +252,26 @@ export function CampaignLeadForm({
                   value={form.mobile}
                 />
               </label>
-              <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
-                Postcode
-                <input
-                  className={fieldClass}
-                  onChange={(event) => updateField("postcode", event.target.value)}
-                  required
-                  value={form.postcode}
-                />
-              </label>
+              {workplaceMode ? (
+                <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
+                  Approximate number of staff
+                  <input
+                    className={fieldClass}
+                    onChange={(event) => updateField("staffCount", event.target.value)}
+                    value={form.staffCount}
+                  />
+                </label>
+              ) : (
+                <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
+                  Postcode
+                  <input
+                    className={fieldClass}
+                    onChange={(event) => updateField("postcode", event.target.value)}
+                    required
+                    value={form.postcode}
+                  />
+                </label>
+              )}
             </div>
             <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
               Best time to contact

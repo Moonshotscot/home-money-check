@@ -4,7 +4,10 @@ import { campaignPages } from "@/lib/campaign-pages";
 
 const page = campaignPages["perthshire-bills-check"];
 
-export const metadata: Metadata = { title: page.metadataTitle };
+export const metadata: Metadata = {
+  title: page.metadataTitle,
+  description: page.metadataDescription,
+};
 
 export default function PerthshireBillsCheckPage() {
   return <CampaignLandingPage page={page} />;

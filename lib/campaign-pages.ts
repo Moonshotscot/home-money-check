@@ -12,11 +12,14 @@ export type CampaignSection = {
 export type CampaignPageConfig = {
   slug: string;
   metadataTitle: string;
+  metadataDescription?: string;
   eyebrow: string;
   title: string;
   subtitle: string;
   ctaLabel: string;
   reassurance: string;
+  checklistHeading?: string;
+  introHeading?: string;
   intro: string[];
   coversHeading: string;
   covers: string[];
@@ -35,13 +38,6 @@ export type CampaignPageConfig = {
   };
 };
 
-const householdCheckChoices: CampaignChoice[] = [
-  { key: "energy", label: "Energy" },
-  { key: "broadband", label: "Broadband" },
-  { key: "mobile", label: "Mobile SIMs" },
-  { key: "all-household-bills", label: "All household bills" },
-];
-
 const householdBillsFunnelChoices: CampaignChoice[] = [
   { key: "energy", label: "Gas and electricity" },
   { key: "broadband", label: "Broadband" },
@@ -53,6 +49,8 @@ export const campaignPages = {
   "household-bills-check": {
     slug: "household-bills-check",
     metadataTitle: "Household Bills Check | Home Money Check",
+    metadataDescription:
+      "Check if Home Money Check can help you save money on gas, electricity, broadband and Mobile SIMs for your home.",
     eyebrow: "HOUSEHOLD BILLS CHECK",
     title: "Let’s see if we can save you money!",
     subtitle:
@@ -63,6 +61,8 @@ export const campaignPages = {
       "Everyone is feeling the pinch at the moment and your household bills probably aren’t helping! We can’t promise any miracles but we can promise to do our best to help you save money.",
       "Here at Home Money Check we’ll discuss what you pay for, what you use, what you actually need and if we can help you get a cheaper deal. If we can help you save then great. And if we can’t, we’ll tell you straight away.",
     ],
+    checklistHeading: "Your personal bills check includes:",
+    introHeading: "Are your bills too expensive?",
     coversHeading: "What we check",
     covers: [
       "Gas and electricity",
@@ -91,82 +91,98 @@ export const campaignPages = {
   "perthshire-bills-check": {
     slug: "perthshire-bills-check",
     metadataTitle: "Perthshire Bills Check | Home Money Check",
-    eyebrow: "Perthshire household bills",
-    title: "Perthshire household bills check",
+    metadataDescription:
+      "Check if Home Money Check can help you save money on gas, electricity, broadband and Mobile SIMs for your Perthshire home.",
+    eyebrow: "HOUSEHOLD BILLS CHECK",
+    title: "Perthshire - let’s see if we can save you money!",
     subtitle:
-      "A free household bills check for people in Perthshire who want to review energy, broadband, mobile and home services.",
-    ctaLabel: "Start my Perthshire bills check",
-    reassurance: "No cost to you. No obligation.",
+      "Pop in your details below and we’ll check if we can save you money on your household bills.",
+    ctaLabel: "Start my bills check",
+    reassurance: "Free! No cost to you",
     intro: [
-      "If you live in Perthshire, Home Money Check can help you review the household services you already use and see whether there is a better deal available.",
-      "We'll look at your energy, broadband, Mobile SIMs and home services, then explain your options clearly so you can decide what works best for your home.",
+      "Everyone is feeling the pinch at the moment and your household bills probably aren’t helping! We can’t promise any miracles but we can promise to do our best to help you save money.",
+      "Here at Home Money Check we’ll discuss what you pay for, what you use, what you actually need and if we can help you get a cheaper deal. If we can help you save then great. And if we can’t, we’ll tell you straight away.",
     ],
-    coversHeading: "What this check covers",
+    checklistHeading: "Your Perthshire personal bills check includes:",
+    introHeading: "Are your bills too expensive?",
+    coversHeading: "What we check",
     covers: [
       "Gas and electricity",
-      "Broadband availability for your address",
-      "Mobile SIM deals",
-      "Household service bundles",
-      "Current offers and savings opportunities",
+      "Broadband",
+      "Mobile SIMs",
+      "Current offers",
+      "Bundle options",
+      "Cashback promotions",
     ],
-    audienceHeading: "Who it is for",
+    audienceHeading: "This is for you if...",
     audience: [
-      "Perthshire households looking to reduce bills",
-      "Homeowners, tenants and families",
-      "People moving home in or around Perthshire",
-      "Anyone who wants a simple local check before switching",
+      "Your bills are getting more expensive or are too high",
+      "You’d like to see if you can get a better deal",
+      "You pay for your own electricity, gas, or broadband",
+      "You are moving home soon and need new services",
+      "You have a mobile phone and want a SIM only deal",
     ],
     noPressure:
-      "This is about helping you understand your options. We'll show you what is available, explain the costs and let you decide whether it fits.",
-    formTitle: "Start your Perthshire bills check",
+      "We’ll talk you through a new quote, discuss your options and what’s available for you and your home. We can get your new deal in place quickly and with minimal fuss. You are always in control.",
+    formTitle: "Pop in your details",
+    formIntro: "Let us know what’s important to you and how to get in touch.",
     formChoiceLabel: "What would you like checked?",
-    formChoices: householdCheckChoices,
+    formChoices: householdBillsFunnelChoices,
     defaultCheck: { key: "perthshire-bills-check", label: "Perthshire Bills Check" },
   },
   "dundee-bills-check": {
     slug: "dundee-bills-check",
     metadataTitle: "Dundee Bills Check | Home Money Check",
-    eyebrow: "Dundee household bills",
-    title: "Dundee household bills check",
+    metadataDescription:
+      "Check if Home Money Check can help you save money on gas, electricity, broadband and Mobile SIMs for your Dundee home.",
+    eyebrow: "HOUSEHOLD BILLS CHECK",
+    title: "Dundee - let’s see if we can save you money!",
     subtitle:
-      "A free household bills check for people in Dundee who want to review energy, broadband, mobile and home services.",
-    ctaLabel: "Start my Dundee bills check",
-    reassurance: "No cost to you. No obligation.",
+      "Pop in your details below and we’ll check if we can save you money on your household bills.",
+    ctaLabel: "Start my bills check",
+    reassurance: "Free! No cost to you",
     intro: [
-      "If you live in Dundee, Home Money Check can help you check the services you already use and see whether your household could get a better deal.",
-      "We'll talk through your current bills, what your household needs and what options are available for your address.",
+      "Everyone is feeling the pinch at the moment and your household bills probably aren’t helping! We can’t promise any miracles but we can promise to do our best to help you save money.",
+      "Here at Home Money Check we’ll discuss what you pay for, what you use, what you actually need and if we can help you get a cheaper deal. If we can help you save then great. And if we can’t, we’ll tell you straight away.",
     ],
-    coversHeading: "What this check covers",
+    checklistHeading: "Your Dundee personal bills check includes:",
+    introHeading: "Are your bills too expensive?",
+    coversHeading: "What we check",
     covers: [
       "Gas and electricity",
-      "Broadband and home internet",
-      "Mobile SIM deals",
-      "Home service bundles",
-      "Current offers and savings opportunities",
+      "Broadband",
+      "Mobile SIMs",
+      "Current offers",
+      "Bundle options",
+      "Cashback promotions",
     ],
-    audienceHeading: "Who it is for",
+    audienceHeading: "This is for you if...",
     audience: [
-      "Dundee households who want to check their bills",
-      "Families with energy, broadband and mobile costs to review",
-      "People moving home in Dundee",
-      "Anyone who wants a clearer deal before deciding",
+      "Your bills are getting more expensive or are too high",
+      "You’d like to see if you can get a better deal",
+      "You pay for your own electricity, gas, or broadband",
+      "You are moving home soon and need new services",
+      "You have a mobile phone and want a SIM only deal",
     ],
     noPressure:
-      "We'll explain your options in plain English. If there is a saving or a better fit, we'll show you. If not, you can leave it there.",
-    formTitle: "Start your Dundee bills check",
+      "We’ll talk you through a new quote, discuss your options and what’s available for you and your home. We can get your new deal in place quickly and with minimal fuss. You are always in control.",
+    formTitle: "Pop in your details",
+    formIntro: "Let us know what’s important to you and how to get in touch.",
     formChoiceLabel: "What would you like checked?",
-    formChoices: householdCheckChoices,
+    formChoices: householdBillsFunnelChoices,
     defaultCheck: { key: "dundee-bills-check", label: "Dundee Bills Check" },
   },
   "staff-bills-check": {
     slug: "staff-bills-check",
-    metadataTitle: "Your Staff's Bills Check | Home Money Check",
-    eyebrow: "Staff wellbeing support",
-    title: "Give your staff a free household bills check",
+    metadataTitle: "Your Staff’s Bills Check | Home Money Check",
+    metadataDescription:
+      "Offer your staff a free Home Money Check to help them check household bills including gas, electricity, broadband and Mobile SIMs.",
+    eyebrow: "YOUR STAFF’S BILLS CHECK",
+    title: "Let’s help your staff to save money!",
     subtitle:
-      "A simple no-cost way to give your team access to a private household bills check covering energy, broadband, mobile and home services.",
-    ctaLabel: "Ask about staff bills checks",
-    reassurance: "No cost to the employer. A practical extra benefit for your team.",
+      "Give your staff access to a free Home Money Check. We’ll check the household bills they already pay, explain their options clearly, and help them see if they can save money.",
+    ctaLabel: "Discuss a staff bills check",
+    reassurance: "Free staff benefit",
     intro: [
       "Many employees are under pressure from household bills. A staff bills check gives your team a simple way to review energy, broadband, mobile and home services without you needing to manage the advice yourself.",
       "Home Money Check can provide a clear way for staff to ask for help, understand their options and see whether a better deal is available.",
@@ -205,7 +221,9 @@ export const campaignPages = {
     ],
     noPressure:
       "Staff are free to ask, free to listen and free to decide. The aim is to give them a simple way to check their household bills and understand their options.",
-    formTitle: "Ask about staff bills checks",
+    formTitle: "Discuss a staff bills check",
+    formIntro:
+      "Pop in your details and we’ll get in touch to talk through how this could work for your workplace.",
     defaultCheck: { key: "staff-bills-check", label: "Staff Bills Check" },
     contextField: {
       label: "Are you enquiring as...",
