@@ -2,783 +2,531 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowUpRight,
+  ArrowDown,
+  ArrowRight,
+  Banknote,
+  Check,
+  CreditCard,
   Gift,
-  Home,
-  Landmark,
+  HeartHandshake,
+  House,
+  Layers,
+  ReceiptText,
   ShieldCheck,
-  FileText,
-  Sparkles,
-  Wifi,
-  Zap,
-  Smartphone,
-  UsersRound,
-  HeartPulse,
+  TrendingUp,
+  Users,
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import { DesktopNavigation, MobileNavigation } from "@/components/SiteNavigation";
-import { LeadFormPreview } from "@/components/LeadFormPreview";
-import { SiteFooter } from "@/components/SiteFooter";
-import { WhatHappensNext } from "@/components/WhatHappensNext";
-import { getHomepageContent } from "@/lib/homepageContent";
-
-export const dynamic = "force-dynamic";
+import { FocusedBillsForm } from "@/components/home/FocusedBillsForm";
+import { SiteFooter } from "@/components/home/SiteFooter";
+import { SiteHeader } from "@/components/home/SiteHeader";
 
 export const metadata: Metadata = {
-  title: "Home Money Check | Check deals for your home, money and future",
+  title: "Home Money Check | See how much you could save",
   description:
-    "Check household bills, planning, protection and selected business services in one place. Tell us what you want checked and we’ll help you take the next step.",
+    "Get a free Home Money Check for your gas, electricity and broadband. We check the available deals, savings, cashback and switching support for your household.",
   openGraph: {
-    title: "Home Money Check | Check deals for your home, money and future",
+    title: "Home Money Check | See how much you could save",
     description:
-      "Check household bills, planning, protection and selected business services in one place. Tell us what you want checked and we’ll help you take the next step.",
+      "A free household bills check that does everything it can to help you save money.",
     type: "website",
   },
 };
 
-type HeroTileItem = {
-  title: string;
-  note: string;
-  href: string;
-  icon: LucideIcon;
-  bg: string;
-  colour: string;
-  mobileClass: string;
-  className: string;
-  big?: boolean;
-};
-
-type RouteGroupItem = {
-  label: string;
-  bg: string;
-  colour: string;
-  items: {
-    label: string;
-    href: string;
-  }[];
-};
-
-const heroTiles: HeroTileItem[] = [
+const savingRoutes = [
   {
-    title: "Household Bills",
-    note: "Your main home services check",
-    href: "/energy",
-    icon: Home,
-    bg: "#F7F0E8",
-    colour: "#622C91",
-    mobileClass: "rotate-[-1.25deg]",
-    className:
-      "lg:absolute lg:left-[5%] lg:top-[17%] lg:h-[255px] lg:w-[310px] lg:rotate-[-2deg]",
-    big: true,
+    number: "01",
+    title: "Cheaper household services",
+    body: "We check available gas, electricity and broadband prices and search for services that cost your household less.",
+    icon: Banknote,
+    style: "bg-[#3D145F] text-white",
+    iconStyle: "bg-[#22C86B] text-[#12371F]",
+    bodyStyle: "text-white/72",
   },
   {
-    title: "Energy",
-    note: "Gas and electricity",
-    href: "/energy",
-    icon: Zap,
-    bg: "#F4CF7A",
-    colour: "#6B4611",
-    mobileClass: "mt-4 rotate-[1.75deg]",
-    className:
-      "lg:absolute lg:left-[42%] lg:top-[4%] lg:mt-0 lg:h-[178px] lg:w-[215px] lg:rotate-[4deg]",
+    number: "02",
+    title: "Stack savings by combining services",
+    body: "Combining the right services can reduce your bill and add extra offers.",
+    icon: Layers,
+    style: "bg-white text-[#2C2033] ring-1 ring-inset ring-[#D9A914]/40",
+    iconStyle: "bg-[#FFF1B8] text-[#3D145F]",
+    bodyStyle: "text-[#625667]",
   },
   {
-    title: "Broadband",
-    note: "Home internet",
-    href: "/broadband",
-    icon: Wifi,
-    bg: "#BFE3FF",
-    colour: "#245984",
-    mobileClass: "mt-1 rotate-[-0.75deg]",
-    className:
-      "lg:absolute lg:right-[7%] lg:top-[12%] lg:mt-0 lg:h-[174px] lg:w-[226px] lg:rotate-[-1deg]",
+    number: "03",
+    title: "The right services for you and your household",
+    body: "We check the speed, data and features you need, so you only pay for what you will use.",
+    icon: House,
+    style: "bg-[#2B1535] text-white",
+    iconStyle: "bg-[#22C86B] text-[#12371F]",
+    bodyStyle: "text-white/70",
   },
   {
-    title: "Mobile SIMs",
-    note: "Mobile SIM deals",
-    href: "/mobile",
-    icon: Smartphone,
-    bg: "#F4D9DE",
-    colour: "#7C3845",
-    mobileClass: "mt-5 rotate-[-1.75deg]",
-    className:
-      "lg:absolute lg:left-[38%] lg:top-[31%] lg:mt-0 lg:h-[174px] lg:w-[210px] lg:rotate-[-3deg]",
-  },
-  {
-    title: "Prize draw",
-    note: "£20K Giveaway",
-    href: "/20k-giveaway",
-    icon: Gift,
-    bg: "#EADFFD",
-    colour: "#5F2D8C",
-    mobileClass: "mt-2 rotate-[1.25deg]",
-    className:
-      "lg:absolute lg:right-[2%] lg:top-[37%] lg:mt-0 lg:h-[184px] lg:w-[232px] lg:rotate-[3deg]",
-  },
-  {
-    title: "Mortgage",
-    note: "Buying or remortgage",
-    href: "/mortgage",
-    icon: Landmark,
-    bg: "#D8EEFF",
-    colour: "#245984",
-    mobileClass: "mt-4 rotate-[0.75deg]",
-    className:
-      "lg:absolute lg:left-[7%] lg:bottom-[17%] lg:mt-0 lg:h-[170px] lg:w-[228px] lg:rotate-[1deg]",
-  },
-  {
-    title: "Protection",
-    note: "Life and family cover",
-    href: "/protection",
-    icon: ShieldCheck,
-    bg: "#F5D28A",
-    colour: "#6B4611",
-    mobileClass: "mt-1 rotate-[-1.25deg]",
-    className:
-      "lg:absolute lg:left-[26%] lg:bottom-[31%] lg:mt-0 lg:h-[160px] lg:w-[228px] lg:rotate-[3deg]",
-  },
-  {
-    title: "Medical",
-    note: "Private medical cover",
-    href: "/private-medical-insurance",
-    icon: HeartPulse,
-    bg: "#BFD9C8",
-    colour: "#173E29",
-    mobileClass: "mt-5 rotate-[1.75deg]",
-    className:
-      "lg:absolute lg:right-[19%] lg:bottom-[20%] lg:mt-0 lg:h-[176px] lg:w-[216px] lg:rotate-[2deg]",
-  },
-  {
-    title: "Wills and POAs",
-    note: "Wills and POAs",
-    href: "/estate-planning",
-    icon: FileText,
-    bg: "#F7D5C8",
-    colour: "#5F2D8C",
-    mobileClass: "mt-2 rotate-[-0.75deg]",
-    className:
-      "lg:absolute lg:left-[21%] lg:bottom-[0%] lg:mt-0 lg:h-[182px] lg:w-[260px] lg:rotate-[3deg]",
-  },
-  {
-    title: "Partner with us",
-    note: "Make extra money",
-    href: "/partner-with-us",
-    icon: UsersRound,
-    bg: "#D9C2F4",
-    colour: "#4F247D",
-    mobileClass: "mt-4 rotate-[-1.25deg]",
-    className:
-      "lg:absolute lg:right-[2%] lg:bottom-[2%] lg:mt-0 lg:h-[178px] lg:w-[236px] lg:rotate-[-2deg]",
+    number: "04",
+    title: "Cashback and help with switching costs",
+    body: "Cashback can reduce your ongoing bill, while switching support can help with current contract costs.",
+    icon: CreditCard,
+    style: "bg-[#EAB929] text-[#312006]",
+    iconStyle: "bg-[#FFF7D9] text-[#3D145F]",
+    bodyStyle: "text-[#4D350A]",
   },
 ];
 
-const routeGroups: RouteGroupItem[] = [
+const process = [
   {
-    label: "Household bill checks",
-    bg: "#F7F0E8",
-    colour: "#622C91",
-    items: [
-      { label: "Energy", href: "/energy" },
-      { label: "Broadband", href: "/broadband" },
-      { label: "Mobile SIM deals", href: "/mobile" },
-      { label: "£20K Giveaway", href: "/20k-giveaway" },
-    ],
+    number: "01",
+    title: "Tell us what you want checked",
+    body: "Choose the bills you want checked and let us know how to contact you. We’ll get in touch for a chat.",
   },
   {
-    label: "Mortgage, insurance & planning",
-    bg: "#EADFFD",
-    colour: "#5F2D8C",
-    items: [
-      { label: "Mortgages", href: "/mortgage" },
-      { label: "Protection", href: "/protection" },
-      { label: "Private medical insurance", href: "/private-medical-insurance" },
-      { label: "Wills and POAs", href: "/estate-planning" },
-    ],
+    number: "02",
+    title: "We review your bills and build your quote",
+    body: "We review what you pay, check what your household needs and build a quote for your chosen services and offers.",
   },
   {
-    label: "Business & income checks",
-    bg: "#D9E1E8",
-    colour: "#263646",
-    items: [
-      { label: "Partner with us", href: "/partner-with-us" },
-      { label: "Business utilities", href: "/business-utilities" },
-      { label: "Finance/bookkeeping", href: "/finance-services" },
-      { label: "Business protection", href: "/business-protection" },
-      { label: "Business continuity", href: "/business-continuity" },
-    ],
+    number: "03",
+    title: "See your new costs and savings",
+    body: "We’ll talk through your new quote and all the potential savings.",
   },
 ];
 
-const fallbackUpdates = [
-  { label: "Featured", text: "£20K Giveaway", tone: "#EADFFD" },
-  { label: "Home", text: "Household bills worth checking", tone: "#F7F0E8" },
-  { label: "Business", text: "Business utilities", tone: "#D9E1E8" },
+const faqs = [
+  {
+    question: "How could a Home Money Check save me money?",
+    answer:
+      "We look at your current bills, then build a household services quote around what you use. Savings may come from a cheaper price, choosing a better-fit package, combining services, cashback or eligible switching support.",
+  },
+  {
+    question: "Is the check free and is there any obligation?",
+    answer:
+      "There is no charge for your Home Money Check and there is no obligation. We explain the quote, costs and potential savings before you decide if it is right for you.",
+  },
+  {
+    question: "Will every household save money?",
+    answer:
+      "Every household starts with different prices, contracts and needs. We calculate your quote using your own information and do everything we can to find a saving. We can’t promise to find a saving every time, and if that’s the case, we’ll be upfront and tell you.",
+  },
+  {
+    question: "What can you check?",
+    answer:
+      "We focus on gas, electricity and broadband. We can also include Mobile SIMs, EV tariffs, the Cashback Card and eligible help with existing termination fees when we build your quote.",
+  },
+  {
+    question: "What cashback and switching support is available?",
+    answer:
+      "Eligible customers may receive up to £400 towards early termination fees and up to £150 in Cashback Card bonus credit when switching qualifying services. The Cashback Card can also earn cashback from everyday spending to reduce the monthly household bill. Eligibility and terms apply.",
+  },
+  {
+    question: "Which company provides the household services?",
+    answer:
+      "Household utility quotes use Utility Warehouse services. We check the available services and offers against what your household needs, then talk through the quote with you and highlight any savings that can be made.",
+  },
 ];
 
-const homepageProfile = {
-  name: "Neill",
-  image: "/images/neill-connolly-profile.webp",
-  heading: "A note from Neill",
-  paragraphs: [
-    "I set up Home Money Check to help people check the services they already use, spot better options where possible, and help them save money, not just now, but for the long term.",
-    "Most households have bills, policies, plans or paperwork that could be reviewed. My aim is to make that easier, explain it simply and help you get the best deals.",
-    "If we can help you make a great saving, improve something, or get a product or service more suited to what you actually need, then we'll have done our job.",
-  ],
-  closing: "We’d love to help you too.",
-};
-
-// Admin editable later: campaign visibility on/off, pill label, title,
-// middle/central content area, lower box text, and an optional button/link.
-const fallbackCampaign = {
-  isVisible: true,
-  label: "Current campaign",
-  title: "£20K Giveaway",
-  titleAccent: "£20K",
-  titleMain: "Giveaway",
-  // Admin field later: central campaign content area.
-  body:
-    "A premium campaign panel that can be changed or hidden when the featured push changes.",
-  // Admin field later: middle/central campaign content area.
-  middleContent:
-    "A premium campaign panel that can be changed or hidden when the featured push changes.",
-  // Admin field later: lower pill/box text.
-  lowerBoxText:
-    "A premium campaign panel that can be changed or hidden when the featured push changes.",
-};
-
-const enquiryOptions = [
-  "Household bills",
-  "Energy",
-  "Broadband",
-  "Mobile SIM deals",
-  "£20K Giveaway",
-  "Mortgages",
-  "First-time buyers",
-  "Remortgages",
-  "Moving home",
-  "Protection",
-  "Private medical insurance",
-  "Wills and POAs",
-  "Partner with us",
-  "Business utilities",
-  "Finance/bookkeeping",
-  "Business protection",
-  "Business continuity",
-];
-
-function BrandMark({ priority = false }: { priority?: boolean }) {
+export default function HomePage() {
   return (
-    <div className="flex items-center">
-      <Image
-        alt="Home Money Check"
-        className="h-14 w-auto object-contain md:h-16"
-        height={88}
-        priority={priority}
-        sizes="(min-width: 768px) 248px, 216px"
-        src="/brand/hmc-logo-full-transparent.png"
-        width={248}
-      />
-    </div>
-  );
-}
+    <div className="min-h-screen overflow-x-clip bg-[#FFFDF8] text-[#261B2E]">
+      <SiteHeader />
 
-function HeroTile({ item }: { item: HeroTileItem }) {
-  const Icon = item.icon;
-  const titleSize = item.big
-    ? "text-4xl md:text-[2.7rem]"
-    : item.title.length > 11
-      ? "text-[1.55rem]"
-      : "text-2xl";
+      <main>
+        <section className="relative isolate overflow-hidden px-5 pb-16 pt-10 sm:px-8 lg:pb-20 lg:pt-14">
+          <div className="pointer-events-none absolute -right-48 bottom-0 -z-10 h-[34rem] w-[34rem] rounded-full bg-[#E8D7F6]/55 blur-3xl" />
 
-  return (
-    <Link
-      aria-label={`Open ${item.title} check`}
-      className={`group relative block h-[185px] min-w-[230px] snap-start transform-gpu cursor-pointer overflow-hidden rounded-[2rem] p-5 no-underline shadow-[0_22px_60px_rgba(44,31,61,0.24)] ring-1 ring-white/40 transition-all duration-300 ease-out hover:z-20 hover:-translate-y-3 hover:rotate-0 hover:scale-[1.025] hover:shadow-[0_34px_86px_rgba(44,31,61,0.31)] focus-visible:z-20 focus-visible:ring-4 focus-visible:ring-[#FDCA55] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)] ${item.big ? "h-[220px] min-w-[285px]" : ""} ${item.mobileClass} lg:min-w-0 ${item.className}`}
-      href={item.href}
-      style={{ backgroundColor: item.bg, color: item.colour }}
-    >
-      <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/38 transition-all duration-300 ease-out group-hover:scale-110 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]" />
-      <div className="absolute -bottom-14 left-8 h-24 w-24 rounded-full bg-white/22 transition-all duration-300 ease-out group-hover:scale-110 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]" />
-      <div className="relative flex h-full flex-col justify-between gap-5">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/60 shadow-sm transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:bg-white/80 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]">
-            <Icon className="h-6 w-6" strokeWidth={2.45} />
-          </div>
-          <ArrowUpRight
-            className="h-5 w-5 opacity-45 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-85 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
-            strokeWidth={2.6}
-          />
-        </div>
-        <div>
-          <h3 className={`display-font ${titleSize} font-black leading-[0.96] tracking-[-0.015em]`}>
-            {item.title}
-          </h3>
-          <p className={`${item.big ? "mt-3 text-base" : "mt-2 text-sm"} max-w-[16rem] font-extrabold leading-5 opacity-72`}>
-            {item.note}
-          </p>
-        </div>
-      </div>
-    </Link>
-  );
-}
-
-function RouteGroup({ group }: { group: RouteGroupItem }) {
-  return (
-    <div
-      className="group relative transform-gpu overflow-hidden rounded-[2rem] p-5 shadow-[0_18px_55px_rgba(44,31,61,0.12)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_26px_72px_rgba(44,31,61,0.16)] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
-      style={{ backgroundColor: group.bg, color: group.colour }}
-    >
-      <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/35" />
-      <div className="relative">
-        <p className="display-font mb-4 text-lg font-black leading-5 tracking-[-0.015em] opacity-85">
-          {group.label}
-        </p>
-        <div className="grid gap-2">
-          {group.items.map((item) => (
-            <Link
-              key={item.href}
-              className="inline-flex min-h-12 w-full transform-gpu items-center justify-between gap-3 rounded-[1.15rem] bg-white/62 px-4 py-3 text-sm font-black leading-5 shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/85 hover:shadow-[0_10px_24px_rgba(44,31,61,0.10)] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
-              href={item.href}
-            >
-              <span className="min-w-0">{item.label}</span>
-              <ArrowUpRight className="h-4 w-4 shrink-0" strokeWidth={2.7} />
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function CampaignTitle({
-  title,
-  titleAccent,
-  titleMain,
-}: {
-  title: string;
-  titleAccent?: string | null;
-  titleMain?: string | null;
-}) {
-  const [first, ...rest] = title.split(" ");
-  const accent = titleAccent || first;
-  const main = titleMain || (rest.length > 0 ? rest.join(" ") : "");
-
-  return (
-    <>
-      <span className="text-[#F4CF7A]">{accent}</span>{" "}
-      {main}
-    </>
-  );
-}
-
-export default async function HomeMoneyCheckHomepage() {
-  const homepageContent = await getHomepageContent();
-  const featuredCampaign =
-    homepageContent.campaignError
-      ? fallbackCampaign
-      : homepageContent.campaign
-        ? {
-            isVisible: homepageContent.campaign.is_live,
-            label: homepageContent.campaign.label || fallbackCampaign.label,
-            middleContent:
-              homepageContent.campaign.middle_content ||
-              fallbackCampaign.middleContent,
-            lowerBoxText: homepageContent.campaign.lower_text || fallbackCampaign.lowerBoxText,
-            title: homepageContent.campaign.title || fallbackCampaign.title,
-            titleAccent: homepageContent.campaign.title_accent,
-            titleMain: homepageContent.campaign.title_main,
-          }
-        : null;
-  const updates =
-    homepageContent.noticeboardError || homepageContent.noticeboardItems === undefined
-      ? fallbackUpdates
-      : homepageContent.noticeboardItems.map((item) => ({
-          label: item.label || item.category || "Update",
-          text: item.title || item.body || "Worth checking",
-          tone: item.accent_colour || "#EADFFD",
-        }));
-
-  return (
-    <div
-      className="min-h-screen max-w-full overflow-x-hidden bg-[#6A35A0] text-[#F7F0E8]"
-      style={{ fontFamily: "'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif" }}
-    >
-      <div className="pointer-events-none fixed inset-0 hidden overflow-hidden md:block">
-        <div className="absolute -left-28 top-12 h-96 w-96 rounded-full bg-[#8E52C4]/20" />
-        <div className="absolute right-0 top-64 h-[30rem] w-[30rem] rounded-full bg-[#4F247D]/24" />
-        <div className="absolute bottom-20 left-1/3 h-80 w-80 rounded-full bg-[#F4CF7A]/14" />
-        <div className="absolute -bottom-24 right-1/4 h-64 w-64 rotate-[18deg] rounded-[4rem] bg-[#EADFFD]/12" />
-      </div>
-
-      <header className="relative z-20 px-4 pt-5 md:px-7">
-        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-[1.75rem] border border-white/12 bg-white/10 px-4 py-3 shadow-[0_18px_70px_rgba(44,31,61,0.22)] backdrop-blur-xl md:px-5">
-          <BrandMark priority />
-          <DesktopNavigation />
-          <div className="flex items-center gap-2">
-            <a
-              className="hidden transform-gpu rounded-full bg-[#22C55E] px-5 py-3 text-sm font-black text-[#2C1F3D] shadow-[0_12px_32px_rgba(34,197,94,0.24)] transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[#32D86A] hover:shadow-[0_18px_42px_rgba(34,197,94,0.28)] md:block"
-              href="#lead-form"
-            >
-              Start my check
-            </a>
-            <MobileNavigation />
-          </div>
-        </div>
-      </header>
-
-      <main className="relative z-10 max-w-full overflow-x-hidden">
-        <section className="relative mx-auto grid max-w-7xl gap-6 overflow-hidden px-5 pb-12 pt-12 md:px-8 md:pb-16 md:pt-16 lg:min-h-[820px] lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:overflow-visible">
-          <div className="pointer-events-none absolute left-[2%] top-[18%] hidden h-24 w-24 rounded-full bg-[#BFE3FF]/42 md:block" />
-          <div className="pointer-events-none absolute right-[9%] top-[8%] hidden h-32 w-32 rounded-bl-[6rem] bg-[#F4CF7A]/38 lg:block" />
-          <div className="pointer-events-none absolute bottom-[12%] left-[32%] hidden h-20 w-20 rotate-[12deg] rounded-[1.5rem] bg-[#CFE6D5]/34 lg:block" />
-          <div className="pointer-events-none absolute bottom-[24%] right-[1%] hidden h-28 w-28 rounded-full bg-[#F7F0E8]/16 lg:block" />
-          <div className="pointer-events-none absolute left-[45%] top-[8%] hidden h-14 w-14 rotate-[-10deg] rounded-[1.1rem] bg-[#F4D9DE]/35 lg:block" />
-          <div className="relative z-10 min-w-0 max-w-full">
-            <div className="mb-7 inline-flex max-w-full items-start gap-3 rounded-full bg-[#F7F0E8] px-5 py-3 text-sm font-black text-[#5F2D8C] shadow-[0_14px_45px_rgba(44,31,61,0.22)] sm:items-center">
-              <Sparkles className="h-4 w-4 shrink-0 text-[#D89B2B]" strokeWidth={2.7} />
-              <span className="min-w-0">Getting better deals for you and your home</span>
-            </div>
-
-            <h1 className="max-w-4xl">
-              <span className="display-font block text-[4.7rem] leading-[0.86] tracking-[-0.015em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.83] lg:text-[7.35rem]">
-                Home
-              </span>
-              <span className="display-font block text-[4.7rem] leading-[0.84] tracking-[-0.015em] text-[#F4CF7A] drop-shadow-[0_10px_24px_rgba(44,31,61,0.18)] md:text-[7.05rem] md:leading-[0.81] lg:text-[7.35rem]">
-                Money
-              </span>
-              <span className="mt-1 flex w-fit max-w-full items-center md:mt-2">
-                <span className="block text-[3.45rem] font-black leading-[0.88] tracking-[-0.075em] text-[#F7F0E8] md:text-[5.25rem] lg:text-[5.65rem]">
-                  Checked
-                </span>
+          <div className="mx-auto grid max-w-[86rem] items-center gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14">
+            <div className="max-w-3xl">
+              <p className="inline-flex items-center gap-2 border-b-2 border-[#EAB929] pb-3 text-xs font-extrabold uppercase tracking-[0.19em] text-[#5B2388]">
                 <Image
-                  src="/brand/hmc-tick-icon-transparent.png"
                   alt=""
-                  width={220}
-                  height={180}
-                  priority
-                  sizes="(min-width: 1024px) 182px, (min-width: 768px) 182px, 118px"
-                  className="-ml-3 -mt-4 h-[5.9rem] w-[7.4rem] shrink-0 object-contain drop-shadow-[0_10px_16px_rgba(79,36,125,0.22)] md:-ml-5 md:-mt-7 md:h-[9.2rem] md:w-[11.4rem] lg:-ml-6 lg:-mt-5"
+                  className="h-7 w-7 rounded-[0.45rem] object-cover"
+                  height={64}
+                  src="/brand/hmc-tick-icon-purple.png"
+                  width={64}
                 />
-              </span>
-            </h1>
-
-            <p className="mt-7 max-w-full text-xl font-semibold leading-8 text-[#F7F0E8]/78 md:max-w-2xl md:text-2xl md:leading-9">
-              Better deals for your home, money and future.
-            </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <a
-                className="group inline-flex w-full transform-gpu items-center justify-center gap-2 rounded-full bg-[#22C55E] px-7 py-4 text-base font-black text-[#2C1F3D] shadow-[0_18px_50px_rgba(34,197,94,0.25)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.01] hover:bg-[#32D86A] hover:shadow-[0_22px_54px_rgba(34,197,94,0.28)] sm:w-auto md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
-                href="#lead-form"
-              >
-                Start a free check
-                <ArrowUpRight className="h-5 w-5 transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]" strokeWidth={2.6} />
-              </a>
-              <a
-                className="inline-flex w-full transform-gpu items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-7 py-4 text-base font-black text-[#F7F0E8] backdrop-blur transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/16 sm:w-auto md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
-                href="#checks"
-              >
-                Explore checks
-              </a>
-            </div>
-            <div className="mt-5 flex items-center gap-2 text-sm font-extrabold text-[#F7F0E8]/70 lg:hidden">
-              <span className="h-2 w-8 rounded-full bg-[#F4CF7A]" />
-              Swipe the cards to choose a check
-            </div>
-          </div>
-
-          <div className="relative z-10 min-h-[300px] max-w-full overflow-hidden md:min-h-[320px] lg:mx-0 lg:min-h-[770px] lg:overflow-visible">
-            <div className="absolute left-[2%] top-[4%] hidden h-24 w-24 rounded-full bg-[#BFE3FF] opacity-80 shadow-[0_24px_60px_rgba(44,31,61,0.18)] lg:block" />
-            <div className="absolute right-[16%] top-[2%] hidden h-20 w-20 rotate-[12deg] rounded-[1.5rem] bg-[#F4CF7A] opacity-95 shadow-[0_24px_60px_rgba(44,31,61,0.2)] lg:block" />
-            <div className="absolute bottom-[7%] right-[28%] hidden h-24 w-24 rounded-full bg-[#BFD9C8] opacity-90 shadow-[0_24px_60px_rgba(44,31,61,0.18)] lg:block" />
-            <div className="absolute bottom-[12%] left-[46%] hidden h-14 w-14 rotate-[-8deg] rounded-[1rem] bg-[#F4D9DE] opacity-90 shadow-[0_16px_45px_rgba(44,31,61,0.18)] lg:block" />
-            <div className="absolute right-[2%] top-[64%] hidden h-16 w-16 rounded-full bg-[#F7F0E8] opacity-70 shadow-[0_16px_45px_rgba(44,31,61,0.18)] lg:block" />
-            <div className="absolute left-[0%] top-[49%] hidden h-28 w-28 rotate-[10deg] rounded-[2rem] bg-[#EADFFD] opacity-55 shadow-[0_18px_50px_rgba(44,31,61,0.16)] lg:block" />
-            <div className="absolute left-[51%] top-[24%] hidden h-16 w-16 rotate-[-12deg] rounded-[1.25rem] bg-[#F7F0E8] opacity-45 shadow-[0_16px_45px_rgba(44,31,61,0.14)] lg:block" />
-            <div className="absolute bottom-[28%] right-[10%] hidden h-20 w-20 rotate-[14deg] rounded-[1.6rem] bg-[#F4CF7A] opacity-50 shadow-[0_16px_45px_rgba(44,31,61,0.14)] lg:block" />
-
-            <div className="flex max-w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-10 pt-2 scroll-px-0 md:px-0 lg:block lg:h-full lg:overflow-visible lg:px-0 lg:pb-0 lg:pt-0">
-              {heroTiles.map((tile) => (
-                <HeroTile key={tile.title} item={tile} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="relative overflow-hidden bg-[#F7F0E8] px-5 py-12 text-[#2C1F3D] md:px-8 md:py-16">
-          <div className="absolute -right-20 top-8 hidden h-56 w-56 rounded-full bg-[#EADFFD] blur-3xl md:block" />
-          <div className="absolute -left-20 bottom-8 hidden h-56 w-56 rounded-[3rem] bg-[#F4CF7A]/35 blur-3xl md:block" />
-          <div id="checks" className="relative mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.72fr_1.28fr] lg:items-stretch">
-            <div className="relative overflow-hidden rounded-[2.3rem] bg-[#6A35A0] p-7 text-[#F7F0E8] shadow-[0_24px_70px_rgba(44,31,61,0.18)] md:p-9">
-              <div className="absolute -bottom-12 -right-10 h-28 w-28 rotate-[14deg] rounded-[2rem] bg-[#F4CF7A]/35" />
-              <p className="mb-4 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
-                Check services
+                Your free household bills check
               </p>
-              <h2 className="display-font relative z-10 max-w-[12ch] text-5xl font-black leading-[0.95] tracking-[-0.015em] md:text-6xl">
-                Choose your check
-              </h2>
-              <Image
-                src="/brand/hmc-tick-icon-transparent.png"
-                alt=""
-                width={220}
-                height={180}
-                sizes="(min-width: 768px) 160px, 128px"
-                className="pointer-events-none absolute bottom-1 right-12 h-24 w-32 object-contain drop-shadow-[0_10px_16px_rgba(79,36,125,0.2)] md:bottom-2 md:right-14 md:h-32 md:w-40"
-              />
-            </div>
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {routeGroups.map((group) => (
-                <RouteGroup key={group.label} group={group} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-[#F7F0E8] px-5 pb-12 text-[#2C1F3D] md:px-8 md:pb-16">
-          <div className="mx-auto grid max-w-7xl items-stretch gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.9fr)]">
-            <div className="flex flex-col gap-5 self-stretch">
-              <div className="relative overflow-hidden rounded-[2.75rem] bg-[#5F2D8C] p-9 text-[#F7F0E8] shadow-[0_30px_90px_rgba(44,31,61,0.22)] md:p-12">
-                <div className="absolute -right-20 -top-28 hidden h-80 w-80 rounded-full bg-[#EADFFD]/20 blur-3xl md:block" />
-                <div className="absolute bottom-8 right-10 hidden h-24 w-24 rounded-full bg-[#BFE3FF]/18 md:block" />
-                <div className="absolute right-24 top-20 hidden h-14 w-14 rotate-[14deg] rounded-[1.1rem] bg-[#F4D9DE]/22 md:block" />
-                <div className="absolute bottom-28 left-8 hidden h-16 w-16 rotate-[-9deg] rounded-[1.35rem] bg-[#F7F0E8]/10 md:block" />
-                <div className="absolute left-[58%] top-[48%] hidden h-8 w-8 rounded-full bg-[#CFE6D5]/24 lg:block" />
-                <div className="relative flex min-h-full flex-col gap-8 md:gap-9">
-                  {featuredCampaign ? (
-                    <>
-                      <div>
-                        <p className="mb-5 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
-                          {featuredCampaign.label}
-                        </p>
-                        <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.015em] md:text-7xl">
-                          <CampaignTitle
-                            title={featuredCampaign.title}
-                            titleAccent={featuredCampaign.titleAccent}
-                            titleMain={featuredCampaign.titleMain}
-                          />
-                        </h2>
-                      </div>
-                      <div className="relative max-w-2xl overflow-hidden rounded-[2.25rem] bg-[#F4CF7A] p-8 text-[#4F247D] shadow-[0_24px_64px_rgba(44,31,61,0.23)] ring-1 ring-white/20 md:p-9">
-                        <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/22" />
-                        <div className="absolute -bottom-5 left-8 h-12 w-12 rotate-[12deg] rounded-[1rem] bg-[#EADFFD]/40" />
-                        <p className="relative text-2xl font-black leading-9 tracking-[-0.035em] md:text-[1.75rem] md:leading-10">
-                          {featuredCampaign.middleContent}
-                        </p>
-                      </div>
-                      <div className="max-w-2xl rounded-[1.6rem] bg-white/10 p-6 backdrop-blur ring-1 ring-white/14">
-                        <p className="text-base font-bold leading-7 text-[#F7F0E8]/76">
-                          {featuredCampaign.lowerBoxText}
-                        </p>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div>
-                        <p className="mb-5 w-fit rounded-full bg-[#F4CF7A] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
-                          Current campaign
-                        </p>
-                        <h2 className="display-font max-w-2xl text-5xl font-black leading-[0.95] tracking-[-0.015em] md:text-7xl">
-                          No current campaign
-                        </h2>
-                      </div>
-                      <div className="max-w-2xl rounded-[1.5rem] bg-white/10 p-5 backdrop-blur ring-1 ring-white/12">
-                        <p className="text-base font-bold leading-7 text-[#F7F0E8]/76">
-                          Check back soon for the next featured Home Money Check update.
-                        </p>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-
-              <div className="relative hidden min-h-[230px] overflow-hidden rounded-[2.25rem] border-2 border-[#22C55E]/55 bg-[#F7F0E8] p-6 shadow-[0_18px_50px_rgba(34,197,94,0.12)] lg:block">
-                <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-[#CFE6D5]/80" />
-                <div className="absolute -bottom-10 left-10 h-20 w-20 rotate-[12deg] rounded-[1.4rem] bg-[#FDCA55]/45" />
-                <div className="relative z-10 max-w-md">
-                  <p className="mb-4 w-fit rounded-full bg-[#CFE6D5] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#173E29]">
-                    Updates
-                  </p>
-                  <h2 className="display-font text-[2.15rem] font-black leading-[0.96] tracking-[-0.015em] text-[#2C1F3D]">
-                    Get regular updates from Home Money Check
-                  </h2>
-                  <p className="mt-4 text-sm font-bold leading-6 text-[#2C1F3D]/70">
-                    Stay in the know with money saving ideas and the latest offers.
-                  </p>
-                  <Link
-                    className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#22C55E] px-5 py-3 text-sm font-black text-[#2C1F3D] shadow-[0_12px_32px_rgba(34,197,94,0.2)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#32D86A]"
-                    href="/updates"
-                  >
-                    Sign up for updates
-                    <ArrowUpRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
-
-              <div className="relative hidden min-h-[520px] overflow-hidden rounded-[2.5rem] bg-[#5F2D8C] p-10 text-[#F7F0E8] shadow-[0_18px_54px_rgba(44,31,61,0.14)] ring-1 ring-[#EADFFD]/35 lg:block xl:min-h-[560px] xl:p-11">
-                <div className="absolute right-8 top-10 z-0 h-28 w-28 rounded-full bg-[#BFE3FF]/75" />
-                <div className="absolute bottom-24 right-36 z-0 h-36 w-36 rotate-[12deg] rounded-[2.35rem] bg-[#F4CF7A]/70" />
-                <div className="relative z-10 flex min-h-[440px] flex-col justify-between gap-12 xl:min-h-[478px]">
-                  <p className="w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
-                    Why use Home Money Check
-                  </p>
-                  <div className="grid gap-9">
-                    <div className="w-fit overflow-hidden rounded-[1.75rem] bg-[#4F247D] p-5">
-                      <Image
-                        src="/brand/hmc-logo-full-transparent.png"
-                        alt="Home Money Check"
-                        width={328}
-                        height={118}
-                        sizes="292px"
-                        className="h-24 w-auto object-contain"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="text-3xl font-black leading-[1.02] tracking-[-0.055em] text-[#F7F0E8]">
-                        Friendly help. Quick contact. No obligation.
-                      </h3>
-                      <p className="mt-4 max-w-2xl text-base font-bold leading-7 text-[#F7F0E8]/78">
-                        Tell us what you want checked and we’ll get back to you quickly to help you
-                        understand your options.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {["Friendly help", "Quick contact", "No obligation"].map((point) => (
-                      <span
-                        className="rounded-full bg-[#F7F0E8] px-4 py-2 text-xs font-black text-[#5F2D8C]"
-                        key={point}
-                      >
-                        {point}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div id="lead-form" className="self-start">
-              <LeadFormPreview
-                helperText={
-                  <>
-                    <span className="brand-wordmark-text text-lg tracking-[-0.035em]">
-                      Home Money Check
-                    </span>{" "}
-                    is a friendly check and advice service. Pop in some details here and we'll get
-                    back to you to discuss how we can help. No obligation at all.
-                  </>
-                }
-                messagePlaceholder="Tell us what you’d like help with."
-                requirePostcode
-                sourcePage="/"
-                title="What would you like to check?"
-              />
-            </div>
-          </div>
-          <WhatHappensNext />
-        </section>
-
-        <section className="bg-[#F7F0E8] px-5 pb-14 text-[#2C1F3D] md:px-8 md:pb-20">
-          <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.75fr_1.25fr]">
-            <div className="relative overflow-hidden rounded-[2.5rem] bg-[#EADFFD] p-8 shadow-[0_22px_70px_rgba(44,31,61,0.10)] md:p-10">
-              <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-white/35" />
-              <p className="mb-4 w-fit rounded-full bg-white/65 px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
-                Noticeboard
+              <h1 className="display-font mt-8 max-w-[11ch] text-[clamp(4rem,7.7vw,8rem)] font-black leading-[0.84] tracking-[-0.065em] text-[#3D145F]">
+                Let&rsquo;s see how much you could <span className="relative inline-block text-[#D89F00]">save.</span>
+              </h1>
+              <p className="mt-8 max-w-2xl text-lg font-semibold leading-8 text-[#3F3347] sm:text-xl sm:leading-9">
+                We check your gas, electricity and broadband bills then talk you through a new quote tailored specifically for you and designed to save you money.
               </p>
-              <h2 className="text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-5xl">
-                Worth checking this month.
-              </h2>
-            </div>
-
-            <div className="grid gap-5 md:grid-cols-3">
-              {updates.length > 0 ? updates.map((item) => (
-                <div
-                  key={item.text}
-                  className="group flex min-h-[180px] transform-gpu flex-col justify-between rounded-[2.25rem] p-6 shadow-[0_22px_70px_rgba(44,31,61,0.10)] transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_28px_78px_rgba(44,31,61,0.16)] md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]"
-                  style={{ backgroundColor: item.tone }}
+              <p className="mt-4 max-w-xl text-base font-extrabold leading-7 text-[#3D145F] sm:text-lg">
+                We&rsquo;ll do everything we can to help you save money.
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Link
+                  className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-[#22C86B] px-7 py-4 text-base font-extrabold text-[#12371F] shadow-[0_18px_50px_rgba(34,200,107,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2DD977] focus-visible:outline-[#3D145F]"
+                  href="#arrange-check"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-full bg-white/55 px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-[#5F2D8C]">
-                      {item.label}
-                    </span>
-                    <ArrowUpRight className="h-5 w-5 text-[#5F2D8C] transition-all duration-300 ease-out group-hover:translate-x-1 group-hover:-translate-y-1 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]" />
-                  </div>
-                  <p className="text-2xl font-black leading-[1.05] tracking-[-0.05em] text-[#2C1F3D]">
-                    {item.text}
-                  </p>
-                </div>
-              )) : (
-                <div className="rounded-[2.25rem] bg-[#F7F0E8] p-6 text-lg font-black leading-7 text-[#5F2D8C] shadow-[0_22px_70px_rgba(44,31,61,0.10)] md:col-span-3">
-                  No noticeboard items right now.
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-[#5F2D8C] px-5 py-14 md:px-8 md:py-20">
-          <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="relative min-h-[360px] transform-gpu overflow-hidden rounded-[2.75rem] bg-[#F7F0E8] p-8 text-[#2C1F3D] shadow-[0_30px_90px_rgba(44,31,61,0.25)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_34px_90px_rgba(44,31,61,0.26)] md:p-12 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]">
-              <div className="absolute -right-5 top-6 h-20 w-28 rotate-[10deg] rounded-[1.5rem] bg-[#EADFFD]/55" />
-              <div className="relative z-10 grid h-full min-h-[296px] gap-8 md:grid-cols-[minmax(0,1fr)_14rem]">
-                <div>
-                  <p className="mb-5 w-fit rounded-full bg-[#BFD9C8] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#173E29]">
-                    Trusted advice
-                  </p>
-                  <h2 className="display-font flex max-w-3xl flex-col gap-4 text-4xl font-black leading-[0.98] tracking-[-0.015em] md:gap-5 md:text-[4.35rem]">
-                    <span className="whitespace-nowrap">Check your</span>
-                    <span className="whitespace-nowrap">deals.</span>
-                    <span className="whitespace-nowrap">Straight</span>
-                    <span className="whitespace-nowrap">answers.</span>
-                    <span className="whitespace-nowrap">Super easy.</span>
-                  </h2>
-                </div>
-                <div className="flex items-end justify-end pb-2 pr-2 md:pb-8 md:pr-8">
-                  <Image
-                    src="/brand/hmc-tick-icon-transparent.png"
-                    alt=""
-                    width={220}
-                    height={180}
-                    sizes="(min-width: 768px) 208px, 128px"
-                    className="h-auto w-32 object-contain drop-shadow-[0_12px_18px_rgba(79,36,125,0.18)] md:w-52"
-                  />
-                </div>
+                  Check how much I could save
+                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  className="inline-flex min-h-14 items-center justify-center rounded-full border-2 border-[#F0C646] bg-[#F0C646] px-7 py-4 text-base font-extrabold text-[#35240B] shadow-[0_14px_34px_rgba(234,185,41,0.2)] transition duration-300 hover:-translate-y-0.5 hover:border-[#FFD75F] hover:bg-[#FFD75F]"
+                  href="#how-it-works"
+                >
+                  See how it works
+                </Link>
               </div>
+              <div className="mt-9 flex flex-wrap gap-x-7 gap-y-3 border-t border-[#E8DFC9] pt-5 text-sm font-bold text-[#5C4E63]">
+                {["Free. No cost to you.", "Speak with an expert. No AI. No Call Centres.", "You decide"].map(
+                  (item) => (
+                    <span className="inline-flex items-center gap-2" key={item}>
+                      <Check className="h-4 w-4 text-[#18A957]" strokeWidth={3} />
+                      {item}
+                    </span>
+                  ),
+                )}
+              </div>
+              <p className="mt-5 text-sm font-bold text-[#5C4E63]">
+                Home Money Check is led by founder{" "}
+                <Link className="text-[#3D145F] underline decoration-[#EAB929] decoration-2 underline-offset-4" href="#about">
+                  Neill Connolly
+                </Link>
+                .
+              </p>
             </div>
 
-            <div className="relative transform-gpu overflow-hidden rounded-[2.75rem] bg-[#F4CF7A] p-8 text-[#2C1F3D] shadow-[0_30px_90px_rgba(44,31,61,0.22)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_34px_90px_rgba(44,31,61,0.24)] md:p-10 md:duration-700 md:ease-[cubic-bezier(0.22,1,0.36,1)]">
-              <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-white/35" />
-              <div className="relative z-10 flex h-full min-h-[320px] flex-col gap-8">
-                <div>
-                  <p className="mb-6 w-fit rounded-full bg-white/55 px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#6B4611]">
-                    {homepageProfile.heading}
-                  </p>
-                  <div className="grid gap-4 text-base font-black leading-7 text-[#2C1F3D]/84 md:text-lg md:leading-8">
-                    {homepageProfile.paragraphs.slice(0, 2).map((paragraph) => (
-                      <p key={paragraph}>{paragraph}</p>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-auto grid gap-6 md:grid-cols-[minmax(0,1fr)_11rem] md:items-end">
-                  <div className="grid gap-4 text-base font-black leading-7 text-[#2C1F3D]/84 md:text-lg md:leading-8">
-                    <p>{homepageProfile.paragraphs[2]}</p>
-                    <p className="display-font pt-1 text-3xl font-black leading-[0.95] tracking-[-0.015em] text-[#5F2D8C] md:text-4xl">
-                      {homepageProfile.closing}
+            <div className="relative mx-auto w-full max-w-[47rem] lg:mx-0 lg:ml-auto">
+              <div className="relative overflow-hidden rounded-[2.2rem] bg-[#3D145F] px-6 pb-7 pt-6 text-white shadow-[0_42px_100px_rgba(61,20,95,0.3)] sm:rounded-[3rem] sm:px-10 sm:pb-10 sm:pt-9">
+                <div className="absolute -right-24 -top-20 h-72 w-72 rounded-full border-[55px] border-white/[0.055]" />
+                <div className="relative flex items-start justify-between gap-6 border-b border-white/15 pb-7">
+                  <div>
+                    <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">
+                      Your savings check
+                    </p>
+                    <p className="display-font mt-3 max-w-[10ch] text-4xl leading-[0.95] tracking-[-0.04em] sm:text-5xl">
+                      Every saving counts.
                     </p>
                   </div>
-                  <div className="flex justify-start md:justify-end">
-                    <div className="relative aspect-[4/5] w-36 shrink-0 overflow-hidden rounded-[2rem] bg-[#F7F0E8]/52 p-2 shadow-[inset_0_0_0_1px_rgba(107,70,17,0.08),0_18px_42px_rgba(44,31,61,0.14)] md:w-44">
-                      <Image
-                        src={homepageProfile.image}
-                        alt={`${homepageProfile.name} Connolly`}
-                        width={360}
-                        height={450}
-                        sizes="(min-width: 768px) 176px, 144px"
-                        className="h-full w-full rounded-[1.45rem] object-contain object-bottom"
-                      />
-                    </div>
+                  <Image
+                    alt=""
+                    className="h-[4.5rem] w-[4.5rem] shrink-0 rounded-[1.25rem] object-cover sm:h-20 sm:w-20 sm:rounded-[1.4rem]"
+                    height={160}
+                    src="/brand/hmc-tick-icon-purple.png"
+                    width={160}
+                  />
+                </div>
+
+                <div className="relative mt-6 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-[1.5rem] bg-white/[0.09] p-5 ring-1 ring-inset ring-white/10">
+                    <p className="display-font text-5xl leading-none tracking-[-0.055em] text-[#F0C646]">£400</p>
+                    <p className="mt-3 text-sm font-bold leading-6 text-white/76">
+                      Up to £400 towards early termination fees.
+                    </p>
+                  </div>
+                  <div className="rounded-[1.5rem] bg-[#F0C646] p-5 text-[#33210A]">
+                    <p className="display-font text-5xl leading-none tracking-[-0.055em]">£150</p>
+                    <p className="mt-3 text-sm font-extrabold leading-6">
+                      Up to £150 Cashback Card bonus credit.
+                    </p>
                   </div>
                 </div>
+
+                <div className="relative mt-6 space-y-3">
+                  {["Find a cheaper monthly price", "Secure larger savings by combining services", "Add cashback & help with switching costs"].map(
+                    (item) => (
+                      <p className="flex items-center gap-3 text-sm font-bold text-white/82" key={item}>
+                        <Image
+                          alt=""
+                          className="h-7 w-7 shrink-0 rounded-[0.45rem] object-cover"
+                          height={56}
+                          src="/brand/hmc-tick-icon-purple.png"
+                          width={56}
+                        />
+                        {item}
+                      </p>
+                    ),
+                  )}
+                </div>
+                <Link
+                  className="group relative mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-[#F0C646] transition hover:text-[#FFD75F]"
+                  href="#arrange-check"
+                >
+                  Check how much I could save
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-[#EEE5D0] bg-white px-5 py-12 sm:px-8 sm:py-14 lg:py-20">
+          <div className="mx-auto grid max-w-[86rem] gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:gap-20">
+            <div className="lg:sticky lg:top-8">
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Where savings come from</p>
+              <h2 className="display-font mt-4 max-w-[10ch] text-5xl leading-[0.92] tracking-[-0.05em] text-[#3D145F] sm:text-6xl">
+                There&rsquo;s more than one way to save.
+              </h2>
+              <p className="mt-5 max-w-lg text-lg font-semibold leading-8 text-[#514558]">
+                We look for savings across your whole quote: lower prices, services that fit your household, extra value from combining them and every available offer.
+              </p>
+              <div className="mt-7 rounded-[1.65rem] bg-[#F0C646] p-5 text-[#2B1535] shadow-[0_18px_45px_rgba(234,185,41,0.2)] sm:p-7 lg:pb-11">
+                <ReceiptText className="h-7 w-7 text-[#6A2C93]" strokeWidth={2} />
+                <p className="display-font mt-4 text-3xl leading-[1.02] tracking-[-0.035em]">
+                  You stack the savings.
+                </p>
+                <p className="mt-3 text-sm font-semibold leading-6 text-[#49330A] sm:text-base">
+                  Including lower prices, discounts for combining services, cashback and help with switching costs.
+                </p>
+              </div>
+              <Link
+                className="group mt-5 inline-flex min-h-13 items-center gap-3 rounded-full bg-[#22C86B] px-6 py-3 text-sm font-extrabold text-[#12371F] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2DD977]"
+                href="#arrange-check"
+              >
+                Check how much I could save
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </div>
+
+            <div className="grid gap-3 sm:gap-4">
+              {savingRoutes.map(({ number, title, body, icon: Icon, style, iconStyle, bodyStyle }) => (
+                <article
+                  className={`relative grid grid-cols-[1fr_auto] items-start gap-4 overflow-hidden rounded-[1.65rem] px-5 py-5 shadow-[0_16px_45px_rgba(61,20,95,0.09)] sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-5 sm:rounded-[2rem] sm:px-8 sm:py-7 ${style}`}
+                  key={title}
+                >
+                  <div className={`row-start-1 flex h-12 w-12 items-center justify-center rounded-[1rem] ${iconStyle}`}>
+                    <Icon className="h-6 w-6" strokeWidth={2} />
+                  </div>
+                  <div className="col-span-2 row-start-2 sm:col-span-1 sm:col-start-2 sm:row-start-1">
+                    <h3 className="text-xl font-extrabold tracking-[-0.03em] sm:text-2xl">{title}</h3>
+                    <p className={`mt-2 max-w-2xl text-sm font-semibold leading-6 sm:text-base ${bodyStyle}`}>{body}</p>
+                  </div>
+                  <span className="display-font col-start-2 row-start-1 text-4xl leading-none opacity-30 sm:col-start-3 sm:text-5xl">{number}</span>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden bg-[#35104F] px-5 py-16 text-white sm:px-8 lg:py-24" id="how-it-works">
+          <div className="pointer-events-none absolute -right-32 -top-40 h-[36rem] w-[36rem] rounded-full border-[110px] border-white/[0.035]" />
+          <div className="mx-auto max-w-[86rem]">
+            <div className="max-w-4xl">
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">How it works</p>
+              <h2 className="display-font mt-5 max-w-[16ch] text-5xl leading-[0.92] tracking-[-0.05em] text-[#F0C646] sm:text-6xl">
+                We check your bills to <span className="whitespace-nowrap">save you money.</span>
+              </h2>
+              <p className="mt-7 max-w-2xl text-lg font-semibold leading-8 text-white/72">
+                We start with what you pay and what your household needs. Then we can build your quote, maximise your savings and talk through the result.
+              </p>
+            </div>
+
+            <ol className="mt-16 grid gap-8 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-stretch">
+              {process.map((step, index) => (
+                <li className="contents" key={step.number}>
+                  <article className="flex h-full flex-col">
+                    <span className={`flex h-16 w-16 items-center justify-center rounded-[1.35rem] text-sm font-extrabold ${index === 1 ? "bg-[#22C86B] text-[#12371F]" : "bg-[#F0C646] text-[#35240B]"}`}>
+                      {step.number}
+                    </span>
+                    <h3 className="mt-7 max-w-[13ch] text-2xl font-extrabold leading-tight tracking-[-0.035em] sm:text-3xl lg:min-h-[6.75rem]">{step.title}</h3>
+                    <p className="mt-4 max-w-sm text-base font-medium leading-7 text-white/67 lg:min-h-[7rem]">{step.body}</p>
+                  </article>
+                  {index < process.length - 1 ? (
+                    <>
+                      <div aria-hidden="true" className="flex justify-center lg:hidden">
+                        <ArrowDown
+                          className="h-12 w-12 text-[#F0C646] drop-shadow-[0_0_14px_rgba(240,198,70,0.24)]"
+                          strokeWidth={3}
+                        />
+                      </div>
+                      <ArrowRight
+                        aria-hidden="true"
+                        className="hidden h-16 w-16 self-start text-[#F0C646] drop-shadow-[0_0_14px_rgba(240,198,70,0.24)] lg:block"
+                        strokeWidth={3}
+                      />
+                    </>
+                  ) : null}
+                </li>
+              ))}
+            </ol>
+
+            <div className="mt-14 flex justify-start">
+              <Link
+                className="inline-flex min-h-14 items-center gap-3 rounded-full bg-[#22C86B] px-7 py-4 text-base font-extrabold text-[#12371F] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2DD977]"
+                href="#arrange-check"
+              >
+                Check how much I could save
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#FFFDF8] px-5 py-16 sm:px-8 lg:py-20" id="about">
+          <div className="mx-auto grid max-w-[86rem] items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+            <div className="relative mx-auto w-full max-w-[33rem] lg:mx-0">
+              <div className="relative aspect-[4/4.55] overflow-hidden rounded-[2.35rem] border border-[#D9A914]/60 bg-[#D9C7E7] shadow-[0_30px_72px_rgba(61,20,95,0.16)]">
+                <Image
+                  alt="Neill Connolly, founder of Home Money Check"
+                  className="object-cover object-top"
+                  fill
+                  sizes="(max-width: 1024px) 90vw, 42vw"
+                  src="/images/neill-connolly-profile.webp"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#2F0D48]/88 via-[#2F0D48]/30 to-transparent px-7 pb-7 pt-24 text-white">
+                  <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#F0C646]">Founder</p>
+                  <p className="mt-1 text-xl font-extrabold">Neill Connolly</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Meet Neill</p>
+              <h2 className="display-font mt-5 max-w-[13ch] text-5xl leading-[0.94] tracking-[-0.05em] text-[#3D145F] sm:text-6xl">
+                &ldquo;I created Home Money Check to help people save money.&rdquo;
+              </h2>
+              <div className="mt-8 max-w-2xl space-y-5 text-base font-medium leading-8 text-[#5F5265]">
+                <p>
+                  Too many households are paying more than they need to for gas, electricity and broadband. Price changes and complicated offers seem designed to confuse us, and it&rsquo;s getting worse. I want to make things clearer and help people keep more of their money.
+                </p>
+                <p>
+                  Home Money Check gives you one simple quote for gas, electricity and broadband, then maximises your savings by bundling services and checking for cashback or help with exit fees. I want every customer to understand their quote and feel confident choosing what is right for them.
+                </p>
+              </div>
+              <div className="mt-9 flex items-center gap-4 border-l-4 border-[#EAB929] pl-5">
+                <ShieldCheck className="h-6 w-6 shrink-0 text-[#20A95C]" strokeWidth={2.1} />
+                <p className="display-font text-2xl tracking-[-0.03em] text-[#3D145F]">
+                  We do everything we can to help you save money.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#2E0D45] px-5 py-16 text-white sm:px-8 lg:py-20" id="arrange-check">
+          <div className="mx-auto grid max-w-[86rem] items-start gap-12 lg:grid-cols-[0.76fr_1.24fr] lg:gap-20">
+            <div className="lg:sticky lg:top-8">
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">Your free bills check</p>
+              <h2 className="display-font mt-5 max-w-[10ch] text-5xl leading-[0.92] tracking-[-0.05em] sm:text-6xl lg:text-7xl">
+                Start your free bills check.
+              </h2>
+              <p className="mt-7 max-w-md text-lg font-medium leading-8 text-white/72">
+                Choose what you want checked and let us know how to reach you. We&rsquo;ll get in touch for a chat and start searching for savings.
+              </p>
+              <div className="mt-9 space-y-4 border-t border-white/15 pt-6 text-sm font-bold text-white/80">
+                {["Find cheaper deals", "Check savings from combining services", "Add available switching support and cashback offers"].map((item) => (
+                  <p className="flex items-center gap-3" key={item}>
+                    <Check className="h-4 w-4 text-[#28D679]" strokeWidth={3} />
+                    {item}
+                  </p>
+                ))}
+              </div>
+            </div>
+            <FocusedBillsForm sourcePage="/" />
+          </div>
+        </section>
+
+        <section className="bg-[#FFFDF8] px-5 pb-10 pt-20 sm:px-8 lg:pb-12 lg:pt-24" id="questions">
+          <div className="mx-auto grid max-w-[86rem] gap-12 lg:grid-cols-[0.65fr_1.35fr] lg:gap-20">
+            <div className="border-l-4 border-[#EAB929] pl-6">
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Questions</p>
+              <h2 className="display-font mt-5 max-w-[9ch] text-5xl leading-[0.94] tracking-[-0.05em] text-[#3D145F] sm:text-6xl">
+                Your questions answered.
+              </h2>
+            </div>
+            <div className="border-t border-[#DDD1B8]">
+              {faqs.map((faq) => (
+                <details className="group border-b border-[#DDD1B8] py-6" key={faq.question}>
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-lg font-extrabold text-[#34273B] marker:hidden sm:text-xl">
+                    {faq.question}
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#EAB929]/55 bg-[#FFF4CE] text-[#5A247F] transition group-open:rotate-45 group-open:bg-[#F0C646]">
+                      +
+                    </span>
+                  </summary>
+                  <p className="max-w-3xl pb-2 pt-5 text-base font-medium leading-8 text-[#625667]">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+          <div className="mx-auto mt-14 flex max-w-[86rem] flex-col gap-6 rounded-[2rem] bg-[#F0C646] p-7 text-[#2B1535] shadow-[0_18px_45px_rgba(234,185,41,0.18)] sm:flex-row sm:items-center sm:justify-between sm:p-9">
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#6A2C93]">Ready when you are</p>
+              <p className="display-font mt-2 text-3xl leading-tight tracking-[-0.035em] text-[#3D145F] sm:text-4xl">
+                See how much you could save.
+              </p>
+            </div>
+            <Link
+              className="group inline-flex min-h-14 shrink-0 items-center justify-center gap-3 rounded-full bg-[#3D145F] px-7 py-4 text-base font-extrabold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#512078]"
+              href="#arrange-check"
+            >
+              Check how much I could save
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </section>
+
+        <section id="more-from-home-money-check" className="bg-[#F4EDDF] px-5 py-14 sm:px-8 lg:py-16">
+          <div className="mx-auto max-w-[86rem]">
+            <p className="mb-7 text-center text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">
+              More from Home Money Check
+            </p>
+            <div className="grid gap-5 md:grid-cols-2">
+              <article className="relative flex min-h-[23rem] flex-col overflow-hidden rounded-[2.3rem] bg-[#F0C646] p-7 text-[#2B1535] shadow-[0_24px_60px_rgba(91,63,6,0.14)] sm:p-9">
+                <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full border-[48px] border-white/20" />
+                <div className="relative flex h-14 w-14 items-center justify-center rounded-[1.1rem] bg-[#FFF7D9] text-[#3D145F]">
+                  <Gift className="h-7 w-7" strokeWidth={1.9} />
+                </div>
+                <p className="relative mt-7 text-xs font-extrabold uppercase tracking-[0.19em] text-[#6A2C93]">£20K Giveaway</p>
+                <h3 className="display-font relative mt-3 text-4xl leading-[0.98] tracking-[-0.045em] sm:text-5xl">Enter to win £20,000.</h3>
+                <p className="relative mt-4 max-w-md text-sm font-semibold leading-6 text-[#4D370B] sm:text-base">
+                  Enter the £20K Giveaway through Home Money Check.
+                </p>
+                <div className="relative mt-auto pt-5">
+                  <Link
+                    className="inline-flex min-h-13 w-fit items-center justify-center gap-2 rounded-full bg-[#3D145F] px-6 py-3 text-sm font-extrabold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#512078]"
+                    href="/20k-giveaway"
+                  >
+                    Enter the giveaway
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </article>
+
+              <article className="flex min-h-[23rem] flex-col rounded-[2.3rem] bg-[#273468] p-7 text-white shadow-[0_24px_60px_rgba(39,52,104,0.2)] sm:p-9">
+                <div className="flex h-14 w-14 items-center justify-center rounded-[1.1rem] bg-[#22C86B] text-[#12371F]">
+                  <TrendingUp className="h-7 w-7" strokeWidth={2.2} />
+                </div>
+                <p className="mt-7 text-xs font-extrabold uppercase tracking-[0.19em] text-[#F0C646]">Build something of your own</p>
+                <h3 className="display-font mt-3 text-4xl leading-[0.98] tracking-[-0.045em] sm:text-5xl">Earn a second income.</h3>
+                <p className="mt-4 max-w-md text-sm font-semibold leading-6 text-white/72 sm:text-base">
+                  Help people save money on household services and build an additional income of your own.
+                </p>
+                <div className="mt-auto pt-5">
+                  <Link
+                    className="inline-flex min-h-13 w-fit items-center justify-center gap-2 rounded-full bg-[#F0C646] px-6 py-3 text-sm font-extrabold text-[#35240B] transition duration-300 hover:-translate-y-0.5 hover:bg-[#FFD75F]"
+                    href="/build-a-second-income"
+                  >
+                    Explore the opportunity
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-[#E2D7C3] bg-[#FFFDF8] px-5 py-16 sm:px-8 lg:py-20">
+          <div className="mx-auto grid max-w-[86rem] gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-stretch lg:gap-10">
+            <div className="flex flex-col justify-center rounded-[2.2rem] bg-[#35104F] p-8 text-white sm:p-10">
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">For your staff and clients</p>
+              <h2 className="display-font mt-4 max-w-[10ch] text-5xl leading-[0.93] tracking-[-0.05em] sm:text-6xl">Help the people you work with save money.</h2>
+              <p className="mt-6 max-w-md text-base font-semibold leading-7 text-white/70">Give your staff or clients their own route to a free gas, electricity and broadband check.</p>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <article className="flex min-h-[22rem] flex-col rounded-[2.2rem] bg-[#F0C646] p-8 text-[#33210A] shadow-[0_22px_55px_rgba(95,69,10,0.13)]">
+                <div className="flex h-14 w-14 items-center justify-center rounded-[1rem] bg-[#FFF7D9] text-[#3D145F]"><Users className="h-7 w-7" strokeWidth={2} /></div>
+                <p className="mt-7 text-xs font-extrabold uppercase tracking-[0.18em] text-[#6A2C93]">For employers</p>
+                <h3 className="display-font mt-3 text-4xl leading-[0.98] tracking-[-0.045em] text-[#3D145F]">Help your staff save money.</h3>
+                <p className="mt-4 text-sm font-semibold leading-6 text-[#513B0D]">Give your team direct access to a free gas, electricity and broadband check.</p>
+                <Link className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-extrabold text-[#3D145F]" href="/staff-bills-check">Explore Staff Bills Check<ArrowRight className="h-4 w-4" /></Link>
+              </article>
+              <article className="flex min-h-[22rem] flex-col rounded-[2.2rem] bg-[#273468] p-8 text-white shadow-[0_22px_55px_rgba(39,52,104,0.18)]">
+                <div className="flex h-14 w-14 items-center justify-center rounded-[1rem] bg-[#22C86B] text-[#12371F]"><HeartHandshake className="h-7 w-7" strokeWidth={2} /></div>
+                <p className="mt-7 text-xs font-extrabold uppercase tracking-[0.18em] text-[#F0C646]">For professionals</p>
+                <h3 className="display-font mt-3 text-4xl leading-[0.98] tracking-[-0.045em]">Help your clients save money.</h3>
+                <p className="mt-4 text-sm font-semibold leading-6 text-white/72">Introduce your clients to a free check of their gas, electricity and broadband bills.</p>
+                <Link className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-extrabold text-[#F0C646]" href="/for-your-clients">Explore client introductions<ArrowRight className="h-4 w-4" /></Link>
+              </article>
             </div>
           </div>
         </section>
@@ -788,4 +536,3 @@ export default async function HomeMoneyCheckHomepage() {
     </div>
   );
 }
-

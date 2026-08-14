@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/home/SiteFooter";
+import { SiteHeader } from "@/components/home/SiteHeader";
 
 type DisclaimerSection = {
   title: string;
@@ -53,7 +53,7 @@ const sections: DisclaimerSection[] = [
   {
     title: "Advice-led and professional services",
     paragraphs: [
-      "Some services need proper advice, fact-finding or a separate professional process.",
+      "Some services need advice, fact-finding or a separate professional process.",
       "Where that applies, we will explain what information is needed and what happens next before anything proceeds.",
       "Website information alone should not be relied on as personal advice.",
     ],
@@ -104,10 +104,10 @@ export const metadata: Metadata = {
 
 export default function DisclaimersPage() {
   return (
-    <div className="min-h-screen bg-[#F7F0E8] text-[#2C1F3D]">
+    <div className="min-h-screen bg-[#FFFDF8] text-[#261B2E]">
       <SiteHeader />
       <main>
-        <section className="bg-[#5F2D8C] px-5 pb-14 pt-12 text-[#F7F0E8] md:px-8 md:pb-20 md:pt-16">
+        <section className="bg-[#35104F] px-5 pb-14 pt-12 text-white md:px-8 md:pb-20 md:pt-16">
           <div className="mx-auto max-w-7xl">
             <p className="mb-6 w-fit rounded-full bg-[#FDCA55] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
               Disclaimers

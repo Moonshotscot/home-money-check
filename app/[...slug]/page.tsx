@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ComingSoonPage } from "@/components/ComingSoonPage";
-import { ServicePage } from "@/components/ServicePage";
-import { getPageBySlug, getRoutePath, sitePages, siteUrl } from "@/lib/site-pages";
+import { LocalBillsCampaignPage } from "@/components/home/LocalBillsCampaignPage";
+import { siteUrl } from "@/lib/site-pages";
+
+const localCampaigns: Record<string, string> = {
+  "perthshire-bills-check": "Perthshire",
+  "dundee-bills-check": "Dundee",
+  "edinburgh-bills-check": "Edinburgh",
+  "glasgow-bills-check": "Glasgow",
+  "aberdeen-bills-check": "Aberdeen",
+  "stirling-bills-check": "Stirling",
+  "inverness-bills-check": "Inverness",
+  "fife-bills-check": "Fife",
+  "scotland-bills-check": "Scotland",
+};
 
 type RouteParams = {
   slug: string[];
@@ -13,30 +24,32 @@ type PageProps = {
 };
 
 export function generateStaticParams() {
-  return sitePages.map((page) => ({
-    slug: page.slug.split("/"),
-  }));
+  return Object.keys(localCampaigns).map((slug) => ({ slug: [slug] }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const page = getPageBySlug(slug.join("/"));
+  const route = slug.join("/");
+  const location = localCampaigns[route];
 
-  if (!page) {
+  if (!location) {
     return {};
   }
 
-  const path = getRoutePath(page);
+  const path = `/${route}`;
+  const title = `${location} Household Bills Check | Home Money Check`;
+  const description = `Check your gas, electricity and broadband bills in ${location}. We build a quote around your home and look for every available saving.`;
 
   return {
-    title: page.metaTitle,
-    description: page.metaDescription,
+    title,
+    description,
+    robots: { index: false, follow: true },
     alternates: {
       canonical: `${siteUrl}${path}`,
     },
     openGraph: {
-      title: page.metaTitle,
-      description: page.metaDescription,
+      title,
+      description,
       url: `${siteUrl}${path}`,
       siteName: "Home Money Check",
       type: "website",
@@ -46,15 +59,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function RoutedPage({ params }: PageProps) {
   const { slug } = await params;
-  const page = getPageBySlug(slug.join("/"));
+  const route = slug.join("/");
+  const location = localCampaigns[route];
 
-  if (!page) {
+  if (!location) {
     notFound();
   }
 
-  if (page.status === "comingSoon") {
-    return <ComingSoonPage page={page} />;
-  }
-
-  return <ServicePage page={page} />;
+  return <LocalBillsCampaignPage location={location} sourcePage={`/${route}`} />;
 }

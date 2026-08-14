@@ -1,82 +1,85 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
+import { ArrowRight, Check, Mail } from "lucide-react";
+import { SiteFooter } from "@/components/home/SiteFooter";
+import { SiteHeader } from "@/components/home/SiteHeader";
 import { UpdateSignupForm } from "@/components/UpdateSignupForm";
 
 export const metadata: Metadata = {
-  title: "Get Home Money Check updates | Home Money Check",
+  title: "Offers and updates | Home Money Check",
   description:
-    "Sign up for simple money-saving checks, useful reminders and current offers from Home Money Check.",
+    "Join the Home Money Check list for household bill updates, money-saving offers, giveaways and useful ideas.",
 };
+
+const updateBenefits = [
+  "Money-saving offers",
+  "Household bill updates",
+  "Giveaways and special campaigns",
+  "Useful ways to keep more of your money",
+] as const;
 
 export default function UpdatesPage() {
   return (
-    <div className="min-h-screen bg-[#F7F0E8] text-[#2C1F3D]">
+    <div className="min-h-screen overflow-x-clip bg-[#FFFDF8] text-[#261B2E]">
       <SiteHeader />
+
       <main>
-        <section className="bg-[#5F2D8C] px-5 pb-14 pt-12 text-[#F7F0E8] md:px-8 md:pb-20 md:pt-16">
-          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_0.75fr] lg:items-end">
-            <div>
-              <p className="mb-5 w-fit rounded-full bg-[#FDCA55] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
-                Home Money Check updates
+        <section className="relative overflow-hidden bg-[#35104F] px-5 py-16 text-white sm:px-8 lg:py-24">
+          <div className="pointer-events-none absolute -right-32 -top-40 h-[36rem] w-[36rem] rounded-full border-[110px] border-white/[0.035]" />
+          <div className="mx-auto grid max-w-[86rem] items-start gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20">
+            <div className="lg:sticky lg:top-28">
+              <div className="flex h-14 w-14 items-center justify-center rounded-[1.1rem] bg-[#22C86B] text-[#12371F]">
+                <Mail className="h-7 w-7" strokeWidth={2.2} />
+              </div>
+              <p className="mt-8 text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">
+                Home Money Check offers & updates
               </p>
-              <h1 className="display-font max-w-4xl text-5xl font-black leading-[0.95] tracking-[-0.015em] text-[#FDCA55] md:text-7xl">
-                <span className="block">Get</span>
-                <span className="block whitespace-nowrap">Home Money Check</span>
-                <span className="block">Updates</span>
+              <h1 className="display-font mt-5 max-w-[10ch] text-6xl leading-[0.88] tracking-[-0.055em] text-[#F0C646] sm:text-7xl lg:text-8xl">
+                Join Home Money Check.
               </h1>
-              <p className="mt-7 max-w-3xl text-xl font-bold leading-8 text-[#F7F0E8]/82 md:text-2xl md:leading-9">
-                Simple money-saving checks, useful reminders and current offers for your home,
-                money and household.
+              <p className="mt-7 max-w-xl text-lg font-semibold leading-8 text-white/76 sm:text-xl sm:leading-9">
+                Leave your email and we&rsquo;ll send you Home Money Check offers, household bill updates, giveaways and useful ways to save money.
+              </p>
+              <div className="mt-9 grid gap-4 border-t border-white/15 pt-7 text-sm font-bold text-white/82 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                {updateBenefits.map((benefit) => (
+                  <p className="flex items-start gap-3" key={benefit}>
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#22C86B] text-[#12371F]">
+                      <Check className="h-3.5 w-3.5" strokeWidth={3.2} />
+                    </span>
+                    {benefit}
+                  </p>
+                ))}
+              </div>
+              <p className="mt-8 text-sm font-semibold text-white/58">
+                Occasional emails. Unsubscribe at any time.
               </p>
             </div>
-            <div className="relative overflow-hidden rounded-[2.5rem] bg-[#F7F0E8] p-7 text-[#2C1F3D] shadow-[0_28px_80px_rgba(44,31,61,0.25)]">
-              <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[#EADFFD]" />
-              <p className="relative text-sm font-black uppercase tracking-[0.14em] text-[#5F2D8C]/70">
-                Join us
-              </p>
-              <p className="display-font relative mt-10 text-3xl font-black leading-[1] tracking-[-0.015em]">
-                Deals, offers, useful advice
-              </p>
-              <Link
-                className="relative mt-6 inline-flex items-center gap-2 rounded-full bg-[#22C55E] px-5 py-3 text-sm font-black text-[#2C1F3D]"
-                href="#updates-signup"
-              >
-                Sign up
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </div>
+
+            <UpdateSignupForm />
           </div>
         </section>
 
-        <section className="px-5 py-12 md:px-8 md:py-16">
-          <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1fr_0.85fr]">
-            <div className="relative overflow-hidden rounded-[2.75rem] bg-[#5F2D8C] p-8 text-[#F7F0E8] shadow-[0_30px_90px_rgba(44,31,61,0.22)] md:p-12">
-              <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-[#EADFFD]/20 blur-3xl" />
-              <h2 className="display-font relative text-4xl font-black leading-[0.98] tracking-[-0.015em] text-[#FDCA55] md:text-6xl">
-                Simple updates that are worth reading.
-              </h2>
-              <div className="relative mt-7 grid gap-4 text-lg font-bold leading-8 text-[#F7F0E8]/78">
-                <p>
-                  Sign up for our Home Money Check updates. We’ll send useful offers, simple checks,
-                  and relevant articles that could help you save money or get a better deal.
-                </p>
-                <p>We promise to keep them interesting!</p>
-                <p>No spam, and only emails when there's something worth talking about.</p>
-                <p className="display-font text-3xl font-black leading-[1] tracking-[-0.015em] text-[#FDCA55] md:text-4xl">
-                  We'd love you to join us!!
-                </p>
-              </div>
+        <section className="bg-[#FFFDF8] px-5 py-12 sm:px-8 lg:py-16">
+          <div className="mx-auto flex max-w-[86rem] flex-col gap-6 rounded-[2rem] bg-[#F0C646] p-7 text-[#2B1535] shadow-[0_18px_45px_rgba(234,185,41,0.18)] sm:flex-row sm:items-center sm:justify-between sm:p-9">
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#6A2C93]">
+                Check your household bills now
+              </p>
+              <p className="display-font mt-2 text-3xl leading-tight tracking-[-0.035em] text-[#3D145F] sm:text-4xl">
+                See how much you could save.
+              </p>
             </div>
-
-            <div id="updates-signup">
-              <UpdateSignupForm />
-            </div>
+            <Link
+              className="group inline-flex min-h-14 shrink-0 items-center justify-center gap-3 rounded-full bg-[#3D145F] px-7 py-4 text-base font-extrabold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#512078]"
+              href="/#arrange-check"
+            >
+              Check how much I could save
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
           </div>
         </section>
       </main>
+
       <SiteFooter />
     </div>
   );

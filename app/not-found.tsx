@@ -1,69 +1,61 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowUpRight } from "lucide-react";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
+import { ArrowRight, House } from "lucide-react";
+import { SiteFooter } from "@/components/home/SiteFooter";
+import { SiteHeader } from "@/components/home/SiteHeader";
 
 export const metadata: Metadata = {
   title: "Page not found | Home Money Check",
-  description: "This Home Money Check page could not be found.",
+  description: "Choose a current Home Money Check page.",
 };
+
+const usefulLinks = [
+  { href: "/household-bills-check", label: "Household bills" },
+  { href: "/energy", label: "Energy" },
+  { href: "/broadband", label: "Broadband" },
+  { href: "/20k-giveaway", label: "£20K Giveaway" },
+  { href: "/build-a-second-income", label: "Build a second income" },
+] as const;
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-[#F7F0E8] text-[#2C1F3D]">
+    <div className="min-h-screen bg-[#FFFDF8] text-[#2C2033]">
       <SiteHeader />
-      <main className="bg-[#F7F0E8] px-5 py-12 md:px-8 md:py-16">
-        <section className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[1fr_0.75fr]">
-          <div className="relative overflow-hidden rounded-[2.75rem] bg-[#5F2D8C] p-8 text-[#F7F0E8] shadow-[0_30px_90px_rgba(44,31,61,0.22)] md:p-12">
-            <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-[#EADFFD]/20 blur-3xl" />
-            <p className="relative mb-5 w-fit rounded-full bg-[#FDCA55] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
-              Page not found
-            </p>
-            <h1 className="display-font relative text-6xl font-black leading-[0.9] tracking-[-0.015em] text-[#FDCA55] md:text-8xl">
-              Page not found
+      <main className="overflow-hidden px-5 py-14 sm:px-8 lg:py-20">
+        <section className="mx-auto grid max-w-[76rem] overflow-hidden rounded-[2.5rem] bg-[#35104F] text-white shadow-[0_30px_90px_rgba(44,31,61,0.2)] lg:grid-cols-[1.08fr_0.92fr]">
+          <div className="relative isolate p-8 sm:p-12 lg:p-16">
+            <div className="pointer-events-none absolute -right-36 -top-44 -z-10 h-[32rem] w-[32rem] rounded-full border-[95px] border-white/[0.04]" />
+            <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">Page not found</p>
+            <h1 className="display-font mt-5 max-w-[10ch] text-6xl leading-[0.9] tracking-[-0.055em] sm:text-7xl">
+              Let&rsquo;s get you back on track.
             </h1>
-            <p className="relative mt-7 max-w-2xl text-xl font-bold leading-8 text-[#F7F0E8]/82">
-              We can’t find that page, but you can head back to Home Money Check and choose what
-              you want checked.
+            <p className="mt-7 max-w-xl text-lg font-semibold leading-8 text-white/72">
+              Choose a current page or return to the homepage to start your household bills check.
             </p>
-            <div className="relative mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link
-                className="inline-flex items-center justify-center rounded-full bg-[#F7F0E8] px-6 py-3 text-sm font-black text-[#5F2D8C]"
-                href="/"
-              >
-                Back to homepage
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Link className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-[#22C86B] px-7 py-4 text-base font-extrabold text-[#12371F]" href="/#arrange-check">
+                Check how much I could save
+                <ArrowRight className="h-5 w-5" />
               </Link>
-              <Link
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FDCA55] px-6 py-3 text-sm font-black text-[#4F247D]"
-                href="/start-my-check"
-              >
-                Start a free check
-                <ArrowUpRight className="h-4 w-4" strokeWidth={2.7} />
+              <Link className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/30 px-7 py-4 text-base font-extrabold text-white" href="/">
+                Homepage
               </Link>
             </div>
           </div>
-          <div className="relative overflow-hidden rounded-[2.75rem] bg-white p-8 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-10">
-            <div className="absolute -right-12 -top-12 h-32 w-32 rotate-[12deg] rounded-[2rem] bg-[#EADFFD]" />
-            <p className="relative mb-5 w-fit rounded-full bg-[#F7F0E8] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
-              Useful links
-            </p>
-            <div className="relative grid gap-3">
-              {[
-                { href: "/energy", label: "Household bills" },
-                { href: "/20k-giveaway", label: "£20K Giveaway" },
-                { href: "/estate-planning", label: "Wills and POAs" },
-                { href: "/business-utilities", label: "Business utilities" },
-              ].map((item) => (
-                <Link
-                  className="rounded-[1.25rem] bg-[#F7F0E8] px-5 py-4 text-sm font-black text-[#5F2D8C]"
-                  href={item.href}
-                  key={item.href}
-                >
+
+          <div className="bg-[#F0C646] p-8 text-[#33210A] sm:p-12 lg:p-16">
+            <div className="flex h-14 w-14 items-center justify-center rounded-[1rem] bg-white text-[#6A2C93]">
+              <House className="h-7 w-7" strokeWidth={2.2} />
+            </div>
+            <h2 className="display-font mt-7 text-4xl leading-[0.95] tracking-[-0.045em] text-[#3D145F] sm:text-5xl">Where would you like to go?</h2>
+            <nav aria-label="Useful pages" className="mt-7 grid gap-3">
+              {usefulLinks.map((item) => (
+                <Link className="flex items-center justify-between gap-4 rounded-[1.1rem] bg-white/55 px-5 py-4 text-sm font-extrabold ring-1 ring-inset ring-[#6A2C93]/12 transition hover:bg-white/80" href={item.href} key={item.href}>
                   {item.label}
+                  <ArrowRight className="h-4 w-4 text-[#6A2C93]" />
                 </Link>
               ))}
-            </div>
+            </nav>
           </div>
         </section>
       </main>

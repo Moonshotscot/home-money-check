@@ -1,11 +1,5 @@
-import type { Metadata } from "next";
-import { CampaignAdmin } from "@/components/admin/CampaignAdmin";
-
-export const metadata: Metadata = {
-  title: "Admin | Home Money Check",
-  description: "Manage the Home Money Check campaign panel.",
-};
+import { redirect } from "next/navigation";
 
 export default function AdminCampaignPage() {
-  return <CampaignAdmin />;
+  redirect("/admin");
 }

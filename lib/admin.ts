@@ -15,19 +15,16 @@ export const enquiryStatuses = [
 ] as const;
 
 export const selectedCheckFilters = [
-  "Energy",
+  "Gas",
+  "Electricity",
   "Broadband",
-  "Mobile SIMs",
+  "Gas, electricity and broadband",
   "£20K Giveaway",
-  "Mortgages",
-  "Wills and POAs",
-  "Protection",
-  "Private Medical Insurance",
-  "Business protection",
-  "Business utilities",
-  "Business continuity",
-  "Finance / bookkeeping",
-  "Partner with us",
+  "Build a Second Income",
+  "Your Staff’s Bills Check",
+  "For Your Clients",
+  "Partner-specific HMC Page",
+  "General question",
 ] as const;
 
 export type EnquiryStatus = (typeof enquiryStatuses)[number];

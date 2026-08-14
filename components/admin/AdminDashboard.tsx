@@ -36,12 +36,6 @@ const cards = [
     live: true,
   },
   {
-    href: "/admin/campaign",
-    label: "Campaign panel",
-    note: "Edit the homepage featured campaign panel.",
-    live: true,
-  },
-  {
     href: "/admin/noticeboard",
     label: "Noticeboard",
     note: "Manage homepage noticeboard items.",
@@ -51,16 +45,23 @@ const cards = [
 
 const hiddenPageLinks = [
   { href: "/household-bills-check", label: "Household Bills Check" },
-  { href: "/perthshire-bills-check", label: "Perthshire Bills Check" },
-  { href: "/dundee-bills-check", label: "Dundee Bills Check" },
-  { href: "/staff-bills-check", label: "Your Staff’s Bills Check" },
-  { href: "/for-your-clients", label: "Home Money Check for Your Clients" },
+  { href: "/energy", label: "Energy Check" },
+  { href: "/broadband", label: "Broadband Check" },
+  { href: "/20k-giveaway", label: "£20K Giveaway" },
+  { href: "/build-a-second-income", label: "Build a Second Income" },
+  { href: "/how-it-works", label: "How It Works" },
+  { href: "/about", label: "About Neill" },
+  { href: "/staff-bills-check", label: "Staff Bills Check" },
+  { href: "/staff-bills-check/employee", label: "Employee Bills Check" },
+  { href: "/for-your-clients", label: "For Your Clients" },
+  { href: "/for-your-clients/client", label: "Introduced Client Page" },
+  { href: "/partner-bills-check", label: "Partner Bills Pages" },
+  { href: "/partner-bills-check/start", label: "Partner Customer Page" },
   { href: "/updates", label: "Updates" },
 ];
 
 export function AdminDashboard() {
   const [summary, setSummary] = useState({
-    campaignLive: null as boolean | null,
     checksByType: [] as { label: string; count: number }[],
     checksNeedingAction: null as number | null,
     convertedChecks: null as number | null,
@@ -85,7 +86,6 @@ export function AdminDashboard() {
         checksNeedingAction,
         checkRows,
         latestEnquiries,
-        campaign,
         liveNoticeboardItems,
       ] = await Promise.all([
         supabase.from("enquiries").select("id", { count: "exact", head: true }),
@@ -112,12 +112,6 @@ export function AdminDashboard() {
           .select("id,created_at,name,selected_check,source_page,status")
           .order("created_at", { ascending: false })
           .limit(5),
-        supabase
-          .from("campaign_panel")
-          .select("is_live")
-          .order("created_at", { ascending: false })
-          .limit(1)
-          .maybeSingle(),
         supabase
           .from("noticeboard_items")
           .select("id", { count: "exact", head: true })
@@ -160,7 +154,6 @@ export function AdminDashboard() {
       });
 
       setSummary({
-        campaignLive: campaign.data?.is_live ?? null,
         checksByType: Array.from(checkTypeCounts.entries())
           .map(([label, count]) => ({ label, count }))
           .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label)),
@@ -243,15 +236,6 @@ export function AdminDashboard() {
                             <dd>{summary.totalEnquiries ?? "-"}</dd>
                           </div>
                         </dl>
-                      ) : null}
-                      {card.label === "Campaign panel" ? (
-                        <p className="mt-5 w-fit rounded-full bg-white px-3 py-2 text-xs font-black text-[#5F2D8C]">
-                          {summary.campaignLive === null
-                            ? "Status unavailable"
-                            : summary.campaignLive
-                              ? "Currently live"
-                              : "Currently hidden"}
-                        </p>
                       ) : null}
                       {card.label === "Noticeboard" ? (
                         <p className="mt-5 w-fit rounded-full bg-white px-3 py-2 text-xs font-black text-[#5F2D8C]">
@@ -362,7 +346,7 @@ export function AdminDashboard() {
                     Utility links
                   </p>
                   <h2 className="mt-3 text-2xl font-black tracking-[-0.05em]">
-                    Campaign and hidden page links
+                    Hidden page links
                   </h2>
                 </div>
                 <p className="max-w-xl text-sm font-bold leading-6 text-[#2C1F3D]/65">

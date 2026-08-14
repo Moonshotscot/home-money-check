@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,900,100,1&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,7 +13,7 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   max-width: 100%;
 }
@@ -25,20 +23,20 @@ body {
   min-width: 320px;
   width: 100%;
   max-width: 100%;
-  background: #4a1682;
-  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  overflow-x: hidden;
+  background: #fffdf8;
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: clip;
 }
 
 .display-font {
-  font-family: "Fraunces", ui-serif, Georgia, serif;
-  font-variation-settings: "SOFT" 100, "WONK" 1;
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  font-variation-settings: "SOFT" 35, "WONK" 0.15;
   font-weight: 900;
 }
 
 .brand-wordmark-text {
-  font-family: "Fraunces", ui-serif, Georgia, serif;
-  font-variation-settings: "SOFT" 100, "WONK" 1;
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  font-variation-settings: "SOFT" 25, "WONK" 0;
   font-weight: 900;
 }
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import { Fraunces, Poppins } from "next/font/google";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -8,9 +8,10 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-plus-jakarta",
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -50,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fraunces.variable} ${plusJakarta.variable}`}>
+      <body className={`${fraunces.variable} ${poppins.variable}`}>
         {children}
       </body>
     </html>

@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
-import { CampaignLandingPage } from "@/components/CampaignLandingPage";
-import { campaignPages } from "@/lib/campaign-pages";
-
-const page = campaignPages["staff-bills-check"];
+import { DistributionPage } from "@/components/home/DistributionPage";
 
 export const metadata: Metadata = {
-  title: page.metadataTitle,
-  description: page.metadataDescription,
+  title: "Staff Bills Check | Home Money Check",
+  description: "Give your staff a free gas, electricity and broadband bills check through Home Money Check.",
+  robots: { index: false, follow: true },
 };
 
 export default function StaffBillsCheckPage() {
-  return <CampaignLandingPage page={page} />;
+  return <DistributionPage kind="staff" />;
 }

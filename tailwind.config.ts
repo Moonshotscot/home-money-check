@@ -28,7 +28,7 @@ const config: Config = {
       },
       fontFamily: {
         display: ["var(--font-fraunces)", "Georgia", "serif"],
-        sans: ["var(--font-plus-jakarta)", "Inter", "Arial", "sans-serif"],
+        sans: ["var(--font-poppins)", "Inter", "Arial", "sans-serif"],
       },
     },
   },

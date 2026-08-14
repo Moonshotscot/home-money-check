@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/home/SiteFooter";
+import { SiteHeader } from "@/components/home/SiteHeader";
 
 type PrivacySection = {
   title: string;
@@ -50,7 +50,7 @@ const sections: PrivacySection[] = [
     paragraphs: [
       "When you send us your details, we usually rely on your consent to contact you about your enquiry.",
       "We may also rely on legitimate interests where we need to keep basic enquiry records, manage follow-up, improve the service or deal with normal business administration.",
-      "If you choose to receive updates, we will only send them where we have a proper lawful basis to do so. You can ask us to stop sending updates at any time.",
+      "If you choose to receive updates, we will only send them where we have a lawful basis to do so. You can ask us to stop sending updates at any time.",
     ],
   },
   {
@@ -114,10 +114,10 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="min-h-screen bg-[#F7F0E8] text-[#2C1F3D]">
+    <div className="min-h-screen bg-[#FFFDF8] text-[#261B2E]">
       <SiteHeader />
       <main>
-        <section className="bg-[#5F2D8C] px-5 pb-14 pt-12 text-[#F7F0E8] md:px-8 md:pb-20 md:pt-16">
+        <section className="bg-[#35104F] px-5 pb-14 pt-12 text-white md:px-8 md:pb-20 md:pt-16">
           <div className="mx-auto max-w-7xl">
             <p className="mb-6 w-fit rounded-full bg-[#FDCA55] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#4F247D]">
               Privacy Policy

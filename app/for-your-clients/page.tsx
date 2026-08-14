@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { CampaignLandingPage } from "@/components/CampaignLandingPage";
-import { campaignPages } from "@/lib/campaign-pages";
+import { DistributionPage } from "@/components/home/DistributionPage";
 
-const page = campaignPages["for-your-clients"];
-
-export const metadata: Metadata = { title: page.metadataTitle };
+export const metadata: Metadata = {
+  title: "For Your Clients | Home Money Check",
+  description: "Give your clients a direct route to a free gas, electricity and broadband bills check.",
+  robots: { index: false, follow: true },
+};
 
 export default function ForYourClientsPage() {
-  return <CampaignLandingPage page={page} />;
+  return <DistributionPage kind="introducer" />;
 }

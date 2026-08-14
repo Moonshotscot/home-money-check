@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
-import { CampaignLandingPage } from "@/components/CampaignLandingPage";
-import { campaignPages } from "@/lib/campaign-pages";
-
-const page = campaignPages["household-bills-check"];
+import { BillsServicePage } from "@/components/home/BillsServicePage";
 
 export const metadata: Metadata = {
-  title: page.metadataTitle,
-  description: page.metadataDescription,
+  title: "Household Bills Check | Home Money Check",
+  description:
+    "Check your gas, electricity and broadband bills, combine services and include available cashback and switching support.",
 };
 
 export default function HouseholdBillsCheckPage() {
-  return <CampaignLandingPage page={page} />;
+  return <BillsServicePage kind="household" />;
 }
