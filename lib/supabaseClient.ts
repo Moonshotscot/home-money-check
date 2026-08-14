@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { captureLeadSource } from "@/lib/leadSource";
 
 export type EnquiryPayload = {
   name: string;
@@ -63,7 +64,7 @@ export async function insertEnquiry(payload: EnquiryPayload) {
     p_name: payload.name,
     p_postcode: payload.postcode || null,
     p_requested_checks: payload.requested_checks,
-    p_source_page: payload.source_page,
+    p_source_page: captureLeadSource(payload.source_page),
   });
 
   if (error) {
@@ -78,7 +79,7 @@ export async function insertUpdateSubscriber(payload: UpdateSignupPayload) {
     p_first_name: payload.first_name,
     p_interests: payload.interests,
     p_postcode: payload.postcode || null,
-    p_source_page: payload.source_page,
+    p_source_page: captureLeadSource(payload.source_page),
   });
 
   if (error) {

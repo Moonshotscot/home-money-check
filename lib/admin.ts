@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabaseClient";
 export const enquiryStatuses = [
   "New",
   "Contacted",
+  "Sent to CPH",
   "Booked",
   "Quoted",
   "In progress",

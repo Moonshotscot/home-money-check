@@ -12,6 +12,7 @@ import {
 import { supabase } from "@/lib/supabaseClient";
 import { AdminGuard } from "@/components/admin/AdminGuard";
 import { AdminShell } from "@/components/admin/AdminShell";
+import { getLeadSourceDetails } from "@/lib/leadSource";
 
 const enquiryColumns =
   "id,created_at,name,email,mobile,postcode,selected_check,source_page,message,consent_contact,consent_updates,status,admin_notes,last_contacted_at,converted_at,updated_at";
@@ -235,6 +236,11 @@ function statusBadge(status: string | null) {
   return status || "New";
 }
 
+function sourceFilterLabel(sourcePage: string | null) {
+  const source = getLeadSourceDetails(sourcePage);
+  return source.context[0] ? `${source.label} · ${source.context[0]}` : source.label;
+}
+
 function statusPillClass(status: string | null) {
   const value = statusBadge(status);
 
@@ -244,6 +250,10 @@ function statusPillClass(status: string | null) {
 
   if (value === "Converted") {
     return "bg-[#BFD9C8] text-[#173E29]";
+  }
+
+  if (value === "Sent to CPH") {
+    return "bg-[#273468] text-white";
   }
 
   if (value === "Archived" || value === "Not suitable" || value === "No response") {
@@ -376,6 +386,7 @@ function EnquiryDetail({
   const [deleteState, setDeleteState] = useState<"idle" | "deleting" | "deleted" | "error">("idle");
   const [copyMessage, setCopyMessage] = useState("");
   const childChecks = enquiry.enquiry_checks || [];
+  const leadSource = getLeadSourceDetails(enquiry.source_page);
 
   async function saveChanges() {
     setSaveState("saving");
@@ -512,7 +523,20 @@ function EnquiryDetail({
             <p className="mb-2 text-[#5F2D8C]">Requested checks:</p>
             <RequestedCheckPills enquiry={enquiry} />
           </div>
-          <p><span className="text-[#5F2D8C]">Source page:</span> {enquiry.source_page || "Not supplied"}</p>
+          <div className="rounded-[1.25rem] bg-[#FFF8E8] p-4 md:col-span-2">
+            <p className="text-xs font-black uppercase tracking-[0.14em] text-[#7A2E9A]">
+              Lead source
+            </p>
+            <p className="mt-2 text-lg font-black text-[#3D145F]">{leadSource.label}</p>
+            {leadSource.context.length > 0 ? (
+              <p className="mt-1 text-sm font-black text-[#7A2E9A]">
+                {leadSource.context.join(" · ")}
+              </p>
+            ) : null}
+            <p className="mt-1 break-all text-xs font-semibold text-[#35104F]/60">
+              {leadSource.raw}
+            </p>
+          </div>
           <p><span className="text-[#5F2D8C]">Created:</span> {formatDate(enquiry.created_at)}</p>
           <p><span className="text-[#5F2D8C]">Updated:</span> {formatDate(enquiry.updated_at)}</p>
           <p>
@@ -527,12 +551,12 @@ function EnquiryDetail({
             <p className="md:col-span-2">
               <a
                 className="inline-flex items-center gap-2 rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black text-[#5F2D8C]"
-                href={enquiry.source_page}
+                href={leadSource.href}
                 rel="noreferrer"
                 target="_blank"
               >
                 <ExternalLink className="h-4 w-4" />
-                View source page
+                Open source page
               </a>
             </p>
           ) : null}
@@ -646,6 +670,7 @@ function EnquiriesContent() {
   const [selectedEnquiry, setSelectedEnquiry] = useState<Enquiry | null>(null);
   const [statusFilter, setStatusFilter] = useState("All");
   const [checkFilter, setCheckFilter] = useState("All");
+  const [sourceFilter, setSourceFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [loadState, setLoadState] = useState<"loading" | "loaded" | "error">("loading");
   const [actionMessage, setActionMessage] = useState("");
@@ -713,10 +738,17 @@ function EnquiriesContent() {
   useEffect(() => {
     loadEnquiries();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [statusFilter, checkFilter]);
+  }, []);
 
   const statusOptions = useMemo(() => ["All", ...enquiryStatuses], []);
   const checkOptions = useMemo(() => ["All", ...selectedCheckFilters], []);
+  const sourceOptions = useMemo(
+    () => [
+      "All",
+      ...Array.from(new Set(enquiries.map((enquiry) => sourceFilterLabel(enquiry.source_page)))).sort(),
+    ],
+    [enquiries],
+  );
   const visibleEnquiries = useMemo(() => {
     const query = searchTerm.trim().toLowerCase();
 
@@ -726,12 +758,18 @@ function EnquiriesContent() {
       const matchesCheckFilter =
         checkFilter === "All" ||
         requestedChecks.some((check) => checkMatchesFilter(check, checkFilter));
+      const matchesSourceFilter =
+        sourceFilter === "All" || sourceFilterLabel(enquiry.source_page) === sourceFilter;
 
       if (!matchesStatusFilter) {
         return false;
       }
 
       if (!matchesCheckFilter) {
+        return false;
+      }
+
+      if (!matchesSourceFilter) {
         return false;
       }
 
@@ -747,11 +785,12 @@ function EnquiriesContent() {
         requestedCheckText(enquiry),
         enquiry.status,
         enquiry.source_page,
+        sourceFilterLabel(enquiry.source_page),
       ]
         .filter(Boolean)
         .some((value) => String(value).toLowerCase().includes(query));
     });
-  }, [checkFilter, enquiries, searchTerm, statusFilter]);
+  }, [checkFilter, enquiries, searchTerm, sourceFilter, statusFilter]);
 
   function handleSaved(updated: Enquiry) {
     setEnquiries((current) =>
@@ -772,16 +811,20 @@ function EnquiriesContent() {
       <section className="rounded-[2.75rem] bg-white p-6 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-5 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
-              Lead capture
+            <p className="mb-5 w-fit rounded-full bg-[#F0C646] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#3D145F]">
+              HMC lead inbox
             </p>
-            <h1 className="text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-6xl">
-              Enquiries
+            <h1 className="display-font text-4xl leading-[0.98] text-[#3D145F] md:text-6xl">
+              New customer leads
             </h1>
+            <p className="mt-4 max-w-2xl text-sm font-semibold leading-6 text-[#35104F]/68">
+              See the customer, what they want checked and exactly which page or company link
+              brought them here. Ongoing CRM work belongs in CPH.
+            </p>
           </div>
           <div className="flex flex-wrap gap-3">
             <button
-              className="inline-flex items-center gap-2 rounded-full bg-[#F7F0E8] px-5 py-3 text-sm font-black text-[#5F2D8C]"
+              className="inline-flex items-center gap-2 rounded-full bg-[#FFF8E8] px-5 py-3 text-sm font-black text-[#3D145F]"
               onClick={loadEnquiries}
               type="button"
             >
@@ -789,7 +832,7 @@ function EnquiriesContent() {
               Refresh
             </button>
             <button
-              className="inline-flex items-center gap-2 rounded-full bg-[#FDCA55] px-5 py-3 text-sm font-black text-[#4F247D]"
+              className="inline-flex items-center gap-2 rounded-full bg-[#F0C646] px-5 py-3 text-sm font-black text-[#35104F]"
               onClick={() => exportCsv(visibleEnquiries)}
               type="button"
             >
@@ -799,7 +842,7 @@ function EnquiriesContent() {
           </div>
         </div>
 
-        <div className="mt-7 grid gap-4 rounded-[2rem] bg-[#F7F0E8] p-5 md:grid-cols-[1.1fr_1fr_1fr_auto] md:items-end">
+        <div className="mt-7 grid gap-4 rounded-[2rem] bg-[#FFF8E8] p-5 md:grid-cols-2 xl:grid-cols-[1.15fr_0.8fr_1fr_1fr_auto] xl:items-end">
           <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
             Search
             <span className="relative">
@@ -837,11 +880,24 @@ function EnquiriesContent() {
               ))}
             </select>
           </label>
+          <label className="grid gap-2 text-sm font-black text-[#3D145F]">
+            Source page
+            <select
+              className="rounded-[1.25rem] border-0 bg-white px-4 py-3 text-base font-bold outline-none"
+              onChange={(event) => setSourceFilter(event.target.value)}
+              value={sourceFilter}
+            >
+              {sourceOptions.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </select>
+          </label>
           <button
-            className="rounded-full bg-[#5F2D8C] px-5 py-3 text-sm font-black text-[#F7F0E8]"
+            className="rounded-full bg-[#3D145F] px-5 py-3 text-sm font-black text-white"
             onClick={() => {
               setStatusFilter("All");
               setCheckFilter("All");
+              setSourceFilter("All");
               setSearchTerm("");
             }}
             type="button"
@@ -885,15 +941,13 @@ function EnquiriesContent() {
           <>
             <div className="mt-6 hidden overflow-hidden rounded-[1.75rem] border border-[#EADFFD] md:block">
               <table className="w-full border-collapse text-left text-sm">
-                <thead className="bg-[#5F2D8C] text-[#F7F0E8]">
+                <thead className="bg-[#3D145F] text-white">
                   <tr>
                     <th className="p-4 font-black">Created</th>
-                    <th className="p-4 font-black">Name</th>
+                    <th className="p-4 font-black">Customer</th>
                     <th className="p-4 font-black">Check</th>
                     <th className="p-4 font-black">Status</th>
-                    <th className="p-4 font-black">Email</th>
-                    <th className="p-4 font-black">Mobile</th>
-                    <th className="p-4 font-black">Source</th>
+                    <th className="p-4 font-black">Source page</th>
                     <th className="p-4 font-black">Open</th>
                   </tr>
                 </thead>
@@ -901,11 +955,16 @@ function EnquiriesContent() {
                   {visibleEnquiries.map((enquiry) => {
                     const checkDisplay = getFilteredCheckDisplay(enquiry, statusFilter);
                     const listStatus = getListStatus(enquiry, statusFilter);
+                    const source = getLeadSourceDetails(enquiry.source_page);
 
                     return (
                       <tr className="border-t border-[#EADFFD] bg-white" key={enquiry.id}>
                         <td className="p-4 font-bold">{formatDate(enquiry.created_at)}</td>
-                        <td className="p-4 font-black">{enquiry.name}</td>
+                        <td className="p-4">
+                          <p className="font-black">{enquiry.name}</p>
+                          <p className="mt-1 text-xs font-semibold text-[#35104F]/60">{enquiry.email}</p>
+                          <p className="text-xs font-semibold text-[#35104F]/60">{enquiry.mobile}</p>
+                        </td>
                         <td className="p-4">
                           <RequestedCheckPills
                             checks={checkDisplay.checks}
@@ -917,12 +976,15 @@ function EnquiriesContent() {
                             {listStatus}
                           </span>
                         </td>
-                        <td className="p-4 font-bold">{enquiry.email}</td>
-                        <td className="p-4 font-bold">{enquiry.mobile}</td>
                         <td className="p-4">
-                          <span className="inline-flex max-w-36 rounded-full bg-[#F7F0E8] px-3 py-1 text-xs font-black leading-5 text-[#5F2D8C]">
-                            {enquiry.source_page}
-                          </span>
+                          <p className="max-w-52 text-xs font-black leading-5 text-[#3D145F]">
+                            {source.label}
+                          </p>
+                          {source.context.length > 0 ? (
+                            <p className="mt-1 max-w-52 text-xs font-black leading-5 text-[#7A2E9A]">
+                              {source.context.join(" · ")}
+                            </p>
+                          ) : null}
                         </td>
                         <td className="p-4">
                           <button
@@ -945,6 +1007,7 @@ function EnquiriesContent() {
               {visibleEnquiries.map((enquiry) => {
                 const checkDisplay = getFilteredCheckDisplay(enquiry, statusFilter);
                 const listStatus = getListStatus(enquiry, statusFilter);
+                const source = getLeadSourceDetails(enquiry.source_page);
 
                 return (
                   <article className="rounded-[1.75rem] bg-[#F7F0E8] p-5 shadow-[0_14px_40px_rgba(44,31,61,0.08)]" key={enquiry.id}>
@@ -967,7 +1030,13 @@ function EnquiriesContent() {
                     </div>
                     <p className="text-sm font-bold leading-6">{enquiry.email}</p>
                     <p className="text-sm font-bold leading-6">{enquiry.mobile}</p>
-                    <p className="text-sm font-bold leading-6">{enquiry.source_page}</p>
+                    <div className="mt-4 rounded-xl bg-white p-3">
+                      <p className="text-xs font-black uppercase tracking-[0.12em] text-[#7A2E9A]">Source</p>
+                      <p className="mt-1 text-sm font-black text-[#3D145F]">{source.label}</p>
+                      {source.context.length > 0 ? (
+                        <p className="mt-1 text-xs font-black text-[#7A2E9A]">{source.context.join(" · ")}</p>
+                      ) : null}
+                    </div>
                     <button
                       className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#5F2D8C] px-4 py-2 text-xs font-black text-[#F7F0E8]"
                       onClick={() => setSelectedEnquiry(enquiry)}

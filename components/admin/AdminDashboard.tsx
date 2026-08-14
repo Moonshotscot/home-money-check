@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, ClipboardList } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Inbox, Mail, Network, Users } from "lucide-react";
 import { AdminGuard } from "@/components/admin/AdminGuard";
 import { AdminShell } from "@/components/admin/AdminShell";
+import { getLeadSourceDetails } from "@/lib/leadSource";
 import { supabase } from "@/lib/supabaseClient";
 
 type RecentEnquiry = {
@@ -16,160 +17,66 @@ type RecentEnquiry = {
   status: string | null;
 };
 
-type EnquiryCheckRow = {
-  check_label: string | null;
-  enquiry_id?: string;
-  status: string | null;
-};
-
-const cards = [
-  {
-    href: "/admin/enquiries",
-    label: "Enquiries",
-    note: "View, filter and update lead enquiries.",
-    live: true,
-  },
-  {
-    href: "/admin/updates",
-    label: "Updates",
-    note: "View Home Money Check update signups.",
-    live: true,
-  },
-  {
-    href: "/admin/noticeboard",
-    label: "Noticeboard",
-    note: "Manage homepage noticeboard items.",
-    live: true,
-  },
-];
-
-const hiddenPageLinks = [
+const customerPageLinks = [
   { href: "/household-bills-check", label: "Household Bills Check" },
-  { href: "/energy", label: "Energy Check" },
-  { href: "/broadband", label: "Broadband Check" },
+  { href: "/energy", label: "Energy" },
+  { href: "/broadband", label: "Broadband" },
   { href: "/20k-giveaway", label: "£20K Giveaway" },
   { href: "/build-a-second-income", label: "Build a Second Income" },
-  { href: "/how-it-works", label: "How It Works" },
-  { href: "/about", label: "About Neill" },
-  { href: "/staff-bills-check", label: "Staff Bills Check" },
-  { href: "/staff-bills-check/employee", label: "Employee Bills Check" },
-  { href: "/for-your-clients", label: "For Your Clients" },
-  { href: "/for-your-clients/client", label: "Introduced Client Page" },
-  { href: "/partner-bills-check", label: "Partner Bills Pages" },
-  { href: "/partner-bills-check/start", label: "Partner Customer Page" },
-  { href: "/updates", label: "Updates" },
+  { href: "/staff-bills-check/employee", label: "Employee bills page" },
+  { href: "/for-your-clients/client", label: "Introduced client page" },
+  { href: "/partner-bills-check/start", label: "Partner customer page" },
+  { href: "/updates", label: "Offers and updates" },
 ];
 
 export function AdminDashboard() {
   const [summary, setSummary] = useState({
-    checksByType: [] as { label: string; count: number }[],
-    checksNeedingAction: null as number | null,
-    convertedChecks: null as number | null,
-    openChecks: null as number | null,
-    liveNoticeboardItems: null as number | null,
+    mailingList: null as number | null,
     newEnquiries: null as number | null,
-    recentActivity: [] as (RecentEnquiry & { requestedChecks: string[] })[],
+    recentActivity: [] as RecentEnquiry[],
     recentEnquiries: null as number | null,
+    sources: [] as { count: number; label: string }[],
     totalEnquiries: null as number | null,
   });
 
   useEffect(() => {
     async function loadSummary() {
       const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-
-      const [
-        totalEnquiries,
-        newEnquiries,
-        recentEnquiries,
-        openChecks,
-        convertedChecks,
-        checksNeedingAction,
-        checkRows,
-        latestEnquiries,
-        liveNoticeboardItems,
-      ] = await Promise.all([
-        supabase.from("enquiries").select("id", { count: "exact", head: true }),
+      const [enquiryRows, newEnquiries, recentEnquiries, mailingList] = await Promise.all([
+        supabase
+          .from("enquiries")
+          .select("id,created_at,name,selected_check,source_page,status")
+          .order("created_at", { ascending: false }),
         supabase.from("enquiries").select("id", { count: "exact", head: true }).eq("status", "New"),
         supabase
           .from("enquiries")
           .select("id", { count: "exact", head: true })
           .gte("created_at", sevenDaysAgo),
         supabase
-          .from("enquiry_checks")
-          .select("id", { count: "exact", head: true })
-          .in("status", ["New", "Contacted", "Quoted", "In progress"]),
-        supabase
-          .from("enquiry_checks")
-          .select("id", { count: "exact", head: true })
-          .eq("status", "Converted"),
-        supabase
-          .from("enquiry_checks")
-          .select("id", { count: "exact", head: true })
-          .in("status", ["New", "In progress"]),
-        supabase.from("enquiry_checks").select("check_label,status"),
-        supabase
-          .from("enquiries")
-          .select("id,created_at,name,selected_check,source_page,status")
-          .order("created_at", { ascending: false })
-          .limit(5),
-        supabase
-          .from("noticeboard_items")
-          .select("id", { count: "exact", head: true })
-          .eq("is_live", true),
+          .from("update_subscribers")
+          .select("id", { count: "exact", head: true }),
       ]);
 
-      const latestIds = ((latestEnquiries.data || []) as RecentEnquiry[]).map(
-        (enquiry) => enquiry.id,
-      );
-      const latestChecks =
-        latestIds.length > 0
-          ? await supabase
-              .from("enquiry_checks")
-              .select("enquiry_id,check_label,status")
-              .in("enquiry_id", latestIds)
-          : { data: [] };
-      const checksByEnquiry = new Map<string, string[]>();
+      const enquiries = (enquiryRows.data || []) as RecentEnquiry[];
+      const sourceCounts = new Map<string, number>();
 
-      ((latestChecks.data || []) as EnquiryCheckRow[]).forEach((check) => {
-        if (!check.enquiry_id || !check.check_label) {
-          return;
-        }
-
-        checksByEnquiry.set(check.enquiry_id, [
-          ...(checksByEnquiry.get(check.enquiry_id) || []),
-          check.check_label,
-        ]);
-      });
-
-      const checkTypeCounts = new Map<string, number>();
-
-      ((checkRows.data || []) as EnquiryCheckRow[]).forEach((check) => {
-        const label = check.check_label?.trim();
-
-        if (!label) {
-          return;
-        }
-
-        checkTypeCounts.set(label, (checkTypeCounts.get(label) || 0) + 1);
+      enquiries.forEach((enquiry) => {
+        const source = getLeadSourceDetails(enquiry.source_page);
+        const context = source.context[0];
+        const label = context ? `${source.label} · ${context}` : source.label;
+        sourceCounts.set(label, (sourceCounts.get(label) || 0) + 1);
       });
 
       setSummary({
-        checksByType: Array.from(checkTypeCounts.entries())
-          .map(([label, count]) => ({ label, count }))
-          .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label)),
-        checksNeedingAction: checksNeedingAction.count,
-        convertedChecks: convertedChecks.count,
-        openChecks: openChecks.count,
-        liveNoticeboardItems: liveNoticeboardItems.count,
+        mailingList: mailingList.count,
         newEnquiries: newEnquiries.count,
-        recentActivity: ((latestEnquiries.data || []) as RecentEnquiry[]).map((enquiry) => ({
-          ...enquiry,
-          requestedChecks:
-            checksByEnquiry.get(enquiry.id) ||
-            (enquiry.selected_check ? [enquiry.selected_check] : []),
-        })),
+        recentActivity: enquiries.slice(0, 5),
         recentEnquiries: recentEnquiries.count,
-        totalEnquiries: totalEnquiries.count,
+        sources: Array.from(sourceCounts.entries())
+          .map(([label, count]) => ({ count, label }))
+          .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
+          .slice(0, 8),
+        totalEnquiries: enquiries.length,
       });
     }
 
@@ -180,192 +87,159 @@ export function AdminDashboard() {
     <AdminGuard>
       {() => (
         <AdminShell>
-          <section className="rounded-[2.75rem] bg-white p-8 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-10">
-            <p className="mb-5 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
-              Admin
-            </p>
-            <h1 className="text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-6xl">
-              Home Money Check admin
-            </h1>
-
-            <div className="mt-8 grid gap-4 md:grid-cols-3 xl:grid-cols-6">
-              {[
-                ["Total enquiries", summary.totalEnquiries],
-                ["New enquiries", summary.newEnquiries],
-                ["Open checks", summary.openChecks],
-                ["Converted checks", summary.convertedChecks],
-                ["Checks needing action", summary.checksNeedingAction],
-                ["Recent enquiries", summary.recentEnquiries],
-              ].map(([label, value]) => (
-                <div
-                  className="rounded-[1.5rem] bg-[#F7F0E8] p-5 shadow-[0_12px_34px_rgba(44,31,61,0.07)]"
-                  key={label}
-                >
-                  <p className="text-xs font-black uppercase tracking-[0.12em] text-[#5F2D8C]/70">
-                    {label}
-                  </p>
-                  <p className="mt-3 text-3xl font-black tracking-[-0.05em] text-[#2C1F3D]">
-                    {value ?? "-"}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-8 grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-4">
-              {cards.map((card) => {
-                const inner = (
-                  <div className="flex h-full flex-col justify-between rounded-[2rem] bg-[#F7F0E8] p-6 shadow-[0_16px_45px_rgba(44,31,61,0.08)] transition-all duration-300 hover:-translate-y-1">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#FDCA55] text-[#4F247D]">
-                      <ClipboardList className="h-5 w-5" />
-                    </span>
-                    <div className="mt-10">
-                      <h2 className="text-2xl font-black tracking-[-0.05em]">{card.label}</h2>
-                      <p className="mt-3 text-sm font-bold leading-6 text-[#2C1F3D]/70">{card.note}</p>
-                      {card.label === "Enquiries" ? (
-                        <dl className="mt-5 grid gap-2 text-xs font-black text-[#5F2D8C]">
-                          <div className="flex justify-between gap-3 rounded-full bg-white px-3 py-2">
-                            <dt>New</dt>
-                            <dd>{summary.newEnquiries ?? "-"}</dd>
-                          </div>
-                          <div className="flex justify-between gap-3 rounded-full bg-white px-3 py-2">
-                            <dt>Last 7 days</dt>
-                            <dd>{summary.recentEnquiries ?? "-"}</dd>
-                          </div>
-                          <div className="flex justify-between gap-3 rounded-full bg-white px-3 py-2">
-                            <dt>Total</dt>
-                            <dd>{summary.totalEnquiries ?? "-"}</dd>
-                          </div>
-                        </dl>
-                      ) : null}
-                      {card.label === "Noticeboard" ? (
-                        <p className="mt-5 w-fit rounded-full bg-white px-3 py-2 text-xs font-black text-[#5F2D8C]">
-                          {summary.liveNoticeboardItems ?? "-"} live item
-                          {summary.liveNoticeboardItems === 1 ? "" : "s"}
-                        </p>
-                      ) : null}
-                    </div>
-                    {card.live ? (
-                      <span className="mt-6 inline-flex items-center gap-2 text-sm font-black text-[#5F2D8C]">
-                        Open
-                        <ArrowUpRight className="h-4 w-4" />
-                      </span>
-                    ) : null}
-                  </div>
-                );
-
-                return card.live ? (
-                  <Link
-                    className="h-full"
-                    href={card.href}
-                    key={card.label}
-                  >
-                    {inner}
-                  </Link>
-                ) : (
-                  <div key={card.label}>{inner}</div>
-                );
-              })}
-            </div>
-
-            <div className="mt-8 grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
-              <section className="rounded-[2rem] bg-[#F7F0E8] p-6 shadow-[0_16px_45px_rgba(44,31,61,0.08)]">
-                <h2 className="text-2xl font-black tracking-[-0.05em]">Checks by type</h2>
-                {summary.checksByType.length > 0 ? (
-                  <dl className="mt-5 grid gap-2">
-                    {summary.checksByType.map((item) => (
-                      <div
-                        className="flex items-center justify-between gap-3 rounded-full bg-white px-4 py-2 text-sm font-black text-[#5F2D8C]"
-                        key={item.label}
-                      >
-                        <dt>{item.label}</dt>
-                        <dd>{item.count}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                ) : (
-                  <p className="mt-5 rounded-[1.5rem] bg-white p-4 text-sm font-bold leading-6 text-[#5F2D8C]">
-                    No requested checks yet.
-                  </p>
-                )}
-              </section>
-
-              <section className="rounded-[2rem] bg-[#F7F0E8] p-6 shadow-[0_16px_45px_rgba(44,31,61,0.08)]">
-                <h2 className="text-2xl font-black tracking-[-0.05em]">Recent activity</h2>
-                {summary.recentActivity.length > 0 ? (
-                  <div className="mt-5 grid gap-3">
-                    {summary.recentActivity.map((enquiry) => (
-                      <article className="rounded-[1.5rem] bg-white p-4" key={enquiry.id}>
-                        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                          <div>
-                            <h3 className="text-lg font-black tracking-[-0.035em]">
-                              {enquiry.name || "Unnamed enquiry"}
-                            </h3>
-                            <p className="mt-1 text-xs font-black uppercase tracking-[0.1em] text-[#5F2D8C]/65">
-                              {new Date(enquiry.created_at).toLocaleDateString("en-GB", {
-                                day: "2-digit",
-                                month: "short",
-                                year: "numeric",
-                              })}
-                            </p>
-                          </div>
-                          <span className="w-fit rounded-full bg-[#EADFFD] px-3 py-1 text-xs font-black text-[#5F2D8C]">
-                            {enquiry.status || "New"}
-                          </span>
-                        </div>
-                        <div className="mt-3 flex flex-wrap gap-1.5">
-                          {enquiry.requestedChecks.length > 0 ? (
-                            enquiry.requestedChecks.map((check) => (
-                              <span
-                                className="rounded-full bg-[#F7F0E8] px-3 py-1 text-xs font-black text-[#5F2D8C]"
-                                key={check}
-                              >
-                                {check}
-                              </span>
-                            ))
-                          ) : (
-                            <span className="text-xs font-black text-[#5F2D8C]/65">
-                              No check supplied
-                            </span>
-                          )}
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="mt-5 rounded-[1.5rem] bg-white p-4 text-sm font-bold leading-6 text-[#5F2D8C]">
-                    No recent enquiries yet.
-                  </p>
-                )}
-              </section>
-            </div>
-
-            <section className="mt-8 rounded-[2rem] bg-[#F7F0E8] p-6 shadow-[0_16px_45px_rgba(44,31,61,0.08)]">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <p className="w-fit rounded-full bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.12em] text-[#5F2D8C]/70">
-                    Utility links
-                  </p>
-                  <h2 className="mt-3 text-2xl font-black tracking-[-0.05em]">
-                    Hidden page links
-                  </h2>
-                </div>
-                <p className="max-w-xl text-sm font-bold leading-6 text-[#2C1F3D]/65">
-                  Quick access to direct-link pages that are not shown in the public navigation.
+          <section className="overflow-hidden rounded-[2.25rem] bg-[#3D145F] text-white shadow-[0_24px_70px_rgba(61,20,95,0.16)]">
+            <div className="grid gap-8 px-6 py-8 md:px-10 md:py-10 lg:grid-cols-[1fr_auto] lg:items-end">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-[#F0C646]">
+                  Home Money Check back office
+                </p>
+                <h1 className="display-font mt-4 max-w-3xl text-4xl leading-[0.98] md:text-6xl">
+                  New leads arrive here.
+                </h1>
+                <p className="mt-5 max-w-2xl text-base font-semibold leading-7 text-white/78">
+                  Check where each enquiry came from, make the first contact and pass the lead into
+                  CPH when it is ready for ongoing CRM work.
                 </p>
               </div>
-              <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {hiddenPageLinks.map((item) => (
+              <Link
+                className="inline-flex w-fit items-center gap-3 rounded-full bg-[#22C86B] px-6 py-4 text-sm font-black text-[#143526] transition-transform hover:-translate-y-0.5"
+                href="/admin/enquiries"
+              >
+                Open lead inbox
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+            </div>
+          </section>
+
+          <section aria-label="Lead summary" className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {[
+              { icon: Inbox, label: "New leads", value: summary.newEnquiries },
+              { icon: ArrowUpRight, label: "Last 7 days", value: summary.recentEnquiries },
+              { icon: Users, label: "All HMC leads", value: summary.totalEnquiries },
+              { icon: Mail, label: "Mailing list", value: summary.mailingList },
+            ].map(({ icon: MetricIcon, label, value }) => {
+
+              return (
+                <article
+                  className="rounded-[1.75rem] border border-[#3D145F]/10 bg-white p-5 shadow-[0_14px_38px_rgba(61,20,95,0.07)]"
+                  key={label}
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <p className="text-xs font-black uppercase tracking-[0.14em] text-[#3D145F]/65">
+                      {label}
+                    </p>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F0C646] text-[#35104F]">
+                      <MetricIcon className="h-5 w-5" />
+                    </span>
+                  </div>
+                  <p className="mt-5 text-4xl font-black tracking-[-0.055em] text-[#35104F]">
+                    {value ?? "–"}
+                  </p>
+                </article>
+              );
+            })}
+          </section>
+
+          <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+            <section className="rounded-[2rem] border border-[#3D145F]/10 bg-white p-6 shadow-[0_18px_50px_rgba(61,20,95,0.07)] md:p-8">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7A2E9A]">
+                    Latest leads
+                  </p>
+                  <h2 className="display-font mt-3 text-3xl text-[#3D145F]">Recent activity</h2>
+                </div>
+                <Link className="text-sm font-black text-[#3D145F] underline decoration-[#F0C646] decoration-2 underline-offset-4" href="/admin/enquiries">
+                  View all leads
+                </Link>
+              </div>
+              {summary.recentActivity.length > 0 ? (
+                <div className="mt-6 grid gap-3">
+                  {summary.recentActivity.map((enquiry) => {
+                    const source = getLeadSourceDetails(enquiry.source_page);
+
+                    return (
+                      <article className="grid gap-3 rounded-[1.4rem] bg-[#FFF8E8] p-4 sm:grid-cols-[1fr_auto] sm:items-center" key={enquiry.id}>
+                        <div>
+                          <h3 className="font-black text-[#35104F]">{enquiry.name || "Unnamed enquiry"}</h3>
+                          <p className="mt-1 text-sm font-semibold text-[#35104F]/65">
+                            {enquiry.selected_check || "No check supplied"} · {source.label}
+                          </p>
+                          {source.context.length > 0 ? (
+                            <p className="mt-1 text-xs font-black text-[#7A2E9A]">{source.context.join(" · ")}</p>
+                          ) : null}
+                        </div>
+                        <span className="w-fit rounded-full bg-white px-3 py-1.5 text-xs font-black text-[#3D145F]">
+                          {enquiry.status || "New"}
+                        </span>
+                      </article>
+                    );
+                  })}
+                </div>
+              ) : (
+                <p className="mt-6 rounded-[1.5rem] bg-[#FFF8E8] p-5 text-sm font-bold text-[#3D145F]">
+                  New customer enquiries will appear here.
+                </p>
+              )}
+            </section>
+
+            <section className="rounded-[2rem] bg-[#273468] p-6 text-white shadow-[0_18px_50px_rgba(39,52,104,0.15)] md:p-8">
+              <Network className="h-9 w-9 text-[#22C86B]" />
+              <p className="mt-6 text-xs font-black uppercase tracking-[0.18em] text-[#F0C646]">
+                Lead sources
+              </p>
+              <h2 className="display-font mt-3 text-3xl">See what is working.</h2>
+              <p className="mt-4 text-sm font-semibold leading-6 text-white/72">
+                Every form records its page. Company, partner and campaign details are also kept
+                when they are included in the link.
+              </p>
+              {summary.sources.length > 0 ? (
+                <dl className="mt-6 grid gap-2">
+                  {summary.sources.map((source) => (
+                    <div className="flex items-center justify-between gap-4 rounded-xl bg-white/10 px-4 py-3 text-sm font-black" key={source.label}>
+                      <dt>{source.label}</dt>
+                      <dd className="text-[#F0C646]">{source.count}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : (
+                <p className="mt-6 rounded-xl bg-white/10 px-4 py-3 text-sm font-semibold text-white/75">
+                  Source totals will appear when leads arrive.
+                </p>
+              )}
+            </section>
+          </div>
+
+          <section className="mt-6 rounded-[2rem] border border-[#F0C646]/55 bg-[#FFF8E8] p-6 md:p-8">
+            <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7A2E9A]">
+                  Customer page links
+                </p>
+                <h2 className="display-font mt-3 text-3xl text-[#3D145F]">Direct links, clearly tracked.</h2>
+                <p className="mt-4 text-sm font-semibold leading-6 text-[#35104F]/72">
+                  For a company-specific link, add the company name to the end, for example
+                  <span className="mt-2 block break-all rounded-lg bg-white px-3 py-2 font-black text-[#3D145F]">
+                    /staff-bills-check/employee?company=CompanyName
+                  </span>
+                  Leads from that link will show the page and company in the inbox.
+                </p>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {customerPageLinks.map((item) => (
                   <Link
-                    className="group flex items-center justify-between gap-3 rounded-[1.25rem] bg-white px-4 py-3 text-sm font-black text-[#5F2D8C] shadow-[0_10px_28px_rgba(44,31,61,0.05)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#FDCA55]"
+                    className="group flex items-center justify-between gap-3 rounded-[1.1rem] bg-white px-4 py-3 text-sm font-black text-[#3D145F] shadow-[0_10px_28px_rgba(61,20,95,0.05)] transition-transform hover:-translate-y-0.5"
                     href={item.href}
                     key={item.href}
+                    rel="noreferrer"
+                    target="_blank"
                   >
                     <span>{item.label}</span>
-                    <ArrowUpRight className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 shrink-0 text-[#22C86B]" />
                   </Link>
                 ))}
               </div>
-            </section>
+            </div>
           </section>
         </AdminShell>
       )}

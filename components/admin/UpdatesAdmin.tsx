@@ -6,6 +6,7 @@ import { AdminGuard } from "@/components/admin/AdminGuard";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { formatDate, type UpdateSubscriber } from "@/lib/admin";
 import { supabase } from "@/lib/supabaseClient";
+import { getLeadSourceDetails } from "@/lib/leadSource";
 
 function csvEscape(value: string) {
   return `"${value.replace(/"/g, '""')}"`;
@@ -171,11 +172,12 @@ function UpdatesContent() {
         ) : null}
 
         <div className="mt-8 overflow-hidden rounded-[1.75rem] ring-1 ring-[#EADFFD]">
-          <div className="grid grid-cols-[1fr_1.25fr_1fr_1.25fr_0.8fr_0.55fr] gap-3 bg-[#5F2D8C] px-5 py-3 text-xs font-black uppercase tracking-[0.12em] text-[#F7F0E8] max-lg:hidden">
+          <div className="grid grid-cols-[1fr_1.25fr_0.7fr_1.1fr_1.1fr_0.7fr_0.55fr] gap-3 bg-[#3D145F] px-5 py-3 text-xs font-black uppercase tracking-[0.12em] text-white max-lg:hidden">
             <span>Name</span>
             <span>Email</span>
             <span>Postcode</span>
             <span>Interests</span>
+            <span>Source page</span>
             <span>Status</span>
             <span>Action</span>
           </div>
@@ -188,7 +190,7 @@ function UpdatesContent() {
             ) : null}
             {filteredSubscribers.map((subscriber) => (
               <div
-                className="grid gap-3 p-5 text-sm font-bold text-[#2C1F3D] lg:grid-cols-[1fr_1.25fr_1fr_1.25fr_0.8fr_0.55fr]"
+                className="grid gap-3 p-5 text-sm font-bold text-[#35104F] lg:grid-cols-[1fr_1.25fr_0.7fr_1.1fr_1.1fr_0.7fr_0.55fr]"
                 key={subscriber.id}
               >
                 <div>
@@ -210,6 +212,16 @@ function UpdatesContent() {
                   ) : (
                     <span className="text-[#2C1F3D]/58">General</span>
                   )}
+                </div>
+                <div>
+                  <p className="text-xs font-black text-[#3D145F]">
+                    {getLeadSourceDetails(subscriber.source_page).label}
+                  </p>
+                  {getLeadSourceDetails(subscriber.source_page).context.length > 0 ? (
+                    <p className="mt-1 text-xs font-black text-[#7A2E9A]">
+                      {getLeadSourceDetails(subscriber.source_page).context.join(" · ")}
+                    </p>
+                  ) : null}
                 </div>
                 <span className="h-fit w-fit rounded-full bg-[#CFE6D5] px-3 py-1 text-xs font-black text-[#173E29]">
                   {subscriber.status || "Active"}
