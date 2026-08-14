@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Inbox, Mail, Network, Users } from "lucide-react";
+import { ArrowUpRight, Inbox, Mail, Users } from "lucide-react";
 import { AdminGuard } from "@/components/admin/AdminGuard";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { getLeadSourceDetails } from "@/lib/leadSource";
@@ -15,6 +15,10 @@ type RecentEnquiry = {
   selected_check: string | null;
   source_page: string | null;
   status: string | null;
+};
+
+type RequestedCheck = {
+  check_label: string;
 };
 
 const customerPageLinks = [
@@ -35,6 +39,7 @@ export function AdminDashboard() {
     newEnquiries: null as number | null,
     recentActivity: [] as RecentEnquiry[],
     recentEnquiries: null as number | null,
+    requestedChecks: [] as { count: number; label: string }[],
     sources: [] as { count: number; label: string }[],
     totalEnquiries: null as number | null,
   });
@@ -42,7 +47,8 @@ export function AdminDashboard() {
   useEffect(() => {
     async function loadSummary() {
       const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-      const [enquiryRows, newEnquiries, recentEnquiries, mailingList] = await Promise.all([
+      const [enquiryRows, newEnquiries, recentEnquiries, mailingList, requestedCheckRows] =
+        await Promise.all([
         supabase
           .from("enquiries")
           .select("id,created_at,name,selected_check,source_page,status")
@@ -55,10 +61,12 @@ export function AdminDashboard() {
         supabase
           .from("update_subscribers")
           .select("id", { count: "exact", head: true }),
+        supabase.from("enquiry_checks").select("check_label"),
       ]);
 
       const enquiries = (enquiryRows.data || []) as RecentEnquiry[];
       const sourceCounts = new Map<string, number>();
+      const requestedCheckCounts = new Map<string, number>();
 
       enquiries.forEach((enquiry) => {
         const source = getLeadSourceDetails(enquiry.source_page);
@@ -67,11 +75,38 @@ export function AdminDashboard() {
         sourceCounts.set(label, (sourceCounts.get(label) || 0) + 1);
       });
 
+      ((requestedCheckRows.data || []) as RequestedCheck[]).forEach((check) => {
+        if (!check.check_label) {
+          return;
+        }
+
+        requestedCheckCounts.set(
+          check.check_label,
+          (requestedCheckCounts.get(check.check_label) || 0) + 1,
+        );
+      });
+
+      if (requestedCheckCounts.size === 0) {
+        enquiries.forEach((enquiry) => {
+          if (!enquiry.selected_check) {
+            return;
+          }
+
+          requestedCheckCounts.set(
+            enquiry.selected_check,
+            (requestedCheckCounts.get(enquiry.selected_check) || 0) + 1,
+          );
+        });
+      }
+
       setSummary({
         mailingList: mailingList.count,
         newEnquiries: newEnquiries.count,
         recentActivity: enquiries.slice(0, 5),
         recentEnquiries: recentEnquiries.count,
+        requestedChecks: Array.from(requestedCheckCounts.entries())
+          .map(([label, count]) => ({ count, label }))
+          .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label)),
         sources: Array.from(sourceCounts.entries())
           .map(([label, count]) => ({ count, label }))
           .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
@@ -87,31 +122,11 @@ export function AdminDashboard() {
     <AdminGuard>
       {() => (
         <AdminShell>
-          <section className="overflow-hidden rounded-[2.25rem] bg-[#3D145F] text-white shadow-[0_24px_70px_rgba(61,20,95,0.16)]">
-            <div className="grid gap-8 px-6 py-8 md:px-10 md:py-10 lg:grid-cols-[1fr_auto] lg:items-end">
-              <div>
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-[#F0C646]">
-                  Home Money Check back office
-                </p>
-                <h1 className="display-font mt-4 max-w-3xl text-4xl leading-[0.98] md:text-6xl">
-                  New leads arrive here.
-                </h1>
-                <p className="mt-5 max-w-2xl text-base font-semibold leading-7 text-white/78">
-                  Check where each enquiry came from, make the first contact and pass the lead into
-                  CPH when it is ready for ongoing CRM work.
-                </p>
-              </div>
-              <Link
-                className="inline-flex w-fit items-center gap-3 rounded-full bg-[#22C86B] px-6 py-4 text-sm font-black text-[#143526] transition-transform hover:-translate-y-0.5"
-                href="/admin/enquiries"
-              >
-                Open lead inbox
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </div>
-          </section>
+          <h1 className="text-3xl font-black tracking-[-0.04em] text-[#3D145F] md:text-4xl">
+            Overview
+          </h1>
 
-          <section aria-label="Lead summary" className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <section aria-label="Lead summary" className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {[
               { icon: Inbox, label: "New leads", value: summary.newEnquiries },
               { icon: ArrowUpRight, label: "Last 7 days", value: summary.recentEnquiries },
@@ -140,15 +155,12 @@ export function AdminDashboard() {
             })}
           </section>
 
-          <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="mt-6 grid gap-6 lg:grid-cols-[1.35fr_0.65fr]">
             <section className="rounded-[2rem] border border-[#3D145F]/10 bg-white p-6 shadow-[0_18px_50px_rgba(61,20,95,0.07)] md:p-8">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7A2E9A]">
-                    Latest leads
-                  </p>
-                  <h2 className="display-font mt-3 text-3xl text-[#3D145F]">Recent activity</h2>
-                </div>
+                <h2 className="text-2xl font-black tracking-[-0.035em] text-[#3D145F]">
+                  Recent activity
+                </h2>
                 <Link className="text-sm font-black text-[#3D145F] underline decoration-[#F0C646] decoration-2 underline-offset-4" href="/admin/enquiries">
                   View all leads
                 </Link>
@@ -178,57 +190,25 @@ export function AdminDashboard() {
                 </div>
               ) : (
                 <p className="mt-6 rounded-[1.5rem] bg-[#FFF8E8] p-5 text-sm font-bold text-[#3D145F]">
-                  New customer enquiries will appear here.
+                  No leads yet.
                 </p>
               )}
             </section>
 
-            <section className="rounded-[2rem] bg-[#273468] p-6 text-white shadow-[0_18px_50px_rgba(39,52,104,0.15)] md:p-8">
-              <Network className="h-9 w-9 text-[#22C86B]" />
-              <p className="mt-6 text-xs font-black uppercase tracking-[0.18em] text-[#F0C646]">
-                Lead sources
-              </p>
-              <h2 className="display-font mt-3 text-3xl">See what is working.</h2>
-              <p className="mt-4 text-sm font-semibold leading-6 text-white/72">
-                Every form records its page. Company, partner and campaign details are also kept
-                when they are included in the link.
-              </p>
-              {summary.sources.length > 0 ? (
-                <dl className="mt-6 grid gap-2">
-                  {summary.sources.map((source) => (
-                    <div className="flex items-center justify-between gap-4 rounded-xl bg-white/10 px-4 py-3 text-sm font-black" key={source.label}>
-                      <dt>{source.label}</dt>
-                      <dd className="text-[#F0C646]">{source.count}</dd>
-                    </div>
-                  ))}
-                </dl>
-              ) : (
-                <p className="mt-6 rounded-xl bg-white/10 px-4 py-3 text-sm font-semibold text-white/75">
-                  Source totals will appear when leads arrive.
-                </p>
-              )}
-            </section>
+            <div className="grid gap-6">
+              <SummaryList heading="Checks requested" items={summary.requestedChecks} />
+              <SummaryList heading="Lead sources" items={summary.sources} />
+            </div>
           </div>
 
-          <section className="mt-6 rounded-[2rem] border border-[#F0C646]/55 bg-[#FFF8E8] p-6 md:p-8">
-            <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-              <div>
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#7A2E9A]">
-                  Customer page links
-                </p>
-                <h2 className="display-font mt-3 text-3xl text-[#3D145F]">Direct links, clearly tracked.</h2>
-                <p className="mt-4 text-sm font-semibold leading-6 text-[#35104F]/72">
-                  For a company-specific link, add the company name to the end, for example
-                  <span className="mt-2 block break-all rounded-lg bg-white px-3 py-2 font-black text-[#3D145F]">
-                    /staff-bills-check/employee?company=CompanyName
-                  </span>
-                  Leads from that link will show the page and company in the inbox.
-                </p>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
+          <section className="mt-6 rounded-[2rem] border border-[#3D145F]/10 bg-white p-6 shadow-[0_18px_50px_rgba(61,20,95,0.07)] md:p-8">
+            <h2 className="text-2xl font-black tracking-[-0.035em] text-[#3D145F]">
+              Customer pages
+            </h2>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {customerPageLinks.map((item) => (
                   <Link
-                    className="group flex items-center justify-between gap-3 rounded-[1.1rem] bg-white px-4 py-3 text-sm font-black text-[#3D145F] shadow-[0_10px_28px_rgba(61,20,95,0.05)] transition-transform hover:-translate-y-0.5"
+                    className="group flex items-center justify-between gap-3 rounded-[1.1rem] bg-[#FFF8E8] px-4 py-3 text-sm font-black text-[#3D145F] transition-transform hover:-translate-y-0.5"
                     href={item.href}
                     key={item.href}
                     rel="noreferrer"
@@ -238,11 +218,39 @@ export function AdminDashboard() {
                     <ArrowUpRight className="h-4 w-4 shrink-0 text-[#22C86B]" />
                   </Link>
                 ))}
-              </div>
             </div>
           </section>
         </AdminShell>
       )}
     </AdminGuard>
+  );
+}
+
+function SummaryList({
+  heading,
+  items,
+}: {
+  heading: string;
+  items: { count: number; label: string }[];
+}) {
+  return (
+    <section className="rounded-[2rem] border border-[#3D145F]/10 bg-white p-6 shadow-[0_18px_50px_rgba(61,20,95,0.07)]">
+      <h2 className="text-xl font-black tracking-[-0.025em] text-[#3D145F]">{heading}</h2>
+      {items.length > 0 ? (
+        <dl className="mt-4 grid gap-2">
+          {items.map((item) => (
+            <div
+              className="flex items-center justify-between gap-4 rounded-xl bg-[#FFF8E8] px-4 py-3 text-sm font-bold text-[#35104F]"
+              key={item.label}
+            >
+              <dt>{item.label}</dt>
+              <dd className="font-black text-[#3D145F]">{item.count}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : (
+        <p className="mt-4 text-sm font-bold text-[#35104F]/55">No data yet.</p>
+      )}
+    </section>
   );
 }

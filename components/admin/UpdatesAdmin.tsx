@@ -128,15 +128,9 @@ function UpdatesContent() {
       <section className="rounded-[2.75rem] bg-white p-8 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-10">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="mb-5 w-fit rounded-full bg-[#F0C646] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#3D145F]">
-              Email updates
-            </p>
-            <h1 className="display-font text-4xl leading-[0.98] text-[#3D145F] md:text-6xl">
+            <h1 className="text-4xl font-black leading-[0.98] tracking-[-0.04em] text-[#3D145F] md:text-5xl">
               Mailing list
             </h1>
-            <p className="mt-4 max-w-2xl text-sm font-semibold leading-6 text-[#35104F]/68">
-              People who have asked for Home Money Check offers, updates and money-saving ideas.
-            </p>
           </div>
           <button
             className="inline-flex w-fit items-center gap-2 rounded-full bg-[#5F2D8C] px-5 py-3 text-sm font-black text-[#F7F0E8] transition-all duration-300 hover:-translate-y-0.5"

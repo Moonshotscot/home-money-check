@@ -811,16 +811,9 @@ function EnquiriesContent() {
       <section className="rounded-[2.75rem] bg-white p-6 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-5 w-fit rounded-full bg-[#F0C646] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#3D145F]">
-              HMC lead inbox
-            </p>
-            <h1 className="display-font text-4xl leading-[0.98] text-[#3D145F] md:text-6xl">
-              New customer leads
+            <h1 className="text-4xl font-black leading-[0.98] tracking-[-0.04em] text-[#3D145F] md:text-5xl">
+              Lead inbox
             </h1>
-            <p className="mt-4 max-w-2xl text-sm font-semibold leading-6 text-[#35104F]/68">
-              See the customer, what they want checked and exactly which page or company link
-              brought them here. Ongoing CRM work belongs in CPH.
-            </p>
           </div>
           <div className="flex flex-wrap gap-3">
             <button

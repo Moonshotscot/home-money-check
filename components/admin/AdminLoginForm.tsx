@@ -62,7 +62,7 @@ export function AdminLoginForm() {
           <p className="relative mt-8 w-fit rounded-full bg-[#F0C646] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#3D145F]">
             Admin login
           </p>
-          <h1 className="display-font relative mt-5 text-4xl leading-[0.98] text-[#3D145F] md:text-5xl">
+          <h1 className="relative mt-5 text-4xl font-black leading-[0.98] tracking-[-0.04em] text-[#3D145F] md:text-5xl">
             HMC back office
           </h1>
           {error ? (
