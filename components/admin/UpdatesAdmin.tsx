@@ -128,14 +128,14 @@ function UpdatesContent() {
       <section className="rounded-[2.75rem] bg-white p-8 shadow-[0_24px_70px_rgba(44,31,61,0.12)] md:p-10">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="mb-5 w-fit rounded-full bg-[#EADFFD] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#5F2D8C]">
-              Updates
+            <p className="mb-5 w-fit rounded-full bg-[#F0C646] px-4 py-2 text-xs font-black uppercase tracking-[0.14em] text-[#3D145F]">
+              Email updates
             </p>
-            <h1 className="text-4xl font-black leading-[0.98] tracking-[-0.065em] md:text-6xl">
-              Update signups
+            <h1 className="display-font text-4xl leading-[0.98] text-[#3D145F] md:text-6xl">
+              Mailing list
             </h1>
-            <p className="mt-4 max-w-2xl text-sm font-bold leading-6 text-[#2C1F3D]/68">
-              People who have asked to receive occasional Home Money Check updates.
+            <p className="mt-4 max-w-2xl text-sm font-semibold leading-6 text-[#35104F]/68">
+              People who have asked for Home Money Check offers, updates and money-saving ideas.
             </p>
           </div>
           <button
@@ -150,7 +150,7 @@ function UpdatesContent() {
 
         <div className="mt-8">
           <label className="grid gap-2 text-sm font-black text-[#5F2D8C]">
-            Search updates
+            Search mailing list
             <input
               className="w-full rounded-[1.25rem] border-0 bg-[#F7F0E8] px-5 py-4 text-base font-bold text-[#2C1F3D] outline-none ring-2 ring-transparent focus:ring-[#FDCA55]"
               onChange={(event) => setSearchTerm(event.target.value)}
