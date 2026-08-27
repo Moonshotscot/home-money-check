@@ -18,15 +18,15 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://homemoneycheck.co.uk"),
   title: {
-    default: "Home Money Check | Check deals for your home, money and future",
+    default: "Home Money Check | See how much you could save",
     template: "%s",
   },
   description:
-    "Check household bills, planning, protection and selected business services in one place. Tell us what you want checked and we’ll help you take the next step.",
+    "Get a free Home Money Check for your gas, electricity and broadband. We check the available deals, savings, cashback and switching support for your household.",
   openGraph: {
-    title: "Home Money Check | Check deals for your home, money and future",
+    title: "Home Money Check | See how much you could save",
     description:
-      "Check household bills, planning, protection and selected business services in one place. Tell us what you want checked and we’ll help you take the next step.",
+      "Get a free Home Money Check for your gas, electricity and broadband. We check the available deals, savings, cashback and switching support for your household.",
     type: "website",
   },
   verification: {

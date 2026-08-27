@@ -7,10 +7,10 @@ import { SiteBrand } from "@/components/home/SiteBrand";
 
 const navigation = [
   { href: "/household-bills-check", label: "Household bills" },
-  { href: "/20k-giveaway", label: "£20K Giveaway" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/about", label: "About" },
   { href: "/build-a-second-income", label: "Build a second income" },
+  { href: "/20k-giveaway", label: "£20K Giveaway" },
 ] as const;
 
 export function SiteHeader() {

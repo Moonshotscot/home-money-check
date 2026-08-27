@@ -11,7 +11,6 @@ import {
   HeartHandshake,
   House,
   Layers,
-  ReceiptText,
   ShieldCheck,
   TrendingUp,
   Users,
@@ -189,57 +188,27 @@ export default function HomePage() {
             <div className="relative mx-auto w-full max-w-[47rem] lg:mx-0 lg:ml-auto">
               <div className="relative overflow-hidden rounded-[2.2rem] bg-[#3D145F] px-6 pb-7 pt-6 text-white shadow-[0_42px_100px_rgba(61,20,95,0.3)] sm:rounded-[3rem] sm:px-10 sm:pb-10 sm:pt-9">
                 <div className="absolute -right-24 -top-20 h-72 w-72 rounded-full border-[55px] border-white/[0.055]" />
-                <div className="relative flex items-start justify-between gap-6 border-b border-white/15 pb-7">
-                  <div>
-                    <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">
-                      Your savings check
-                    </p>
-                    <p className="display-font mt-3 max-w-[10ch] text-4xl leading-[0.95] tracking-[-0.04em] sm:text-5xl">
-                      Every saving counts.
-                    </p>
-                  </div>
-                  <Image
-                    alt=""
-                    className="h-[4.5rem] w-[4.5rem] shrink-0 rounded-[1.25rem] object-cover sm:h-20 sm:w-20 sm:rounded-[1.4rem]"
-                    height={160}
-                    src="/brand/hmc-tick-icon-purple.png"
-                    width={160}
-                  />
-                </div>
-
-                <div className="relative mt-6 grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-[1.5rem] bg-white/[0.09] p-5 ring-1 ring-inset ring-white/10">
-                    <p className="display-font text-5xl leading-none tracking-[-0.055em] text-[#F0C646]">£400</p>
-                    <p className="mt-3 text-sm font-bold leading-6 text-white/76">
-                      Up to £400 towards early termination fees.
-                    </p>
-                  </div>
-                  <div className="rounded-[1.5rem] bg-[#F0C646] p-5 text-[#33210A]">
-                    <p className="display-font text-5xl leading-none tracking-[-0.055em]">£150</p>
-                    <p className="mt-3 text-sm font-extrabold leading-6">
-                      Up to £150 Cashback Card bonus credit.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="relative mt-6 space-y-3">
-                  {["Find a cheaper monthly price", "Secure larger savings by combining services", "Add cashback & help with switching costs"].map(
-                    (item) => (
-                      <p className="flex items-center gap-3 text-sm font-bold text-white/82" key={item}>
-                        <Image
-                          alt=""
-                          className="h-7 w-7 shrink-0 rounded-[0.45rem] object-cover"
-                          height={56}
-                          src="/brand/hmc-tick-icon-purple.png"
-                          width={56}
-                        />
-                        {item}
+                <p className="relative border-b border-white/15 pb-5 text-[0.7rem] font-extrabold uppercase tracking-[0.2em] text-[#F0C646] sm:text-xs">
+                  Helping you save money on
+                </p>
+                <div className="relative divide-y divide-white/10">
+                  {["Gas", "Electricity", "Broadband", "SIM-only deals"].map((service) => (
+                    <div className="flex items-center gap-4 py-4 sm:gap-5 sm:py-5" key={service}>
+                      <Image
+                        alt=""
+                        className="h-11 w-11 shrink-0 rounded-[0.7rem] object-cover sm:h-14 sm:w-14 sm:rounded-[0.85rem]"
+                        height={112}
+                        src="/brand/hmc-tick-icon-purple.png"
+                        width={112}
+                      />
+                      <p className="display-font text-[2rem] leading-none tracking-[-0.035em] sm:text-[2.65rem]">
+                        {service}
                       </p>
-                    ),
-                  )}
+                    </div>
+                  ))}
                 </div>
                 <Link
-                  className="group relative mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-[#F0C646] transition hover:text-[#FFD75F]"
+                  className="group relative mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[#F0C646] transition hover:text-[#FFD75F]"
                   href="#arrange-check"
                 >
                   Check how much I could save
@@ -260,14 +229,55 @@ export default function HomePage() {
               <p className="mt-5 max-w-lg text-lg font-semibold leading-8 text-[#514558]">
                 We look for savings across your whole quote: lower prices, services that fit your household, extra value from combining them and every available offer.
               </p>
-              <div className="mt-7 rounded-[1.65rem] bg-[#F0C646] p-5 text-[#2B1535] shadow-[0_18px_45px_rgba(234,185,41,0.2)] sm:p-7 lg:pb-11">
-                <ReceiptText className="h-7 w-7 text-[#6A2C93]" strokeWidth={2} />
-                <p className="display-font mt-4 text-3xl leading-[1.02] tracking-[-0.035em]">
-                  You stack the savings.
-                </p>
-                <p className="mt-3 text-sm font-semibold leading-6 text-[#49330A] sm:text-base">
-                  Including lower prices, discounts for combining services, cashback and help with switching costs.
-                </p>
+              <div className="relative mt-7 overflow-hidden rounded-[1.8rem] bg-[#3D145F] p-5 text-white shadow-[0_24px_60px_rgba(61,20,95,0.2)] sm:p-7">
+                <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full border-[42px] border-white/[0.055]" />
+                <div className="relative flex items-start justify-between gap-5 border-b border-white/15 pb-5">
+                  <div>
+                    <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">
+                      Your savings check
+                    </p>
+                    <p className="display-font mt-3 max-w-[10ch] text-3xl leading-[0.96] tracking-[-0.04em] sm:text-4xl">
+                      Every saving counts.
+                    </p>
+                  </div>
+                  <Image
+                    alt=""
+                    className="h-14 w-14 shrink-0 rounded-[1rem] object-cover sm:h-16 sm:w-16"
+                    height={128}
+                    src="/brand/hmc-tick-icon-purple.png"
+                    width={128}
+                  />
+                </div>
+                <div className="relative mt-5 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-[1.35rem] bg-white/[0.09] p-4 ring-1 ring-inset ring-white/10">
+                    <p className="display-font text-4xl leading-none tracking-[-0.055em] text-[#F0C646]">£400</p>
+                    <p className="mt-3 text-sm font-bold leading-6 text-white/76">
+                      Up to £400 towards early termination fees.
+                    </p>
+                  </div>
+                  <div className="rounded-[1.35rem] bg-[#F0C646] p-4 text-[#33210A]">
+                    <p className="display-font text-4xl leading-none tracking-[-0.055em]">£150</p>
+                    <p className="mt-3 text-sm font-extrabold leading-6">
+                      Up to £150 Cashback Card bonus credit.
+                    </p>
+                  </div>
+                </div>
+                <div className="relative mt-5 space-y-3">
+                  {["Find a cheaper monthly price", "Secure larger savings by combining services", "Add cashback and help with switching costs"].map(
+                    (item) => (
+                      <p className="flex items-center gap-3 text-sm font-bold text-white/82" key={item}>
+                        <Image
+                          alt=""
+                          className="h-7 w-7 shrink-0 rounded-[0.45rem] object-cover"
+                          height={56}
+                          src="/brand/hmc-tick-icon-purple.png"
+                          width={56}
+                        />
+                        {item}
+                      </p>
+                    ),
+                  )}
+                </div>
               </div>
               <Link
                 className="group mt-5 inline-flex min-h-13 items-center gap-3 rounded-full bg-[#22C86B] px-6 py-3 text-sm font-extrabold text-[#12371F] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2DD977]"
