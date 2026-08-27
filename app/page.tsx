@@ -153,10 +153,10 @@ export default function HomePage() {
       <SiteHeader />
 
       <main>
-        <section className="relative isolate overflow-hidden px-5 pb-10 pt-7 sm:px-8 sm:pb-12 sm:pt-8 lg:pb-12 lg:pt-9">
+        <section className="relative isolate overflow-hidden px-5 pb-14 pt-9 sm:px-8 sm:pb-14 sm:pt-10 lg:pb-16 lg:pt-11">
           <div className="pointer-events-none absolute -right-48 bottom-0 -z-10 h-[34rem] w-[34rem] rounded-full bg-[#E8D7F6]/55 blur-3xl" />
 
-          <div className="mx-auto grid max-w-[86rem] items-center gap-9 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12">
+          <div className="mx-auto grid max-w-[86rem] items-center gap-11 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14">
             <div className="max-w-3xl">
               <p className="inline-flex items-center gap-2 border-b-2 border-[#EAB929] pb-3 text-xs font-extrabold uppercase tracking-[0.19em] text-[#5B2388]">
                 <Image
@@ -168,16 +168,16 @@ export default function HomePage() {
                 />
                 Your free household bills check
               </p>
-              <h1 className="display-font mt-5 max-w-[11ch] text-[clamp(3.5rem,6.2vw,6.5rem)] font-black leading-[0.84] tracking-[-0.065em] text-[#3D145F]">
+              <h1 className="display-font mt-6 max-w-[11ch] text-[clamp(3.75rem,6.6vw,7rem)] font-black leading-[0.84] tracking-[-0.065em] text-[#3D145F]">
                 Let&rsquo;s see how much you could <span className="relative inline-block text-[#D89F00]">save.</span>
               </h1>
-              <p className="mt-5 max-w-2xl text-base font-semibold leading-7 text-[#3F3347] sm:text-lg sm:leading-8">
+              <p className="mt-6 max-w-2xl text-lg font-semibold leading-8 text-[#3F3347] sm:text-[1.15rem] sm:leading-8">
                 We check your gas, electricity and broadband bills then talk you through a new quote tailored specifically for you and designed to save you money.
               </p>
               <p className="mt-3 max-w-xl text-base font-extrabold leading-7 text-[#3D145F]">
                 We&rsquo;ll do everything we can to help you save money.
               </p>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
                   className="group inline-flex min-h-13 items-center justify-center gap-3 rounded-full bg-[#22C86B] px-6 py-3 text-base font-extrabold text-[#12371F] shadow-[0_18px_50px_rgba(34,200,107,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2DD977] focus-visible:outline-[#3D145F]"
                   href="#arrange-check"
@@ -192,7 +192,7 @@ export default function HomePage() {
                   See how it works
                 </Link>
               </div>
-              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-[#E8DFC9] pt-4 text-xs font-bold text-[#5C4E63]">
+              <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 border-t border-[#E8DFC9] pt-5 text-xs font-bold text-[#5C4E63]">
                 {["Free. No cost to you.", "Speak with an expert. No AI. No Call Centres.", "You decide"].map(
                   (item) => (
                     <span className="inline-flex items-center gap-2" key={item}>
@@ -204,30 +204,30 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative mx-auto w-full max-w-[43rem] lg:mx-0 lg:ml-auto">
-              <div className="relative overflow-hidden rounded-[2rem] bg-[#3D145F] px-6 pb-6 pt-5 text-white shadow-[0_36px_80px_rgba(61,20,95,0.27)] sm:rounded-[2.5rem] sm:px-8 sm:pb-7 sm:pt-7">
+            <div className="relative mx-auto w-full max-w-[45rem] lg:mx-0 lg:ml-auto">
+              <div className="relative overflow-hidden rounded-[2rem] bg-[#3D145F] px-6 pb-7 pt-6 text-white shadow-[0_36px_80px_rgba(61,20,95,0.27)] sm:rounded-[2.5rem] sm:px-9 sm:pb-9 sm:pt-8">
                 <div className="absolute -right-24 -top-20 h-72 w-72 rounded-full border-[55px] border-white/[0.055]" />
                 <p className="relative border-b border-white/15 pb-4 text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#F0C646] sm:text-xs">
                   Helping you save money on
                 </p>
                 <div className="relative divide-y divide-white/10">
                   {["Gas", "Electricity", "Broadband", "SIM-only deals"].map((service) => (
-                    <div className="flex items-center gap-4 py-3 sm:gap-4 sm:py-3.5" key={service}>
+                    <div className="flex items-center gap-4 py-3.5 sm:gap-5 sm:py-4" key={service}>
                       <Image
                         alt=""
-                        className="h-9 w-9 shrink-0 rounded-[0.6rem] object-cover sm:h-11 sm:w-11 sm:rounded-[0.7rem]"
+                        className="h-10 w-10 shrink-0 rounded-[0.65rem] object-cover sm:h-12 sm:w-12 sm:rounded-[0.75rem]"
                         height={112}
                         src="/brand/hmc-tick-icon-purple.png"
                         width={112}
                       />
-                      <p className="display-font text-[1.75rem] leading-none tracking-[-0.035em] sm:text-[2.2rem]">
+                      <p className="display-font text-[1.9rem] leading-none tracking-[-0.035em] sm:text-[2.4rem]">
                         {service}
                       </p>
                     </div>
                   ))}
                 </div>
                 <Link
-                  className="group relative mt-4 inline-flex items-center gap-2 text-sm font-extrabold text-[#F0C646] transition hover:text-[#FFD75F]"
+                  className="group relative mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[#F0C646] transition hover:text-[#FFD75F]"
                   href="#arrange-check"
                 >
                   Check how much I could save
@@ -238,117 +238,115 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="border-y border-[#EEE5D0] bg-white px-5 py-10 sm:px-8 lg:py-12">
+        <section className="border-y border-[#EEE5D0] bg-white px-5 py-12 sm:px-8 sm:py-14 lg:py-16">
           <div className="mx-auto max-w-[86rem]">
-            <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end lg:gap-14">
-              <div>
-                <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Where savings come from</p>
-                <h2 className="display-font mt-3 max-w-[12ch] text-4xl leading-[0.94] tracking-[-0.045em] text-[#3D145F] sm:text-5xl">
-                  There&rsquo;s more than one way to save.
-                </h2>
-              </div>
-              <div>
-                <p className="max-w-3xl text-base font-semibold leading-7 text-[#514558]">
-                  We look for savings across your whole quote: lower prices, services that fit your household, extra value from combining them and every available offer.
-                </p>
-                <p className="mt-3 max-w-3xl border-l-[3px] border-[#EAB929] pl-4 text-xs font-semibold leading-5 text-[#6A5D70]">
-                  Home Money Check is a personal bills-check service. Household-service quotes are sourced through Utility Warehouse, rather than from a whole-market comparison.
-                </p>
-              </div>
+            <div className="max-w-4xl">
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Where savings come from</p>
+              <h2 className="display-font mt-4 max-w-[13ch] text-5xl leading-[0.94] tracking-[-0.045em] text-[#3D145F] sm:text-[3.5rem]">
+                There&rsquo;s more than one way to save.
+              </h2>
+              <p className="mt-5 max-w-3xl text-lg font-semibold leading-8 text-[#514558]">
+                We look for savings across your whole quote: lower prices, services that fit your household, extra value from combining them and every available offer.
+              </p>
             </div>
 
-            <div className="mt-8 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-stretch lg:gap-8">
+            <div className="mt-10 grid gap-7 lg:grid-cols-[0.82fr_1.18fr] lg:items-stretch lg:gap-9">
               <div className="flex flex-col">
-                <div className="relative flex-1 overflow-hidden rounded-[1.7rem] bg-[#3D145F] p-5 text-white shadow-[0_22px_52px_rgba(61,20,95,0.18)] sm:p-6">
-                  <div className="absolute -right-20 -top-20 h-52 w-52 rounded-full border-[40px] border-white/[0.055]" />
-                  <div className="relative flex items-start justify-between gap-5 border-b border-white/15 pb-4">
+                <div className="relative flex-1 overflow-hidden rounded-[1.9rem] bg-[#3D145F] p-6 text-white shadow-[0_22px_52px_rgba(61,20,95,0.18)] sm:p-7">
+                  <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full border-[42px] border-white/[0.055]" />
+                  <div className="relative flex items-start justify-between gap-5 border-b border-white/15 pb-5">
                     <div>
-                      <p className="text-[0.66rem] font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">Your savings check</p>
-                      <p className="display-font mt-2 text-3xl leading-[0.96] tracking-[-0.04em]">Every saving counts.</p>
+                      <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">Your savings check</p>
+                      <p className="display-font mt-2 text-[2rem] leading-[0.96] tracking-[-0.04em] sm:text-4xl">Every saving counts.</p>
                     </div>
-                    <Image alt="" className="h-12 w-12 shrink-0 rounded-[0.85rem] object-cover" height={96} src="/brand/hmc-tick-icon-purple.png" width={96} />
+                    <Image alt="" className="h-14 w-14 shrink-0 rounded-[0.9rem] object-cover" height={112} src="/brand/hmc-tick-icon-purple.png" width={112} />
                   </div>
-                  <div className="relative mt-4 grid grid-cols-2 gap-3">
-                    <div className="rounded-[1.15rem] bg-white/[0.09] p-4 ring-1 ring-inset ring-white/10">
-                      <p className="display-font text-3xl leading-none tracking-[-0.05em] text-[#F0C646]">£400</p>
-                      <p className="mt-2 text-xs font-bold leading-5 text-white/76">Towards early termination fees.</p>
+                  <div className="relative mt-5 grid grid-cols-2 gap-4">
+                    <div className="rounded-[1.25rem] bg-white/[0.09] p-4 ring-1 ring-inset ring-white/10 sm:p-5">
+                      <p className="display-font text-4xl leading-none tracking-[-0.05em] text-[#F0C646]">£400</p>
+                      <p className="mt-3 text-sm font-bold leading-5 text-white/76">Towards early termination fees.</p>
                     </div>
-                    <div className="rounded-[1.15rem] bg-[#F0C646] p-4 text-[#33210A]">
-                      <p className="display-font text-3xl leading-none tracking-[-0.05em]">£150</p>
-                      <p className="mt-2 text-xs font-extrabold leading-5">Cashback Card bonus credit.</p>
+                    <div className="rounded-[1.25rem] bg-[#F0C646] p-4 text-[#33210A] sm:p-5">
+                      <p className="display-font text-4xl leading-none tracking-[-0.05em]">£150</p>
+                      <p className="mt-3 text-sm font-extrabold leading-5">Cashback Card bonus credit.</p>
                     </div>
                   </div>
-                  <div className="relative mt-4 space-y-2.5">
+                  <div className="relative mt-5 space-y-3">
                     {["Find a cheaper monthly price", "Secure larger savings by combining services", "Add cashback and help with switching costs"].map((item) => (
-                      <p className="flex items-center gap-2.5 text-xs font-bold leading-5 text-white/82" key={item}>
-                        <Image alt="" className="h-6 w-6 shrink-0 rounded-[0.4rem] object-cover" height={48} src="/brand/hmc-tick-icon-purple.png" width={48} />
+                      <p className="flex items-center gap-3 text-sm font-bold leading-5 text-white/82" key={item}>
+                        <Image alt="" className="h-7 w-7 shrink-0 rounded-[0.45rem] object-cover" height={56} src="/brand/hmc-tick-icon-purple.png" width={56} />
                         {item}
                       </p>
                     ))}
                   </div>
                 </div>
-                <Link className="group mt-4 inline-flex min-h-12 w-fit items-center gap-3 rounded-full bg-[#22C86B] px-6 py-3 text-sm font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="#arrange-check">
+                <Link className="group mt-5 inline-flex min-h-13 w-fit items-center gap-3 rounded-full bg-[#22C86B] px-7 py-3 text-sm font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="#arrange-check">
                   Check how much I could save
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-5 sm:grid-cols-2">
                 {savingRoutes.map(({ number, title, body, icon: Icon, style, iconStyle, bodyStyle }) => (
-                  <article className={`relative flex min-h-44 flex-col overflow-hidden rounded-[1.6rem] p-5 shadow-[0_14px_38px_rgba(61,20,95,0.08)] sm:p-6 ${style}`} key={title}>
+                  <article className={`relative flex min-h-48 flex-col overflow-hidden rounded-[1.75rem] p-6 shadow-[0_14px_38px_rgba(61,20,95,0.08)] sm:p-7 ${style}`} key={title}>
                     <div className="flex items-start justify-between gap-4">
-                      <div className={`flex h-11 w-11 items-center justify-center rounded-[0.9rem] ${iconStyle}`}>
+                      <div className={`flex h-12 w-12 items-center justify-center rounded-[0.95rem] ${iconStyle}`}>
                         <Icon className="h-5 w-5" strokeWidth={2} />
                       </div>
-                      <span className="display-font text-3xl leading-none opacity-30">{number}</span>
+                      <span className="display-font text-4xl leading-none opacity-30">{number}</span>
                     </div>
-                    <h3 className="mt-4 text-lg font-extrabold leading-6 tracking-[-0.025em]">{title}</h3>
+                    <h3 className="mt-5 text-xl font-extrabold leading-7 tracking-[-0.025em]">{title}</h3>
                     <p className={`mt-2 text-sm font-semibold leading-6 ${bodyStyle}`}>{body}</p>
                   </article>
                 ))}
               </div>
             </div>
+
+            <p className="mt-7 border-t border-[#E8DFC9] pt-5 text-xs font-semibold leading-5 text-[#6A5D70]">
+              Home Money Check is a personal bills-check service. Household-service quotes use Utility Warehouse and are not a whole-market comparison.
+            </p>
           </div>
         </section>
-        <section className="relative overflow-hidden bg-[#35104F] px-5 py-12 text-white sm:px-8 lg:py-14" id="how-it-works">
+
+        <section className="relative overflow-hidden bg-[#35104F] px-5 py-14 text-white sm:px-8 sm:py-16 lg:py-[4.5rem]" id="how-it-works">
           <div className="pointer-events-none absolute -right-28 -top-36 h-[30rem] w-[30rem] rounded-full border-[90px] border-white/[0.035]" />
           <div className="relative mx-auto max-w-[86rem]">
             <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-14">
               <div>
                 <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">How it works</p>
-                <h2 className="display-font mt-3 max-w-[15ch] text-4xl leading-[0.94] tracking-[-0.045em] text-[#F0C646] sm:text-5xl">
+                <h2 className="display-font mt-4 max-w-[15ch] text-5xl leading-[0.94] tracking-[-0.045em] text-[#F0C646] sm:text-[3.5rem]">
                   We check your bills to <span className="whitespace-nowrap">save you money.</span>
                 </h2>
               </div>
-              <p className="max-w-2xl text-base font-semibold leading-7 text-white/72">
+              <p className="max-w-2xl text-lg font-semibold leading-8 text-white/72">
                 We start with what you pay and what your household needs. Then we can build your quote, maximise your savings and talk through the result.
               </p>
             </div>
 
-            <ol className="mt-10 grid gap-6 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-start">
+            <ol className="mt-12 grid gap-7 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-start">
               {process.map((step, index) => (
                 <li className="contents" key={step.number}>
                   <article>
-                    <span className={`flex h-12 w-12 items-center justify-center rounded-[1rem] text-xs font-extrabold ${index === 1 ? "bg-[#22C86B] text-[#12371F]" : "bg-[#F0C646] text-[#35240B]"}`}>
+                    <span className={`flex h-14 w-14 items-center justify-center rounded-[1.05rem] text-xs font-extrabold ${index === 1 ? "bg-[#22C86B] text-[#12371F]" : "bg-[#F0C646] text-[#35240B]"}`}>
                       {step.number}
                     </span>
-                    <h3 className="mt-4 max-w-[14ch] text-2xl font-extrabold leading-tight tracking-[-0.03em] lg:min-h-[4.5rem]">{step.title}</h3>
-                    <p className="mt-3 max-w-sm text-sm font-medium leading-6 text-white/67">{step.body}</p>
+                    <h3 className="mt-5 max-w-[14ch] text-2xl font-extrabold leading-tight tracking-[-0.03em] sm:text-[1.75rem] lg:min-h-[5rem]">{step.title}</h3>
+                    <p className="mt-3 max-w-sm text-base font-medium leading-7 text-white/67">{step.body}</p>
                   </article>
                   {index < process.length - 1 ? (
                     <>
                       <div aria-hidden="true" className="flex justify-center lg:hidden">
-                        <ArrowDown className="h-10 w-10 text-[#F0C646]" strokeWidth={3} />
+                        <ArrowDown className="h-12 w-12 text-[#F0C646]" strokeWidth={3} />
                       </div>
-                      <ArrowRight aria-hidden="true" className="mt-1 hidden h-11 w-11 text-[#F0C646] lg:block" strokeWidth={3} />
+                      <ArrowRight aria-hidden="true" className="mt-2 hidden h-12 w-12 text-[#F0C646] lg:block" strokeWidth={3} />
                     </>
                   ) : null}
                 </li>
               ))}
             </ol>
 
-            <div className="mt-9 flex justify-start">
-              <Link className="inline-flex min-h-12 items-center gap-3 rounded-full bg-[#22C86B] px-6 py-3 text-sm font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="#arrange-check">
+            <div className="mt-11 flex justify-start">
+              <Link className="inline-flex min-h-13 items-center gap-3 rounded-full bg-[#22C86B] px-7 py-3 text-sm font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="#arrange-check">
                 Check how much I could save
                 <ArrowRight className="h-4 w-4" />
               </Link>
