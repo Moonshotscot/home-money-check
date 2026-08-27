@@ -102,7 +102,7 @@ const relatedServices = [
     icon: ShieldCheck,
   },
   {
-    title: "Wills and Power of Attorney",
+    title: "Wills & Powers of Attorney",
     detail: "neillconnollywills.co.uk",
     href: "https://neillconnollywills.co.uk/",
     icon: HeartHandshake,
@@ -202,13 +202,6 @@ export default function HomePage() {
                   ),
                 )}
               </div>
-              <p className="mt-5 text-sm font-bold text-[#5C4E63]">
-                Home Money Check is led by founder{" "}
-                <Link className="text-[#3D145F] underline decoration-[#EAB929] decoration-2 underline-offset-4" href="#about">
-                  Neill Connolly
-                </Link>
-                .
-              </p>
             </div>
 
             <div className="relative mx-auto w-full max-w-[47rem] lg:mx-0 lg:ml-auto">
@@ -429,40 +422,37 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="border-y border-[#E6DAC2] bg-[#F7F1E6] px-5 py-14 sm:px-8 lg:py-16">
-          <div className="mx-auto grid max-w-[86rem] gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:gap-20">
+        <section className="border-y border-[#DED2E5] bg-[#F4EEF7] px-5 py-8 sm:px-8 sm:py-9">
+          <div className="mx-auto grid max-w-[86rem] gap-6 lg:grid-cols-[0.52fr_1.48fr] lg:items-center lg:gap-12">
             <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Other services</p>
-              <h2 className="display-font mt-4 max-w-[12ch] text-4xl leading-[0.95] tracking-[-0.045em] text-[#3D145F] sm:text-5xl">
-                More ways Neill can help.
+              <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Other services</p>
+              <h2 className="display-font mt-2 max-w-[13ch] text-3xl leading-[0.98] tracking-[-0.04em] text-[#3D145F] sm:text-4xl">
+                More ways we can help.
               </h2>
-              <p className="mt-5 max-w-lg text-base font-medium leading-7 text-[#5F5265]">
-                Home Money Check focuses on household bills. Neill can also help with mortgages, protection, wills and Power of Attorney, and business utilities.
-              </p>
             </div>
 
-            <div className="grid border-b border-[#D8C8A8] sm:grid-cols-2">
+            <div className="grid border-b border-[#D4C5DD] sm:grid-cols-2">
               {relatedServices.map((service, index) => {
                 const Icon = service.icon;
 
                 return (
                   <Link
-                    className={`group flex min-h-32 items-center gap-4 border-t border-[#D8C8A8] py-6 transition hover:text-[#6A2C93] sm:px-6 ${
+                    className={`group flex min-h-24 items-center gap-3 border-t border-[#D4C5DD] py-4 transition hover:text-[#6A2C93] sm:px-5 ${
                       index % 2 === 1 ? "sm:border-l" : ""
                     }`}
                     href={service.href}
                     key={service.title}
                   >
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[0.9rem] bg-[#F0C646] text-[#3D145F]">
-                      <Icon className="h-6 w-6" strokeWidth={2.2} />
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[0.75rem] bg-[#F0C646] text-[#3D145F]">
+                      <Icon className="h-5 w-5" strokeWidth={2.2} />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block text-base font-extrabold leading-6 text-[#34273B] group-hover:text-[#6A2C93]">
+                      <span className="block text-sm font-extrabold leading-5 text-[#34273B] group-hover:text-[#6A2C93]">
                         {service.title}
                       </span>
-                      <span className="mt-1 block truncate text-xs font-semibold text-[#756879]">{service.detail}</span>
+                      <span className="mt-0.5 block truncate text-[0.68rem] font-semibold text-[#756879]">{service.detail}</span>
                     </span>
-                    <ArrowRight className="h-5 w-5 shrink-0 text-[#6A2C93] transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-4 w-4 shrink-0 text-[#6A2C93] transition-transform group-hover:translate-x-1" />
                   </Link>
                 );
               })}

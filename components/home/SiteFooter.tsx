@@ -19,7 +19,7 @@ const footerLinks = [
 const otherServices = [
   { href: "https://www.wherecanifindamortgage.co.uk/", label: "Mortgages" },
   { href: "https://wherecanifindamortgage.co.uk/protection/", label: "Life insurance and protection" },
-  { href: "https://neillconnollywills.co.uk/", label: "Wills and Power of Attorney" },
+  { href: "https://neillconnollywills.co.uk/", label: "Wills & Powers of Attorney" },
   { href: "/business-utilities", label: "Business utilities" },
 ] as const;
 
