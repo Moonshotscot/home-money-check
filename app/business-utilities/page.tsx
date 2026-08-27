@@ -25,7 +25,7 @@ export default function BusinessUtilitiesPage() {
               This page will be <span className="text-[#F0C646]">available soon.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg font-medium leading-8 text-white/72">
-              Neill will also help businesses check their utility costs. Full details will be added here soon.
+              We’ll soon help businesses check their utility costs. Full details will be added here.
             </p>
             <Link
               className="mt-7 inline-flex min-h-14 items-center gap-3 rounded-full bg-[#22C86B] px-7 py-4 text-base font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]"

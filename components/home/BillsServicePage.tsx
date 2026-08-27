@@ -265,7 +265,7 @@ export function BillsServicePage({ kind }: { kind: BillsServiceKind }) {
                 <Image alt="" className="h-6 w-6 rounded-[0.35rem] object-cover" height={48} src="/brand/hmc-tick-icon-purple.png" width={48} />
                 {page.eyebrow}
               </p>
-              <h1 className="display-font mt-6 max-w-[12ch] text-[clamp(3.6rem,5.5vw,6.15rem)] leading-[0.88] tracking-[-0.06em] text-[#3D145F]">
+              <h1 className="display-font mt-6 max-w-[12ch] text-[3.2rem] leading-[0.88] tracking-[-0.06em] text-[#3D145F] min-[480px]:max-w-[14ch] sm:max-w-[12ch] sm:text-[clamp(3.6rem,5.5vw,6.15rem)]">
                 {titleStart}<span className="text-[#D89F00]">{titleAccent}</span>{titleEnd}
               </h1>
               <p className="mt-6 max-w-2xl text-lg font-semibold leading-8 text-[#514558] sm:text-[1.15rem]">

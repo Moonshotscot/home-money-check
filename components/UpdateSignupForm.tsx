@@ -103,7 +103,7 @@ export function UpdateSignupForm({ sourcePage = "/updates" }: { sourcePage?: str
         Join the list
       </p>
       <h2 className="display-font relative text-4xl leading-[0.98] tracking-[-0.045em] text-[#3D145F] sm:text-5xl">
-        Get the offers worth knowing about.
+        Get our latest offers and updates.
       </h2>
       <p className="relative mt-5 text-sm font-semibold leading-6 text-[#5D5062]">
         Home Money Check offers, household bill updates, giveaways and money-saving ideas by email.

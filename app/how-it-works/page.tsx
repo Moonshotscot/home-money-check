@@ -13,7 +13,7 @@ const steps = [
   { number: "01", title: "Choose what you want checked", body: "Select gas, electricity, broadband or any combination, then leave your contact details.", icon: Check },
   { number: "02", title: "We get in touch for a chat", body: "We ask what you pay now, how your household uses each service and what matters to you.", icon: MessageCircle },
   { number: "03", title: "We build your quote", body: "We check the available Utility Warehouse services, prices and offers for your household.", icon: Search },
-  { number: "04", title: "We maximise the savings", body: "We include the value of combining services, cashback and available switching support.", icon: Sparkles },
+  { number: "04", title: "We maximise the savings", body: "We combine services where that saves you more, then add any cashback and switching support available.", icon: Sparkles },
   { number: "05", title: "You see the result", body: "We talk through the new costs and every potential saving, then answer your questions.", icon: ReceiptText },
 ] as const;
 

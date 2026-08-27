@@ -42,7 +42,7 @@ export default function AboutPage() {
             <div className="rounded-[2.4rem] bg-[#35104F] p-8 text-white shadow-[0_28px_70px_rgba(61,20,95,0.2)] sm:p-11">
               <ShieldCheck className="h-11 w-11 text-[#22C86B]" strokeWidth={2} />
               <h2 className="display-font mt-7 max-w-[11ch] text-5xl leading-[0.94] tracking-[-0.05em]">You should understand every part of your quote.</h2>
-              <p className="mt-6 text-base font-semibold leading-8 text-white/70">Home Money Check gives you one clear household-services quote, explains where the savings come from and gives you the information to decide what works for you.</p>
+              <p className="mt-6 text-base font-semibold leading-8 text-white/70">Home Money Check gives you one clear quote for your household services, explains where the savings come from and gives you the information to decide what works for you.</p>
             </div>
             <div>
               <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">What matters to me</p>
