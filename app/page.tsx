@@ -308,13 +308,13 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-[#35104F] px-5 py-14 text-white sm:px-8 sm:py-16 lg:py-[4.5rem]" id="how-it-works">
-          <div className="pointer-events-none absolute -right-28 -top-36 h-[30rem] w-[30rem] rounded-full border-[90px] border-white/[0.035]" />
+        <section className="relative overflow-hidden bg-[#35104F] px-5 py-16 text-white sm:px-8 sm:py-18 lg:py-20" id="how-it-works">
+          <div className="pointer-events-none absolute -right-30 -top-38 h-[34rem] w-[34rem] rounded-full border-[100px] border-white/[0.035]" />
           <div className="relative mx-auto max-w-[86rem]">
-            <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-14">
+            <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-16">
               <div>
                 <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">How it works</p>
-                <h2 className="display-font mt-4 max-w-[15ch] text-5xl leading-[0.94] tracking-[-0.045em] text-[#F0C646] sm:text-[3.5rem]">
+                <h2 className="display-font mt-5 max-w-[15ch] text-5xl leading-[0.94] tracking-[-0.045em] text-[#F0C646] sm:text-[3.75rem]">
                   We check your bills to <span className="whitespace-nowrap">save you money.</span>
                 </h2>
               </div>
@@ -323,39 +323,39 @@ export default function HomePage() {
               </p>
             </div>
 
-            <ol className="mt-12 grid gap-7 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-start">
+            <ol className="mt-14 grid gap-8 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-start">
               {process.map((step, index) => (
                 <li className="contents" key={step.number}>
                   <article>
-                    <span className={`flex h-14 w-14 items-center justify-center rounded-[1.05rem] text-xs font-extrabold ${index === 1 ? "bg-[#22C86B] text-[#12371F]" : "bg-[#F0C646] text-[#35240B]"}`}>
+                    <span className={`flex h-16 w-16 items-center justify-center rounded-[1.2rem] text-sm font-extrabold ${index === 1 ? "bg-[#22C86B] text-[#12371F]" : "bg-[#F0C646] text-[#35240B]"}`}>
                       {step.number}
                     </span>
-                    <h3 className="mt-5 max-w-[14ch] text-2xl font-extrabold leading-tight tracking-[-0.03em] sm:text-[1.75rem] lg:min-h-[5rem]">{step.title}</h3>
+                    <h3 className="mt-6 max-w-[14ch] text-2xl font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl lg:min-h-[5.75rem]">{step.title}</h3>
                     <p className="mt-3 max-w-sm text-base font-medium leading-7 text-white/67">{step.body}</p>
                   </article>
                   {index < process.length - 1 ? (
                     <>
                       <div aria-hidden="true" className="flex justify-center lg:hidden">
-                        <ArrowDown className="h-12 w-12 text-[#F0C646]" strokeWidth={3} />
+                        <ArrowDown className="h-14 w-14 text-[#F0C646]" strokeWidth={3} />
                       </div>
-                      <ArrowRight aria-hidden="true" className="mt-2 hidden h-12 w-12 text-[#F0C646] lg:block" strokeWidth={3} />
+                      <ArrowRight aria-hidden="true" className="mt-2 hidden h-14 w-14 text-[#F0C646] lg:block" strokeWidth={3} />
                     </>
                   ) : null}
                 </li>
               ))}
             </ol>
 
-            <div className="mt-11 flex justify-start">
-              <Link className="inline-flex min-h-13 items-center gap-3 rounded-full bg-[#22C86B] px-7 py-3 text-sm font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="#arrange-check">
+            <div className="mt-13 flex justify-start">
+              <Link className="inline-flex min-h-14 items-center gap-3 rounded-full bg-[#22C86B] px-7 py-4 text-base font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="#arrange-check">
                 Check how much I could save
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
         </section>
-        <section className="bg-[#FFFDF8] px-5 py-16 sm:px-8 lg:py-20" id="about">
-          <div className="mx-auto grid max-w-[86rem] items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-            <div className="relative mx-auto w-full max-w-[33rem] lg:mx-0">
+        <section className="bg-[#FFFDF8] px-5 py-18 sm:px-8 sm:py-20 lg:py-24" id="about">
+          <div className="mx-auto grid max-w-[86rem] items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
+            <div className="relative mx-auto w-full max-w-[34rem] lg:mx-0">
               <div className="relative aspect-[4/4.55] overflow-hidden rounded-[2.35rem] border border-[#D9A914]/60 bg-[#D9C7E7] shadow-[0_30px_72px_rgba(61,20,95,0.16)]">
                 <Image
                   alt="Neill Connolly, founder of Home Money Check"
@@ -373,10 +373,10 @@ export default function HomePage() {
 
             <div>
               <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Meet Neill</p>
-              <h2 className="display-font mt-5 max-w-[13ch] text-5xl leading-[0.94] tracking-[-0.05em] text-[#3D145F] sm:text-6xl">
+              <h2 className="display-font mt-5 max-w-[13ch] text-5xl leading-[0.94] tracking-[-0.05em] text-[#3D145F] sm:text-[4rem]">
                 &ldquo;I created Home Money Check to help people save money.&rdquo;
               </h2>
-              <div className="mt-8 max-w-2xl space-y-5 text-base font-medium leading-8 text-[#5F5265]">
+              <div className="mt-8 max-w-2xl space-y-5 text-[1.05rem] font-medium leading-8 text-[#5F5265]">
                 <p>
                   Too many households are paying more than they need to for gas, electricity and broadband. Price changes and complicated offers seem designed to confuse us, and it&rsquo;s getting worse. I want to make things clearer and help people keep more of their money.
                 </p>
@@ -427,8 +427,8 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        <section className="bg-[#2E0D45] px-5 py-16 text-white sm:px-8 lg:py-20" id="arrange-check">
-          <div className="mx-auto grid max-w-[86rem] items-start gap-12 lg:grid-cols-[0.76fr_1.24fr] lg:gap-20">
+        <section className="bg-[#2E0D45] px-5 py-18 text-white sm:px-8 sm:py-20 lg:py-24" id="arrange-check">
+          <div className="mx-auto grid max-w-[86rem] items-start gap-14 lg:grid-cols-[0.76fr_1.24fr] lg:gap-24">
             <div className="lg:sticky lg:top-8">
               <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">Your free bills check</p>
               <h2 className="display-font mt-5 max-w-[10ch] text-5xl leading-[0.92] tracking-[-0.05em] sm:text-6xl lg:text-7xl">
@@ -539,29 +539,29 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="border-t border-[#E2D7C3] bg-[#FFFDF8] px-5 py-12 sm:px-8 lg:py-14">
+        <section className="border-t border-[#E2D7C3] bg-[#FFFDF8] px-5 py-14 sm:px-8 sm:py-16 lg:py-18">
           <div className="mx-auto max-w-[86rem]">
             <div className="max-w-3xl">
               <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">For your staff and clients</p>
-              <h2 className="display-font mt-3 text-4xl leading-[0.94] tracking-[-0.045em] text-[#3D145F] sm:text-5xl">Help the people you work with save money.</h2>
+              <h2 className="display-font mt-4 text-5xl leading-[0.94] tracking-[-0.045em] text-[#3D145F] sm:text-[3.5rem]">Help the people you work with save money.</h2>
               <p className="mt-4 max-w-2xl text-base font-semibold leading-7 text-[#5F5265]">Give your staff or clients their own route to a free gas, electricity and broadband check.</p>
             </div>
 
-            <div className="mt-8 grid gap-5 md:grid-cols-2">
-              <article className="flex min-h-[18rem] flex-col rounded-[2rem] bg-[#F0C646] p-7 text-[#33210A] shadow-[0_20px_48px_rgba(95,69,10,0.12)]">
-                <div className="flex h-12 w-12 items-center justify-center rounded-[0.9rem] bg-[#FFF7D9] text-[#3D145F]"><Users className="h-6 w-6" strokeWidth={2} /></div>
-                <p className="mt-5 text-xs font-extrabold uppercase tracking-[0.18em] text-[#6A2C93]">For employers</p>
-                <h3 className="display-font mt-2 text-3xl leading-[0.98] tracking-[-0.04em] text-[#3D145F] sm:text-4xl">Help your staff save money.</h3>
-                <p className="mt-3 max-w-xl text-sm font-semibold leading-6 text-[#513B0D]">Give your team direct access to a free gas, electricity and broadband check.</p>
-                <Link className="mt-auto inline-flex w-fit items-center gap-2 pt-5 text-sm font-extrabold text-[#3D145F]" href="/staff-bills-check">Explore Staff Bills Check<ArrowRight className="h-4 w-4" /></Link>
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              <article className="flex min-h-[20rem] flex-col rounded-[2.1rem] bg-[#F0C646] p-8 text-[#33210A] shadow-[0_20px_48px_rgba(95,69,10,0.12)]">
+                <div className="flex h-14 w-14 items-center justify-center rounded-[1rem] bg-[#FFF7D9] text-[#3D145F]"><Users className="h-7 w-7" strokeWidth={2} /></div>
+                <p className="mt-6 text-xs font-extrabold uppercase tracking-[0.18em] text-[#6A2C93]">For employers</p>
+                <h3 className="display-font mt-3 text-4xl leading-[0.98] tracking-[-0.04em] text-[#3D145F]">Help your staff save money.</h3>
+                <p className="mt-4 max-w-xl text-sm font-semibold leading-6 text-[#513B0D]">Give your team direct access to a free gas, electricity and broadband check.</p>
+                <Link className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-extrabold text-[#3D145F]" href="/staff-bills-check">Explore Staff Bills Check<ArrowRight className="h-4 w-4" /></Link>
               </article>
 
-              <article className="flex min-h-[18rem] flex-col rounded-[2rem] bg-[#273468] p-7 text-white shadow-[0_20px_48px_rgba(39,52,104,0.16)]">
-                <div className="flex h-12 w-12 items-center justify-center rounded-[0.9rem] bg-[#22C86B] text-[#12371F]"><HeartHandshake className="h-6 w-6" strokeWidth={2} /></div>
-                <p className="mt-5 text-xs font-extrabold uppercase tracking-[0.18em] text-[#F0C646]">For professionals</p>
-                <h3 className="display-font mt-2 text-3xl leading-[0.98] tracking-[-0.04em] sm:text-4xl">Help your clients save money.</h3>
-                <p className="mt-3 max-w-xl text-sm font-semibold leading-6 text-white/72">Introduce your clients to a free check of their gas, electricity and broadband bills.</p>
-                <Link className="mt-auto inline-flex w-fit items-center gap-2 pt-5 text-sm font-extrabold text-[#F0C646]" href="/for-your-clients">Explore client introductions<ArrowRight className="h-4 w-4" /></Link>
+              <article className="flex min-h-[20rem] flex-col rounded-[2.1rem] bg-[#273468] p-8 text-white shadow-[0_20px_48px_rgba(39,52,104,0.16)]">
+                <div className="flex h-14 w-14 items-center justify-center rounded-[1rem] bg-[#22C86B] text-[#12371F]"><HeartHandshake className="h-7 w-7" strokeWidth={2} /></div>
+                <p className="mt-6 text-xs font-extrabold uppercase tracking-[0.18em] text-[#F0C646]">For professionals</p>
+                <h3 className="display-font mt-3 text-4xl leading-[0.98] tracking-[-0.04em]">Help your clients save money.</h3>
+                <p className="mt-4 max-w-xl text-sm font-semibold leading-6 text-white/72">Introduce your clients to a free check of their gas, electricity and broadband bills.</p>
+                <Link className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-extrabold text-[#F0C646]" href="/for-your-clients">Explore client introductions<ArrowRight className="h-4 w-4" /></Link>
               </article>
             </div>
           </div>
