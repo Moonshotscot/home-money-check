@@ -153,46 +153,46 @@ export default function HomePage() {
       <SiteHeader />
 
       <main>
-        <section className="relative isolate overflow-hidden px-5 pb-16 pt-10 sm:px-8 lg:pb-20 lg:pt-14">
+        <section className="relative isolate overflow-hidden px-5 pb-10 pt-7 sm:px-8 sm:pb-12 sm:pt-8 lg:pb-12 lg:pt-9">
           <div className="pointer-events-none absolute -right-48 bottom-0 -z-10 h-[34rem] w-[34rem] rounded-full bg-[#E8D7F6]/55 blur-3xl" />
 
-          <div className="mx-auto grid max-w-[86rem] items-center gap-14 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14">
+          <div className="mx-auto grid max-w-[86rem] items-center gap-9 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12">
             <div className="max-w-3xl">
               <p className="inline-flex items-center gap-2 border-b-2 border-[#EAB929] pb-3 text-xs font-extrabold uppercase tracking-[0.19em] text-[#5B2388]">
                 <Image
                   alt=""
-                  className="h-7 w-7 rounded-[0.45rem] object-cover"
+                  className="h-6 w-6 rounded-[0.4rem] object-cover"
                   height={64}
                   src="/brand/hmc-tick-icon-purple.png"
                   width={64}
                 />
                 Your free household bills check
               </p>
-              <h1 className="display-font mt-8 max-w-[11ch] text-[clamp(4rem,7.7vw,8rem)] font-black leading-[0.84] tracking-[-0.065em] text-[#3D145F]">
+              <h1 className="display-font mt-5 max-w-[11ch] text-[clamp(3.5rem,6.2vw,6.5rem)] font-black leading-[0.84] tracking-[-0.065em] text-[#3D145F]">
                 Let&rsquo;s see how much you could <span className="relative inline-block text-[#D89F00]">save.</span>
               </h1>
-              <p className="mt-8 max-w-2xl text-lg font-semibold leading-8 text-[#3F3347] sm:text-xl sm:leading-9">
+              <p className="mt-5 max-w-2xl text-base font-semibold leading-7 text-[#3F3347] sm:text-lg sm:leading-8">
                 We check your gas, electricity and broadband bills then talk you through a new quote tailored specifically for you and designed to save you money.
               </p>
-              <p className="mt-4 max-w-xl text-base font-extrabold leading-7 text-[#3D145F] sm:text-lg">
+              <p className="mt-3 max-w-xl text-base font-extrabold leading-7 text-[#3D145F]">
                 We&rsquo;ll do everything we can to help you save money.
               </p>
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
-                  className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-[#22C86B] px-7 py-4 text-base font-extrabold text-[#12371F] shadow-[0_18px_50px_rgba(34,200,107,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2DD977] focus-visible:outline-[#3D145F]"
+                  className="group inline-flex min-h-13 items-center justify-center gap-3 rounded-full bg-[#22C86B] px-6 py-3 text-base font-extrabold text-[#12371F] shadow-[0_18px_50px_rgba(34,200,107,0.25)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2DD977] focus-visible:outline-[#3D145F]"
                   href="#arrange-check"
                 >
                   Check how much I could save
                   <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
                 <Link
-                  className="inline-flex min-h-14 items-center justify-center rounded-full border-2 border-[#F0C646] bg-[#F0C646] px-7 py-4 text-base font-extrabold text-[#35240B] shadow-[0_14px_34px_rgba(234,185,41,0.2)] transition duration-300 hover:-translate-y-0.5 hover:border-[#FFD75F] hover:bg-[#FFD75F]"
+                  className="inline-flex min-h-13 items-center justify-center rounded-full border-2 border-[#F0C646] bg-[#F0C646] px-6 py-3 text-base font-extrabold text-[#35240B] shadow-[0_14px_34px_rgba(234,185,41,0.2)] transition duration-300 hover:-translate-y-0.5 hover:border-[#FFD75F] hover:bg-[#FFD75F]"
                   href="#how-it-works"
                 >
                   See how it works
                 </Link>
               </div>
-              <div className="mt-9 flex flex-wrap gap-x-7 gap-y-3 border-t border-[#E8DFC9] pt-5 text-sm font-bold text-[#5C4E63]">
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-[#E8DFC9] pt-4 text-xs font-bold text-[#5C4E63]">
                 {["Free. No cost to you.", "Speak with an expert. No AI. No Call Centres.", "You decide"].map(
                   (item) => (
                     <span className="inline-flex items-center gap-2" key={item}>
@@ -204,30 +204,30 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative mx-auto w-full max-w-[47rem] lg:mx-0 lg:ml-auto">
-              <div className="relative overflow-hidden rounded-[2.2rem] bg-[#3D145F] px-6 pb-7 pt-6 text-white shadow-[0_42px_100px_rgba(61,20,95,0.3)] sm:rounded-[3rem] sm:px-10 sm:pb-10 sm:pt-9">
+            <div className="relative mx-auto w-full max-w-[43rem] lg:mx-0 lg:ml-auto">
+              <div className="relative overflow-hidden rounded-[2rem] bg-[#3D145F] px-6 pb-6 pt-5 text-white shadow-[0_36px_80px_rgba(61,20,95,0.27)] sm:rounded-[2.5rem] sm:px-8 sm:pb-7 sm:pt-7">
                 <div className="absolute -right-24 -top-20 h-72 w-72 rounded-full border-[55px] border-white/[0.055]" />
-                <p className="relative border-b border-white/15 pb-5 text-[0.7rem] font-extrabold uppercase tracking-[0.2em] text-[#F0C646] sm:text-xs">
+                <p className="relative border-b border-white/15 pb-4 text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#F0C646] sm:text-xs">
                   Helping you save money on
                 </p>
                 <div className="relative divide-y divide-white/10">
                   {["Gas", "Electricity", "Broadband", "SIM-only deals"].map((service) => (
-                    <div className="flex items-center gap-4 py-4 sm:gap-5 sm:py-5" key={service}>
+                    <div className="flex items-center gap-4 py-3 sm:gap-4 sm:py-3.5" key={service}>
                       <Image
                         alt=""
-                        className="h-11 w-11 shrink-0 rounded-[0.7rem] object-cover sm:h-14 sm:w-14 sm:rounded-[0.85rem]"
+                        className="h-9 w-9 shrink-0 rounded-[0.6rem] object-cover sm:h-11 sm:w-11 sm:rounded-[0.7rem]"
                         height={112}
                         src="/brand/hmc-tick-icon-purple.png"
                         width={112}
                       />
-                      <p className="display-font text-[2rem] leading-none tracking-[-0.035em] sm:text-[2.65rem]">
+                      <p className="display-font text-[1.75rem] leading-none tracking-[-0.035em] sm:text-[2.2rem]">
                         {service}
                       </p>
                     </div>
                   ))}
                 </div>
                 <Link
-                  className="group relative mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-[#F0C646] transition hover:text-[#FFD75F]"
+                  className="group relative mt-4 inline-flex items-center gap-2 text-sm font-extrabold text-[#F0C646] transition hover:text-[#FFD75F]"
                   href="#arrange-check"
                 >
                   Check how much I could save
@@ -238,149 +238,123 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="border-y border-[#EEE5D0] bg-white px-5 py-12 sm:px-8 sm:py-14 lg:py-20">
-          <div className="mx-auto grid max-w-[86rem] gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start lg:gap-20">
-            <div className="lg:sticky lg:top-8">
-              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Where savings come from</p>
-              <h2 className="display-font mt-4 max-w-[10ch] text-5xl leading-[0.92] tracking-[-0.05em] text-[#3D145F] sm:text-6xl">
-                There&rsquo;s more than one way to save.
-              </h2>
-              <p className="mt-5 max-w-lg text-lg font-semibold leading-8 text-[#514558]">
-                We look for savings across your whole quote: lower prices, services that fit your household, extra value from combining them and every available offer.
-              </p>
-              <div className="relative mt-7 overflow-hidden rounded-[1.8rem] bg-[#3D145F] p-5 text-white shadow-[0_24px_60px_rgba(61,20,95,0.2)] sm:p-7">
-                <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full border-[42px] border-white/[0.055]" />
-                <div className="relative flex items-start justify-between gap-5 border-b border-white/15 pb-5">
-                  <div>
-                    <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">
-                      Your savings check
-                    </p>
-                    <p className="display-font mt-3 max-w-[10ch] text-3xl leading-[0.96] tracking-[-0.04em] sm:text-4xl">
-                      Every saving counts.
-                    </p>
-                  </div>
-                  <Image
-                    alt=""
-                    className="h-14 w-14 shrink-0 rounded-[1rem] object-cover sm:h-16 sm:w-16"
-                    height={128}
-                    src="/brand/hmc-tick-icon-purple.png"
-                    width={128}
-                  />
-                </div>
-                <div className="relative mt-5 grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-[1.35rem] bg-white/[0.09] p-4 ring-1 ring-inset ring-white/10">
-                    <p className="display-font text-4xl leading-none tracking-[-0.055em] text-[#F0C646]">£400</p>
-                    <p className="mt-3 text-sm font-bold leading-6 text-white/76">
-                      Up to £400 towards early termination fees.
-                    </p>
-                  </div>
-                  <div className="rounded-[1.35rem] bg-[#F0C646] p-4 text-[#33210A]">
-                    <p className="display-font text-4xl leading-none tracking-[-0.055em]">£150</p>
-                    <p className="mt-3 text-sm font-extrabold leading-6">
-                      Up to £150 Cashback Card bonus credit.
-                    </p>
-                  </div>
-                </div>
-                <div className="relative mt-5 space-y-3">
-                  {["Find a cheaper monthly price", "Secure larger savings by combining services", "Add cashback and help with switching costs"].map(
-                    (item) => (
-                      <p className="flex items-center gap-3 text-sm font-bold text-white/82" key={item}>
-                        <Image
-                          alt=""
-                          className="h-7 w-7 shrink-0 rounded-[0.45rem] object-cover"
-                          height={56}
-                          src="/brand/hmc-tick-icon-purple.png"
-                          width={56}
-                        />
-                        {item}
-                      </p>
-                    ),
-                  )}
-                </div>
+        <section className="border-y border-[#EEE5D0] bg-white px-5 py-10 sm:px-8 lg:py-12">
+          <div className="mx-auto max-w-[86rem]">
+            <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end lg:gap-14">
+              <div>
+                <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Where savings come from</p>
+                <h2 className="display-font mt-3 max-w-[12ch] text-4xl leading-[0.94] tracking-[-0.045em] text-[#3D145F] sm:text-5xl">
+                  There&rsquo;s more than one way to save.
+                </h2>
               </div>
-              <Link
-                className="group mt-5 inline-flex min-h-13 items-center gap-3 rounded-full bg-[#22C86B] px-6 py-3 text-sm font-extrabold text-[#12371F] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2DD977]"
-                href="#arrange-check"
-              >
-                Check how much I could save
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
+              <div>
+                <p className="max-w-3xl text-base font-semibold leading-7 text-[#514558]">
+                  We look for savings across your whole quote: lower prices, services that fit your household, extra value from combining them and every available offer.
+                </p>
+                <p className="mt-3 max-w-3xl border-l-[3px] border-[#EAB929] pl-4 text-xs font-semibold leading-5 text-[#6A5D70]">
+                  Home Money Check is a personal bills-check service. Household-service quotes are sourced through Utility Warehouse, rather than from a whole-market comparison.
+                </p>
+              </div>
             </div>
 
-            <div className="grid gap-3 sm:gap-4">
-              {savingRoutes.map(({ number, title, body, icon: Icon, style, iconStyle, bodyStyle }) => (
-                <article
-                  className={`relative grid grid-cols-[1fr_auto] items-start gap-4 overflow-hidden rounded-[1.65rem] px-5 py-5 shadow-[0_16px_45px_rgba(61,20,95,0.09)] sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-5 sm:rounded-[2rem] sm:px-8 sm:py-7 ${style}`}
-                  key={title}
-                >
-                  <div className={`row-start-1 flex h-12 w-12 items-center justify-center rounded-[1rem] ${iconStyle}`}>
-                    <Icon className="h-6 w-6" strokeWidth={2} />
+            <div className="mt-8 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-stretch lg:gap-8">
+              <div className="flex flex-col">
+                <div className="relative flex-1 overflow-hidden rounded-[1.7rem] bg-[#3D145F] p-5 text-white shadow-[0_22px_52px_rgba(61,20,95,0.18)] sm:p-6">
+                  <div className="absolute -right-20 -top-20 h-52 w-52 rounded-full border-[40px] border-white/[0.055]" />
+                  <div className="relative flex items-start justify-between gap-5 border-b border-white/15 pb-4">
+                    <div>
+                      <p className="text-[0.66rem] font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">Your savings check</p>
+                      <p className="display-font mt-2 text-3xl leading-[0.96] tracking-[-0.04em]">Every saving counts.</p>
+                    </div>
+                    <Image alt="" className="h-12 w-12 shrink-0 rounded-[0.85rem] object-cover" height={96} src="/brand/hmc-tick-icon-purple.png" width={96} />
                   </div>
-                  <div className="col-span-2 row-start-2 sm:col-span-1 sm:col-start-2 sm:row-start-1">
-                    <h3 className="text-xl font-extrabold tracking-[-0.03em] sm:text-2xl">{title}</h3>
-                    <p className={`mt-2 max-w-2xl text-sm font-semibold leading-6 sm:text-base ${bodyStyle}`}>{body}</p>
+                  <div className="relative mt-4 grid grid-cols-2 gap-3">
+                    <div className="rounded-[1.15rem] bg-white/[0.09] p-4 ring-1 ring-inset ring-white/10">
+                      <p className="display-font text-3xl leading-none tracking-[-0.05em] text-[#F0C646]">£400</p>
+                      <p className="mt-2 text-xs font-bold leading-5 text-white/76">Towards early termination fees.</p>
+                    </div>
+                    <div className="rounded-[1.15rem] bg-[#F0C646] p-4 text-[#33210A]">
+                      <p className="display-font text-3xl leading-none tracking-[-0.05em]">£150</p>
+                      <p className="mt-2 text-xs font-extrabold leading-5">Cashback Card bonus credit.</p>
+                    </div>
                   </div>
-                  <span className="display-font col-start-2 row-start-1 text-4xl leading-none opacity-30 sm:col-start-3 sm:text-5xl">{number}</span>
-                </article>
-              ))}
+                  <div className="relative mt-4 space-y-2.5">
+                    {["Find a cheaper monthly price", "Secure larger savings by combining services", "Add cashback and help with switching costs"].map((item) => (
+                      <p className="flex items-center gap-2.5 text-xs font-bold leading-5 text-white/82" key={item}>
+                        <Image alt="" className="h-6 w-6 shrink-0 rounded-[0.4rem] object-cover" height={48} src="/brand/hmc-tick-icon-purple.png" width={48} />
+                        {item}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+                <Link className="group mt-4 inline-flex min-h-12 w-fit items-center gap-3 rounded-full bg-[#22C86B] px-6 py-3 text-sm font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="#arrange-check">
+                  Check how much I could save
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {savingRoutes.map(({ number, title, body, icon: Icon, style, iconStyle, bodyStyle }) => (
+                  <article className={`relative flex min-h-44 flex-col overflow-hidden rounded-[1.6rem] p-5 shadow-[0_14px_38px_rgba(61,20,95,0.08)] sm:p-6 ${style}`} key={title}>
+                    <div className="flex items-start justify-between gap-4">
+                      <div className={`flex h-11 w-11 items-center justify-center rounded-[0.9rem] ${iconStyle}`}>
+                        <Icon className="h-5 w-5" strokeWidth={2} />
+                      </div>
+                      <span className="display-font text-3xl leading-none opacity-30">{number}</span>
+                    </div>
+                    <h3 className="mt-4 text-lg font-extrabold leading-6 tracking-[-0.025em]">{title}</h3>
+                    <p className={`mt-2 text-sm font-semibold leading-6 ${bodyStyle}`}>{body}</p>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>
-
-        <section className="relative overflow-hidden bg-[#35104F] px-5 py-16 text-white sm:px-8 lg:py-24" id="how-it-works">
-          <div className="pointer-events-none absolute -right-32 -top-40 h-[36rem] w-[36rem] rounded-full border-[110px] border-white/[0.035]" />
-          <div className="mx-auto max-w-[86rem]">
-            <div className="max-w-4xl">
-              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">How it works</p>
-              <h2 className="display-font mt-5 max-w-[16ch] text-5xl leading-[0.92] tracking-[-0.05em] text-[#F0C646] sm:text-6xl">
-                We check your bills to <span className="whitespace-nowrap">save you money.</span>
-              </h2>
-              <p className="mt-7 max-w-2xl text-lg font-semibold leading-8 text-white/72">
+        <section className="relative overflow-hidden bg-[#35104F] px-5 py-12 text-white sm:px-8 lg:py-14" id="how-it-works">
+          <div className="pointer-events-none absolute -right-28 -top-36 h-[30rem] w-[30rem] rounded-full border-[90px] border-white/[0.035]" />
+          <div className="relative mx-auto max-w-[86rem]">
+            <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-14">
+              <div>
+                <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">How it works</p>
+                <h2 className="display-font mt-3 max-w-[15ch] text-4xl leading-[0.94] tracking-[-0.045em] text-[#F0C646] sm:text-5xl">
+                  We check your bills to <span className="whitespace-nowrap">save you money.</span>
+                </h2>
+              </div>
+              <p className="max-w-2xl text-base font-semibold leading-7 text-white/72">
                 We start with what you pay and what your household needs. Then we can build your quote, maximise your savings and talk through the result.
               </p>
             </div>
 
-            <ol className="mt-16 grid gap-8 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-stretch">
+            <ol className="mt-10 grid gap-6 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-start">
               {process.map((step, index) => (
                 <li className="contents" key={step.number}>
-                  <article className="flex h-full flex-col">
-                    <span className={`flex h-16 w-16 items-center justify-center rounded-[1.35rem] text-sm font-extrabold ${index === 1 ? "bg-[#22C86B] text-[#12371F]" : "bg-[#F0C646] text-[#35240B]"}`}>
+                  <article>
+                    <span className={`flex h-12 w-12 items-center justify-center rounded-[1rem] text-xs font-extrabold ${index === 1 ? "bg-[#22C86B] text-[#12371F]" : "bg-[#F0C646] text-[#35240B]"}`}>
                       {step.number}
                     </span>
-                    <h3 className="mt-7 max-w-[13ch] text-2xl font-extrabold leading-tight tracking-[-0.035em] sm:text-3xl lg:min-h-[6.75rem]">{step.title}</h3>
-                    <p className="mt-4 max-w-sm text-base font-medium leading-7 text-white/67 lg:min-h-[7rem]">{step.body}</p>
+                    <h3 className="mt-4 max-w-[14ch] text-2xl font-extrabold leading-tight tracking-[-0.03em] lg:min-h-[4.5rem]">{step.title}</h3>
+                    <p className="mt-3 max-w-sm text-sm font-medium leading-6 text-white/67">{step.body}</p>
                   </article>
                   {index < process.length - 1 ? (
                     <>
                       <div aria-hidden="true" className="flex justify-center lg:hidden">
-                        <ArrowDown
-                          className="h-12 w-12 text-[#F0C646] drop-shadow-[0_0_14px_rgba(240,198,70,0.24)]"
-                          strokeWidth={3}
-                        />
+                        <ArrowDown className="h-10 w-10 text-[#F0C646]" strokeWidth={3} />
                       </div>
-                      <ArrowRight
-                        aria-hidden="true"
-                        className="hidden h-16 w-16 self-start text-[#F0C646] drop-shadow-[0_0_14px_rgba(240,198,70,0.24)] lg:block"
-                        strokeWidth={3}
-                      />
+                      <ArrowRight aria-hidden="true" className="mt-1 hidden h-11 w-11 text-[#F0C646] lg:block" strokeWidth={3} />
                     </>
                   ) : null}
                 </li>
               ))}
             </ol>
 
-            <div className="mt-14 flex justify-start">
-              <Link
-                className="inline-flex min-h-14 items-center gap-3 rounded-full bg-[#22C86B] px-7 py-4 text-base font-extrabold text-[#12371F] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2DD977]"
-                href="#arrange-check"
-              >
+            <div className="mt-9 flex justify-start">
+              <Link className="inline-flex min-h-12 items-center gap-3 rounded-full bg-[#22C86B] px-6 py-3 text-sm font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="#arrange-check">
                 Check how much I could save
-                <ArrowRight className="h-5 w-5" />
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
         </section>
-
         <section className="bg-[#FFFDF8] px-5 py-16 sm:px-8 lg:py-20" id="about">
           <div className="mx-auto grid max-w-[86rem] items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
             <div className="relative mx-auto w-full max-w-[33rem] lg:mx-0">
@@ -422,37 +396,33 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="border-y border-[#DED2E5] bg-[#F4EEF7] px-5 py-8 sm:px-8 sm:py-9">
-          <div className="mx-auto grid max-w-[86rem] gap-6 lg:grid-cols-[0.52fr_1.48fr] lg:items-center lg:gap-12">
-            <div>
-              <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Other services</p>
-              <h2 className="display-font mt-2 max-w-[13ch] text-3xl leading-[0.98] tracking-[-0.04em] text-[#3D145F] sm:text-4xl">
-                More ways we can help.
-              </h2>
+        <section className="bg-[#FFFDF8] px-5 py-7 sm:px-8 sm:py-8">
+          <div className="mx-auto max-w-[82rem] rounded-[1.7rem] bg-[#F0C646] p-5 shadow-[0_18px_44px_rgba(91,63,6,0.16)] sm:p-6">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+              <p className="text-[0.66rem] font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Other services</p>
+              <h2 className="display-font text-2xl leading-none tracking-[-0.035em] text-[#3D145F] sm:text-3xl">More ways we can help.</h2>
             </div>
 
-            <div className="grid border-b border-[#D4C5DD] sm:grid-cols-2">
+            <div className="mt-4 grid border-b border-[#3D145F]/25 sm:grid-cols-2 lg:grid-cols-4">
               {relatedServices.map((service, index) => {
                 const Icon = service.icon;
 
                 return (
                   <Link
-                    className={`group flex min-h-24 items-center gap-3 border-t border-[#D4C5DD] py-4 transition hover:text-[#6A2C93] sm:px-5 ${
+                    className={`group flex min-h-20 items-center gap-3 border-t border-[#3D145F]/25 py-3.5 sm:px-4 ${
                       index % 2 === 1 ? "sm:border-l" : ""
-                    }`}
+                    } ${index > 0 ? "lg:border-l" : ""}`}
                     href={service.href}
                     key={service.title}
                   >
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[0.75rem] bg-[#F0C646] text-[#3D145F]">
-                      <Icon className="h-5 w-5" strokeWidth={2.2} />
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[0.7rem] bg-[#3D145F] text-[#F0C646]">
+                      <Icon className="h-[1.125rem] w-[1.125rem]" strokeWidth={2.2} />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block text-sm font-extrabold leading-5 text-[#34273B] group-hover:text-[#6A2C93]">
-                        {service.title}
-                      </span>
-                      <span className="mt-0.5 block truncate text-[0.68rem] font-semibold text-[#756879]">{service.detail}</span>
+                      <span className="block text-xs font-extrabold leading-5 text-[#34273B] group-hover:text-[#6A2C93]">{service.title}</span>
+                      <span className="block truncate text-[0.62rem] font-semibold text-[#69501A]">{service.detail}</span>
                     </span>
-                    <ArrowRight className="h-4 w-4 shrink-0 text-[#6A2C93] transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="h-3.5 w-3.5 shrink-0 text-[#6A2C93] transition-transform group-hover:translate-x-1" />
                   </Link>
                 );
               })}
@@ -571,27 +541,29 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="border-t border-[#E2D7C3] bg-[#FFFDF8] px-5 py-16 sm:px-8 lg:py-20">
-          <div className="mx-auto grid max-w-[86rem] gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-stretch lg:gap-10">
-            <div className="flex flex-col justify-center rounded-[2.2rem] bg-[#35104F] p-8 text-white sm:p-10">
-              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">For your staff and clients</p>
-              <h2 className="display-font mt-4 max-w-[10ch] text-5xl leading-[0.93] tracking-[-0.05em] sm:text-6xl">Help the people you work with save money.</h2>
-              <p className="mt-6 max-w-md text-base font-semibold leading-7 text-white/70">Give your staff or clients their own route to a free gas, electricity and broadband check.</p>
+        <section className="border-t border-[#E2D7C3] bg-[#FFFDF8] px-5 py-12 sm:px-8 lg:py-14">
+          <div className="mx-auto max-w-[86rem]">
+            <div className="max-w-3xl">
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">For your staff and clients</p>
+              <h2 className="display-font mt-3 text-4xl leading-[0.94] tracking-[-0.045em] text-[#3D145F] sm:text-5xl">Help the people you work with save money.</h2>
+              <p className="mt-4 max-w-2xl text-base font-semibold leading-7 text-[#5F5265]">Give your staff or clients their own route to a free gas, electricity and broadband check.</p>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2">
-              <article className="flex min-h-[22rem] flex-col rounded-[2.2rem] bg-[#F0C646] p-8 text-[#33210A] shadow-[0_22px_55px_rgba(95,69,10,0.13)]">
-                <div className="flex h-14 w-14 items-center justify-center rounded-[1rem] bg-[#FFF7D9] text-[#3D145F]"><Users className="h-7 w-7" strokeWidth={2} /></div>
-                <p className="mt-7 text-xs font-extrabold uppercase tracking-[0.18em] text-[#6A2C93]">For employers</p>
-                <h3 className="display-font mt-3 text-4xl leading-[0.98] tracking-[-0.045em] text-[#3D145F]">Help your staff save money.</h3>
-                <p className="mt-4 text-sm font-semibold leading-6 text-[#513B0D]">Give your team direct access to a free gas, electricity and broadband check.</p>
-                <Link className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-extrabold text-[#3D145F]" href="/staff-bills-check">Explore Staff Bills Check<ArrowRight className="h-4 w-4" /></Link>
+
+            <div className="mt-8 grid gap-5 md:grid-cols-2">
+              <article className="flex min-h-[18rem] flex-col rounded-[2rem] bg-[#F0C646] p-7 text-[#33210A] shadow-[0_20px_48px_rgba(95,69,10,0.12)]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-[0.9rem] bg-[#FFF7D9] text-[#3D145F]"><Users className="h-6 w-6" strokeWidth={2} /></div>
+                <p className="mt-5 text-xs font-extrabold uppercase tracking-[0.18em] text-[#6A2C93]">For employers</p>
+                <h3 className="display-font mt-2 text-3xl leading-[0.98] tracking-[-0.04em] text-[#3D145F] sm:text-4xl">Help your staff save money.</h3>
+                <p className="mt-3 max-w-xl text-sm font-semibold leading-6 text-[#513B0D]">Give your team direct access to a free gas, electricity and broadband check.</p>
+                <Link className="mt-auto inline-flex w-fit items-center gap-2 pt-5 text-sm font-extrabold text-[#3D145F]" href="/staff-bills-check">Explore Staff Bills Check<ArrowRight className="h-4 w-4" /></Link>
               </article>
-              <article className="flex min-h-[22rem] flex-col rounded-[2.2rem] bg-[#273468] p-8 text-white shadow-[0_22px_55px_rgba(39,52,104,0.18)]">
-                <div className="flex h-14 w-14 items-center justify-center rounded-[1rem] bg-[#22C86B] text-[#12371F]"><HeartHandshake className="h-7 w-7" strokeWidth={2} /></div>
-                <p className="mt-7 text-xs font-extrabold uppercase tracking-[0.18em] text-[#F0C646]">For professionals</p>
-                <h3 className="display-font mt-3 text-4xl leading-[0.98] tracking-[-0.045em]">Help your clients save money.</h3>
-                <p className="mt-4 text-sm font-semibold leading-6 text-white/72">Introduce your clients to a free check of their gas, electricity and broadband bills.</p>
-                <Link className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-extrabold text-[#F0C646]" href="/for-your-clients">Explore client introductions<ArrowRight className="h-4 w-4" /></Link>
+
+              <article className="flex min-h-[18rem] flex-col rounded-[2rem] bg-[#273468] p-7 text-white shadow-[0_20px_48px_rgba(39,52,104,0.16)]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-[0.9rem] bg-[#22C86B] text-[#12371F]"><HeartHandshake className="h-6 w-6" strokeWidth={2} /></div>
+                <p className="mt-5 text-xs font-extrabold uppercase tracking-[0.18em] text-[#F0C646]">For professionals</p>
+                <h3 className="display-font mt-2 text-3xl leading-[0.98] tracking-[-0.04em] sm:text-4xl">Help your clients save money.</h3>
+                <p className="mt-3 max-w-xl text-sm font-semibold leading-6 text-white/72">Introduce your clients to a free check of their gas, electricity and broadband bills.</p>
+                <Link className="mt-auto inline-flex w-fit items-center gap-2 pt-5 text-sm font-extrabold text-[#F0C646]" href="/for-your-clients">Explore client introductions<ArrowRight className="h-4 w-4" /></Link>
               </article>
             </div>
           </div>
