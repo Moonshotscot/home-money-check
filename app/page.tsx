@@ -378,13 +378,13 @@ export default function HomePage() {
               </h2>
               <div className="mt-8 max-w-2xl space-y-5 text-[1.05rem] font-medium leading-8 text-[#5F5265]">
                 <p>
-                  For more than 25 years, I&rsquo;ve helped clients save money across a range of industries. I believe in doing the right thing for every customer, finding the most suitable option and getting the best price I can.
+                  For more than 25 years, I&rsquo;ve helped clients save money across a range of industries. I believe in doing the right thing for every customer, finding the most suitable option and getting everyone the very best deal possible.
                 </p>
                 <p>
                   Too many households are paying more than they need to for gas, electricity and broadband. Price changes and complicated offers seem designed to confuse us, and it&rsquo;s getting worse. I want to make things clearer and help people keep more of their money.
                 </p>
                 <p>
-                  Home Money Check gives you one simple quote for gas, electricity and broadband, then maximises your savings by bundling services and checking for cashback or help with exit fees. I want every customer to understand their quote and feel confident choosing what is right for them.
+                  Home Money Check gives you one simple quote for gas, electricity and broadband, then maximises your savings by bundling services and checking for cashback or help with exit fees. I want every customer to fully understand their quote and feel confident choosing what is right for them.
                 </p>
               </div>
               <div className="mt-9 flex items-center gap-4 border-l-4 border-[#EAB929] pl-5">

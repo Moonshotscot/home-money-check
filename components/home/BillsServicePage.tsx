@@ -119,7 +119,7 @@ const pageConfigs: Record<BillsServiceKind, BillsServicePageConfig> = {
       "A cheaper quote only works when the services work for your household. We ask what you use, what matters to you and what you pay now.",
       "Then we talk through the new quote, the monthly cost and where each saving comes from.",
     ],
-    detailPoints: ["Gas and electricity", "Broadband", "Mobile SIMs where useful", "Cashback and current offers"],
+    detailPoints: ["Gas and electricity", "Broadband", "Mobile SIMs", "Cashback and current offers"],
     detailStyle: "bg-[#F0C646] text-[#33210A]",
     questions: sharedQuestions,
   },
@@ -245,28 +245,34 @@ const steps = [
 
 export function BillsServicePage({ kind }: { kind: BillsServiceKind }) {
   const page = pageConfigs[kind];
+  const titleAccent = {
+    household: "household bills.",
+    energy: "gas and electricity could cost less.",
+    broadband: "broadband could cost less.",
+  }[kind];
+  const [titleStart, titleEnd = ""] = page.title.split(titleAccent);
   const HeroIcon = page.heroIcon;
 
   return (
     <div className="min-h-screen overflow-x-clip bg-[#FFFDF8] text-[#261B2E]">
       <SiteHeader />
       <main>
-        <section className="relative isolate overflow-hidden px-5 py-14 sm:px-8 sm:py-20 lg:py-24">
+        <section className="relative isolate overflow-hidden px-5 pb-14 pt-9 sm:px-8 sm:pb-14 sm:pt-10 lg:pb-16 lg:pt-11">
           <div className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(circle_at_88%_38%,rgba(106,44,147,0.15),transparent_31%),linear-gradient(115deg,#FFF9E9_0%,#FFFDF8_52%,#F3EAF8_100%)]" />
-          <div className="mx-auto grid max-w-[86rem] items-center gap-12 lg:grid-cols-[0.94fr_1.06fr] lg:gap-20">
+          <div className="mx-auto grid max-w-[86rem] items-center gap-11 lg:grid-cols-[0.94fr_1.06fr] lg:gap-14">
             <div>
               <p className="flex w-fit items-center gap-2 border-b-2 border-[#EAB929] pb-3 text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">
                 <Image alt="" className="h-6 w-6 rounded-[0.35rem] object-cover" height={48} src="/brand/hmc-tick-icon-purple.png" width={48} />
                 {page.eyebrow}
               </p>
-              <h1 className="display-font mt-7 max-w-[12ch] text-5xl leading-[0.91] tracking-[-0.052em] text-[#3D145F] sm:text-6xl lg:text-7xl xl:text-[5.4rem]">
-                {page.title}
+              <h1 className="display-font mt-6 max-w-[12ch] text-[clamp(3.6rem,5.5vw,6.15rem)] leading-[0.88] tracking-[-0.06em] text-[#3D145F]">
+                {titleStart}<span className="text-[#D89F00]">{titleAccent}</span>{titleEnd}
               </h1>
-              <p className="mt-7 max-w-2xl text-lg font-semibold leading-8 text-[#514558] sm:text-xl sm:leading-9">
+              <p className="mt-6 max-w-2xl text-lg font-semibold leading-8 text-[#514558] sm:text-[1.15rem]">
                 {page.introduction}
               </p>
               <p className="mt-5 max-w-xl text-base font-extrabold leading-7 text-[#3D145F]">{page.promise}</p>
-              <div className="mt-9 flex flex-wrap gap-3">
+              <div className="mt-7 flex flex-wrap gap-3">
                 <Link className="inline-flex min-h-14 items-center gap-3 rounded-full bg-[#22C86B] px-7 py-4 text-base font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="#start-check">
                   Check how much I could save
                   <ArrowRight className="h-5 w-5" />

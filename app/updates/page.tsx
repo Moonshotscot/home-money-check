@@ -24,9 +24,9 @@ export default function UpdatesPage() {
       <SiteHeader />
 
       <main>
-        <section className="relative overflow-hidden bg-[#35104F] px-5 py-16 text-white sm:px-8 lg:py-24">
+        <section className="relative overflow-hidden bg-[#35104F] px-5 pb-14 pt-9 text-white sm:px-8 sm:pb-14 sm:pt-10 lg:pb-16 lg:pt-11">
           <div className="pointer-events-none absolute -right-32 -top-40 h-[36rem] w-[36rem] rounded-full border-[110px] border-white/[0.035]" />
-          <div className="mx-auto grid max-w-[86rem] items-start gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20">
+          <div className="mx-auto grid max-w-[86rem] items-start gap-11 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
             <div className="lg:sticky lg:top-28">
               <div className="flex h-14 w-14 items-center justify-center rounded-[1.1rem] bg-[#22C86B] text-[#12371F]">
                 <Mail className="h-7 w-7" strokeWidth={2.2} />
@@ -34,10 +34,10 @@ export default function UpdatesPage() {
               <p className="mt-8 text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">
                 Home Money Check offers & updates
               </p>
-              <h1 className="display-font mt-5 max-w-[10ch] text-6xl leading-[0.88] tracking-[-0.055em] text-[#F0C646] sm:text-7xl lg:text-8xl">
+              <h1 className="display-font mt-6 max-w-[10ch] text-[clamp(3.6rem,5.5vw,6.2rem)] leading-[0.88] tracking-[-0.06em] text-[#F0C646]">
                 Join Home Money Check.
               </h1>
-              <p className="mt-7 max-w-xl text-lg font-semibold leading-8 text-white/76 sm:text-xl sm:leading-9">
+              <p className="mt-6 max-w-xl text-lg font-semibold leading-8 text-white/76 sm:text-[1.15rem]">
                 Leave your email and we&rsquo;ll send you Home Money Check offers, household bill updates, giveaways and useful ways to save money.
               </p>
               <div className="mt-9 grid gap-4 border-t border-white/15 pt-7 text-sm font-bold text-white/82 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">

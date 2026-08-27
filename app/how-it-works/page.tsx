@@ -22,13 +22,13 @@ export default function HowItWorksPage() {
     <div className="min-h-screen overflow-x-clip bg-[#FFFDF8] text-[#261B2E]">
       <SiteHeader />
       <main>
-        <section className="relative isolate overflow-hidden bg-[#35104F] px-5 py-16 text-white sm:px-8 lg:py-24">
+        <section className="relative isolate overflow-hidden bg-[#35104F] px-5 pb-14 pt-9 text-white sm:px-8 sm:pb-14 sm:pt-10 lg:pb-16 lg:pt-11">
           <div className="pointer-events-none absolute -right-36 -top-44 -z-10 h-[42rem] w-[42rem] rounded-full border-[125px] border-white/[0.04]" />
           <div className="mx-auto max-w-[86rem]">
             <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">How it works</p>
-            <h1 className="display-font mt-5 max-w-[15ch] text-6xl leading-[0.9] tracking-[-0.055em] text-white sm:text-7xl lg:text-[5.6rem]">We check your bills to save you money.</h1>
-            <p className="mt-7 max-w-3xl text-lg font-semibold leading-8 text-white/74 sm:text-xl sm:leading-9">We start with what you pay and what your household needs. Then we build your quote, maximise your savings and talk through the result.</p>
-            <Link className="mt-9 inline-flex min-h-14 items-center gap-3 rounded-full bg-[#22C86B] px-7 py-4 text-base font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="/#arrange-check">Check how much I could save<ArrowRight className="h-5 w-5" /></Link>
+            <h1 className="display-font mt-6 max-w-[15ch] text-[clamp(3.6rem,5.7vw,6.3rem)] leading-[0.88] tracking-[-0.06em] text-white">We check your bills to <span className="text-[#F0C646]">save you money.</span></h1>
+            <p className="mt-6 max-w-3xl text-lg font-semibold leading-8 text-white/74 sm:text-[1.15rem]">We start with what you pay and what your household needs. Then we build your quote, maximise your savings and talk through the result.</p>
+            <Link className="mt-7 inline-flex min-h-13 items-center gap-3 rounded-full bg-[#22C86B] px-6 py-3 text-base font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="/#arrange-check">Check how much I could save<ArrowRight className="h-5 w-5" /></Link>
           </div>
         </section>
 

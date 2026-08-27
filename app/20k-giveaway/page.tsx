@@ -21,14 +21,14 @@ export default function GiveawayPage() {
     <div className="min-h-screen overflow-x-clip bg-[#FFFDF8] text-[#261B2E]">
       <SiteHeader />
       <main>
-        <section className="relative isolate overflow-hidden bg-[#F0C646] px-5 py-16 text-[#33210A] sm:px-8 lg:py-24">
+        <section className="relative isolate overflow-hidden bg-[#F0C646] px-5 pb-14 pt-9 text-[#33210A] sm:px-8 sm:pb-14 sm:pt-10 lg:pb-16 lg:pt-11">
           <div className="pointer-events-none absolute -right-40 -top-40 -z-10 h-[42rem] w-[42rem] rounded-full border-[115px] border-white/20" />
-          <div className="mx-auto grid max-w-[86rem] items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+          <div className="mx-auto grid max-w-[86rem] items-center gap-11 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
             <div>
               <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Current giveaway</p>
-              <h1 className="display-font mt-6 max-w-[9ch] text-7xl leading-[0.86] tracking-[-0.06em] text-[#3D145F] sm:text-8xl lg:text-[7rem]">Enter to win £20,000.</h1>
-              <p className="mt-7 max-w-xl text-lg font-semibold leading-8 text-[#51390A] sm:text-xl sm:leading-9">Start your free entry through Home Money Check. No purchase is necessary.</p>
-              <div className="mt-9 flex flex-wrap gap-3">
+              <h1 className="display-font mt-6 max-w-[10ch] text-[clamp(3.8rem,6vw,6.8rem)] leading-[0.86] tracking-[-0.06em] text-[#3D145F]">Enter to win £20,000.</h1>
+              <p className="mt-6 max-w-xl text-lg font-semibold leading-8 text-[#51390A] sm:text-[1.15rem]">Start your free entry through Home Money Check. No purchase is necessary.</p>
+              <div className="mt-7 flex flex-wrap gap-3">
                 <Link className="inline-flex min-h-14 items-center gap-3 rounded-full bg-[#3D145F] px-7 py-4 text-base font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-[#512078]" href="#giveaway-form">Enter the giveaway<ArrowRight className="h-5 w-5" /></Link>
                 <Link className="inline-flex min-h-14 items-center gap-3 rounded-full bg-white/55 px-7 py-4 text-base font-extrabold text-[#3D145F] ring-1 ring-[#3D145F]/15 transition hover:bg-white/75" href="#how-it-works">See how it works<ArrowDown className="h-5 w-5" /></Link>
               </div>

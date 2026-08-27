@@ -15,9 +15,9 @@ export default function AboutPage() {
     <div className="min-h-screen overflow-x-clip bg-[#FFFDF8] text-[#261B2E]">
       <SiteHeader />
       <main>
-        <section className="relative isolate overflow-hidden px-5 py-14 sm:px-8 lg:py-24">
+        <section className="relative isolate overflow-hidden px-5 pb-14 pt-9 sm:px-8 sm:pb-14 sm:pt-10 lg:pb-16 lg:pt-11">
           <div className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(circle_at_82%_34%,rgba(106,44,147,0.16),transparent_30%),linear-gradient(115deg,#FFF9E9_0%,#FFFDF8_53%,#F3EAF8_100%)]" />
-          <div className="mx-auto grid max-w-[86rem] items-center gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:gap-20">
+          <div className="mx-auto grid max-w-[86rem] items-center gap-11 lg:grid-cols-[0.88fr_1.12fr] lg:gap-14">
             <div className="relative mx-auto w-full max-w-[34rem] lg:mx-0">
               <div className="relative aspect-[4/4.55] overflow-hidden rounded-[2.5rem] border border-[#D9A914]/60 bg-[#D9C7E7] shadow-[0_32px_80px_rgba(61,20,95,0.18)]">
                 <Image alt="Neill Connolly, founder of Home Money Check" className="object-cover object-top" fill priority sizes="(max-width: 1024px) 90vw, 42vw" src="/images/neill-connolly-profile.webp" />
@@ -26,13 +26,13 @@ export default function AboutPage() {
             </div>
             <div>
               <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Meet Neill</p>
-              <h1 className="display-font mt-5 max-w-[13ch] text-6xl leading-[0.9] tracking-[-0.055em] text-[#3D145F] sm:text-7xl lg:text-[5.35rem]">I created Home Money Check to help people save money.</h1>
-              <div className="mt-8 max-w-2xl space-y-5 text-lg font-medium leading-8 text-[#5F5265]">
-                <p>For more than 25 years, I&rsquo;ve helped clients save money across a range of industries. I believe in doing the right thing for every customer, finding the most suitable option and getting the best price I can.</p>
+              <h1 className="display-font mt-6 max-w-[13ch] text-[clamp(3.6rem,5.5vw,6rem)] leading-[0.88] tracking-[-0.06em] text-[#3D145F]">I created Home Money Check to help people <span className="text-[#D89F00]">save money.</span></h1>
+              <div className="mt-6 max-w-2xl space-y-4 text-lg font-medium leading-8 text-[#5F5265]">
+                <p>For more than 25 years, I&rsquo;ve helped clients save money across a range of industries. I believe in doing the right thing for every customer, finding the most suitable option and getting everyone the very best deal possible.</p>
                 <p>Too many households are paying more than they need to for gas, electricity and broadband. Price changes and complicated offers make it harder to see what you are really paying and whether a better option is available.</p>
-                <p>I want to make that a whole lot clearer and help people keep more of their money.</p>
+                <p>I want to make it all as clear as possible and help people keep more of their money.</p>
               </div>
-              <Link className="mt-9 inline-flex min-h-14 items-center gap-3 rounded-full bg-[#22C86B] px-7 py-4 text-base font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="/#arrange-check">Check how much I could save<ArrowRight className="h-5 w-5" /></Link>
+              <Link className="mt-7 inline-flex min-h-13 items-center gap-3 rounded-full bg-[#22C86B] px-6 py-3 text-base font-extrabold text-[#12371F] transition hover:-translate-y-0.5 hover:bg-[#2DD977]" href="/#arrange-check">Check how much I could save<ArrowRight className="h-5 w-5" /></Link>
             </div>
           </div>
         </section>
@@ -46,7 +46,7 @@ export default function AboutPage() {
             </div>
             <div>
               <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">What matters to me</p>
-              <h2 className="display-font mt-5 max-w-[13ch] text-5xl leading-[0.94] tracking-[-0.05em] text-[#3D145F] sm:text-6xl">I want you to know what you would pay and how much you could save.</h2>
+              <h2 className="display-font mt-5 max-w-[13ch] text-5xl leading-[0.94] tracking-[-0.05em] text-[#3D145F] sm:text-6xl">I want you to look at your quote and think, &ldquo;That makes sense. I know what I&rsquo;m paying and I can see exactly where I&rsquo;m saving.&rdquo;</h2>
               <div className="mt-9 grid gap-4 sm:grid-cols-2">
                 {[
                   { title: "Check what you pay now", body: "We start with your bills, the services you use and what your home needs.", icon: Eye },

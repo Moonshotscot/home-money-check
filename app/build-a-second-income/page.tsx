@@ -52,14 +52,14 @@ export default function BuildASecondIncomePage() {
     <div className="min-h-screen overflow-x-clip bg-[#FFFDF8] text-[#261B2E]">
       <SiteHeader />
       <main>
-        <section className="relative isolate overflow-hidden bg-[#273468] px-5 py-16 text-white sm:px-8 lg:py-24">
+        <section className="relative isolate overflow-hidden bg-[#273468] px-5 pb-14 pt-9 text-white sm:px-8 sm:pb-14 sm:pt-10 lg:pb-16 lg:pt-11">
           <div className="pointer-events-none absolute -right-40 -top-44 -z-10 h-[42rem] w-[42rem] rounded-full border-[125px] border-white/[0.04]" />
-          <div className="mx-auto grid max-w-[86rem] items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-20">
+          <div className="mx-auto grid max-w-[86rem] items-center gap-11 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
             <div className="min-w-0">
               <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">Build something of your own</p>
-              <h1 className="display-font mt-6 max-w-[12ch] text-5xl leading-[0.89] tracking-[-0.055em] text-white sm:text-7xl lg:text-[5.8rem]">Earn a second income helping people save money on household bills.</h1>
-              <p className="mt-7 max-w-2xl text-lg font-semibold leading-8 text-white/76 sm:text-xl sm:leading-9">Introduce people to Utility Warehouse services, help them check what they could save and earn when customers take services.</p>
-              <div className="mt-9 flex flex-wrap gap-3">
+              <h1 className="display-font mt-6 max-w-[13ch] text-[clamp(3.5rem,5.1vw,5.8rem)] leading-[0.88] tracking-[-0.06em] text-white">Earn a second income helping people <span className="text-[#F0C646]">save money on household bills.</span></h1>
+              <p className="mt-6 max-w-2xl text-lg font-semibold leading-8 text-white/76 sm:text-[1.15rem]">Be a money-saving expert. Introduce people to Utility Warehouse services, help them check what they could save and earn when customers take services. This is all about helping people and doing everything we can to save them money.</p>
+              <div className="mt-7 flex flex-wrap gap-3">
                 <Link className="inline-flex min-h-14 items-center gap-3 rounded-full bg-[#F0C646] px-7 py-4 text-base font-extrabold text-[#35240B] transition hover:-translate-y-0.5 hover:bg-[#FFD75F]" href="#start-conversation">Tell me more<ArrowRight className="h-5 w-5" /></Link>
                 <Link className="inline-flex min-h-14 items-center gap-3 rounded-full border border-white/25 bg-white/8 px-7 py-4 text-base font-extrabold text-white transition hover:bg-white/14" href="#how-it-works">See how it works<ArrowDown className="h-5 w-5" /></Link>
               </div>

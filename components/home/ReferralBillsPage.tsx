@@ -41,6 +41,8 @@ const configs = {
 
 export function ReferralBillsPage({ kind }: { kind: ReferralBillsKind }) {
   const page = configs[kind];
+  const titleAccent = kind === "employee" ? "gas, electricity and broadband." : "household bills.";
+  const [titleStart, titleEnd = ""] = page.title.split(titleAccent);
 
   return (
     <div className="min-h-screen overflow-x-clip bg-[#FFFDF8] text-[#261B2E]">
@@ -52,14 +54,14 @@ export function ReferralBillsPage({ kind }: { kind: ReferralBillsKind }) {
       </header>
 
       <main>
-        <section className="relative isolate overflow-hidden bg-[#35104F] px-5 py-14 text-white sm:px-8 lg:py-20">
+        <section className="relative isolate overflow-hidden bg-[#35104F] px-5 pb-14 pt-9 text-white sm:px-8 sm:pb-14 sm:pt-10 lg:pb-16 lg:pt-11">
           <div className="pointer-events-none absolute -right-36 -top-40 -z-10 h-[38rem] w-[38rem] rounded-full border-[110px] border-white/[0.035]" />
-          <div className="mx-auto grid max-w-[76rem] items-center gap-10 lg:grid-cols-[0.98fr_1.02fr] lg:gap-16">
+          <div className="mx-auto grid max-w-[76rem] items-center gap-11 lg:grid-cols-[0.98fr_1.02fr] lg:gap-14">
             <div>
               <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#F0C646]">{page.eyebrow}</p>
-              <h1 className="display-font mt-6 max-w-[12ch] text-6xl leading-[0.89] tracking-[-0.055em] text-white sm:text-7xl lg:text-[5.35rem]">{page.title}</h1>
-              <p className="mt-7 max-w-xl text-lg font-semibold leading-8 text-white/76 sm:text-xl sm:leading-9">{page.introduction}</p>
-              <Link className="mt-9 inline-flex min-h-14 items-center gap-3 rounded-full bg-[#22C86B] px-7 py-4 text-base font-extrabold text-[#12371F]" href="#start-check">Check how much I could save<ArrowRight className="h-5 w-5" /></Link>
+              <h1 className="display-font mt-6 max-w-[13ch] text-[clamp(3.5rem,5.2vw,5.9rem)] leading-[0.88] tracking-[-0.06em] text-white">{titleStart}<span className="text-[#F0C646]">{titleAccent}</span>{titleEnd}</h1>
+              <p className="mt-6 max-w-xl text-lg font-semibold leading-8 text-white/76 sm:text-[1.15rem]">{page.introduction}</p>
+              <Link className="mt-7 inline-flex min-h-14 items-center gap-3 rounded-full bg-[#22C86B] px-7 py-4 text-base font-extrabold text-[#12371F]" href="#start-check">Check how much I could save<ArrowRight className="h-5 w-5" /></Link>
             </div>
 
             <div className="relative overflow-hidden rounded-[2.4rem] bg-[#F0C646] p-8 text-[#33210A] shadow-[0_34px_85px_rgba(15,5,23,0.28)] sm:p-10">
