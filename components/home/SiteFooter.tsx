@@ -16,6 +16,12 @@ const footerLinks = [
   { href: "/#questions", label: "Questions" },
   { href: "/contact", label: "Contact" },
 ] as const;
+const otherServices = [
+  { href: "https://www.wherecanifindamortgage.co.uk/", label: "Mortgages" },
+  { href: "https://wherecanifindamortgage.co.uk/protection/", label: "Life insurance and protection" },
+  { href: "https://neillconnollywills.co.uk/", label: "Wills and Power of Attorney" },
+  { href: "/business-utilities", label: "Business utilities" },
+] as const;
 
 export function SiteFooter() {
   return (
@@ -31,11 +37,25 @@ export function SiteFooter() {
               Home Money Check is run by Neill Connolly. If another provider or specialist needs to contact you, we&rsquo;ll explain this before making an introduction.
             </p>
           </div>
-          <div className="grid gap-8 sm:grid-cols-2">
+          <div className="grid gap-8 sm:grid-cols-3">
             <div>
               <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#E7B93E]">Explore</p>
               <nav aria-label="Footer navigation" className="mt-5 grid gap-3">
                 {footerLinks.map((item) => (
+                  <Link
+                    className="w-fit text-sm font-bold text-white/76 transition hover:text-white"
+                    href={item.href}
+                    key={item.href}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-[#E7B93E]">Other services</p>
+              <nav aria-label="Other services" className="mt-5 grid gap-3">
+                {otherServices.map((item) => (
                   <Link
                     className="w-fit text-sm font-bold text-white/76 transition hover:text-white"
                     href={item.href}

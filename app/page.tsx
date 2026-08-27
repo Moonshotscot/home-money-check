@@ -88,6 +88,32 @@ const process = [
   },
 ];
 
+const relatedServices = [
+  {
+    title: "Mortgages",
+    detail: "wherecanifindamortgage.co.uk",
+    href: "https://www.wherecanifindamortgage.co.uk/",
+    icon: House,
+  },
+  {
+    title: "Life insurance and protection",
+    detail: "wherecanifindamortgage.co.uk/protection",
+    href: "https://wherecanifindamortgage.co.uk/protection/",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Wills and Power of Attorney",
+    detail: "neillconnollywills.co.uk",
+    href: "https://neillconnollywills.co.uk/",
+    icon: HeartHandshake,
+  },
+  {
+    title: "Business utilities",
+    detail: "Page coming soon",
+    href: "/business-utilities",
+    icon: TrendingUp,
+  },
+] as const;
 const faqs = [
   {
     question: "How could a Home Money Check save me money?",
@@ -403,6 +429,46 @@ export default function HomePage() {
           </div>
         </section>
 
+        <section className="border-y border-[#E6DAC2] bg-[#F7F1E6] px-5 py-14 sm:px-8 lg:py-16">
+          <div className="mx-auto grid max-w-[86rem] gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-center lg:gap-20">
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Other services</p>
+              <h2 className="display-font mt-4 max-w-[12ch] text-4xl leading-[0.95] tracking-[-0.045em] text-[#3D145F] sm:text-5xl">
+                More ways Neill can help.
+              </h2>
+              <p className="mt-5 max-w-lg text-base font-medium leading-7 text-[#5F5265]">
+                Home Money Check focuses on household bills. Neill can also help with mortgages, protection, wills and Power of Attorney, and business utilities.
+              </p>
+            </div>
+
+            <div className="grid border-b border-[#D8C8A8] sm:grid-cols-2">
+              {relatedServices.map((service, index) => {
+                const Icon = service.icon;
+
+                return (
+                  <Link
+                    className={`group flex min-h-32 items-center gap-4 border-t border-[#D8C8A8] py-6 transition hover:text-[#6A2C93] sm:px-6 ${
+                      index % 2 === 1 ? "sm:border-l" : ""
+                    }`}
+                    href={service.href}
+                    key={service.title}
+                  >
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[0.9rem] bg-[#F0C646] text-[#3D145F]">
+                      <Icon className="h-6 w-6" strokeWidth={2.2} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-base font-extrabold leading-6 text-[#34273B] group-hover:text-[#6A2C93]">
+                        {service.title}
+                      </span>
+                      <span className="mt-1 block truncate text-xs font-semibold text-[#756879]">{service.detail}</span>
+                    </span>
+                    <ArrowRight className="h-5 w-5 shrink-0 text-[#6A2C93] transition-transform group-hover:translate-x-1" />
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
         <section className="bg-[#2E0D45] px-5 py-16 text-white sm:px-8 lg:py-20" id="arrange-check">
           <div className="mx-auto grid max-w-[86rem] items-start gap-12 lg:grid-cols-[0.76fr_1.24fr] lg:gap-20">
             <div className="lg:sticky lg:top-8">
