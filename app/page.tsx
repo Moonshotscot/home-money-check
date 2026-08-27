@@ -378,6 +378,9 @@ export default function HomePage() {
               </h2>
               <div className="mt-8 max-w-2xl space-y-5 text-[1.05rem] font-medium leading-8 text-[#5F5265]">
                 <p>
+                  For more than 25 years, I&rsquo;ve helped clients save money across a range of industries. I believe in doing the right thing for every customer, finding the most suitable option and getting the best price I can.
+                </p>
+                <p>
                   Too many households are paying more than they need to for gas, electricity and broadband. Price changes and complicated offers seem designed to confuse us, and it&rsquo;s getting worse. I want to make things clearer and help people keep more of their money.
                 </p>
                 <p>

@@ -28,6 +28,7 @@ export default function AboutPage() {
               <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#6A2C93]">Meet Neill</p>
               <h1 className="display-font mt-5 max-w-[13ch] text-6xl leading-[0.9] tracking-[-0.055em] text-[#3D145F] sm:text-7xl lg:text-[5.35rem]">I created Home Money Check to help people save money.</h1>
               <div className="mt-8 max-w-2xl space-y-5 text-lg font-medium leading-8 text-[#5F5265]">
+                <p>For more than 25 years, I&rsquo;ve helped clients save money across a range of industries. I believe in doing the right thing for every customer, finding the most suitable option and getting the best price I can.</p>
                 <p>Too many households are paying more than they need to for gas, electricity and broadband. Price changes and complicated offers make it harder to see what you are really paying and whether a better option is available.</p>
                 <p>I want to make that a whole lot clearer and help people keep more of their money.</p>
               </div>

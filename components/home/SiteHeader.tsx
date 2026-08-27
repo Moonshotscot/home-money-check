@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SiteBrand } from "@/components/home/SiteBrand";
 
 const navigation = [
@@ -15,6 +15,30 @@ const navigation = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const closeWhenClickingOutside = (event: PointerEvent) => {
+      const target = event.target as Node;
+
+      if (menuRef.current?.contains(target) || menuButtonRef.current?.contains(target)) return;
+      setOpen(false);
+    };
+    const closeWithEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("pointerdown", closeWhenClickingOutside);
+    document.addEventListener("keydown", closeWithEscape);
+
+    return () => {
+      document.removeEventListener("pointerdown", closeWhenClickingOutside);
+      document.removeEventListener("keydown", closeWithEscape);
+    };
+  }, [open]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#E8DFC9] bg-[#FFFDF8]/95 px-5 py-2 backdrop-blur-xl sm:px-8">
@@ -44,6 +68,7 @@ export function SiteHeader() {
             <ArrowRight className="h-4 w-4" />
           </Link>
           <button
+            ref={menuButtonRef}
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}
             className="flex h-12 w-12 items-center justify-center rounded-full border border-[#3D145F]/18 text-[#3D145F] xl:hidden"
@@ -57,6 +82,7 @@ export function SiteHeader() {
 
       {open ? (
         <nav
+          ref={menuRef}
           aria-label="Mobile navigation"
           className="absolute inset-x-5 top-[calc(100%+0.5rem)] rounded-[1.6rem] bg-[#3D145F] p-3 text-white shadow-[0_28px_70px_rgba(61,20,95,0.28)] sm:inset-x-8 xl:hidden"
         >
