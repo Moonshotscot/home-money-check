@@ -10,6 +10,8 @@ export const enquiryStatuses = [
   "In progress",
   "Converted",
   "Not suitable",
+  "Spam",
+  "Duplicate",
   "Closed",
   "Archived",
   "No response",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Copy, Download, Eye, ExternalLink, RefreshCw, Save, Search, Trash2 } from "lucide-react";
+import { Copy, Download, Eye, ExternalLink, RefreshCw, Save, Search, Send, Trash2 } from "lucide-react";
 import {
   Enquiry,
   EnquiryCheck,
@@ -384,6 +384,8 @@ function EnquiryDetail({
   const [adminNotes, setAdminNotes] = useState(enquiry.admin_notes || "");
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [deleteState, setDeleteState] = useState<"idle" | "deleting" | "deleted" | "error">("idle");
+  const [sendState, setSendState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [sendMessage, setSendMessage] = useState("");
   const [copyMessage, setCopyMessage] = useState("");
   const childChecks = enquiry.enquiry_checks || [];
   const leadSource = getLeadSourceDetails(enquiry.source_page);
@@ -443,6 +445,29 @@ function EnquiryDetail({
     setDeleteState("deleted");
     onDeleted(enquiry.id);
     onClose();
+  }
+
+  async function sendToCph() {
+    if (!window.confirm(`Send ${enquiry.name || "this enquiry"} into CPH as a Home Utilities case?`)) return;
+    setSendState("sending");
+    setSendMessage("");
+    const { data } = await supabase.auth.getSession();
+    const token = data.session?.access_token;
+    const response = await fetch(`/api/admin/enquiries/${encodeURIComponent(enquiry.id)}/send-to-cph`, {
+      method: "POST",
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+    const payload = (await response.json().catch(() => ({}))) as { error?: string; caseReference?: string; enquiry?: Enquiry };
+    if (!response.ok || !payload.enquiry) {
+      setSendState("error");
+      setSendMessage(payload.error || "This enquiry could not be sent to CPH.");
+      return;
+    }
+    onSaved(payload.enquiry);
+    setStatus("Sent to CPH");
+    setAdminNotes(payload.enquiry.admin_notes || adminNotes);
+    setSendState("sent");
+    setSendMessage(`Sent to CPH as ${payload.caseReference}.`);
   }
 
   async function copyText(label: string, value: string | null) {
@@ -604,7 +629,7 @@ function EnquiryDetail({
               onChange={(event) => setStatus(event.target.value)}
               value={status}
             >
-              {enquiryStatuses.map((option) => (
+              {enquiryStatuses.filter((option) => option !== "Sent to CPH" || enquiry.status === "Sent to CPH").map((option) => (
                 <option key={option}>{option}</option>
               ))}
             </select>
@@ -639,20 +664,38 @@ function EnquiryDetail({
             Could not delete this enquiry. Please try again.
           </p>
         ) : null}
+        {sendMessage ? (
+          <p className={`mt-4 rounded-[1.25rem] p-4 text-sm font-black ${sendState === "error" ? "bg-[#FFF1C8] text-[#6B4611]" : "bg-white text-[#5F2D8C]"}`}>
+            {sendMessage}
+          </p>
+        ) : null}
 
         <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <button
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#5F2D8C] px-6 py-3 text-sm font-black text-[#F7F0E8] disabled:opacity-70"
-            disabled={saveState === "saving" || deleteState === "deleting"}
-            onClick={saveChanges}
-            type="button"
-          >
-            <Save className="h-4 w-4" />
-            {saveState === "saving" ? "Saving..." : "Save changes"}
-          </button>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            {enquiry.status !== "Sent to CPH" ? (
+              <button
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FDCA55] px-6 py-3 text-sm font-black text-[#3D145F] disabled:cursor-not-allowed disabled:opacity-50"
+                disabled={sendState === "sending" || !enquiry.consent_contact}
+                onClick={sendToCph}
+                type="button"
+              >
+                <Send className="h-4 w-4" />
+                {sendState === "sending" ? "Sending..." : "Send to CPH"}
+              </button>
+            ) : null}
+            <button
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#5F2D8C] px-6 py-3 text-sm font-black text-[#F7F0E8] disabled:opacity-70"
+              disabled={saveState === "saving" || deleteState === "deleting" || sendState === "sending"}
+              onClick={saveChanges}
+              type="button"
+            >
+              <Save className="h-4 w-4" />
+              {saveState === "saving" ? "Saving..." : "Save changes"}
+            </button>
+          </div>
           <button
             className="inline-flex items-center justify-center gap-2 rounded-full border border-[#B44747]/25 bg-white px-5 py-3 text-sm font-black text-[#B44747] transition-colors duration-300 ease-out hover:bg-[#FFF1C8] disabled:opacity-70"
-            disabled={deleteState === "deleting" || saveState === "saving"}
+            disabled={deleteState === "deleting" || saveState === "saving" || sendState === "sending"}
             onClick={deletePermanently}
             type="button"
           >
