@@ -16,7 +16,15 @@ export async function GET(request: Request) {
       .from("enquiries")
       .select("id", { count: "exact", head: true })
       .eq("status", "New");
-    if (error) throw error;
+    if (error) {
+      console.error("HMC pending-count database error", {
+        code: error.code,
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+      });
+      throw error;
+    }
     return NextResponse.json({ count: count ?? 0 }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     console.error("Could not count pending HMC enquiries", error);
