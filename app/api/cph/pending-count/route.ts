@@ -26,18 +26,9 @@ export async function GET(request: Request) {
     const contentRange = databaseResponse.headers.get("content-range");
     const total = contentRange?.split("/").at(-1);
     if (!databaseResponse.ok || !total || total === "*") {
-      let errorText = "";
-      if (!databaseResponse.ok) {
-        const diagnosticResponse = await fetch(
-          `${supabaseUrl.replace(/\/$/, "")}/rest/v1/enquiries?select=id&limit=0`,
-          { headers: { apikey: serverKey }, cache: "no-store" },
-        );
-        errorText = (await diagnosticResponse.text()).slice(0, 500);
-      }
       console.error("HMC pending-count database error", {
         status: databaseResponse.status,
         hasContentRange: Boolean(contentRange),
-        errorText,
       });
       throw new Error("The HMC database count failed.");
     }
