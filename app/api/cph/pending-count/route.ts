@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { integrationSecretMatches } from "@/lib/integrationAuth";
-import { createAdminSupabase } from "@/lib/serverSupabase";
 
 export const dynamic = "force-dynamic";
 
@@ -12,20 +11,29 @@ export async function GET(request: Request) {
   }
 
   try {
-    const { count, error } = await createAdminSupabase()
-      .from("enquiries")
-      .select("id", { count: "exact", head: true })
-      .eq("status", "New");
-    if (error) {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const serverKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (!supabaseUrl || !serverKey) throw new Error("HMC database configuration is missing.");
+
+    const databaseResponse = await fetch(
+      `${supabaseUrl.replace(/\/$/, "")}/rest/v1/enquiries?select=id&status=eq.New`,
+      {
+        method: "HEAD",
+        headers: { apikey: serverKey, Prefer: "count=exact" },
+        cache: "no-store",
+      },
+    );
+    const contentRange = databaseResponse.headers.get("content-range");
+    const total = contentRange?.split("/").at(-1);
+    if (!databaseResponse.ok || !total || total === "*") {
       console.error("HMC pending-count database error", {
-        code: error.code,
-        message: error.message,
-        details: error.details,
-        hint: error.hint,
+        status: databaseResponse.status,
+        hasContentRange: Boolean(contentRange),
       });
-      throw error;
+      throw new Error("The HMC database count failed.");
     }
-    return NextResponse.json({ count: count ?? 0 }, { headers: { "Cache-Control": "no-store" } });
+
+    return NextResponse.json({ count: Number(total) }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     console.error("Could not count pending HMC enquiries", error);
     return NextResponse.json({ error: "Pending enquiries could not be counted." }, { status: 500 });
