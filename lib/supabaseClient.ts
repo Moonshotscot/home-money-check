@@ -55,20 +55,14 @@ const { supabaseKey, supabaseUrl } = getSupabaseConfig();
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function insertEnquiry(payload: EnquiryPayload) {
-  const { error } = await supabase.rpc("create_enquiry_with_checks", {
-    p_consent_contact: payload.consent_contact,
-    p_consent_updates: payload.consent_updates,
-    p_email: payload.email,
-    p_message: payload.message || null,
-    p_mobile: payload.mobile,
-    p_name: payload.name,
-    p_postcode: payload.postcode || null,
-    p_requested_checks: payload.requested_checks,
-    p_source_page: captureLeadSource(payload.source_page),
+  const response = await fetch("/api/enquiries", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...payload, source_page: captureLeadSource(payload.source_page) }),
   });
-
-  if (error) {
-    throw error;
+  const result = await response.json().catch(() => ({})) as { ok?: boolean; error?: string };
+  if (!response.ok || result.ok !== true) {
+    throw new Error(result.error || "Your enquiry could not be saved. Please try again.");
   }
 }
 
